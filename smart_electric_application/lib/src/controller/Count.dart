@@ -8,4 +8,5 @@ class CountContoller extends GetxController {
     count++;
     update();
   }
+  
 }
