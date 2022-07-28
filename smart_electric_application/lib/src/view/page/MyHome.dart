@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/page/SecondPage.dart';
-import 'package:smart_electric_application/src/view/component/CurrentCharge.dart';
+import 'package:smart_electric_application/src/view/component/SampleCard.dart';
 import 'package:smart_electric_application/src/view/color/Colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +9,8 @@ class MyHome extends StatelessWidget {
   // const MyHome({Key? key}) : super(key: key);
 
   RxBool _isLightTheme = false.obs;
+
+  bool isLightTheme = true;
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -28,36 +30,48 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.colorScheme.background,
       appBar: AppBar(),
       body: Column(children: [
+        SampleCard(),
         ElevatedButton(
-          child: Text('Dark/Light'),
-          onPressed: () {
-            // 다크모드가 토글됩니다.
-            Get.isDarkMode ?
-            Get.changeTheme(ThemeData.light()) :
-            Get.changeTheme(ThemeData.dark());
-          },
-        ),
-        CurrentCharge(),
-        Obx(
-          () => Text(
-            'Click on switch to change to ${_isLightTheme.value ? 'Dark' : 'Light'} theme',
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(context.theme.colorScheme.secondary),
           ),
+          onPressed: (){
+            if (isLightTheme) {
+                Get.changeThemeMode(ThemeMode.dark);
+                isLightTheme = false;
+            }
+            else {
+              Get.changeThemeMode(ThemeMode.light);  
+              isLightTheme = true;
+            }
+          }, 
+          child: Text(
+            "light/dark", 
+            style: TextStyle(color: Colors.white)
+          )
         ),
-        ObxValue(
-          (data) => Switch(
-            value: _isLightTheme.value,
-            onChanged: (val) {
-              _isLightTheme.value = val;
-              Get.changeThemeMode(
-                  _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
-                );
-                _saveThemeStatus();
-              },
-            ),
-            false.obs,
-        ),
+        // Obx(
+        //   () => Text(
+        //     'Change to ${_isLightTheme.value ? 'Dark' : 'Light'} theme',
+        //     style: TextStyle(color: context.theme.colorScheme.onBackground),
+        //   ),
+        // ),
+        // ObxValue(
+        //   (data) => Switch(
+        //     value: _isLightTheme.value,
+        //     onChanged: (val) {
+        //       _isLightTheme.value = val;
+        //       Get.changeThemeMode(
+        //           _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
+        //       );
+        //         // _saveThemeStatus();
+        //       },
+        //     ),
+        //     false.obs,
+        // ),
       ]),
       bottomNavigationBar: BottomAppBar(),
     );
