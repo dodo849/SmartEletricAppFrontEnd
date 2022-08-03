@@ -41,7 +41,7 @@ class CommonColors {
   // color define
   static const Color red = Color(0xFFEC7272);
   static const Color yellow = Color(0xFFFAD113);
-  static const Color green = Color(0xFF8ED9AB);
+  static const Color green = Color(0xFF3BB682);
 
   // 테마에 따라 바뀌지 않는 컬러
   static const Color onWhite = Color(0xFFFFFFFF);

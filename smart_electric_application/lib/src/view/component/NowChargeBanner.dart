@@ -6,17 +6,13 @@ class NowChargeBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     // 데이터
     var dataValue = "13,030";
     var bodyValue = "/ 125 kWh";
 
-
     return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        width: double.infinity,
-        margin: EdgeInsets.only(left: 30, right: 30, top: 40, bottom: 20),
+        margin: EdgeInsets.only(left: 30, right: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -62,13 +58,25 @@ class NowChargeBanner extends StatelessWidget {
               ],
             ),
             SizedBox(height: 5),
-            Text(
-              " 지난달 대비 12% ▼",
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: context.theme.colorScheme.secondary,
-              ),
+            Row(
+              children: [
+                Text(
+                  "첫번째 누진 구간",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: context.theme.colorScheme.tertiaryContainer,
+                  ),
+                ),
+                Text(
+                  " 요금 적용",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: context.theme.colorScheme.tertiaryContainer,
+                  ),
+                ),
+              ],
             ),
           ],
         ));

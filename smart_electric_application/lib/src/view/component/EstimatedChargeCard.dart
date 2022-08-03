@@ -30,8 +30,8 @@ class EstimatedChargeCard extends StatelessWidget {
                 Text(
                   "이번달 예상 요금",
                   style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
                     color: context.theme.colorScheme.onSurface,
                   ),
                 ),
@@ -41,22 +41,23 @@ class EstimatedChargeCard extends StatelessWidget {
                     Text(
                       "AI 분석 리포트 보기",
                       style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
                         color: context.theme.colorScheme.secondary,
                       ),
                     ),
+                    SizedBox(width: 5),
                     SvgPicture.asset(
                       'assets/icons/arrow.svg',
-                      width: 10,
-                      height: 10,
+                      width: 14,
+                      height: 14,
                       color: context.theme.colorScheme.secondary,
                     ),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 5),
+            SizedBox(height: 7),
             Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,

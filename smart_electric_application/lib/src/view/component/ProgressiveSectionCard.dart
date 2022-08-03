@@ -10,16 +10,6 @@ class ProgressiveSectionCard extends StatelessWidget {
     var dataValue = "13,030";
     var bodyValue = "125 kWh";
 
-    // 박스 내의 텍스트 위젯
-    var title = Text(
-      "누진구간",
-      style: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        color: context.theme.colorScheme.onSurface,
-      ),
-    );
-
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -31,7 +21,14 @@ class ProgressiveSectionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            title,
+            Text(
+              "누진구간",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: context.theme.colorScheme.onSurface,
+              ),
+            ),
 
             SizedBox(height: 20),
 
@@ -41,20 +38,22 @@ class ProgressiveSectionCard extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Color(0xFF3ADD8F), width: 1.5),
-                    color: context.theme.colorScheme.surface,
+                    border: Border.all(color: context.theme.colorScheme.tertiaryContainer, width: 1.5),
+                    color: context.theme.colorScheme.background,
                   ),
                   padding:
-                      EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+                      EdgeInsets.only(left: 15, right: 15, bottom: 7, top: 7),
                   child: Text(
                     "현재 위치",
-                    style: TextStyle(color: Color(0xFF3ADD8F)),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: context.theme.colorScheme.tertiaryContainer),
                   ),
                 ),
                 Container(
                   width: 1.5,
                   height: 15,
-                  color: Color(0xFF3ADD8F),
+                  color: context.theme.colorScheme.tertiaryContainer,
                 ),
               ],
             ),

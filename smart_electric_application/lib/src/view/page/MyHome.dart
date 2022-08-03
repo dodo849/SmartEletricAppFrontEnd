@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/component/NowChargeBanner.dart';
 import 'package:smart_electric_application/src/view/component/ProgressiveSectionCard.dart';
-import 'package:smart_electric_application/src/view/page/SecondPage.dart';
 import 'package:smart_electric_application/src/view/component/EstimatedChargeCard.dart';
+import 'package:smart_electric_application/src/view/component/ProgressiveIntervalBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyHome extends StatelessWidget {
@@ -37,7 +37,17 @@ class MyHome extends StatelessWidget {
         appBar: EmptyAppBar(),
         body: TabBarView(physics: NeverScrollableScrollPhysics(), children: [
           Column(children: [
-            NowChargeBanner(),
+            SizedBox(height: 35),
+            Row(
+              children: [
+                NowChargeBanner(),
+                Spacer(),
+                Image.asset("assets/images/img_day.png", width: 70, height: 70),
+                Spacer(),
+              ],
+            ),
+            ProgressiveIntervalBar(),
+            SizedBox(height: 15),
             EstimatedChargeCard(),
             SizedBox(height: 15),
             ProgressiveSectionCard(),
