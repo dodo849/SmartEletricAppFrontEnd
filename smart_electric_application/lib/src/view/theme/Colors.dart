@@ -11,7 +11,7 @@ class LightColors {
   static const Color gray1 = Color(0xFFFFFFFF);
   static const Color gray2 = Color(0xFFF5F5F5);
   static const Color gray3 = Color(0xFFEEEEEF);
-  static const Color gray4 = Color(0xFFDFE1E4);
+  static const Color gray4 = Color(0xFFD9D9D9);
   static const Color gray5 = Color(0xFF767676);
   static const Color gray6 = Color(0xFF4D4D4D);
   static const Color important = Color(0xFF2D2D2D);

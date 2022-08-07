@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProgressiveSectionCard extends StatelessWidget {
-  const ProgressiveSectionCard({Key? key}) : super(key: key);
+class ProgressiveIntervalCard extends StatelessWidget {
+  const ProgressiveIntervalCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,24 @@ class ProgressiveSectionCard extends StatelessWidget {
 
             SizedBox(height: 20),
 
+            Text(
+              "누진구간",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: context.theme.colorScheme.onSurface,
+              ),
+            ),
+
             // 현재 누진구간 picker
             Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: context.theme.colorScheme.tertiaryContainer, width: 1.5),
+                    border: Border.all(
+                        color: context.theme.colorScheme.tertiaryContainer,
+                        width: 1.5),
                     color: context.theme.colorScheme.background,
                   ),
                   padding:
@@ -46,8 +57,8 @@ class ProgressiveSectionCard extends StatelessWidget {
                   child: Text(
                     "현재 위치",
                     style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: context.theme.colorScheme.tertiaryContainer),
+                        fontWeight: FontWeight.w500,
+                        color: context.theme.colorScheme.tertiaryContainer),
                   ),
                 ),
                 Container(

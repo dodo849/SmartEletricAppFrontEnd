@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/component/NowChargeBanner.dart';
-import 'package:smart_electric_application/src/view/component/ProgressiveSectionCard.dart';
+import 'package:smart_electric_application/src/view/component/ProgressiveIntervalCard.dart';
 import 'package:smart_electric_application/src/view/component/EstimatedChargeCard.dart';
 import 'package:smart_electric_application/src/view/component/ProgressiveIntervalBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
 
 class MyHome extends StatelessWidget {
   // const MyHome({Key? key}) : super(key: key);
 
-  RxBool _isLightTheme = false.obs;
+  RxBool isLightTheme = false.obs;
 
-  bool isLightTheme = true;
+  // bool isLightTheme = true;
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  _saveThemeStatus() async {
-    SharedPreferences pref = await _prefs;
-    pref.setBool('theme', _isLightTheme.value);
-  }
+  // _saveThemeStatus() async {
+  //   SharedPreferences pref = await _prefs;
+  //   pref.setBool('theme', _isLightTheme.value);
+  // }
 
-  _getThemeStatus() async {
-    var _isLight = _prefs.then((SharedPreferences prefs) {
-      return prefs.getBool('theme') != null ? prefs.getBool('theme') : true;
-    }).obs;
-    _isLightTheme.value = (await _isLight.value)!;
-    Get.changeThemeMode(_isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
-  }
+  // _getThemeStatus() async {
+  //   var _isLight = _prefs.then((SharedPreferences prefs) {
+  //     return prefs.getBool('theme') != null ? prefs.getBool('theme') : true;
+  //   }).obs;
+  //   _isLightTheme.value = (await _isLight.value)!;
+  //   Get.changeThemeMode(_isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
+  // }
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ThemeViewModel());
+
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -46,28 +49,34 @@ class MyHome extends StatelessWidget {
                 Spacer(),
               ],
             ),
+
+            SizedBox(height: 15),
             ProgressiveIntervalBar(),
+
             SizedBox(height: 15),
             EstimatedChargeCard(),
+
             SizedBox(height: 15),
-            ProgressiveSectionCard(),
+            ProgressiveIntervalCard(),
+
             SizedBox(height: 15),
-            ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      context.theme.colorScheme.secondary),
-                ),
-                onPressed: () {
-                  if (isLightTheme) {
-                    Get.changeThemeMode(ThemeMode.dark);
-                    isLightTheme = false;
-                  } else {
-                    Get.changeThemeMode(ThemeMode.light);
-                    isLightTheme = true;
-                  }
-                },
-                child:
-                    Text("light/dark", style: TextStyle(color: Colors.white))),
+
+            // state
+            GetBuilder<ThemeViewModel>(
+                global: true,
+                builder: (contoller) {
+                  return ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            context.theme.colorScheme.secondary),
+                      ),
+                      onPressed: () {
+                        contoller.changeTheme();
+                      },
+                      child: Text("light/dark",
+                          style: TextStyle(color: Colors.white)));
+                }),
+
             // Obx(
             //   () => Text(
             //     'Change to ${_isLightTheme.value ? 'Dark' : 'Light'} theme',

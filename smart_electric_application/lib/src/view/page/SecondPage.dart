@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/controller/Count.dart';
-import 'package:smart_electric_application/src/controller/CountControllerWithReactive.dart';
+import 'package:smart_electric_application/src/viewmodel/Count.dart';
+import 'package:smart_electric_application/src/viewmodel/CountControllerWithReactive.dart';
 
 class SecondPage extends StatelessWidget {
   const SecondPage({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_electric_application/src/theme/Colors.dart';
+import 'package:smart_electric_application/src/view/theme/Colors.dart';
 
 ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
@@ -47,7 +47,7 @@ ThemeData darkTheme = ThemeData(
     surface: DarkColors.gray2, // card background
     outline: DarkColors.gray3, // card line or divider
     surfaceVariant: DarkColors.gray4, // disabled
-    onSurface: DarkColors.important, //text3
+    onSurface: DarkColors.gray5, //text3
     onSurfaceVariant: DarkColors.gray6, // text2
     onBackground: DarkColors.important, //text1
     error: CommonColors.red, // danger

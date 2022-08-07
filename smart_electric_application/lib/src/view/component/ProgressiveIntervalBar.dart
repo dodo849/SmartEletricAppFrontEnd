@@ -8,33 +8,20 @@ class ProgressiveIntervalBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20),
+      margin: EdgeInsets.only(left: 30, right: 30),
       child: Column(
         children: [
           Row(
             children: [
               // 피커
-              Stack(
-                alignment: Alignment.center,
-                
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/picker.svg',
-                    // color: context.theme.colorScheme.background,
-                  ),
-                  Positioned(
-                    child: Text(
-                      "현재 위치",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 10,
-                          color: context.theme.colorScheme.tertiaryContainer),
-                    ),
-                  ),
-                ],
+              SvgPicture.asset(
+                'assets/icons/picker-current-green-light.svg',
+                // color: context.theme.colorScheme.background,
               ),
             ],
           ),
+
+          SizedBox(height: 5),
 
           // 누진구간 bar
           Row(
@@ -42,34 +29,64 @@ class ProgressiveIntervalBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: Container(
-                    height: 10,
-                    // width: 100,
-                    decoration: BoxDecoration(
-                        color: context.theme.colorScheme.tertiaryContainer,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10)))),
+                child: Column(
+                  children: [
+                    Container(
+                        height: 10,
+                        width: 100,
+                        decoration: BoxDecoration(
+                            color: context.theme.colorScheme.tertiaryContainer,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomLeft: Radius.circular(10)))),
+                    SizedBox(height: 5),
+                    Text("0~200 kWh",
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurface,
+                          fontSize: 12,
+                        )),
+                  ],
+                ),
               ),
               SizedBox(width: 5),
               Expanded(
-                child: Container(
-                    height: 10,
-                    // width: 100,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFFBF1A),
-                    )),
+                child: Column(
+                  children: [
+                    Container(
+                        height: 10,
+                        // width: 100,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFBF1A),
+                        )),
+                    SizedBox(height: 5),
+                    Text("200~400 kWh",
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurface,
+                          fontSize: 12,
+                        )),
+                  ],
+                ),
               ),
               SizedBox(width: 5),
               Expanded(
-                child: Container(
-                    height: 10,
-                    // width: 100,
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFF5D5D),
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            bottomRight: Radius.circular(10)))),
+                child: Column(
+                  children: [
+                    Container(
+                        height: 10,
+                        // width: 100,
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFF5D5D),
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10),
+                                bottomRight: Radius.circular(10)))),
+                    SizedBox(height: 5),
+                    Text("400~ kWh",
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurface,
+                          fontSize: 12,
+                        )),
+                  ],
+                ),
               ),
             ],
           ),
@@ -77,4 +94,14 @@ class ProgressiveIntervalBar extends StatelessWidget {
       ),
     );
   }
+
+  // Widget getCurrentPickerWidget(ko) {
+  //                 if (isLightTheme) {
+  //                   Get.changeThemeMode(ThemeMode.dark);
+  //                   isLightTheme = false;
+  //                 } else {
+  //                   Get.changeThemeMode(ThemeMode.light);
+  //                   isLightTheme = true;
+  //                 }
+  // }
 }
