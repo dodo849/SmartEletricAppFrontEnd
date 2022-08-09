@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/viewmodel/Count.dart';
 import 'package:smart_electric_application/src/viewmodel/CountControllerWithReactive.dart';
+import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
 
 class SecondPage extends StatelessWidget {
   const SecondPage({Key? key}) : super(key: key);
@@ -24,13 +25,15 @@ class SecondPage extends StatelessWidget {
             Text('0', style: TextStyle(fontSize: 80)),
             ElevatedButton(
               onPressed: () {
-                Get.find<CountControllerWithReactive>().increase();
+                Get.to(SecondPage(), binding: BindingsBuilder(() {
+                  Get.create<ThemeViewModel>(() => ThemeViewModel());
+                }));
               },
               child: Text(
-                '+',
+                'put async',
                 style: TextStyle(fontSize: 40),
               ),
-            )
+            ),
           ],
         ),
       ),

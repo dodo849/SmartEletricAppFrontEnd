@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/view/component/ProgressiveIntervalBar.dart';
 
 class ProgressiveIntervalCard extends StatelessWidget {
   const ProgressiveIntervalCard({Key? key}) : super(key: key);
@@ -30,81 +31,40 @@ class ProgressiveIntervalCard extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 20),
+            SizedBox(height: 5),
 
-            Text(
-              "누진구간",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: context.theme.colorScheme.onSurface,
-              ),
-            ),
-
-            // 현재 누진구간 picker
-            Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                        color: context.theme.colorScheme.tertiaryContainer,
-                        width: 1.5),
-                    color: context.theme.colorScheme.background,
-                  ),
-                  padding:
-                      EdgeInsets.only(left: 15, right: 15, bottom: 7, top: 7),
-                  child: Text(
-                    "현재 위치",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: context.theme.colorScheme.tertiaryContainer),
-                  ),
-                ),
-                Container(
-                  width: 1.5,
-                  height: 15,
-                  color: context.theme.colorScheme.tertiaryContainer,
-                ),
-              ],
-            ),
-
-            // 누진구간 bar
             Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
               children: [
-                Expanded(
-                  child: Container(
-                      height: 10,
-                      // width: 100,
-                      decoration: BoxDecoration(
-                          color: Color(0xFF3ADD8F),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomLeft: Radius.circular(10)))),
+                Text(
+                  "두번째 누진 구간",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: context.theme.colorScheme.onBackground,
+                  ),
                 ),
-                SizedBox(width: 5),
-                Expanded(
-                  child: Container(
-                      height: 10,
-                      // width: 100,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFFFBF1A),
-                      )),
+                SizedBox(
+                  width: 5,
                 ),
-                SizedBox(width: 5),
-                Expanded(
-                  child: Container(
-                      height: 10,
-                      // width: 100,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFF5D5D),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(10),
-                              bottomRight: Radius.circular(10)))),
+                Text(
+                  "적용 예정입니다",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: context.theme.colorScheme.onSurface,
+                  ),
                 ),
               ],
+            ),
+
+            SizedBox(height: 10),
+
+            //누진구간 bar
+            ProgressiveIntervalBar(
+              currentRate: 100,
+              currentSectionNumber: 1,
             ),
           ],
         ));

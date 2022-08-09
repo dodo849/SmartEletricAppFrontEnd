@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ThemeViewModel extends GetxController{
+  static ThemeViewModel get to => Get.find();
+
   RxBool isLightTheme = false.obs;
 
   void changeTheme() {
-    if (isLightTheme == true.obs) {
+    if (isLightTheme.isTrue) {
       Get.changeThemeMode(ThemeMode.dark);
-      isLightTheme = false.obs;
+      isLightTheme(false);
     } else {
       Get.changeThemeMode(ThemeMode.light);
-      isLightTheme = true.obs;
+      isLightTheme(true);
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/component/NowChargeBanner.dart';
 import 'package:smart_electric_application/src/view/component/ProgressiveIntervalCard.dart';
@@ -31,7 +32,7 @@ class MyHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ThemeViewModel());
+    // Get.put(ThemeViewModel());
 
     return DefaultTabController(
       length: 5,
@@ -45,13 +46,28 @@ class MyHome extends StatelessWidget {
               children: [
                 NowChargeBanner(),
                 Spacer(),
-                Image.asset("assets/images/img_day.png", width: 70, height: 70),
+                GestureDetector(
+                  onTap: () {
+                    ThemeViewModel.to.changeTheme();
+                  }, // Image tapped
+                  child: ThemeViewModel.to.isLightTheme.isTrue
+                      ? Image.asset("assets/images/img_day.png",
+                          width: 70, height: 70)
+                      : Image.asset("assets/images/img_night.png",
+                          width: 70, height: 70),
+                ),
                 Spacer(),
               ],
             ),
 
             SizedBox(height: 15),
-            ProgressiveIntervalBar(),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 30),
+              child: ProgressiveIntervalBar(
+                currentRate: 230,
+                currentSectionNumber: 2,
+              ),
+            ),
 
             SizedBox(height: 15),
             EstimatedChargeCard(),
@@ -61,21 +77,32 @@ class MyHome extends StatelessWidget {
 
             SizedBox(height: 15),
 
-            // state
-            GetBuilder<ThemeViewModel>(
-                global: true,
-                builder: (contoller) {
-                  return ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            context.theme.colorScheme.secondary),
-                      ),
-                      onPressed: () {
-                        contoller.changeTheme();
-                      },
-                      child: Text("light/dark",
-                          style: TextStyle(color: Colors.white)));
-                }),
+            // Obx(() => ElevatedButton(
+            //     style: ButtonStyle(
+            //       backgroundColor: MaterialStateProperty.all(
+            //           context.theme.colorScheme.secondary),
+            //     ),
+            //     onPressed: () {
+            //       ThemeViewModel.to.changeTheme();
+            //     },
+            //     child:
+            //         Text("light/dark", style: TextStyle(color: Colors.white)))),
+
+            // // state
+            // GetBuilder<ThemeViewModel>(
+            //     global: true,
+            //     builder: (contoller) {
+            //       return ElevatedButton(
+            //           style: ButtonStyle(
+            //             backgroundColor: MaterialStateProperty.all(
+            //                 context.theme.colorScheme.secondary),
+            //           ),
+            //           onPressed: () {
+            //             contoller.changeTheme();
+            //           },
+            //           child: Text("light/dark",
+            //               style: TextStyle(color: Colors.white)));
+            //     }),
 
             // Obx(
             //   () => Text(
@@ -117,7 +144,7 @@ class MyHome extends StatelessWidget {
               Icon(Icons.directions_car),
               Text("car")
             ])),
-            Tab(icon: Icon(Icons.directions_transit), text: "transit"),
+            Tab(icon: SvgPicture.asset("assets/icons/menu-home-line.svg"), text: "transit"),
             Tab(icon: Icon(Icons.directions_bike), text: "bike"),
             Tab(icon: Icon(Icons.directions_bike), text: "bike"),
             Tab(icon: Icon(Icons.directions_bike), text: "bike"),
