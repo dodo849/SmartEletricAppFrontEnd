@@ -100,6 +100,9 @@ flutter:
           weight: 800
         - asset: assets/fonts/Pretendard-Black.ttf
           weight: 900
+    # - family: CustomIcons
+    #   fonts:
+    #     - asset: assets/fonts/CustomIcons.ttf
 
   #
   # For details regarding fonts from package dependencies,

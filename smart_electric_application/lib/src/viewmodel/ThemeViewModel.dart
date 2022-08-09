@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class ThemeViewModel extends GetxController{
   static ThemeViewModel get to => Get.find();
 
-  RxBool isLightTheme = false.obs;
+  RxBool isLightTheme = true.obs;
 
   void changeTheme() {
     if (isLightTheme.isTrue) {
