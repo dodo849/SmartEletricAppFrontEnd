@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_electric_application/src/view/page/AIReport.dart';
 
 class EstimatedChargeCard extends StatelessWidget {
   const EstimatedChargeCard({Key? key}) : super(key: key);
@@ -38,12 +39,17 @@ class EstimatedChargeCard extends StatelessWidget {
                 Spacer(),
                 Row(
                   children: [
-                    Text(
-                      "AI 분석 리포트 보기",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: context.theme.colorScheme.secondary,
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed("/AIReport");
+                      },
+                      child: Text(
+                        "AI 분석 리포트 보기",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: context.theme.colorScheme.secondary,
+                        ),
                       ),
                     ),
                     SizedBox(width: 5),

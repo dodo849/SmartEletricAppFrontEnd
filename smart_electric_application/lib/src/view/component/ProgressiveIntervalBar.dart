@@ -139,14 +139,14 @@ class ProgressiveIntervalBar extends StatelessWidget {
               left: currentRate / 630 * constraints.maxWidth,
               child: getCurrentPickerCircle(),
             ),
-            Positioned(
-              // 현재 circle 위치 조정
-              top: 36,
-              left: 300 / 630 * constraints.maxWidth,
-              child: SvgPicture.asset(
-                'assets/icons/picker-circle-gray.svg',
-              ),
-            ),
+            // Positioned(
+            //   // 현재 circle 위치 조정
+            //   top: 36,
+            //   left: 300 / 630 * constraints.maxWidth,
+            //   child: SvgPicture.asset(
+            //     'assets/icons/picker-circle-gray.svg',
+            //   ),
+            // ),
           ],
         ),
       );

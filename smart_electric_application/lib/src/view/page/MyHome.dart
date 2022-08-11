@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/view/component/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/view/component/NowChargeBanner.dart';
 import 'package:smart_electric_application/src/view/component/ProgressiveIntervalCard.dart';
 import 'package:smart_electric_application/src/view/component/EstimatedChargeCard.dart';
@@ -8,6 +9,7 @@ import 'package:smart_electric_application/src/view/component/ProgressiveInterva
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
 import 'package:smart_electric_application/CustomIcon.dart';
+
 
 class MyHome extends StatefulWidget {
   const MyHome({Key? key}) : super(key: key);
@@ -19,21 +21,6 @@ class MyHome extends StatefulWidget {
 class _MyHome extends State<MyHome> {
   static RxBool isLightTheme = false.obs;
 
-  static List<BottomNavigationBarItem> bottomNavigationItems =
-      <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-        icon: SvgPicture.asset('assets/icons/menu-home-line.svg'), label: "홈"),
-    BottomNavigationBarItem(
-        icon: SvgPicture.asset('assets/icons/menu_analysis-line.svg'), label: "홈"),
-    BottomNavigationBarItem(
-        icon: SvgPicture.asset('assets/icons/menu-simulation-line.svg'), label: "홈"),
-    BottomNavigationBarItem(
-        icon: SvgPicture.asset('assets/icons/menu-smarthome-line.svg'), label: "홈"),
-    BottomNavigationBarItem(
-        icon: SvgPicture.asset('assets/icons/menu-mypage-line.svg'), label: "홈"),
-  ];
-
-  // bool isLightTheme = true;
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -79,8 +66,8 @@ class _MyHome extends State<MyHome> {
         Container(
           margin: EdgeInsets.symmetric(horizontal: 30),
           child: ProgressiveIntervalBar(
-            currentRate: 230,
-            currentSectionNumber: 2,
+            currentRate: 100,
+            currentSectionNumber: 1,
           ),
         ),
 
@@ -139,9 +126,7 @@ class _MyHome extends State<MyHome> {
         //     false.obs,
         // ),
       ]),
-      bottomNavigationBar: BottomNavigationBar(
-        items: bottomNavigationItems,
-      ),
+      bottomNavigationBar: MyBottomNavgationBar(),
     );
   }
 }
