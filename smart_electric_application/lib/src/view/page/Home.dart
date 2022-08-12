@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/component/MyBottomNavigationBar.dart';
-import 'package:smart_electric_application/src/view/component/NowChargeBanner.dart';
+import 'package:smart_electric_application/src/view/component/NowBillBanner.dart';
 import 'package:smart_electric_application/src/view/component/ProgressiveIntervalCard.dart';
-import 'package:smart_electric_application/src/view/component/EstimatedChargeCard.dart';
+import 'package:smart_electric_application/src/view/component/Estimated%08BillCard.dart';
 import 'package:smart_electric_application/src/view/component/ProgressiveIntervalBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
@@ -44,7 +44,7 @@ class _Home extends State<Home> {
       SizedBox(height: 35),
       Row(
         children: [
-          NowChargeBanner(),
+          NowBillBanner(),
           Spacer(),
           GestureDetector(
             onTap: () {
@@ -70,7 +70,7 @@ class _Home extends State<Home> {
       ),
 
       SizedBox(height: 15),
-      EstimatedChargeCard(),
+      EstimatedBillCard(),
 
       SizedBox(height: 15),
       ProgressiveIntervalCard(),

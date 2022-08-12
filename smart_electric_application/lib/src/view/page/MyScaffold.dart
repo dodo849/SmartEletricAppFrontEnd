@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/component/MyBottomNavigationBar.dart';
+import 'package:smart_electric_application/src/view/page/Analysis.dart';
 import 'package:smart_electric_application/src/view/page/Home.dart';
+import 'package:smart_electric_application/src/view/page/BillSimulation.dart';
 
 class MyScaffold extends StatefulWidget {
   const MyScaffold({Key? key}) : super(key: key);
@@ -19,15 +19,14 @@ class MyScaffoldState extends State<MyScaffold> {
   // 탭별 화면  
   static List<Widget> tabPages = <Widget>[
     Home(),
-    Container(),
-    Container(),
+    Analysis(),
+    BillSimulation(),
     Container(),
     Container(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    print("selectedIndex: ${selectedIndex}");
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: EmptyAppBar(),

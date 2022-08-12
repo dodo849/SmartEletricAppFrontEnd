@@ -33,11 +33,9 @@ class _MyBottomNavgationBar extends State<MyBottomNavgationBar> {
         context.findAncestorStateOfType<MyScaffoldState>();
 
     void _onItemTapped(int index) {
-      print("tap");
       _selectedIndex = index;
       parent?.setState(() {
         parent.selectedIndex = _selectedIndex;
-        print(parent.selectedIndex);
       });
     }
 
