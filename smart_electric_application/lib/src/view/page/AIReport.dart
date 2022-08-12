@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_electric_application/src/view/component/MyBottomNavigationBar.dart';
-import 'package:smart_electric_application/src/view/page/MyHome.dart';
+import 'package:smart_electric_application/src/view/page/Home.dart';
 
 class AIReport extends StatelessWidget {
   const AIReport({Key? key}) : super(key: key);

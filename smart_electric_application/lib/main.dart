@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/page/AIReport.dart';
-import 'package:smart_electric_application/src/view/page/MyHome.dart';
+import 'package:smart_electric_application/src/view/page/MyScaffold.dart';
 import 'package:smart_electric_application/src/view/theme/Themes.dart';
 import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     Get.put(ThemeViewModel());
 
     return GetMaterialApp(
-      home: MyHome(),
+      home: MyScaffold(),
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
