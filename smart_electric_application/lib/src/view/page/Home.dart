@@ -76,7 +76,7 @@ class _Home extends State<Home> {
 
       SizedBox(height: 25),
 
-      Divider(thickness: 10, color: context.theme.colorScheme.outline),
+      Divider(thickness: 10, color: context.theme.colorScheme.surface),
       SizedBox(height: 25),
 
       Container(

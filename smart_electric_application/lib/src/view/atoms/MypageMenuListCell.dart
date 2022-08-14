@@ -17,10 +17,13 @@ class MypageMenuListCell extends StatelessWidget {
             Text(
               "${text}",
               style: TextStyle(
-                  fontSize: 16, color: context.theme.colorScheme.onBackground),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: context.theme.colorScheme.onBackground),
             ),
             Spacer(),
-            SvgPicture.asset("assets/icons/arrow-right.svg", color: context.theme.colorScheme.onSurface),
+            SvgPicture.asset("assets/icons/arrow-right.svg",
+                color: context.theme.colorScheme.onSurface),
           ]),
           SizedBox(height: 10),
           Divider(),

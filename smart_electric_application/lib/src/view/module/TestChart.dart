@@ -51,8 +51,9 @@ class _TestChart extends State<TestChart> {
               'avg',
               style: TextStyle(
                   fontSize: 12,
-                  color:
-                      showAvg ? context.theme.colorScheme.onSurface.withOpacity(0.5) : context.theme.colorScheme.onSurface),
+                  color: showAvg
+                      ? context.theme.colorScheme.onSurface.withOpacity(0.5)
+                      : context.theme.colorScheme.onSurface),
             ),
           ),
         ),
@@ -67,20 +68,21 @@ class _TestChart extends State<TestChart> {
       fontSize: 12,
     );
     Widget text;
-    switch (value.toInt()) {
-      case 2:
-        text = const Text('1', style: style);
-        break;
-      case 5:
-        text = const Text('2', style: style);
-        break;
-      case 8:
-        text = const Text('3', style: style);
-        break;
-      default:
-        text = const Text('', style: style);
-        break;
-    }
+    text = Text('${value.toInt()}', style: style);
+    // switch (value.toInt()) {
+    //   case 2:
+    //     text = const Text('1', style: style);
+    //     break;
+    //   case 5:
+    //     text = const Text('2', style: style);
+    //     break;
+    //   case 8:
+    //     text = const Text('3', style: style);
+    //     break;
+    //   default:
+    //     text = const Text('', style: style);
+    //     break;
+    // }
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -164,20 +166,21 @@ class _TestChart extends State<TestChart> {
               Border.all(color: context.theme.colorScheme.outline, width: 0)),
       //축 범위 설정
       minX: 0,
-      maxX: 11,
+      maxX: 7,
       minY: 0,
       maxY: 6,
       lineBarsData: [
         LineChartBarData(
           // 메인 데이터 위치
           spots: const [
-            FlSpot(0, 3),
-            FlSpot(2.6, 2),
-            FlSpot(4.9, 5),
-            FlSpot(6.8, 3.1),
-            FlSpot(8, 4),
-            FlSpot(9.5, 3),
-            FlSpot(11, 4),
+            FlSpot(0, 0),
+            FlSpot(1, 1),
+            FlSpot(2, 1.2),
+            FlSpot(3, 3),
+            FlSpot(4, 3.2),
+            FlSpot(5, 3.3),
+            FlSpot(6, 4),
+            FlSpot(7, 5),
           ],
           isCurved: true,
           gradient: LinearGradient(
