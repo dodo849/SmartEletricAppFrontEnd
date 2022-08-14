@@ -58,7 +58,7 @@ class _Home extends State<Home> {
                       width: 70, height: 70),
             ),
           ),
-          Spacer(),
+          Spacer(flex: 2),
         ],
       ),
 

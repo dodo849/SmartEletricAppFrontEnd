@@ -21,11 +21,17 @@ class SmartHomePreparingCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("스마트홈 기능은 아직 준비중입니다"),
+            Text(
+              "스마트홈 기능은 아직 준비중입니다",
+              style: TextStyle(color: context.theme.colorScheme.onBackground),
+            ),
             SizedBox(height: 5),
-            Text("조금만 기다려주세요 :)"),
-            Image.asset("assets/images/avatars-woman.jpg",
-                      width: 200, height: 200)
+            Text(
+              "조금만 기다려주세요 :)",
+              style: TextStyle(color: context.theme.colorScheme.onBackground),
+            ),
+            Image.asset("assets/images/avatars-woman.png",
+                width: 200, height: 200)
           ],
         ));
   }

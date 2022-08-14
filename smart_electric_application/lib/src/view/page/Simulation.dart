@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/module/BillSimulationCard.dart';
+import 'package:smart_electric_application/src/view/module/SimulationBanner.dart';
 import 'package:smart_electric_application/src/view/module/SimulationProductList.dart';
 
 class BillSimulation extends StatelessWidget {
@@ -13,18 +14,8 @@ class BillSimulation extends StatelessWidget {
         margin: EdgeInsets.only(left: 20, right: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 35),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              "요금 시뮬레이션",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: context.theme.colorScheme.onBackground,
-              ),
-            ),
-          ),
-          SizedBox(height: 30),
+          SimulationBanner(),
+          SizedBox(height: 10),
           BillSimulationCard(),
           SizedBox(height: 30),
           Row(

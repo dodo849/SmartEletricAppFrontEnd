@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/module/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/view/page/Analysis.dart';
 import 'package:smart_electric_application/src/view/page/Home.dart';
-import 'package:smart_electric_application/src/view/page/BillSimulation.dart';
+import 'package:smart_electric_application/src/view/page/Simulation.dart';
+import 'package:smart_electric_application/src/view/page/MyPage.dart';
 import 'package:smart_electric_application/src/view/page/SmartHome.dart';
 
 class RootScaffold extends StatefulWidget {
@@ -23,7 +24,7 @@ class RootScaffoldState extends State<RootScaffold> {
     Analysis(),
     BillSimulation(),
     SmartHome(),
-    Container(),
+    Mypage(),
   ];
 
   @override
