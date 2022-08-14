@@ -14,9 +14,9 @@ class SmartHome extends StatelessWidget {
           children: [
             SizedBox(height: 25),
             SmartHomeBanner(),
-            SizedBox(height: 15),
+            SizedBox(height: 25),
             Expanded(child: SmartHomePreparingCard()),
-            SizedBox(height: 15),
+            SizedBox(height: 25),
           ],
         ));
   }
