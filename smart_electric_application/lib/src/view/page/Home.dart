@@ -7,6 +7,7 @@ import 'package:smart_electric_application/src/view/module/ProgressiveIntervalCa
 import 'package:smart_electric_application/src/view/module/Estimated%08BillCard.dart';
 import 'package:smart_electric_application/src/view/module/ProgressiveIntervalBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_electric_application/src/view/module/TestChart.dart';
 import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
 import 'package:smart_electric_application/CustomIcon.dart';
 
@@ -52,8 +53,7 @@ class _Home extends State<Home> {
                 _isLightTheme(true);
               }, // Image tapped
               child: ThemeViewModel.to.isLightTheme.isTrue
-                  ? Image.asset("assets/images/day.png",
-                      width: 70, height: 70)
+                  ? Image.asset("assets/images/day.png", width: 70, height: 70)
                   : Image.asset("assets/images/night.png",
                       width: 70, height: 70),
             ),
@@ -74,9 +74,22 @@ class _Home extends State<Home> {
       SizedBox(height: 15),
       EstimatedBillCard(),
 
-      SizedBox(height: 15),
+      SizedBox(height: 25),
 
-      Divider(),
+      Divider(thickness: 10, color: context.theme.colorScheme.outline),
+      SizedBox(height: 25),
+
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
+            SizedBox(height: 15),
+            TestChart(),
+          ],
+        ),
+      ),
 
       // Obx(() => ElevatedButton(
       //     style: ButtonStyle(

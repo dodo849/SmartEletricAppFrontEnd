@@ -31,7 +31,7 @@ class RootScaffoldState extends State<RootScaffold> {
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: EmptyAppBar(),
-      body: tabPages[selectedIndex],
+      body: SafeArea(child: tabPages[selectedIndex]),
       bottomNavigationBar: MyBottomNavgationBar(),
     );
   }
