@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/page/MyScaffold.dart';
+import 'package:smart_electric_application/src/view/page/RootScaffold.dart';
 
 // Stateful 위젯 사용
 class MyBottomNavgationBar extends StatefulWidget {
@@ -29,8 +29,8 @@ class _MyBottomNavgationBar extends State<MyBottomNavgationBar> {
 
     // findAncestorStateOfType: 조상 위젯의 State에 접근할 수 있는 메서드
     // 부모 위젯인 MyScaffold의 state에 접근
-    MyScaffoldState? parent =
-        context.findAncestorStateOfType<MyScaffoldState>();
+    RootScaffoldState? parent =
+        context.findAncestorStateOfType<RootScaffoldState>();
 
     void _onItemTapped(int index) {
       _selectedIndex = index;
@@ -46,36 +46,31 @@ class _MyBottomNavgationBar extends State<MyBottomNavgationBar> {
             icon: _selectedIndex == 0 // 선택된 탭은 채워진 아이콘, 나머지는 line 아이콘
                 ? SvgPicture.asset('assets/icons/menu-home-solid.svg',
                     color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-home-line.svg',
-                    color: context.theme.colorScheme.onSurface),
+                : SvgPicture.asset('assets/icons/menu-home-line.svg',),
             label: "홈"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 1
                 ? SvgPicture.asset('assets/icons/menu-analysis-solid.svg',
                     color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-analysis-line.svg',
-                    color: context.theme.colorScheme.onSurface),
+                : SvgPicture.asset('assets/icons/menu-analysis-line.svg',),
             label: "전력분석"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 2
                 ? SvgPicture.asset('assets/icons/menu-simulation-solid.svg',
                     color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-simulation-line.svg',
-                    color: context.theme.colorScheme.onSurface),
+                : SvgPicture.asset('assets/icons/menu-simulation-line.svg',),
             label: "시뮬레이션"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 3
                 ? SvgPicture.asset('assets/icons/menu-smarthome-solid.svg',
                     color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-smarthome-line.svg',
-                    color: context.theme.colorScheme.onSurface),
+                : SvgPicture.asset('assets/icons/menu-smarthome-line.svg',),
             label: "스마트홈"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 4
                 ? SvgPicture.asset('assets/icons/menu-mypage-solid.svg',
                     color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-mypage-line.svg',
-                    color: context.theme.colorScheme.onSurface),
+                : SvgPicture.asset('assets/icons/menu-mypage-line.svg',),
             label: "마이페이지"),
       ],
       // 현재 인덱스를 selectedIndex에 저장

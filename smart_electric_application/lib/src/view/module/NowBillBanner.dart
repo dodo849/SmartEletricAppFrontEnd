@@ -6,7 +6,6 @@ class NowBillBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // 데이터
     var dataValue = "13,030";
     var bodyValue = "/ 125 kWh";
@@ -16,6 +15,16 @@ class NowBillBanner extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              "월드컵북로 501, 00동 0000호",
+              style: TextStyle(
+                fontFamily: 'Pretendard',
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+                color: context.theme.colorScheme.onSurface,
+              ),
+            ),
+            SizedBox(height: 7),
             Text(
               "소마님의 현재 요금",
               style: TextStyle(

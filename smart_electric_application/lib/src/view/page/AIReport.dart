@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_electric_application/src/view/component/MyBottomNavigationBar.dart';
+import 'package:smart_electric_application/src/view/module/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/view/page/Home.dart';
 
 class AIReport extends StatelessWidget {

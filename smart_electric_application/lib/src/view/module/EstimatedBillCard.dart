@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_electric_application/src/view/page/AIReport.dart';
 
-class EstimatedChargeCard extends StatelessWidget {
-  const EstimatedChargeCard({Key? key}) : super(key: key);
+class EstimatedBillCard extends StatelessWidget {
+  const EstimatedBillCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +26,7 @@ class EstimatedChargeCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            // 타이틀 / AI 분석 go to 버튼
             Row(
               children: [
                 Text(
@@ -63,7 +64,10 @@ class EstimatedChargeCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 7),
+
+            SizedBox(height: 10),
+
+            // 예측 요금 정보
             Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
@@ -82,6 +86,35 @@ class EstimatedChargeCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
+                    color: context.theme.colorScheme.onSurface,
+                  ),
+                ),
+              ],
+            ),
+
+            SizedBox(height: 7),
+
+            // 예측 누진구간 정보
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  "두번째 누진 구간",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: context.theme.colorScheme.primary,
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  "적용 예정입니다",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: context.theme.colorScheme.onSurface,
                   ),
                 ),

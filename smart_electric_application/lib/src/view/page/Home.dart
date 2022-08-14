@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/component/MyBottomNavigationBar.dart';
-import 'package:smart_electric_application/src/view/component/NowBillBanner.dart';
-import 'package:smart_electric_application/src/view/component/ProgressiveIntervalCard.dart';
-import 'package:smart_electric_application/src/view/component/Estimated%08BillCard.dart';
-import 'package:smart_electric_application/src/view/component/ProgressiveIntervalBar.dart';
+import 'package:smart_electric_application/src/view/module/MyBottomNavigationBar.dart';
+import 'package:smart_electric_application/src/view/module/NowBillBanner.dart';
+import 'package:smart_electric_application/src/view/module/ProgressiveIntervalCard.dart';
+import 'package:smart_electric_application/src/view/module/Estimated%08BillCard.dart';
+import 'package:smart_electric_application/src/view/module/ProgressiveIntervalBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
 import 'package:smart_electric_application/CustomIcon.dart';
@@ -18,9 +18,9 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-  static RxBool isLightTheme = false.obs;
-
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  static RxBool _isLightTheme = false.obs;
 
   // _saveThemeStatus() async {
   //   SharedPreferences pref = await _prefs;
@@ -37,7 +37,6 @@ class _Home extends State<Home> {
 
   static int selectedTabIndex = 0;
 
-
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -46,15 +45,18 @@ class _Home extends State<Home> {
         children: [
           NowBillBanner(),
           Spacer(),
-          GestureDetector(
-            onTap: () {
-              ThemeViewModel.to.changeTheme();
-            }, // Image tapped
-            child: ThemeViewModel.to.isLightTheme.isTrue
-                ? Image.asset("assets/images/img_day.png",
-                    width: 70, height: 70)
-                : Image.asset("assets/images/img_night.png",
-                    width: 70, height: 70),
+          Obx(
+            () => GestureDetector(
+              onTap: () {
+                ThemeViewModel.to.changeTheme();
+                _isLightTheme(true);
+              }, // Image tapped
+              child: ThemeViewModel.to.isLightTheme.isTrue
+                  ? Image.asset("assets/images/day.png",
+                      width: 70, height: 70)
+                  : Image.asset("assets/images/night.png",
+                      width: 70, height: 70),
+            ),
           ),
           Spacer(),
         ],
@@ -64,8 +66,8 @@ class _Home extends State<Home> {
       Container(
         margin: EdgeInsets.symmetric(horizontal: 30),
         child: ProgressiveIntervalBar(
-          currentRate: 100,
-          currentSectionNumber: 1,
+          currentRate: 320,
+          currentSectionNumber: 2,
         ),
       ),
 
@@ -73,9 +75,8 @@ class _Home extends State<Home> {
       EstimatedBillCard(),
 
       SizedBox(height: 15),
-      ProgressiveIntervalCard(),
 
-      SizedBox(height: 15),
+      Divider(),
 
       // Obx(() => ElevatedButton(
       //     style: ButtonStyle(

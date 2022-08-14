@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/component/YesterdayUsageCard.dart';
+import 'package:smart_electric_application/src/view/module/YesterdayUsageCard.dart';
 
 class Analysis extends StatelessWidget {
   const Analysis({Key? key}) : super(key: key);

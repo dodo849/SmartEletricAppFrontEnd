@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/component/ProgressiveIntervalBar.dart';
+import 'package:smart_electric_application/src/view/module/ProgressiveIntervalBar.dart';
 
 class ProgressiveIntervalCard extends StatelessWidget {
   const ProgressiveIntervalCard({Key? key}) : super(key: key);
