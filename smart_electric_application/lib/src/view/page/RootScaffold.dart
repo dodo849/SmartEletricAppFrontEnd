@@ -20,11 +20,11 @@ class RootScaffoldState extends State<RootScaffold> {
 
   // 탭별 화면  
   static List<Widget> tabPages = <Widget>[
-    Home(),
-    Analysis(),
-    BillSimulation(),
-    SmartHome(),
-    Mypage(),
+    const Home(),
+    const Analysis(),
+    const BillSimulation(),
+    const SmartHome(),
+    const Mypage(),
   ];
 
   @override
@@ -33,7 +33,7 @@ class RootScaffoldState extends State<RootScaffold> {
       backgroundColor: context.theme.colorScheme.background,
       appBar: EmptyAppBar(),
       body: SafeArea(child: tabPages[selectedIndex]),
-      bottomNavigationBar: MyBottomNavgationBar(),
+      bottomNavigationBar: const MyBottomNavgationBar(),
     );
   }
 }
@@ -45,5 +45,5 @@ class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(0.0, 0.0);
+  Size get preferredSize => const Size(0.0, 0.0);
 }

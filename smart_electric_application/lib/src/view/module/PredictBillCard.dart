@@ -92,7 +92,7 @@ class EstimatedBillCard extends StatelessWidget {
               ],
             ),
 
-            SizedBox(height: 7),
+            SizedBox(height: 10),
 
             // 예측 누진구간 정보
             Row(
@@ -104,7 +104,7 @@ class EstimatedBillCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: context.theme.colorScheme.primary,
+                    color: context.theme.colorScheme.onBackground,
                   ),
                 ),
                 SizedBox(

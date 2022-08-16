@@ -13,7 +13,7 @@ class BillSimulation extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(left: 20, right: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(height: 35),
+          SizedBox(height: 25),
           SimulationBanner(),
           SizedBox(height: 10),
           BillSimulationCard(),
@@ -22,6 +22,8 @@ class BillSimulation extends StatelessWidget {
             children: [
               Text("시뮬레이션 가전 목록", style: context.theme.textTheme.headline2),
               Spacer(),
+              Text("수정하기"),
+              SizedBox(width: 10),
               Text("편집하기"),
             ],
           ),

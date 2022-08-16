@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/module/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/view/module/NowBillBanner.dart';
 import 'package:smart_electric_application/src/view/module/ProgressiveIntervalCard.dart';
-import 'package:smart_electric_application/src/view/module/Estimated%08BillCard.dart';
+import 'package:smart_electric_application/src/view/module/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/view/module/ProgressiveIntervalBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/view/module/TestChart.dart';
@@ -66,8 +66,8 @@ class _Home extends State<Home> {
       Container(
         margin: EdgeInsets.symmetric(horizontal: 30),
         child: ProgressiveIntervalBar(
-          currentRate: 320,
-          currentSectionNumber: 2,
+          currentRate: 120,
+          currentSectionNumber: 1,
         ),
       ),
 

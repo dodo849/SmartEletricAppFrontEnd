@@ -47,7 +47,7 @@ class ProgressiveIntervalBar extends StatelessWidget {
                         getCurrentPicker()
                       else
                         SvgPicture.asset(
-                          'assets/icons/picker-transparent.svg',
+                          'assets/icons/picker_transparent.svg',
                           color: Colors.transparent,
                         ),
                       SizedBox(height: 5),
@@ -79,10 +79,11 @@ class ProgressiveIntervalBar extends StatelessWidget {
                       if (currentSectionNumber == 2)
                         getCurrentPicker()
                       else
-                        SvgPicture.asset(
-                          'assets/icons/picker-transparent.svg',
-                          color: Colors.transparent,
-                        ),
+                        // SvgPicture.asset(
+                        //   'assets/icons/picker-transparent.svg',
+                        //   color: Colors.transparent,
+                        // ),
+                        getPredictPicker(),
                       SizedBox(height: 5),
                       Container(
                           height: 10,
@@ -110,7 +111,7 @@ class ProgressiveIntervalBar extends StatelessWidget {
                         getCurrentPicker()
                       else
                         SvgPicture.asset(
-                          'assets/icons/picker-transparent.svg',
+                          'assets/icons/picker_transparent.svg',
                           color: Colors.transparent,
                         ),
                       SizedBox(height: 5),
@@ -133,20 +134,21 @@ class ProgressiveIntervalBar extends StatelessWidget {
                 ),
               ],
             ),
+
+            // Circle
             Positioned(
               // 현재 circle 위치 조정
               top: 36,
               left: currentRate / 630 * constraints.maxWidth,
               child: getCurrentPickerCircle(),
             ),
-            // Positioned(
-            //   // 현재 circle 위치 조정
-            //   top: 36,
-            //   left: 300 / 630 * constraints.maxWidth,
-            //   child: SvgPicture.asset(
-            //     'assets/icons/picker-circle-gray.svg',
-            //   ),
-            // ),
+            Positioned(
+              top: 36,
+              left: 300 / 630 * constraints.maxWidth,
+              child: SvgPicture.asset(
+                'assets/icons/picker_circle_gray.svg',
+              ),
+            ),
           ],
         ),
       );
@@ -154,14 +156,14 @@ class ProgressiveIntervalBar extends StatelessWidget {
   }
 
   Widget getCurrentPickerCircle() {
-    var iconName = "assets/icons/picker-circle";
+    var iconName = "assets/icons/picker_circle";
 
     if (currentSectionNumber == 1) {
-      iconName += "-green";
+      iconName += "_green";
     } else if (currentSectionNumber == 2) {
-      iconName += "-yellow";
+      iconName += "_yellow";
     } else {
-      iconName += "-red";
+      iconName += "_red";
     }
 
     iconName += ".svg";
@@ -170,27 +172,42 @@ class ProgressiveIntervalBar extends StatelessWidget {
   }
 
   Widget getCurrentPicker() {
-    var iconName = "assets/icons/picker-current";
+    var iconName = "assets/icons/picker_current";
 
     // 현재 누진 구간에 따라 색 변경
     if (currentSectionNumber == 1) {
-      iconName += "-green";
+      iconName += "_green";
     } else if (currentSectionNumber == 2) {
-      iconName += "-yellow";
+      iconName += "_yellow";
     } else {
-      iconName += "-red";
+      iconName += "_red";
     }
 
     // 테마모드에 따라 배경색 변경
     if (ThemeViewModel.to.isLightTheme.isTrue) {
-      iconName += "-light";
+      iconName += "_light";
     } else {
-      iconName += "-dark";
+      iconName += "_dark";
     }
 
     iconName += ".svg";
 
     print(iconName);
+
+    return SvgPicture.asset(iconName);
+  }
+
+  Widget getPredictPicker() {
+    var iconName = "assets/icons/picker_predict";
+
+    // 테마모드에 따라 배경색 변경
+    if (ThemeViewModel.to.isLightTheme.isTrue) {
+      iconName += "_light";
+    } else {
+      iconName += "_dark";
+    }
+
+    iconName += ".svg";
 
     return SvgPicture.asset(iconName);
   }

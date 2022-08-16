@@ -14,6 +14,7 @@ class MypageMenuListCell extends StatelessWidget {
         children: [
           SizedBox(height: 10),
           Row(children: [
+            SizedBox(width: 10),
             Text(
               "${text}",
               style: TextStyle(
@@ -22,7 +23,7 @@ class MypageMenuListCell extends StatelessWidget {
                   color: context.theme.colorScheme.onBackground),
             ),
             Spacer(),
-            SvgPicture.asset("assets/icons/arrow-right.svg",
+            SvgPicture.asset("assets/icons/arrow_right.svg",
                 color: context.theme.colorScheme.onSurface),
           ]),
           SizedBox(height: 10),

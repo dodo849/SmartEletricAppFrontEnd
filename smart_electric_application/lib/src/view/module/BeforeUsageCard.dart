@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class YesterdayUsageCard extends StatelessWidget {
-  const YesterdayUsageCard({Key? key}) : super(key: key);
+class BeforeUsageCard extends StatelessWidget {
+  const BeforeUsageCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,6 @@ class YesterdayUsageCard extends StatelessWidget {
         ),
         width: double.infinity,
         padding: EdgeInsets.all(25),
-        margin: EdgeInsets.only(left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -22,7 +21,7 @@ class YesterdayUsageCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "어제 사용량",
+                  "이전 사용량",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,

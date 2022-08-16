@@ -44,33 +44,28 @@ class _MyBottomNavgationBar extends State<MyBottomNavgationBar> {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
             icon: _selectedIndex == 0 // 선택된 탭은 채워진 아이콘, 나머지는 line 아이콘
-                ? SvgPicture.asset('assets/icons/menu-home-solid.svg',
-                    color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-home-line.svg',),
+                ? SvgPicture.asset('assets/icons/menu_home_solid.svg',)
+                : SvgPicture.asset('assets/icons/menu_home_line.svg',),
             label: "홈"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 1
-                ? SvgPicture.asset('assets/icons/menu-analysis-solid.svg',
-                    color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-analysis-line.svg',),
+                ? SvgPicture.asset('assets/icons/menu_analysis_solid.svg',)
+                : SvgPicture.asset('assets/icons/menu_analysis_line.svg',),
             label: "전력분석"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 2
-                ? SvgPicture.asset('assets/icons/menu-simulation-solid.svg',
-                    color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-simulation-line.svg',),
+                ? SvgPicture.asset('assets/icons/menu_simulation_solid.svg',)
+                : SvgPicture.asset('assets/icons/menu_simulation_line.svg',),
             label: "시뮬레이션"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 3
-                ? SvgPicture.asset('assets/icons/menu-smarthome-solid.svg',
-                    color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-smarthome-line.svg',),
+                ? SvgPicture.asset('assets/icons/menu_smarthome_solid.svg',)
+                : SvgPicture.asset('assets/icons/menu_smarthome_line.svg',),
             label: "스마트홈"),
         BottomNavigationBarItem(
             icon: _selectedIndex == 4
-                ? SvgPicture.asset('assets/icons/menu-mypage-solid.svg',
-                    color: context.theme.colorScheme.onBackground)
-                : SvgPicture.asset('assets/icons/menu-mypage-line.svg',),
+                ? SvgPicture.asset('assets/icons/menu_mypage_solid.svg',)
+                : SvgPicture.asset('assets/icons/menu_mypage_line.svg',),
             label: "마이페이지"),
       ],
       // 현재 인덱스를 selectedIndex에 저장

@@ -37,7 +37,7 @@ class SimulationBanner extends StatelessWidget {
           ),
           Spacer(),
           Image.asset(
-            "assets/images/avatars-woman-checklist.png",
+            "assets/images/avatar_woman_checklist.png",
             width: 100,
             height: 100,
           ),

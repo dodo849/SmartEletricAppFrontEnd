@@ -17,7 +17,10 @@ class Mypage extends StatelessWidget {
             SizedBox(
               height: 35,
             ),
-            Text("마이페이지", style: context.theme.textTheme.headline1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text("마이페이지", style: context.theme.textTheme.headline1),
+            ),
             SizedBox(
               height: 25,
             ),

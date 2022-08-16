@@ -30,7 +30,7 @@ class SmartHomePreparingCard extends StatelessWidget {
               "조금만 기다려주세요 :)",
               style: TextStyle(color: context.theme.colorScheme.onBackground),
             ),
-            Image.asset("assets/images/avatars-woman.png",
+            Image.asset("assets/images/avatar_woman.png",
                 width: 200, height: 200)
           ],
         ));

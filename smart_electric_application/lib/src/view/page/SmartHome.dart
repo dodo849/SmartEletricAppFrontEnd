@@ -12,7 +12,7 @@ class SmartHome extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25),
+            SizedBox(height: 35),
             SmartHomeBanner(),
             SizedBox(height: 25),
             Expanded(child: SmartHomePreparingCard()),

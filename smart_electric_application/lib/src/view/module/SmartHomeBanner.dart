@@ -9,8 +9,8 @@ class SmartHomeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text("스마트홈", style: context.theme.textTheme.headline1)]));
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text("스마트홈", style: context.theme.textTheme.headline1)
+    ]));
   }
 }
