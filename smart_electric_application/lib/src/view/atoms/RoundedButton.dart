@@ -37,7 +37,7 @@ class RoundedBoutton extends StatelessWidget {
 
     return ElevatedButton(
         style: buttonStyle,
-        onPressed: action(),
+        onPressed: (){action();},
         child: Text(
           '$text',
           style: getTextStyleBySize(size),

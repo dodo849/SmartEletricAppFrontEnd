@@ -36,7 +36,7 @@ class TextInput extends StatelessWidget {
   }
 
   Widget getTextFieldIsPlaceholder(String? placeholder, BuildContext context) {
-    // 아웃라인 스타일 정의
+    // 아웃라인 스타일 정의 (focus & enabled)
     var focusBorderStyle = OutlineInputBorder(
       borderSide: BorderSide(
           color: context.theme.colorScheme.primary,
@@ -52,22 +52,23 @@ class TextInput extends StatelessWidget {
       borderRadius: BorderRadius.circular(20.0),
     );
 
-    // 텍스트 스타일 정의
+    // 입력 시 텍스트 스타일 정의
     var textStyle = TextStyle(color: context.theme.colorScheme.onSurface);
 
-    // 반환할 TextField
+    // 1. 기본 텍스트 필드 정의
     var textField = TextField(
       style: textStyle,
       decoration: InputDecoration(
           focusedBorder: focusBorderStyle, enabledBorder: enabledBorderStyle),
     );
 
-    // 플레이스 홀더 설정이 있으면 설정된 TextField 반환
+    // 2. 플레이스 홀더 텍스트 필드 정의
     if (placeholder != null) {
       textField = TextField(
           style: textStyle,
           decoration: InputDecoration(
               hintText: "$placeholder",
+              hintStyle: TextStyle(color: context.theme.colorScheme.surfaceVariant ),
               focusedBorder: focusBorderStyle,
               enabledBorder: enabledBorderStyle));
     }

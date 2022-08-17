@@ -27,10 +27,10 @@ class MyApp extends StatelessWidget {
             name: "/AIReport",
             page: () => AIReport(),
             transition: Transition.native),
-                GetPage(
+        GetPage(
             name: "/Login",
             page: () => Login(),
-            transition: Transition.noTransition),
+            transition: Transition.fade),
       ],
     );
   }

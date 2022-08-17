@@ -101,6 +101,9 @@ flutter:
           weight: 800
         - asset: assets/fonts/Pretendard-Black.ttf
           weight: 900
+    - family: Cafe24Surround
+      fonts:
+        - asset: assets/fonts/Cafe24Ssurround.ttf
     # - family: CustomIcons
     #   fonts:
     #     - asset: assets/fonts/CustomIcons.ttf
