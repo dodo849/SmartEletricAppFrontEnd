@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/view/atoms/ImageButton.dart';
 import 'package:smart_electric_application/src/view/module/BillSimulationCard.dart';
 import 'package:smart_electric_application/src/view/module/SimulationBanner.dart';
 import 'package:smart_electric_application/src/view/module/SimulationProductList.dart';
@@ -20,13 +21,14 @@ class BillSimulation extends StatelessWidget {
           SizedBox(height: 30),
           Row(
             children: [
-              Text("시뮬레이션 가전 목록", style: context.theme.textTheme.headline2),
+              Text("시뮬레이션 가전 목록", style: context.theme.textTheme.headline3),
               Spacer(),
               Text("수정하기"),
               SizedBox(width: 10),
               Text("편집하기"),
             ],
           ),
+          SizedBox(height: 5),
           SimulationProductList(),
         ]),
       ),

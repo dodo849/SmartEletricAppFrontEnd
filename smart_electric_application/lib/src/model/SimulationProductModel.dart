@@ -1,7 +1,9 @@
+// 사용자가 추가한 시뮬레이션 가전 정보
+
 class SimulationProductModel {
-  late String name;
-  late String serialNumber;
-  late String type;
+  late String name; // 가전명
+  late String serialNumber; // 시리얼 넘버
+  late String type; // 타입 ex. ac, dry, cleaner ...
 
   SimulationProductModel(
       {required String name,

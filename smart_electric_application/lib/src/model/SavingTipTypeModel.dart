@@ -1,11 +1,13 @@
+// 절약 팁 분류 종류
+
 class SavingTipTypeModel {
-  late String typeName;
-  late String iconName;
+  late String krName; // 분류 한글명 ex. 에어컨, 청소기
+  late String engName; // 아이콘(영어명) ex. ac, cleaner
 
   SavingTipTypeModel(
-      {required String typeName,
-      required String iconName}) {
-    this.typeName = typeName;
-    this.iconName = iconName;
+      {required String krName,
+      required String engName}) {
+    this.krName = krName;
+    this.engName = engName;
   }
 }

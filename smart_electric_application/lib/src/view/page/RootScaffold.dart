@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/module/MyBottomNavigationBar.dart';
+import 'package:smart_electric_application/src/view/module/common/EmptyAppBar.dart';
+import 'package:smart_electric_application/src/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/view/page/Analysis.dart';
 import 'package:smart_electric_application/src/view/page/Home.dart';
 import 'package:smart_electric_application/src/view/page/Simulation.dart';
@@ -36,14 +37,4 @@ class RootScaffoldState extends State<RootScaffold> {
       bottomNavigationBar: const MyBottomNavgationBar(),
     );
   }
-}
-
-class EmptyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-
-  @override
-  Size get preferredSize => const Size(0.0, 0.0);
 }

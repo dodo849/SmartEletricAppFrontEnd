@@ -25,12 +25,12 @@ class SavingTipTypeGridCell extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              "assets/icons/product_${savingTipType.iconName}.svg",
+              "assets/icons/product_${savingTipType.engName}.svg",
               color: context.theme.colorScheme.primary,
               width: 50,
               height: 50,
             ),
-            Text(savingTipType.typeName),
+            Text(savingTipType.krName, style: TextStyle(fontSize: 12),),
           ],
         ));
   }

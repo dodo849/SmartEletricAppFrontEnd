@@ -17,13 +17,6 @@ class _MyBottomNavgationBar extends State<MyBottomNavgationBar> {
   // 현재 선택된 탭 인덱스 관리할 변수
   static int _selectedIndex = 0;
 
-  // 탭 될때 인덱스 변수 변경할 함수
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     selectedIndex = index;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
 
@@ -32,6 +25,7 @@ class _MyBottomNavgationBar extends State<MyBottomNavgationBar> {
     RootScaffoldState? parent =
         context.findAncestorStateOfType<RootScaffoldState>();
 
+  // 탭 될때 인덱스 변수 변경할 함수
     void _onItemTapped(int index) {
       _selectedIndex = index;
       parent?.setState(() {

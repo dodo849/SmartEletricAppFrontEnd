@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/module/MyBottomNavigationBar.dart';
+import 'package:smart_electric_application/src/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/view/module/NowBillBanner.dart';
 import 'package:smart_electric_application/src/view/module/ProgressiveIntervalCard.dart';
 import 'package:smart_electric_application/src/view/module/Predict%08BillCard.dart';

@@ -29,6 +29,26 @@ class Mypage extends StatelessWidget {
               height: 5,
             ),
             MypageMunuList(),
+            Spacer(),
+            Row(
+              children: [
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: GestureDetector(
+                    onTap: () {
+                        Get.toNamed("/Login");
+                    },
+                    child: Text(
+                      "로그아웃",
+                      style:
+                          TextStyle(color: context.theme.colorScheme.onSurface),
+                    ),
+                  ),
+                ),
+                Spacer(),
+              ],
+            ),
           ],
         ));
   }

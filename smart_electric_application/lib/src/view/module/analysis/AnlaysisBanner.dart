@@ -14,7 +14,6 @@ class AnlaysisBanner extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25),
             Text(
               "소마님은",
               style: TextStyle(
@@ -46,8 +45,8 @@ class AnlaysisBanner extends StatelessWidget {
             ),
           ],
         ),
-        Spacer(),
-        Image.asset("assets/images/light.png", width: 100, height: 100),
+        Spacer(flex:2),
+        Image.asset("assets/images/light.png", width: 80, height: 80),
         Spacer(),
       ],
     ));
