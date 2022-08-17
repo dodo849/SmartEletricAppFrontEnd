@@ -14,7 +14,7 @@ class AIReport extends StatelessWidget {
         shadowColor: Colors.transparent,
       ),
       body: Text("hi"),
-      bottomNavigationBar: MyBottomNavgationBar(),
+      // bottomNavigationBar: MyBottomNavgationBar(),
     );
   }
 }

@@ -23,7 +23,7 @@ class LoginBanner extends StatelessWidget {
                     SizedBox(width: 10),
             Text("스마트전기앱",
                 style: TextStyle(
-                  color: context.theme.colorScheme.onBackground,
+                  color: context.theme.colorScheme.primary,
                   fontSize: 28,
                   fontFamily: "Cafe24Surround",
                 ))

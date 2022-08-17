@@ -8,18 +8,12 @@ import 'package:smart_electric_application/src/view/page/Simulation.dart';
 import 'package:smart_electric_application/src/view/page/MyPage.dart';
 import 'package:smart_electric_application/src/view/page/SmartHome.dart';
 
-class RootScaffold extends StatefulWidget {
-  const RootScaffold({Key? key}) : super(key: key);
 
-  @override
-  State<RootScaffold> createState() => RootScaffoldState();
-}
-
-class RootScaffoldState extends State<RootScaffold> {
+class RootScaffold extends StatelessWidget{
   // 선택된 탭 인덱스 저장. 자식 위젯인 MyBottomNavgationBar에서 변경한다.
   int selectedIndex = 0;
 
-  // 탭별 화면  
+  // 탭별 화면
   static List<Widget> tabPages = <Widget>[
     const Home(),
     const Analysis(),
@@ -30,11 +24,19 @@ class RootScaffoldState extends State<RootScaffold> {
 
   @override
   Widget build(BuildContext context) {
+
+    // 페이지 전환을 위한 MyBottomNavgationBarController 인스턴스화 (의존성 주입)
+    // Get.put : 수명이 페이지와 같음
+    Get.put(MyBottomNavgationBarController());
+
     return Scaffold(
       backgroundColor: context.theme.colorScheme.background,
       appBar: EmptyAppBar(),
-      body: SafeArea(child: tabPages[selectedIndex]),
-      bottomNavigationBar: const MyBottomNavgationBar(),
+      // MyBottomNavgationBarController의 변수가 변하면 화면 변경
+      body: Obx(() => SafeArea(
+          child:
+              tabPages[MyBottomNavgationBarController.to.selectedIndex.value])),
+      bottomNavigationBar: MyBottomNavgationBar(),
     );
   }
 }
