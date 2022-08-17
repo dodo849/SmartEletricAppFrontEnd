@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/module/MypageMenuList.dart';
+import 'package:smart_electric_application/src/view/module/mypage/MypageMenuList.dart';
+
 
 class Mypage extends StatelessWidget {
   const Mypage({Key? key}) : super(key: key);

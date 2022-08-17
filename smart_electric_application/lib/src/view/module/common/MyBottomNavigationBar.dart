@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/view/page/RootScaffold.dart';
 
-// GetXController 위젯 사용
+// BottomNavigationBar 상태 관리를 위한 GetX controller
 class MyBottomNavgationBarController extends GetxController {
   // Get.fine 대신 클래스명 사용 가능
   static MyBottomNavgationBarController get to => Get.find();

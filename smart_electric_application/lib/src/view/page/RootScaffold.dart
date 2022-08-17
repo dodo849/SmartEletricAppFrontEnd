@@ -15,7 +15,7 @@ class RootScaffold extends StatelessWidget{
 
   // 탭별 화면
   static List<Widget> tabPages = <Widget>[
-    const Home(),
+    Home(),
     const Analysis(),
     const BillSimulation(),
     const SmartHome(),

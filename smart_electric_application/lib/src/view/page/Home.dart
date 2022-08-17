@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/module/common/MyBottomNavigationBar.dart';
-import 'package:smart_electric_application/src/view/module/NowBillBanner.dart';
+import 'package:smart_electric_application/src/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/view/module/ProgressiveIntervalCard.dart';
 import 'package:smart_electric_application/src/view/module/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/view/module/ProgressiveIntervalBar.dart';
@@ -11,17 +9,9 @@ import 'package:smart_electric_application/src/view/module/TestChart.dart';
 import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
 import 'package:smart_electric_application/CustomIcon.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() => _Home();
-}
-
-class _Home extends State<Home> {
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
-  static RxBool _isLightTheme = false.obs;
+class Home extends StatelessWidget {
+  // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   // _saveThemeStatus() async {
   //   SharedPreferences pref = await _prefs;
@@ -36,8 +26,6 @@ class _Home extends State<Home> {
   //   Get.changeThemeMode(_isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
   // }
 
-  static int selectedTabIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -50,7 +38,6 @@ class _Home extends State<Home> {
             () => GestureDetector(
               onTap: () {
                 ThemeViewModel.to.changeTheme();
-                _isLightTheme(true);
               }, // Image tapped
               child: ThemeViewModel.to.isLightTheme.isTrue
                   ? Image.asset("assets/images/day.png", width: 70, height: 70)
