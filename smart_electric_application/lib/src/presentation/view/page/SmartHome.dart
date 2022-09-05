@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_electric_application/src/view/module/SmartHomeBanner.dart';
-import 'package:smart_electric_application/src/view/module/SmartHomePreparingCard.dart';
+import 'package:smart_electric_application/src/presentation/view/module/smarthome/SmartHomeBanner.dart';
+import 'package:smart_electric_application/src/presentation/view/module/smarthome/SmartHomePreparingCard.dart';
 
 class SmartHome extends StatelessWidget {
   const SmartHome({Key? key}) : super(key: key);

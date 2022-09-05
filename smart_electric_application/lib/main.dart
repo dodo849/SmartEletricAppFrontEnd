@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/page/AIReport.dart';
-import 'package:smart_electric_application/src/view/page/Login.dart';
-import 'package:smart_electric_application/src/view/page/RootScaffold.dart';
-import 'package:smart_electric_application/src/view/theme/Themes.dart';
-import 'package:smart_electric_application/src/viewmodel/ThemeViewModel.dart';
+import 'package:smart_electric_application/src/presentation/view/page/AIReport.dart';
+import 'package:smart_electric_application/src/presentation/view/page/Login.dart';
+import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
 
 void main() {
   runApp(const MyApp());

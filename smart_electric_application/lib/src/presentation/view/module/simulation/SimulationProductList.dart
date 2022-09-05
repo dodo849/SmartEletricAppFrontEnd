@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/model/SimulationProductModel.dart';
-import 'package:smart_electric_application/src/view/atoms/SimulationProductListCell.dart';
+import 'package:smart_electric_application/src/data/model/SimulationProductModel.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/SimulationProductListCell.dart';
 
 // 클래스 변수 수정 로직
 // historyList.value.addAll(

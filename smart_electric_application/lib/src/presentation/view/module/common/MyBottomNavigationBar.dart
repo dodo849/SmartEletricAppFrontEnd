@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/page/RootScaffold.dart';
+import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 
 // BottomNavigationBar 상태 관리를 위한 GetX controller
 class MyBottomNavgationBarController extends GetxController {
@@ -22,6 +22,18 @@ class MyBottomNavgationBar extends GetView<MyBottomNavgationBarController> {
   Widget build(BuildContext context) {
     return Obx(() => BottomNavigationBar(
           backgroundColor: context.theme.colorScheme.background,
+          // 현재 인덱스를 selectedIndex에 저장
+          currentIndex: controller.selectedIndex.value,
+          // 요소(item)을 탭 할 시 실행)
+          onTap: controller.changeIndex,
+          // 선택에 따라 icon·label 색상 변경
+          selectedItemColor: context.theme.colorScheme.onBackground,
+          unselectedItemColor: context.theme.colorScheme.onSurfaceVariant,
+          // label text style 변경
+          unselectedLabelStyle: TextStyle(fontSize: 10),
+          selectedLabelStyle: TextStyle(fontSize: 10),
+          // 탭 애니메이션 변경 (fixed: 없음)
+          type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
                 icon: controller.selectedIndex.value ==
@@ -70,18 +82,6 @@ class MyBottomNavgationBar extends GetView<MyBottomNavgationBarController> {
                       ),
                 label: "마이페이지"),
           ],
-          // 현재 인덱스를 selectedIndex에 저장
-          currentIndex: controller.selectedIndex.value,
-          // 요소(item)을 탭 할 시 실행)
-          onTap: controller.changeIndex,
-          // 선택에 따라 icon·label 색상 변경
-          selectedItemColor: context.theme.colorScheme.onBackground,
-          unselectedItemColor: context.theme.colorScheme.onSurfaceVariant,
-          // 선택에 따라 label text style 변경
-          unselectedLabelStyle: TextStyle(fontSize: 10),
-          selectedLabelStyle: TextStyle(fontSize: 10),
-          // 탭 애니메이션 변경 (fixed: 없음)
-          type: BottomNavigationBarType.fixed,
         ));
   }
 }

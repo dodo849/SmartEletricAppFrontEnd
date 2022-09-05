@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smart_electric_application/src/view/page/AIReport.dart';
+import 'package:smart_electric_application/src/presentation/view/page/AIReport.dart';
 
 class EstimatedBillCard extends StatelessWidget {
   const EstimatedBillCard({Key? key}) : super(key: key);

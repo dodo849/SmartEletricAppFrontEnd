@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/atoms/ImageButton.dart';
-import 'package:smart_electric_application/src/view/module/analysis/AnlaysisBanner.dart';
-import 'package:smart_electric_application/src/view/module/analysis/SavingTipTypeGrid.dart';
-import 'package:smart_electric_application/src/view/module/TestChart.dart';
-import 'package:smart_electric_application/src/view/module/%08BeforeUsageCard.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/ImageButton.dart';
+import 'package:smart_electric_application/src/presentation/view/module/analysis/AnlaysisBanner.dart';
+import 'package:smart_electric_application/src/presentation/view/module/analysis/SavingTipTypeGrid.dart';
+import 'package:smart_electric_application/src/presentation/view/module/common/TestChart.dart';
+import 'package:smart_electric_application/src/presentation/view/module/analysis/%08BeforeUsageCard.dart';
 
 class Analysis extends StatelessWidget {
   const Analysis({Key? key}) : super(key: key);

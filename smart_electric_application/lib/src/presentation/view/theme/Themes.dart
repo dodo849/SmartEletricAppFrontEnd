@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_electric_application/src/view/theme/Colors.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 
 ThemeData lightTheme = ThemeData(
     appBarTheme: const AppBarTheme(
@@ -11,9 +11,10 @@ ThemeData lightTheme = ThemeData(
     colorScheme: const ColorScheme(
       onPrimary: CommonColors.onWhite,
       onSecondary: CommonColors.onWhite,
-      primary: LightColors.orange1, // point color1
-      primaryContainer: LightColors.orange2, // point color2
-      secondary: LightColors.blue, // point color3
+      primary: LightColors.yellow1, // point color1
+      primaryContainer: LightColors.yellow2, // point color1 text
+      secondary: LightColors.blue, // point color2
+      secondaryContainer: LightColors.purple, // point color3
       background: LightColors.gray1, // app backgound
       surface: LightColors.gray2, // card background
       outline: LightColors.gray3, // card line or divider
@@ -54,9 +55,10 @@ ThemeData darkTheme = ThemeData(
     colorScheme: const ColorScheme(
       onPrimary: CommonColors.onWhite,
       onSecondary: CommonColors.onWhite,
-      primary: DarkColors.orange1, // point color1
-      primaryContainer: DarkColors.orange2, // point color2
-      secondary: DarkColors.blue, // point color3
+      primary: DarkColors.yellow1, // point color1
+      primaryContainer: DarkColors.yellow2, // point color1 text
+      secondary: DarkColors.blue, // point color2
+      secondaryContainer: DarkColors.purple, // point color3
       background: DarkColors.gray1, // app backgound
       surface: DarkColors.gray2, // card background
       outline: DarkColors.gray3, // card line or divider

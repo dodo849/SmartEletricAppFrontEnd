@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/atoms/ImageButton.dart';
-import 'package:smart_electric_application/src/view/module/BillSimulationCard.dart';
-import 'package:smart_electric_application/src/view/module/SimulationBanner.dart';
-import 'package:smart_electric_application/src/view/module/SimulationProductList.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/ImageButton.dart';
+import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationCard.dart';
+import 'package:smart_electric_application/src/presentation/view/module/simulation/SimulationBanner.dart';
+import 'package:smart_electric_application/src/presentation/view/module/simulation/SimulationProductList.dart';
 
 class BillSimulation extends StatelessWidget {
   const BillSimulation({Key? key}) : super(key: key);

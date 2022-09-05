@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/model/SavingTipTypeModel.dart';
-import 'package:smart_electric_application/src/view/atoms/SavingTipTypeGridCell.dart';
+import 'package:smart_electric_application/src/data/model/SavingTipTypeModel.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/SavingTipTypeGridCell.dart';
 
 // 클래스 변수 수정 로직
 // historyList.value.addAll(

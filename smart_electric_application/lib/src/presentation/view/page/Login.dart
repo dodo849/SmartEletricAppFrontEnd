@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/view/atoms/RoundedButton.dart';
-import 'package:smart_electric_application/src/view/atoms/TextInput.dart';
-import 'package:smart_electric_application/src/view/module/Common/EmptyAppBar.dart';
-import 'package:smart_electric_application/src/view/module/common/MyBottomNavigationBar.dart';
-import 'package:smart_electric_application/src/view/module/login/LoginBanner.dart';
-import 'package:smart_electric_application/src/view/page/RootScaffold.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/TextInput.dart';
+import 'package:smart_electric_application/src/presentation/view/module/Common/EmptyAppBar.dart';
+import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
+import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
+import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
