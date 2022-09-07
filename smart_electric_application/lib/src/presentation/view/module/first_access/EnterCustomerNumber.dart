@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/UnderlineTextInput.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
 
 class EnterCustomerNumber extends StatelessWidget {
@@ -27,8 +27,9 @@ class EnterCustomerNumber extends StatelessWidget {
         SizedBox(height: 50),
         Text("고객번호를 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
-        UnderlineTextInput(
-            focusLineColor: colorTheme.secondaryContainer,
+        CustomTextInput(
+            focusColor: colorTheme.secondaryContainer,
+            textInputStyle: TextInputStyle.underline,
             textInputType: TextInputType.number,
             placeholder: "10자리 고객번호 입력",
             maxLength: 10,
@@ -37,9 +38,9 @@ class EnterCustomerNumber extends StatelessWidget {
               EnterCustomerInfoViewModel.to.customerNumber(value);
               validate(value);
             }),
-
         SizedBox(height: 30),
-        Text("고객번호는 전기요금고지서, 혹은 한전 전화문의로 확인하실 수 있습니다.", style: textTheme.bodyText2),
+        Text("고객번호는 전기요금고지서, 혹은 한전 전화문의로 확인하실 수 있습니다.",
+            style: textTheme.bodyText2),
       ],
     ));
   }

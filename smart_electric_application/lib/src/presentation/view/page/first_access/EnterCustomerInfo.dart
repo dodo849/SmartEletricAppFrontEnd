@@ -23,12 +23,6 @@ class EnterCustomerInfo extends StatelessWidget {
       const EnterCustomerName(),
     ];
 
-    // 본문 텍스트 스타일 정의
-    var bodyTextStyle = TextStyle(
-        color: context.theme.colorScheme.onSurfaceVariant,
-        fontSize: 16,
-        fontWeight: FontWeight.normal);
-
     // 테마 스타일
     var textTheme = context.theme.textTheme;
     var colorTheme = context.theme.colorScheme;

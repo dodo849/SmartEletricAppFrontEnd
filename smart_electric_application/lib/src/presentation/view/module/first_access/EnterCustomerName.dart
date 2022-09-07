@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/UnderlineTextInput.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
 
 import '../../atoms/BorderedTextInput.dart';
@@ -24,9 +24,10 @@ class EnterCustomerName extends StatelessWidget {
         SizedBox(height: 50),
         Text("성함을 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
-        UnderlineTextInput(
-          focusLineColor: colorTheme.secondaryContainer,
+        CustomTextInput(
+          focusColor: colorTheme.secondaryContainer,
           textInputType: TextInputType.name,
+          textInputStyle: TextInputStyle.underline,
           isFocus: true,
           onChanged: (value) {
             EnterCustomerInfoViewModel.to.customerName(value);

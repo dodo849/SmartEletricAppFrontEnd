@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+enum TextInputStyle { underline, bordered }
+
 /// label과 placeholder를 설정할 수  있는 컴포넌트
-class UnderlineTextInput extends StatelessWidget {
-  const UnderlineTextInput({
+class CustomTextInput extends StatelessWidget {
+  const CustomTextInput({
     Key? key,
     this.labelText,
     this.placeholder,
-    this.focusLineColor,
+    this.textInputStyle,
+    this.focusColor,
     this.textInputType,
     this.maxLength,
     this.isFocus,
@@ -17,7 +20,8 @@ class UnderlineTextInput extends StatelessWidget {
   // 부모 컴포넌트에게 값을 받을 클래스 변수 정의
   final String? labelText;
   final String? placeholder;
-  final Color? focusLineColor;
+  final TextInputStyle? textInputStyle;
+  final Color? focusColor;
   final TextInputType? textInputType;
   final int? maxLength;
   final bool? isFocus;
@@ -46,18 +50,41 @@ class UnderlineTextInput extends StatelessWidget {
   Widget getTextFieldIsPlaceholder(String? placeholder, BuildContext context,
       TextEditingController controller) {
     // 아웃라인 스타일 정의 (focus & enabled)
-    var focusBorderStyle = UnderlineInputBorder(
-      borderSide: BorderSide(
-          color: focusLineColor ?? context.theme.colorScheme.primary,
-          width: 2,
-          style: BorderStyle.solid),
-    );
-    var enabledBorderStyle = UnderlineInputBorder(
-      borderSide: BorderSide(
-          color: context.theme.colorScheme.outline,
-          width: 2,
-          style: BorderStyle.solid),
-    );
+    var focusBorderStyle;
+    var enabledBorderStyle;
+
+    switch (textInputStyle) {
+      case TextInputStyle.bordered:
+        focusBorderStyle = OutlineInputBorder(
+          borderSide: BorderSide(
+              color: focusColor ?? context.theme.colorScheme.primary,
+              width: 1,
+              style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(20.0),
+        );
+        enabledBorderStyle = OutlineInputBorder(
+          borderSide: BorderSide(
+              color: context.theme.colorScheme.outline,
+              width: 1,
+              style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(20.0),
+        );
+        break;
+      case TextInputStyle.underline:
+        focusBorderStyle = UnderlineInputBorder(
+          borderSide: BorderSide(
+              color: focusColor ?? context.theme.colorScheme.primary,
+              width: 2,
+              style: BorderStyle.solid),
+        );
+        enabledBorderStyle = UnderlineInputBorder(
+          borderSide: BorderSide(
+              color: context.theme.colorScheme.outline,
+              width: 2,
+              style: BorderStyle.solid),
+        );
+        break;
+    }
 
     // 입력 시 텍스트 스타일 정의
     var textStyle = TextStyle(color: context.theme.colorScheme.onBackground);
