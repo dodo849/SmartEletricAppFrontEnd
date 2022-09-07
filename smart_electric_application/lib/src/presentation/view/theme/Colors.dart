@@ -7,7 +7,7 @@ class LightColors {
   static const Color orange1 = Color(0xFFEB8C1C);
   static const Color orange2 = Color(0xFFFFA842);
   static const Color yellow1 = Color(0xFFFECB54);
-  static const Color yellow2 = Color(0xFFEAAB17);
+  static const Color yellow2 = Color(0xFFEBA338);
   static const Color blue = Color(0xFF3485FF);
   static const Color purple = Color(0xFF6D6CE7);
   static const Color gray1 = Color(0xFFFFFFFF);

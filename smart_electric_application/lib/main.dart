@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/page/AIReport.dart';
+import 'package:smart_electric_application/src/presentation/view/page/first_access/FirstAccess.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Login.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
@@ -28,8 +29,10 @@ class MyApp extends StatelessWidget {
             page: () => AIReport(),
             transition: Transition.native),
         GetPage(
-            name: "/Login",
-            page: () => Login(),
+            name: "/Login", page: () => Login(), transition: Transition.fade),
+        GetPage(
+            name: "/FirstAccess",
+            page: () => FirstAccess(),
             transition: Transition.fade),
       ],
     );

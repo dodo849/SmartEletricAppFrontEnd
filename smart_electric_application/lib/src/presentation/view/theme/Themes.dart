@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 
 ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: LightColors.basic,
     appBarTheme: const AppBarTheme(
       backgroundColor: LightColors.gray1,
     ),
@@ -43,9 +44,14 @@ ThemeData lightTheme = ThemeData(
         headline3: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: LightColors.gray5)));
+            color: LightColors.gray5),
+        bodyText2: TextStyle(
+            color: LightColors.gray5,
+            fontSize: 16,
+            fontWeight: FontWeight.normal)));
 
 ThemeData darkTheme = ThemeData(
+    scaffoldBackgroundColor: DarkColors.basic,
     appBarTheme: const AppBarTheme(
       backgroundColor: DarkColors.gray1,
     ),
@@ -88,4 +94,8 @@ ThemeData darkTheme = ThemeData(
           fontSize: 16,
           fontWeight: FontWeight.bold,
           color: DarkColors.gray5,
-        )));
+        ),
+        bodyText2: TextStyle(
+            color: DarkColors.gray5,
+            fontSize: 16,
+            fontWeight: FontWeight.normal)));

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// label과 placeholder를 선택해 지정 가능한 컴포넌트
-
-class TextInput extends StatelessWidget {
-  const TextInput({Key? key, this.labelText, this.placeholder})
+/// label과 placeholder를 설정할 수  있는 컴포넌트
+class BorderedTextInput extends StatelessWidget {
+  const BorderedTextInput({Key? key, this.labelText, this.placeholder, this.focusBorderColor})
       : super(key: key);
 
   // 부모 컴포넌트에게 값을 받을 클래스 변수 정의
   final String? labelText;
   final String? placeholder;
+  final Color? focusBorderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class TextInput extends StatelessWidget {
     // 아웃라인 스타일 정의 (focus & enabled)
     var focusBorderStyle = OutlineInputBorder(
       borderSide: BorderSide(
-          color: context.theme.colorScheme.primary,
+          color: focusBorderColor ?? context.theme.colorScheme.primary,
           width: 1,
           style: BorderStyle.solid),
       borderRadius: BorderRadius.circular(20.0),

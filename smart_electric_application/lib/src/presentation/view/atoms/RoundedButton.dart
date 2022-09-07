@@ -7,33 +7,35 @@ class RoundedBoutton extends StatelessWidget {
   const RoundedBoutton(
       {Key? key,
       required this.text,
-      required this.color,
+      required this.bgColor,
+      required this.textColor,
       required this.size,
       required this.action})
       : super(key: key);
 
   // 부모 컴포넌트에게 값을 받을 클래스 변수 정의
   final String text;
-  final Color color;
+  final Color bgColor;
+  final Color textColor;
   final ButtonSize size;
   final Function action;
 
   @override
   Widget build(BuildContext context) {
+    // 아직 버튼 미디움, 스몰 사이즈 정의 못해서 assert
     assert(size == ButtonSize.large, "아직 midium, small은 사용할 수 없습니다.");
 
     // 둥근 버튼 스타일 정의
     final buttonStyle = ButtonStyle(
         minimumSize: MaterialStateProperty.all(getButtonSize(size)),
-        backgroundColor: MaterialStateProperty.all(color.withOpacity(0.2)),
-        foregroundColor: MaterialStateProperty.all(color),
+        backgroundColor: MaterialStateProperty.all(bgColor),
+        foregroundColor: MaterialStateProperty.all(textColor),
         shadowColor: MaterialStateProperty.all(Colors.transparent),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
         )));
 
-    // 아직 버튼 미디움, 스몰 사이즈 정의 못해서 assert
 
     return ElevatedButton(
         style: buttonStyle,
@@ -66,7 +68,7 @@ class RoundedBoutton extends StatelessWidget {
 
     switch (size) {
       case ButtonSize.large:
-        returnStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 16);
+        returnStyle = TextStyle(fontWeight: FontWeight.w600, fontSize: 16);
         break;
       case ButtonSize.midium: // 미정
         break;

@@ -4,7 +4,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/module/mypage/MypageMenuList.dart';
 
-
 class Mypage extends StatelessWidget {
   const Mypage({Key? key}) : super(key: key);
 
@@ -38,10 +37,25 @@ class Mypage extends StatelessWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: GestureDetector(
                     onTap: () {
-                        Get.toNamed("/Login");
+                      Get.toNamed("/Login");
                     },
                     child: Text(
                       "로그아웃",
+                      style:
+                          TextStyle(color: context.theme.colorScheme.onSurface),
+                    ),
+                  ),
+                ),
+
+                // 첫화면 이동 임시 버튼
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed("/FirstAccess");
+                    },
+                    child: Text(
+                      "다운로드 첫화면",
                       style:
                           TextStyle(color: context.theme.colorScheme.onSurface),
                     ),

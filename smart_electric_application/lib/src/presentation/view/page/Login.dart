@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/TextInput.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/BorderedTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/module/Common/EmptyAppBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
@@ -20,7 +20,7 @@ class Login extends StatelessWidget {
           decoration: BoxDecoration(
             color: context.theme.colorScheme.background,
           ),
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             // crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,14 +31,14 @@ class Login extends StatelessWidget {
               SizedBox(height: 25),
 
               // id input
-              TextInput(
+              BorderedTextInput(
                 labelText: "ID",
                 placeholder: "아이디를 입력해주세요",
               ),
               SizedBox(height: 25),
 
               // password input
-              TextInput(
+              BorderedTextInput(
                 labelText: "PW",
                 placeholder: "비밀번호를 입력해주세요",
               ),
@@ -47,7 +47,8 @@ class Login extends StatelessWidget {
               // login button
               RoundedBoutton(
                   text: "로그인하기",
-                  color: context.theme.colorScheme.primary,
+                  bgColor: context.theme.colorScheme.primary.withOpacity(0.2),
+                  textColor: context.theme.colorScheme.primaryContainer,
                   size: ButtonSize.large,
                   action: () {
                     Get.to(() => RootScaffold(), transition: Transition.fadeIn);
@@ -58,7 +59,8 @@ class Login extends StatelessWidget {
               // signup button
               RoundedBoutton(
                   text: "회원가입하기",
-                  color: context.theme.colorScheme.secondary,
+                  bgColor: context.theme.colorScheme.secondary.withOpacity(0.2),
+                  textColor: context.theme.colorScheme.secondary,
                   size: ButtonSize.large,
                   action: () {}),
 
