@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 enum ButtonSize { small, midium, large }
 
-class RoundedBoutton extends StatelessWidget {
-  const RoundedBoutton(
+class RoundedButton extends StatelessWidget {
+  const RoundedButton(
       {Key? key,
       required this.text,
       required this.bgColor,
@@ -39,7 +39,7 @@ class RoundedBoutton extends StatelessWidget {
 
     return ElevatedButton(
         style: buttonStyle,
-        onPressed: (){action();},
+        onPressed: ()=>action(),
         child: Text(
           '$text',
           style: getTextStyleBySize(size),

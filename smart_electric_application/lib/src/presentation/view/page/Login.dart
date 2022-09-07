@@ -45,7 +45,7 @@ class Login extends StatelessWidget {
               SizedBox(height: 25),
 
               // login button
-              RoundedBoutton(
+              RoundedButton(
                   text: "로그인하기",
                   bgColor: context.theme.colorScheme.primary.withOpacity(0.2),
                   textColor: context.theme.colorScheme.primaryContainer,
@@ -57,7 +57,7 @@ class Login extends StatelessWidget {
               SizedBox(height: 15),
 
               // signup button
-              RoundedBoutton(
+              RoundedButton(
                   text: "회원가입하기",
                   bgColor: context.theme.colorScheme.secondary.withOpacity(0.2),
                   textColor: context.theme.colorScheme.secondary,

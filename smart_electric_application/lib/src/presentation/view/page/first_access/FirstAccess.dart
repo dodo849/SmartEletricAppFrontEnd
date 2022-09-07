@@ -31,7 +31,7 @@ class FirstAccess extends StatelessWidget {
               SizedBox(height: 40),
               Text("가입하기 전 먼저 확인해보세요", style: textTheme.bodyText2),
               SizedBox(height: 10),
-              RoundedBoutton(
+              RoundedButton(
                   text: "이용가능고객인지 확인하기",
                   bgColor: colorTheme.surface,
                   textColor: colorTheme.secondaryContainer,
@@ -42,7 +42,7 @@ class FirstAccess extends StatelessWidget {
               SizedBox(height: 30),
               Text("바로 가입하실 수도 있어요", style: textTheme.bodyText2),
               SizedBox(height: 10),
-              RoundedBoutton(
+              RoundedButton(
                   text: "서비스 가입하기",
                   bgColor: colorTheme.secondaryContainer.withOpacity(0.2),
                   textColor: colorTheme.secondaryContainer,

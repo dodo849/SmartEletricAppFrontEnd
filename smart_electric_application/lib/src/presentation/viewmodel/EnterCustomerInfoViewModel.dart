@@ -3,19 +3,27 @@ import 'package:get/get.dart';
 class EnterCustomerInfoViewModel extends GetxController {
   static EnterCustomerInfoViewModel get to => Get.find();
 
-  RxInt idx = 0.obs;
-  RxBool isTextFieldEmpty = true.obs;
+  RxInt idx = 0.obs; // 실제 페이지 인덱스
+  RxInt tempIdx = 0.obs; // fadein&out위한 임시 인덱스
+  RxBool isButtonEnable = false.obs;
+  RxDouble viewOpacity = 1.0.obs;
   RxString customerNumber = "".obs;
 
   @override
   void onInit() {
     super.onInit();
 
-    // input 필드 입력 여부에 따라 다음으로 버튼 disable위해 isTextFieldEmpty 토글
-    ever(
-        customerNumber,
-        (_) => customerNumber.value.isEmpty
-            ? isTextFieldEmpty(true)
-            : isTextFieldEmpty(false));
+    // 페이지 인덱스 변경되되면 fade out      
+    ever(tempIdx, (_) => viewOpacity(0.0));
+
+    // 몇초 뒤 다시 fade in
+    debounce(viewOpacity, (_) {
+      viewOpacity(1.0);
+    }, time: const Duration(milliseconds: 400));
+
+    // fade out 뒤 실제 페이지 인덱스 변경
+    debounce(tempIdx, (_) {
+      idx(tempIdx.value);
+    }, time: const Duration(milliseconds: 400));
   }
 }
