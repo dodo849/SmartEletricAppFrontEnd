@@ -32,15 +32,19 @@ class EnterCustomerNumber extends StatelessWidget {
             textInputType: TextInputType.number,
             placeholder: "10자리 고객번호 입력",
             maxLength: 10,
+            isFocus: true,
             onChanged: (value) {
               EnterCustomerInfoViewModel.to.customerNumber(value);
               validate(value);
             }),
+
+        SizedBox(height: 30),
+        Text("고객번호는 전기요금고지서, 혹은 한전 전화문의로 확인하실 수 있습니다.", style: textTheme.bodyText2),
       ],
     ));
   }
 
-  ///유효성 검사: 첫번째 문항 - 고객번호
+  ///유효성 검사: 첫번째 문항 - 고객번호 10자리
   void validate(value) {
     // 10자리 고객번호
     if (EnterCustomerInfoViewModel.to.customerNumber.value.length == 10) {

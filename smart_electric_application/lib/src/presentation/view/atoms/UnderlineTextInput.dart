@@ -10,6 +10,7 @@ class UnderlineTextInput extends StatelessWidget {
     this.focusLineColor,
     this.textInputType,
     this.maxLength,
+    this.isFocus,
     required this.onChanged,
   }) : super(key: key);
 
@@ -19,6 +20,7 @@ class UnderlineTextInput extends StatelessWidget {
   final Color? focusLineColor;
   final TextInputType? textInputType;
   final int? maxLength;
+  final bool? isFocus;
   final Function onChanged;
 
   @override
@@ -66,6 +68,7 @@ class UnderlineTextInput extends StatelessWidget {
       style: textStyle,
       keyboardType: textInputType ?? TextInputType.none,
       maxLength: maxLength,
+      autofocus: isFocus ?? false,
       decoration: InputDecoration(
           hintText: placeholder ?? " ",
           hintStyle: TextStyle(color: context.theme.colorScheme.surfaceVariant),

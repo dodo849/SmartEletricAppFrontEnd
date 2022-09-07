@@ -31,24 +31,27 @@ ThemeData lightTheme = ThemeData(
       brightness: Brightness.light,
     ),
     textTheme: const TextTheme(
-        headline1: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: LightColors.important,
-        ),
-        headline2: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: LightColors.important,
-        ),
-        headline3: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: LightColors.gray5),
-        bodyText2: TextStyle(
-            color: LightColors.gray5,
-            fontSize: 16,
-            fontWeight: FontWeight.normal)));
+      headline1: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: LightColors.important,
+      ),
+      headline2: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: LightColors.important,
+      ),
+      headline3: TextStyle(
+          fontSize: 16, fontWeight: FontWeight.bold, color: LightColors.gray5),
+      bodyText1: TextStyle(
+          color: LightColors.gray5,
+          fontSize: 16,
+          fontWeight: FontWeight.normal),
+      bodyText2: TextStyle(
+          color: LightColors.gray5,
+          fontSize: 14,
+          fontWeight: FontWeight.normal),
+    ));
 
 ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: DarkColors.basic,
@@ -95,7 +98,11 @@ ThemeData darkTheme = ThemeData(
           fontWeight: FontWeight.bold,
           color: DarkColors.gray5,
         ),
+        bodyText1: TextStyle(
+          color: DarkColors.gray5,
+          fontSize: 16,
+          fontWeight: FontWeight.normal),
         bodyText2: TextStyle(
             color: DarkColors.gray5,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.normal)));

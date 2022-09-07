@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/CustomerValidationCheck.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerName.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerNumber.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
@@ -42,14 +44,15 @@ class EnterCustomerInfo extends StatelessWidget {
             appBar: AppBar(
               shadowColor: Colors.transparent,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back,
-                    color: context.theme.colorScheme.onSurface),
+                icon: const MyBackButtonIcon(),
                 onPressed: () {
                   // 2번째 문항부터는 백버튼 클릭 시 이전 문항으로 돌아감
-                  if (EnterCustomerInfoViewModel.to.idx > 0) {
+                  if (EnterCustomerInfoViewModel.to.idx.value > 0) {
+                    print(EnterCustomerInfoViewModel.to.idx.value );
+                    assert(EnterCustomerInfoViewModel.to.idx.value > 0, "page index error");
                     EnterCustomerInfoViewModel.to.tempIdx--;
                   } else {
-                    // 첫버째 문항에선 처음화면으로 back
+                    // 첫번째 문항에선 처음화면으로 back
                     Get.back();
                   }
                 },
@@ -95,7 +98,14 @@ class EnterCustomerInfo extends StatelessWidget {
 
   void buttonAction() {
     if (EnterCustomerInfoViewModel.to.isButtonEnable.value == true) {
-      EnterCustomerInfoViewModel.to.tempIdx++;
+      if (EnterCustomerInfoViewModel.to.tempIdx < 1) {
+        // 페이지 이동
+        EnterCustomerInfoViewModel.to.tempIdx++;
+        // 버튼 disabled
+        EnterCustomerInfoViewModel.to.isButtonEnable(false);
+      } else {
+        Get.to(CustomerValidationCheck(), transition: Transition.rightToLeft);
+      }
     }
   }
 }

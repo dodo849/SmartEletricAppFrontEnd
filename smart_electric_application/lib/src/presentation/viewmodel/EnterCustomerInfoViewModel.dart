@@ -8,6 +8,7 @@ class EnterCustomerInfoViewModel extends GetxController {
   RxBool isButtonEnable = false.obs;
   RxDouble viewOpacity = 1.0.obs;
   RxString customerNumber = "".obs;
+  RxString customerName = "".obs;
 
   @override
   void onInit() {
