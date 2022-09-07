@@ -73,9 +73,9 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               BarGraph(),
-              TestChart(),
+              const SizedBox(height: 40),
             ],
           ),
         ),
