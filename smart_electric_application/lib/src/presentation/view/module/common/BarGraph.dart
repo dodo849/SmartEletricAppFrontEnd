@@ -125,39 +125,43 @@ class BarGraph extends GetView<BarGraphViewModel> {
               scrollDirection: Axis.horizontal,
               children: [
                 for (var data in controller.mockData) ...[
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: controller.barGap.value),
-                    decoration: BoxDecoration(
-                        // color: context.theme.colorScheme.secondary,
-                        ),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          AnimatedContainer(
-                            // margin: EdgeInsets.only(top: data),
-                            height: (300 /
-                                controller.maxBarHeight.value *
-                                data.yValue),
-                            width: controller.barWidth.value,
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.ease,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10)),
-                              color: context.theme.colorScheme.primary,
+                  GestureDetector(
+                    onTap: () { print(data.xValue);},
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: controller.barGap.value),
+                      decoration: BoxDecoration(
+                          // color: context.theme.colorScheme.secondary,
+                          ),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            AnimatedContainer(
+                              // margin: EdgeInsets.only(top: data),
+                              height: (300 /
+                                  controller.maxBarHeight.value *
+                                  data.yValue),
+                              width: controller.barWidth.value,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.ease,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10)),
+                                color: context.theme.colorScheme.primary,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 5,),
-                          Text(
-                            "${data.xValue}",
-                            style: TextStyle(
-                                fontSize: 10, color: colorTheme.surfaceVariant),
-                          ),
-                        ],
+                            SizedBox(height: 5,),
+                            // X Axis value
+                            Text(
+                              "${data.xValue}",
+                              style: TextStyle(
+                                  fontSize: 10, color: colorTheme.onSurface),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

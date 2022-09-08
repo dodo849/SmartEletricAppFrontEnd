@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUseCase.dart';
 
 class EnterCustomerInfoViewModel extends GetxController {
   static EnterCustomerInfoViewModel get to => Get.find();
@@ -26,5 +27,10 @@ class EnterCustomerInfoViewModel extends GetxController {
     debounce(tempIdx, (_) {
       idx(tempIdx.value);
     }, time: const Duration(milliseconds: 400));
+  }
+
+  void checkCustomerValidation(){
+    var checkCustomerValidationUseCase = CheckCustomerValidationUseCase();
+    checkCustomerValidationUseCase.excute();
   }
 }

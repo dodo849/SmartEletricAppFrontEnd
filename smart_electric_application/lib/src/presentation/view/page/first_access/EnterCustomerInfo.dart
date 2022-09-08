@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/CustomerValidationCheck.dart';
+import 'package:smart_electric_application/src/presentation/view/page/first_access/CustomerValidationCheck.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerName.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerNumber.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
