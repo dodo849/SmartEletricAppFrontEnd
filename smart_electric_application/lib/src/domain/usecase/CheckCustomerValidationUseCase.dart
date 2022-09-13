@@ -15,7 +15,7 @@ class CheckCustomerValidationUseCase {
     print('Response body: ${data}');
 
     // url = Uri.parse('https://reqbin.com/sample/post/json');
-    // response = await http.ㅎㄷㅅ(url, body: {
+    // response = await http.(url, body: {
     //   {
     //     "joinYn": String,
     //     "agreeYn": String,
