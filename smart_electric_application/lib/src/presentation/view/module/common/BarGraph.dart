@@ -89,7 +89,7 @@ class BarGraph extends GetView<BarGraphViewModel> {
     double xWidth = 20;
 
     return Obx(() => SizedBox(
-          height: 300,
+          height: graphHeight,
           child: Stack(children: [
             // layer 1 : y axis
             Container(
@@ -119,55 +119,62 @@ class BarGraph extends GetView<BarGraphViewModel> {
               ]),
             ),
             // layer 2 : x axis
-            Container(
+            OverflowBox(
+              alignment: Alignment.bottomCenter,
+              maxHeight: graphHeight+500, //500은 overflow 임의값
                 child: ListView(
-              controller: controller.scrollController.value,
-              scrollDirection: Axis.horizontal,
-              children: [
-                for (var data in controller.mockData) ...[
-                  GestureDetector(
-                    onTap: () { print(data.xValue);},
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: controller.barGap.value),
-                      decoration: BoxDecoration(
-                          // color: context.theme.colorScheme.secondary,
-                          ),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            AnimatedContainer(
-                              // margin: EdgeInsets.only(top: data),
-                              height: (300 /
-                                  controller.maxBarHeight.value *
-                                  data.yValue),
-                              width: controller.barWidth.value,
-                              duration: const Duration(milliseconds: 400),
-                              curve: Curves.ease,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10)),
-                                color: context.theme.colorScheme.primary,
+                  controller: controller.scrollController.value,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    for (var data in controller.mockData) ...[
+                      GestureDetector(
+                        onTap: () {
+                          print(data.xValue);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: controller.barGap.value),
+                          decoration: BoxDecoration(
+                              // color: context.theme.colorScheme.secondary,
                               ),
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                AnimatedContainer(
+                                  // margin: EdgeInsets.only(top: data),
+                                  height: (300 /
+                                      controller.maxBarHeight.value *
+                                      data.yValue),
+                                  width: controller.barWidth.value,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.ease,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10)),
+                                    color: context.theme.colorScheme.primary,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                // X Axis value
+                                Text(
+                                  "${data.xValue}",
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      color: colorTheme.onSurface),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 5,),
-                            // X Axis value
-                            Text(
-                              "${data.xValue}",
-                              style: TextStyle(
-                                  fontSize: 10, color: colorTheme.onSurface),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ],
-              ],
-            ))
+                    ],
+                  ],
+                ))
           ]),
         ));
   }
