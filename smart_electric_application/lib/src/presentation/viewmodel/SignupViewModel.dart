@@ -2,21 +2,28 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/usecase/EmailVerifiedUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupUseCase.dart';
 
+
+@Deprecated('EnterUserInfo에 병합')
 class SignupViewModel extends GetxController {
   RxString emailAddress = "".obs;
   RxString password = "".obs;
 
-  void signup() async {
+  Future<void> signup() async {
     var signupUseCase = SignupUseCase();
-    var result = await signupUseCase.execute(emailAddress.value, password.value);
-
-    // if(result == true){
-    //   emailVerified();
-    // }
+    await signupUseCase.execute(emailAddress.value, password.value);
+    print("Singup ViewModel");
+    emailVerified();
+    return;
   }
 
+  // 인증 이메일 보내기
   void emailVerified() {
     var emailVerifiedUseCase = EmailVerifiedUseCase();
-    emailVerifiedUseCase.execute();
+    emailVerifiedUseCase.execute(emailAddress.value, password.value);
+  }
+
+  // 이메일 인증 완료 확인
+  void checkEmailVerified(){
+    
   }
 }

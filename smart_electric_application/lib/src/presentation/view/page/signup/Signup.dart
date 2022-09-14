@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupUseCase.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
+import 'package:smart_electric_application/src/presentation/view/page/signup/EmailVerified.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/SignupViewModel.dart';
 
 class Signup extends StatelessWidget {
@@ -14,7 +15,7 @@ class Signup extends StatelessWidget {
     // ViewModel instance
     var signupViewModel = SignupViewModel();
 
-    // theme define
+    // Theme define
     var colorTheme = context.theme.colorScheme;
 
     return Scaffold(
@@ -46,9 +47,10 @@ class Signup extends StatelessWidget {
               bgColor: colorTheme.primary,
               textColor: colorTheme.onBackground,
               size: ButtonSize.large,
-              action: () {
-                // signupViewModel.signup();
-                signupViewModel.emailVerified();
+              action: () async {
+                await signupViewModel.signup();
+                // 
+                Get.to(EmailVerified());
               }),
           Spacer(flex: 2),
         ]),

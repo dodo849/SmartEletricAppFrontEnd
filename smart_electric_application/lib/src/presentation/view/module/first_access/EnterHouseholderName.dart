@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 
 import '../../atoms/BorderedTextInput.dart';
 
-class EnterCustomerName extends StatelessWidget {
-  const EnterCustomerName({Key? key}) : super(key: key);
+class EnterHouseholderName extends StatelessWidget {
+  const EnterHouseholderName({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class EnterCustomerName extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(height: 50),
-        Text("성함을 입력해주세요", style: textTheme.headline1),
+        Text("세대주 성함을 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
         CustomTextInput(
           focusColor: colorTheme.secondaryContainer,
@@ -30,10 +30,13 @@ class EnterCustomerName extends StatelessWidget {
           textInputStyle: TextInputStyle.underline,
           isFocus: true,
           onChanged: (value) {
-            EnterCustomerInfoViewModel.to.customerName(value);
+            EnterUserInfoViewModel.to.householderName(value);
             validate(value);
           },
         ),
+        SizedBox(height: 30),
+        Text("고객번호 정보와 일치하는 세대주 성함을 입력해주세요",
+            style: textTheme.bodyText2),
       ],
     ));
   }
@@ -42,10 +45,10 @@ class EnterCustomerName extends StatelessWidget {
   void validate(value) {
     if (value.length != 0) {
       // button 활성화
-      EnterCustomerInfoViewModel.to.isButtonEnable(true);
+      EnterUserInfoViewModel.to.isButtonEnable(true);
     } else {
       // button 비활성화
-      EnterCustomerInfoViewModel.to.isButtonEnable(false);
+      EnterUserInfoViewModel.to.isButtonEnable(false);
     }
   }
 }

@@ -1,24 +1,23 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smart_electric_application/src/data/repository/firebase/FirebaseRepository.dart';
 
 class EmailVerifiedUseCase {
-  Future<void> execute() async {
+  // 나중에 email, password 로컬 DB에서 가져오는 걸로 바꾸기
+  Future<bool> execute(email, password) async {
+    // 파이어베이스 레포지토리 인스턴스 생성
+    FirebaseRepository firebaseRepository = FirebaseRepository();
 
-    await FirebaseAuth.instance.signOut();
+    // 인증 이메일 보내기
+    await firebaseRepository.emailVerified();
 
-    User? user = FirebaseAuth.instance.currentUser;
+    // 이메일 인증 후 로그아웃 -> 재로그인 과정 필요
+    await firebaseRepository.logout();
 
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in!');
-      }
-    });
+    await firebaseRepository.login(email, password);
 
-    print("user $user");
+    print(firebaseRepository.getUser());
+    print("Singup UseCase");
 
-    // if (user != null && !user.emailVerified) {
-    //   await user.sendEmailVerification();
-    // }
+    // 과정 성공 시 true 반환
+    return true;
   }
 }

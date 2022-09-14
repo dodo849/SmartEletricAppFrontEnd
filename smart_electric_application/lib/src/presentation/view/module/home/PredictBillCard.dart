@@ -17,11 +17,10 @@ class EstimatedBillCard extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: context.theme.colorScheme.surface,
+          color: context.theme.colorScheme.background,
         ),
         width: double.infinity,
         padding: EdgeInsets.all(25),
-        margin: EdgeInsets.only(left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,

@@ -6,7 +6,7 @@ import 'package:smart_electric_application/src/presentation/view/module/Common/E
 import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
-import 'package:smart_electric_application/src/presentation/view/page/Signup.dart';
+import 'package:smart_electric_application/src/presentation/view/page/signup/Signup.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);

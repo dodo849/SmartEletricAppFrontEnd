@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 
-class EnterCustomerNumber extends StatelessWidget {
-  const EnterCustomerNumber({Key? key}) : super(key: key);
+class EnterUserEmail extends StatelessWidget {
+  const EnterUserEmail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,30 +26,27 @@ class EnterCustomerNumber extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(height: 50),
-        Text("고객번호를 입력해주세요", style: textTheme.headline1),
+        Text("이메일을 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
         CustomTextInput(
             focusColor: colorTheme.secondaryContainer,
             textInputStyle: TextInputStyle.underline,
-            textInputType: TextInputType.number,
-            placeholder: "10자리 고객번호 입력",
-            maxLength: 10,
+            textInputType: TextInputType.emailAddress,
+            placeholder: "smart@smarteletric.co.kr",
             isFocus: true,
             onChanged: (value) {
-              EnterUserInfoViewModel.to.customerNumber(value);
+              EnterUserInfoViewModel.to.email(value);
               validate(value);
             }),
         SizedBox(height: 30),
-        Text("고객번호는 전기요금고지서, 혹은 한전 전화문의로 확인하실 수 있습니다.",
-            style: textTheme.bodyText2),
       ],
     ));
   }
 
-  ///유효성 검사: 첫번째 문항 - 고객번호 10자리
+  ///유효성 검사: 세번째 문항 - 이메일
   void validate(value) {
-    // 10자리 고객번호
-    if (EnterUserInfoViewModel.to.customerNumber.value.length == 10) {
+    // 이메일 유효성 검사
+    if (EmailValidator.validate(EnterUserInfoViewModel.to.email.value)) {
       // button 활성화
       EnterUserInfoViewModel.to.isButtonEnable(true);
     } else {

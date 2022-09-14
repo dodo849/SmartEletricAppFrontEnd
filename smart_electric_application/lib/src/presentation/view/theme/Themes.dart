@@ -27,7 +27,7 @@ ThemeData lightTheme = ThemeData(
       tertiary: CommonColors.yellow, // normal
       tertiaryContainer: CommonColors.green, // safe
 
-      onError: LightColors.basic, //no use
+      onError: LightColors.basic,
       brightness: Brightness.light,
     ),
     textTheme: const TextTheme(
