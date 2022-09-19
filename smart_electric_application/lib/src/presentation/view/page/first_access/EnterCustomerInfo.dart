@@ -1,13 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/EmailVerification.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserEmail.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserName.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserPassword.dart';
 import 'package:smart_electric_application/src/presentation/view/page/first_access/CustomerValidationCheck.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterHouseholderName.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerNumber.dart';
+import 'package:smart_electric_application/src/presentation/view/page/signup/EmailVerified.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 /// 고객정보 입력 페이지
 class EnterCustomerInfo extends StatelessWidget {
@@ -19,6 +28,8 @@ class EnterCustomerInfo extends StatelessWidget {
     const EnterHouseholderName(),
     const EnterUserName(),
     const EnterUserEmail(),
+    const EnterUserPassword(),
+    const EmailVerification(),
   ];
 
   @override
@@ -95,15 +106,22 @@ class EnterCustomerInfo extends StatelessWidget {
 
   void buttonAction() {
     if (EnterUserInfoViewModel.to.isButtonEnable.value == true) {
-      if (EnterUserInfoViewModel.to.tempIdx < EnterPages.length - 1) {
-        // 페이지 이동
-        EnterUserInfoViewModel.to.tempIdx++;
-        // 버튼 disabled
-        EnterUserInfoViewModel.to.isButtonEnable(false);
-      } else {
-        // 마지막 문항이면 사용자 정보제공동의 확인페이지로
-        Get.to(CustomerValidationCheck(), transition: Transition.rightToLeft);
+      switch (EnterUserInfoViewModel.to.tempIdx.value) {
+        // 비밀번호 입력 페이지에서 다음 버튼 클릭 시 이메일 인증 전송
+        case 4:
+          EnterUserInfoViewModel.to.signup(); // 아직 가입 Exception 처리 X
+          EnterUserInfoViewModel.to.sendEmailVerification();
+          break;
+        case 5:
+          EnterUserInfoViewModel.to.checkEmailVerification();
+          break;
+        default:
+          // 버튼 disabled
+          EnterUserInfoViewModel.to.isButtonEnable(false);
       }
+
+      // 페이지 이동
+      EnterUserInfoViewModel.to.tempIdx++;
     }
   }
 }

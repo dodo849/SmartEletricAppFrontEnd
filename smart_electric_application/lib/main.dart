@@ -1,3 +1,8 @@
+import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
+
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +15,18 @@ import 'package:smart_electric_application/src/presentation/view/theme/Themes.da
 import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
 
 void main() async {
+  setup();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   runApp(const MyApp());
+}
+
+// Dependency Injection (DI)
+void setup() {
+  GetIt.I.registerSingleton<FirebaseRepositoryInterface>(FirebaseRepository());
+  GetIt.I.registerSingleton<Dio>(Dio());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,13 +44,13 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
             name: "/AIReport",
-            page: () => AIReport(),
+            page: () => const AIReport(),
             transition: Transition.native),
         GetPage(
             name: "/Login", page: () => Login(), transition: Transition.fade),
         GetPage(
             name: "/FirstAccess",
-            page: () => FirstAccess(),
+            page: () => const FirstAccess(),
             transition: Transition.fade),
       ],
     );

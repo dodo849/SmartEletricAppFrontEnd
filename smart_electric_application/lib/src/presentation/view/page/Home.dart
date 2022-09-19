@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/BarGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
@@ -34,6 +35,13 @@ class Home extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(children: [
         const SizedBox(height: 20),
+
+        ElevatedButton(onPressed: () async {
+          var firebaseRepository  = FirebaseRepository();
+          var user = await firebaseRepository.getUser();
+          var token = await user?.getIdToken();
+          print(token);
+        }, child: Text("get user")),
 
         // 스마트 전기앱 로고
         Padding(
@@ -97,7 +105,7 @@ class Home extends StatelessWidget {
         ),
 
         const SizedBox(height: 35),
-        
+
         // 예측 요금
         SizedBox(height: 15),
         Container(

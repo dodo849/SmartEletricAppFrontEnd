@@ -1,3 +1,4 @@
+
 class UserValidation {
   final String joinYn;
   final String infoYn;

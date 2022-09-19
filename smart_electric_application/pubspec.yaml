@@ -44,6 +44,12 @@ dependencies:
   firebase_auth: ^3.8.0
   firebase_core: ^1.22.0
   email_validator: '^2.1.16'
+  get_it: ^7.2.0
+  retrofit: ^3.0.1+1
+  dio: ^4.0.6
+  json_annotation: ^4.6.0
+  freezed_annotation: ^2.1.0
+  flutter_secure_storage: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +61,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  retrofit_generator: ^4.0.3+2
+  build_runner: ^2.2.1
+  json_serializable: ^6.3.2
+  freezed: ^2.1.0+1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

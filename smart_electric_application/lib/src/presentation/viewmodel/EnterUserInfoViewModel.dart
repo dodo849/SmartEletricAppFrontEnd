@@ -1,11 +1,14 @@
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUseCase.dart';
-import 'package:smart_electric_application/src/domain/usecase/EmailVerifiedUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupUseCase.dart';
+
+
 
 class EnterUserInfoViewModel extends GetxController {
   static EnterUserInfoViewModel get to => Get.find();
-  // Pagination/Presentation variables
+  // Pagination Presentation variables
   RxInt idx = 0.obs; // 실제 페이지 인덱스
   RxInt tempIdx = 0.obs; // fadein&out위한 임시 인덱스
   RxBool isButtonEnable = false.obs;
@@ -21,6 +24,12 @@ class EnterUserInfoViewModel extends GetxController {
   // Text input error variables
   RxString emailError = "".obs;
   RxString passwordError = "".obs;
+
+  // Usecase instance
+  final signupUseCase = SignupUseCase();
+  final checkCustomerValidationUseCase = CheckInfoAgreementUseCase();
+  final sendEmailVerifiedUseCase = SendEmailVerificationUseCase();
+  final checkEmailVerifiedUseCase = CheckEmailVerificationUseCase();
 
   // Constructors
   @override
@@ -42,28 +51,40 @@ class EnterUserInfoViewModel extends GetxController {
   }
 
   void checkCustomerValidation() {
-    var checkCustomerValidationUseCase = CheckInfoAgreementUseCase();
     checkCustomerValidationUseCase.excute();
   }
 
   Future<void> signup() async {
-    var signupUseCase = SignupUseCase();
-    await signupUseCase.execute(email.value, password.value);
-    print("Singup ViewModel");
-    emailVerified();
+    var isSignupSuccess =
+        await signupUseCase.execute(email.value, password.value);
+    if (isSignupSuccess) {
+      print("회원가입 성공");
+      sendEmailVerification();
+
+    } else {
+      print("회원가입 실패");
+    }
+
     return;
   }
 
   // 인증 이메일 보내기
-  void emailVerified() {
-    var emailVerifiedUseCase = EmailVerifiedUseCase();
-    emailVerifiedUseCase.execute(email.value, password.value);
+  void sendEmailVerification() {
+    sendEmailVerifiedUseCase.execute(email.value, password.value);
   }
 
   // 이메일 인증 완료 확인
-  void checkEmailVerified() {}
+  void checkEmailVerification() async {
+    var isVerification =
+        await checkEmailVerifiedUseCase.execute(email.value, password.value);
 
-/** */
-  // -- Presentation logic
+    if (isVerification) {
+      // tempIdx++;
+    } else {
+      print("인증 실패");
+    }
+  }
+
+  /** */
 
 }
