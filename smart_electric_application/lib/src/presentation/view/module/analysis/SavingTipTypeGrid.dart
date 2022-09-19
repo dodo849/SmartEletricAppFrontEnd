@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/data/dto/SavingTipTypeModel.dart';
+import 'package:smart_electric_application/src/domain/entity/SavingTipTypeModel.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/SavingTipTypeGridCell.dart';
 
 // 클래스 변수 수정 로직

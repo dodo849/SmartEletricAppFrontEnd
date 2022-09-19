@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/data/dto/SavingTipTypeModel.dart';
+import 'package:smart_electric_application/src/domain/entity/SavingTipTypeModel.dart';
 
 class SavingTipTypeGridCell extends StatelessWidget {
   const SavingTipTypeGridCell({Key? key, required this.savingTipType})

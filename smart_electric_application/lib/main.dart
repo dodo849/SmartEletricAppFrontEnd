@@ -26,7 +26,6 @@ void main() async {
 // Dependency Injection (DI)
 void setup() {
   GetIt.I.registerSingleton<FirebaseRepositoryInterface>(FirebaseRepository());
-  GetIt.I.registerSingleton<Dio>(Dio());
 }
 
 class MyApp extends StatelessWidget {
