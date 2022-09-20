@@ -10,35 +10,40 @@ class LoginUseCase {
   final firebaseRepository = GetIt.I.get<FirebaseRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<bool, Exception>> execute(email, password) async {
+  Future<Result<dynamic, Exception>> execute(email, password) async {
     // firebase 로그인
     Result<bool, Exception> loginResult =
         await firebaseRepository.login(email, password);
 
-    // firebase id token 가져오기
-    switch (loginResult.status) {
-      // 로그인 성공
-      case ResultStatus.success:
-        User? user = firebaseRepository.getUser();
-        String? firebaseIdToken = await user?.getIdToken();
-
-        // firbase id token 받아오는데 성공 시
-        if(firebaseIdToken != null){
-          Result<JwtTokenDTO, Exception> tokens = await authRepository.getJwtTokens(firebaseIdToken);
-        } else {
-          return Result.failure(Exception("firebase token을 받아오는데 실패했습니다."));
-        }
-
-        // 
-
-        break;
-
-        case ResultStatus.error:
-        // return Result()
-        break;
+    if (loginResult.status == ResultStatus.error) {
+      return loginResult;
     }
 
-  return Result.success(true);
+    // 로그인 성공 시 firebase id token 가져오기
+    Result<String, Exception> getIdTokenResult =
+        await firebaseRepository.getIdToken();
 
+    if (getIdTokenResult.status == ResultStatus.error) {
+      return getIdTokenResult;
+    }
+
+    // id 토큰으로 서버 토큰 발급받기
+    Result<JwtTokenDTO, Exception> getJwtTokensResult =
+        await authRepository.getJwtTokens(getIdTokenResult.value!);
+
+    if (getJwtTokensResult.status == ResultStatus.error) {
+      return getJwtTokensResult;
+    }
+
+    // 서버토큰 발급 성공 시 내부 DB에 저장하기
+    Result<bool, Exception> saveTokensResult =
+        await authRepository.saveJwtTokenTnDB(getJwtTokensResult.value!);
+
+    if (saveTokensResult.status == ResultStatus.error) {
+      return saveTokensResult;
+    }
+
+    // 모든 과정 성공 시 true Result 반환
+    return const Result.success(true);
   }
 }

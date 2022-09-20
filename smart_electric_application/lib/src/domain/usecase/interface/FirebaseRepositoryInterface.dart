@@ -8,4 +8,5 @@ abstract class FirebaseRepositoryInterface {
   Future<Result<bool, Exception>> logout();
   Future<void> sendEmailVerification();
   User? getUser();
+  Future<Result<String, Exception>> getIdToken();
 }

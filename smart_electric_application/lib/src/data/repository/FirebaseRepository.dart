@@ -57,7 +57,7 @@ class FirebaseRepository implements FirebaseRepositoryInterface {
   // 이메일 인증 보내기
   @override
   Future<void> sendEmailVerification() async {
-    User? user = getUser();
+    User? user = FirebaseAuth.instance.currentUser;
 
     if (user != null && !user.emailVerified) {
       await user.sendEmailVerification();
@@ -69,4 +69,15 @@ class FirebaseRepository implements FirebaseRepositoryInterface {
     return FirebaseAuth.instance.currentUser;
   }
 
+  @override
+  Future<Result<String, Exception>> getIdToken() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    try {
+      var idToken = await user?.getIdToken();
+      return Result.success(idToken);
+    } catch (err) {
+      return Result.failure(Exception('알 수 없는 오류가 발생했습니다. 다시 시도해주세요.'));
+    }
+  }
 }
