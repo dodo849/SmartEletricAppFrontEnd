@@ -1,27 +1,42 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/EmailVerification.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserEmail.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserName.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserPassword.dart';
 import 'package:smart_electric_application/src/presentation/view/page/first_access/CustomerValidationCheck.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerName.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterHouseholderName.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerNumber.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
+import 'package:smart_electric_application/src/presentation/view/page/signup/EmailVerified.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 /// 고객정보 입력 페이지
 class EnterCustomerInfo extends StatelessWidget {
   const EnterCustomerInfo({Key? key}) : super(key: key);
 
+  // 고객정보 입력 하위 페이지들
+  static final EnterPages = <Widget>[
+    const EnterCustomerNumber(),
+    const EnterHouseholderName(),
+    const EnterUserName(),
+    const EnterUserEmail(),
+    const EnterUserPassword(),
+    const EmailVerification(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     /// Dependency injection
     // input 값 및 하위페이지 이동 관리
-    Get.put(EnterCustomerInfoViewModel());
-
-    // 고객정보 입력 하위 페이지들
-    var EnterPages = <Widget>[
-      const EnterCustomerNumber(),
-      const EnterCustomerName(),
-    ];
+    Get.put(EnterUserInfoViewModel());
 
     // 테마 스타일
     var textTheme = context.theme.textTheme;
@@ -41,10 +56,11 @@ class EnterCustomerInfo extends StatelessWidget {
                 icon: const MyBackButtonIcon(),
                 onPressed: () {
                   // 2번째 문항부터는 백버튼 클릭 시 이전 문항으로 돌아감
-                  if (EnterCustomerInfoViewModel.to.idx.value > 0) {
-                    print(EnterCustomerInfoViewModel.to.idx.value );
-                    assert(EnterCustomerInfoViewModel.to.idx.value > 0, "page index error");
-                    EnterCustomerInfoViewModel.to.tempIdx--;
+                  if (EnterUserInfoViewModel.to.idx.value > 0) {
+                    print(EnterUserInfoViewModel.to.idx.value);
+                    assert(EnterUserInfoViewModel.to.idx.value > 0,
+                        "page index error");
+                    EnterUserInfoViewModel.to.tempIdx--;
                   } else {
                     // 첫번째 문항에선 처음화면으로 back
                     Get.back();
@@ -59,10 +75,9 @@ class EnterCustomerInfo extends StatelessWidget {
                 child: Column(children: [
                   // 하위 페이지 + 애니메이션
                   AnimatedOpacity(
-                      opacity: EnterCustomerInfoViewModel.to.viewOpacity.value,
+                      opacity: EnterUserInfoViewModel.to.viewOpacity.value,
                       duration: const Duration(milliseconds: 200),
-                      child:
-                          EnterPages[EnterCustomerInfoViewModel.to.idx.value]),
+                      child: EnterPages[EnterUserInfoViewModel.to.idx.value]),
 
                   Spacer(),
 
@@ -72,12 +87,11 @@ class EnterCustomerInfo extends StatelessWidget {
                         bottom: MediaQuery.of(context).viewInsets.bottom + 20),
                     child: RoundedButton(
                         text: "다음으로",
-                        bgColor:
-                            EnterCustomerInfoViewModel.to.isButtonEnable.value
-                                ? colorTheme.secondaryContainer
-                                : colorTheme.surface,
+                        bgColor: EnterUserInfoViewModel.to.isButtonEnable.value
+                            ? colorTheme.secondaryContainer
+                            : colorTheme.surface,
                         textColor:
-                            EnterCustomerInfoViewModel.to.isButtonEnable.value
+                            EnterUserInfoViewModel.to.isButtonEnable.value
                                 ? colorTheme.onPrimary
                                 : colorTheme.onSurface,
                         size: ButtonSize.large,
@@ -91,15 +105,23 @@ class EnterCustomerInfo extends StatelessWidget {
   }
 
   void buttonAction() {
-    if (EnterCustomerInfoViewModel.to.isButtonEnable.value == true) {
-      if (EnterCustomerInfoViewModel.to.tempIdx < 1) {
-        // 페이지 이동
-        EnterCustomerInfoViewModel.to.tempIdx++;
-        // 버튼 disabled
-        EnterCustomerInfoViewModel.to.isButtonEnable(false);
-      } else {
-        Get.to(CustomerValidationCheck(), transition: Transition.rightToLeft);
+    if (EnterUserInfoViewModel.to.isButtonEnable.value == true) {
+      switch (EnterUserInfoViewModel.to.tempIdx.value) {
+        // 비밀번호 입력 페이지에서 다음 버튼 클릭 시 이메일 인증 전송
+        case 4:
+          EnterUserInfoViewModel.to.signup(); // 아직 가입 Exception 처리 X
+          EnterUserInfoViewModel.to.sendEmailVerification();
+          break;
+        case 5:
+          EnterUserInfoViewModel.to.checkEmailVerification();
+          break;
+        default:
+          // 버튼 disabled
+          EnterUserInfoViewModel.to.isButtonEnable(false);
       }
+
+      // 페이지 이동
+      EnterUserInfoViewModel.to.tempIdx++;
     }
   }
 }

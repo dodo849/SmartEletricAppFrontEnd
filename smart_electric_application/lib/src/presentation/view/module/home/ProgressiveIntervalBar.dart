@@ -30,127 +30,101 @@ class ProgressiveIntervalBar extends StatelessWidget {
     }
 
     return LayoutBuilder(builder: (context, constraints) {
-      return Container(
-        // margin: EdgeInsets.only(left: 30, right: 30),
-        child: Stack(
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 누진구간 첫번째 bar
-                Expanded(
-                    child: LayoutBuilder(
-                  builder: (context, constraints) => Column(
-                    children: [
-                      if (currentSectionNumber == 1)
-                        getCurrentPicker()
-                      else
-                        SvgPicture.asset(
-                          'assets/icons/picker_transparent.svg',
-                          color: Colors.transparent,
-                        ),
-                      SizedBox(height: 5),
-                      Container(
-                          height: 10,
-                          margin: EdgeInsets.symmetric(vertical: 5),
-                          decoration: BoxDecoration(
-                              color:
-                                  context.theme.colorScheme.tertiaryContainer,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10)))),
-                      SizedBox(height: 5),
-                      Text("0~200 kWh",
-                          style: TextStyle(
-                            color: context.theme.colorScheme.onSurface,
-                            fontSize: 12,
-                          )),
-                    ],
-                  ),
-                )),
-
-                SizedBox(width: 5),
-
-                // 누진구간 두번째 bar
-                Expanded(
-                  child: Column(
-                    children: [
-                      if (currentSectionNumber == 2)
-                        getCurrentPicker()
-                      else
-                        // SvgPicture.asset(
-                        //   'assets/icons/picker-transparent.svg',
-                        //   color: Colors.transparent,
-                        // ),
-                        getPredictPicker(),
-                      SizedBox(height: 5),
-                      Container(
-                          height: 10,
-                          margin: EdgeInsets.only(top: 5, bottom: 5),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFFFBF1A),
-                          )),
-                      SizedBox(height: 5),
-                      Text("201~400 kWh",
-                          style: TextStyle(
-                            color: context.theme.colorScheme.onSurface,
-                            fontSize: 12,
-                          )),
-                    ],
-                  ),
+      return Stack(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 누진구간 첫번째 bar
+              Expanded(
+                  child: LayoutBuilder(
+                builder: (context, constraints) => Column(
+                  children: [
+                    SizedBox(height: 5),
+                    Container(
+                        height: 5,
+                        margin: EdgeInsets.symmetric(vertical: 5),
+                        decoration: BoxDecoration(
+                            color: context.theme.colorScheme.tertiaryContainer,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                bottomLeft: Radius.circular(10)))),
+                    SizedBox(height: 5),
+                    Text("0~200 kWh",
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurface,
+                          fontSize: 12,
+                        )),
+                  ],
                 ),
+              )),
 
-                SizedBox(width: 5),
+              SizedBox(width: 5),
 
-                // 누진구간 세번째 bar
-                Expanded(
-                  child: Column(
-                    children: [
-                      if (currentSectionNumber == 3)
-                        getCurrentPicker()
-                      else
-                        SvgPicture.asset(
-                          'assets/icons/picker_transparent.svg',
-                          color: Colors.transparent,
-                        ),
-                      SizedBox(height: 5),
-                      Container(
-                          height: 10,
-                          margin: EdgeInsets.only(top: 5, bottom: 5),
-                          decoration: BoxDecoration(
-                              color: Color(0xFFFF5D5D),
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)))),
-                      SizedBox(height: 5),
-                      Text("401~ kWh",
-                          style: TextStyle(
-                            color: context.theme.colorScheme.onSurface,
-                            fontSize: 12,
-                          )),
-                    ],
-                  ),
+              // 누진구간 두번째 bar
+              Expanded(
+                child: Column(
+                  children: [
+                    SizedBox(height: 5),
+                    Container(
+                        height: 5,
+                        margin: EdgeInsets.only(top: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFBF1A),
+                        )),
+                    SizedBox(height: 5),
+                    Text("201~400 kWh",
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurface,
+                          fontSize: 12,
+                        )),
+                  ],
                 ),
-              ],
-            ),
-
-            // Circle
-            Positioned(
-              // 현재 circle 위치 조정
-              top: 36,
-              left: currentRate / 630 * constraints.maxWidth,
-              child: getCurrentPickerCircle(),
-            ),
-            Positioned(
-              top: 36,
-              left: 300 / 630 * constraints.maxWidth,
-              child: SvgPicture.asset(
-                'assets/icons/picker_circle_gray.svg',
               ),
+
+              SizedBox(width: 5),
+
+              // 누진구간 세번째 bar
+              Expanded(
+                child: Column(
+                  children: [
+                    SizedBox(height: 5),
+                    Container(
+                        height: 5,
+                        margin: EdgeInsets.only(top: 5, bottom: 5),
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFF5D5D),
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10),
+                                bottomRight: Radius.circular(10)))),
+                    SizedBox(height: 5),
+                    Text("401~ kWh",
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurface,
+                          fontSize: 12,
+                        )),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          // Circle
+          Positioned(
+            // 현재 circle 위치 조정
+            top: 3,
+            left: currentRate / 630 * constraints.maxWidth,
+            child: getCurrentPickerCircle(),
+          ),
+          Positioned(
+            top: 3,
+            left: 300 / 630 * constraints.maxWidth,
+            child: SvgPicture.asset(
+              'assets/icons/picker_circle_gray.svg',
             ),
-          ],
-        ),
+          ),
+        ],
       );
     });
   }

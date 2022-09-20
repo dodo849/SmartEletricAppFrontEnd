@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 
 class EnterCustomerNumber extends StatelessWidget {
   const EnterCustomerNumber({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class EnterCustomerNumber extends StatelessWidget {
             maxLength: 10,
             isFocus: true,
             onChanged: (value) {
-              EnterCustomerInfoViewModel.to.customerNumber(value);
+              EnterUserInfoViewModel.to.customerNumber(value);
               validate(value);
             }),
         SizedBox(height: 30),
@@ -48,12 +48,12 @@ class EnterCustomerNumber extends StatelessWidget {
   ///유효성 검사: 첫번째 문항 - 고객번호 10자리
   void validate(value) {
     // 10자리 고객번호
-    if (EnterCustomerInfoViewModel.to.customerNumber.value.length == 10) {
+    if (EnterUserInfoViewModel.to.customerNumber.value.length == 10) {
       // button 활성화
-      EnterCustomerInfoViewModel.to.isButtonEnable(true);
+      EnterUserInfoViewModel.to.isButtonEnable(true);
     } else {
       // button 비활성화
-      EnterCustomerInfoViewModel.to.isButtonEnable(false);
+      EnterUserInfoViewModel.to.isButtonEnable(false);
     }
   }
 }

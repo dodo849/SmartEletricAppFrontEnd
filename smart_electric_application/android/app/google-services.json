@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "833318025308",
+    "project_id": "smart-electric-app",
+    "storage_bucket": "smart-electric-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833318025308:android:9a920aa70984f5f9168e99",
+        "android_client_info": {
+          "package_name": "com.example.smart_electric_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833318025308-m2g4b3p8acd611edds67655nbda3frtk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtKNjTT_fr-igNYunnf9Yjw_Il68PjfpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833318025308-m2g4b3p8acd611edds67655nbda3frtk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

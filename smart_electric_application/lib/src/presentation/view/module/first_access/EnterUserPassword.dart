@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 
 import '../../atoms/BorderedTextInput.dart';
 
-class EnterCustomerName extends StatelessWidget {
-  const EnterCustomerName({Key? key}) : super(key: key);
+class EnterUserPassword extends StatelessWidget {
+  const EnterUserPassword({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +22,15 @@ class EnterCustomerName extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(height: 50),
-        Text("성함을 입력해주세요", style: textTheme.headline1),
+        Text("비밀번호를 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
         CustomTextInput(
           focusColor: colorTheme.secondaryContainer,
-          textInputType: TextInputType.name,
+          textInputType: TextInputType.visiblePassword,
           textInputStyle: TextInputStyle.underline,
           isFocus: true,
           onChanged: (value) {
-            EnterCustomerInfoViewModel.to.customerName(value);
+            EnterUserInfoViewModel.to.password(value);
             validate(value);
           },
         ),
@@ -38,14 +38,14 @@ class EnterCustomerName extends StatelessWidget {
     ));
   }
 
-  ///유효성 검사: 두번째 문항 - 성함 입력여부만 확인
+  ///유효성 검사: 비밀번호
   void validate(value) {
     if (value.length != 0) {
       // button 활성화
-      EnterCustomerInfoViewModel.to.isButtonEnable(true);
+      EnterUserInfoViewModel.to.isButtonEnable(true);
     } else {
       // button 비활성화
-      EnterCustomerInfoViewModel.to.isButtonEnable(false);
+      EnterUserInfoViewModel.to.isButtonEnable(false);
     }
   }
 }

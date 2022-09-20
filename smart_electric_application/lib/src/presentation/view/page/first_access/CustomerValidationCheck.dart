@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/EnterCustomerInfoViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 
 class CustomerValidationCheck extends StatelessWidget {
   const CustomerValidationCheck({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class CustomerValidationCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    EnterCustomerInfoViewModel.to.checkCustomerValidation();
+    EnterUserInfoViewModel.to.checkCustomerValidation();
     print("실행!!!!");
 
     // 테마 스타일

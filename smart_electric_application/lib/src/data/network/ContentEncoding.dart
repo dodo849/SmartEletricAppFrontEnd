@@ -1,1 +1,0 @@
-enum ContentEncoding { url, json }

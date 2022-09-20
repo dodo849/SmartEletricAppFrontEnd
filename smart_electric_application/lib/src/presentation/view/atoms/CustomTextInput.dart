@@ -14,6 +14,7 @@ class CustomTextInput extends StatelessWidget {
     this.textInputType,
     this.maxLength,
     this.isFocus,
+    this.errorText,
     required this.onChanged,
   }) : super(key: key);
 
@@ -25,11 +26,15 @@ class CustomTextInput extends StatelessWidget {
   final TextInputType? textInputType;
   final int? maxLength;
   final bool? isFocus;
+  final String? errorText;
   final Function onChanged;
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = new TextEditingController();
+
+    // Theme define
+    var colorTheme = context.theme.colorScheme;
 
     return Container(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -37,7 +42,7 @@ class CustomTextInput extends StatelessWidget {
         if (labelText != null) ...[
           Text(
             "$labelText",
-            style: TextStyle(color: context.theme.colorScheme.onSurface),
+            style: TextStyle(color: colorTheme.onSurface),
           )
         ],
 
@@ -49,45 +54,54 @@ class CustomTextInput extends StatelessWidget {
 
   Widget getTextFieldIsPlaceholder(String? placeholder, BuildContext context,
       TextEditingController controller) {
+    // Theme define
+    var colorTheme = context.theme.colorScheme;
     // 아웃라인 스타일 정의 (focus & enabled)
     var focusBorderStyle;
     var enabledBorderStyle;
+    var errorBorderStyle;
 
     switch (textInputStyle) {
       case TextInputStyle.bordered:
         focusBorderStyle = OutlineInputBorder(
           borderSide: BorderSide(
-              color: focusColor ?? context.theme.colorScheme.primary,
+              color: focusColor ?? colorTheme.primary,
               width: 1,
               style: BorderStyle.solid),
           borderRadius: BorderRadius.circular(20.0),
         );
         enabledBorderStyle = OutlineInputBorder(
           borderSide: BorderSide(
-              color: context.theme.colorScheme.outline,
-              width: 1,
-              style: BorderStyle.solid),
+              color: colorTheme.outline, width: 1, style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(20.0),
+        );
+        errorBorderStyle = OutlineInputBorder(
+          borderSide: BorderSide(
+              color: colorTheme.error, width: 1, style: BorderStyle.solid),
           borderRadius: BorderRadius.circular(20.0),
         );
         break;
       case TextInputStyle.underline:
         focusBorderStyle = UnderlineInputBorder(
           borderSide: BorderSide(
-              color: focusColor ?? context.theme.colorScheme.primary,
+              color: focusColor ?? colorTheme.primary,
               width: 2,
               style: BorderStyle.solid),
         );
         enabledBorderStyle = UnderlineInputBorder(
           borderSide: BorderSide(
-              color: context.theme.colorScheme.outline,
-              width: 2,
-              style: BorderStyle.solid),
+              color: colorTheme.outline, width: 2, style: BorderStyle.solid),
+        );
+        errorBorderStyle = UnderlineInputBorder(
+          borderSide: BorderSide(
+              color: colorTheme.error, width: 2, style: BorderStyle.solid),
+          borderRadius: BorderRadius.circular(20.0),
         );
         break;
     }
 
     // 입력 시 텍스트 스타일 정의
-    var textStyle = TextStyle(color: context.theme.colorScheme.onBackground);
+    var textStyle = TextStyle(color: colorTheme.onBackground);
 
     // 텍스트 필드 정의
     var textField = TextField(
@@ -97,10 +111,13 @@ class CustomTextInput extends StatelessWidget {
       maxLength: maxLength,
       autofocus: isFocus ?? false,
       decoration: InputDecoration(
-          hintText: placeholder ?? " ",
-          hintStyle: TextStyle(color: context.theme.colorScheme.surfaceVariant),
-          focusedBorder: focusBorderStyle,
-          enabledBorder: enabledBorderStyle),
+        hintText: placeholder,
+        hintStyle: TextStyle(color: colorTheme.surfaceVariant),
+        errorText: errorText,
+        errorStyle: TextStyle(color: colorTheme.error),
+        focusedBorder: focusBorderStyle,
+        enabledBorder: enabledBorderStyle,
+      ),
       onChanged: (text) {
         onChanged(text);
       },

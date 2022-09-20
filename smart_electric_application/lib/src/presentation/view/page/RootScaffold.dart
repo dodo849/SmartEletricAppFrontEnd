@@ -11,7 +11,7 @@ import 'package:smart_electric_application/src/presentation/view/page/SmartHome.
 
 class RootScaffold extends StatelessWidget{
 
-  // 탭별 화면
+  // 탭별 화면 정의
   static List<Widget> tabPages = <Widget>[
     Home(),
     const Analysis(),
@@ -34,7 +34,7 @@ class RootScaffold extends StatelessWidget{
       body: Obx(() => SafeArea(
           child:
               tabPages[MyBottomNavgationBarController.to.selectedIndex.value])),
-      bottomNavigationBar: MyBottomNavgationBar(),
+      bottomNavigationBar: const MyBottomNavgationBar(),
     );
   }
 }
