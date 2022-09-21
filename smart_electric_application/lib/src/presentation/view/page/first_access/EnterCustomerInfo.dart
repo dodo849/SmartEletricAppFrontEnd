@@ -111,7 +111,6 @@ class EnterCustomerInfo extends StatelessWidget {
       switch (EnterUserInfoViewModel.to.tempIdx.value) {
         // 고객번호&세대주 입력 시 스마트 계량기인지 확인
         case 0:
-          print("hihi");
           EnterUserInfoViewModel.to.checkIsSmartMeter();
           break;
         case 1:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/BarGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
@@ -38,10 +39,14 @@ class Home extends StatelessWidget {
 
         ElevatedButton(onPressed: () async {
           var firebaseRepository  = FirebaseRepository();
-          var user = await firebaseRepository.getUser();
-          var token = await user?.getIdToken();
-          print(token);
-        }, child: Text("get user")),
+          var user = firebaseRepository.getUser();
+          var idToken = await user?.getIdToken();
+          print('idToken $idToken');
+
+          var authRepository  = AuthRepository();
+          var jwtTokens = await authRepository.getJwtTokens(idToken!);
+          print(jwtTokens.value);
+        }, child: Text("Test Button")),
 
         // 스마트 전기앱 로고
         Padding(

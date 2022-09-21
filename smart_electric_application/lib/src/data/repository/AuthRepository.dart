@@ -15,7 +15,7 @@ class AuthRepository implements AuthRepositoryInterface{
       final authRetrofit = AuthRetrofit(dio);
 
       // 서버에서 firbase id token으로 access/refresh token 발급받기
-      JwtTokenDTO jwtTokens = await authRetrofit.getTokens(firebaseIdToken);
+      JwtTokenDTO jwtTokens = await authRetrofit.getJwtTokens('Bearer ${firebaseIdToken}');
 
       return Result.success(jwtTokens);
     } catch (err) {

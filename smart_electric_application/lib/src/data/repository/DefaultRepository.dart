@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/IsSmartMeterDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/DefaultRetrofit.dart';
@@ -11,7 +12,7 @@ class DefaultRepository implements DefaultRepositoryInterface{
   Future<Result<IsSmartMeterDTO, Exception>> checkIsSmartMeter(
       String customerNumber) async {
     try {
-      final dio = await getDefaultDio();
+      final dio = Dio();
       final defaultRetrofit = DefaultRetrofit(dio);
 
       IsSmartMeterDTO isSmartMeter =

@@ -27,7 +27,7 @@ class _DefaultRetrofit implements DefaultRetrofit {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<IsSmartMeterDTO>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<IsSmartMeterDTO>(Options( //여기가 오류 지점
       method: 'GET',
       headers: _headers,
       extra: _extra,

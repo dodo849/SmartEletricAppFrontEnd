@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
@@ -10,7 +12,7 @@ abstract class AuthRetrofit {
 
   // firebase id token으로 refresh/access 토큰 획득
   @POST('/login')
-  Future<JwtTokenDTO> getTokens(@Header("Authorization") String firebaseIdToken);
+  Future<JwtTokenDTO> getJwtTokens(@Header("Authorization") String firebaseIdToken);
 
   // refresh token으로 access token 획득
   @POST('/login/issue/access')

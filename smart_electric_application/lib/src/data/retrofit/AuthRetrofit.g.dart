@@ -21,7 +21,7 @@ class _AuthRetrofit implements AuthRetrofit {
   String? baseUrl;
 
   @override
-  Future<JwtTokenDTO> getTokens(firebaseIdToken) async {
+  Future<JwtTokenDTO> getJwtTokens(firebaseIdToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': firebaseIdToken};
@@ -40,6 +40,7 @@ class _AuthRetrofit implements AuthRetrofit {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    // print("Result data ${_result.data}");
     final value = JwtTokenDTO.fromJson(_result.data!);
     return value;
   }
