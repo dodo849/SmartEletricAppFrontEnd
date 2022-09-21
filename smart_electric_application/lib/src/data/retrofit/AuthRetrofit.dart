@@ -8,7 +8,7 @@ part 'AuthRetrofit.g.dart';
 abstract class AuthRetrofit {
   factory AuthRetrofit(Dio dio, {String baseUrl}) = _AuthRetrofit;
 
-  // firebase token으로 refresh/access 토큰 획득
+  // firebase id token으로 refresh/access 토큰 획득
   @POST('/login')
   Future<JwtTokenDTO> getTokens(@Header("Authorization") String firebaseIdToken);
 

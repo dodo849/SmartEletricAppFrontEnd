@@ -37,7 +37,7 @@ class LoginUseCase {
 
     // 서버토큰 발급 성공 시 내부 DB에 저장하기
     Result<bool, Exception> saveTokensResult =
-        await authRepository.saveJwtTokenTnDB(getJwtTokensResult.value!);
+        await authRepository.saveJwtTokenToDB(getJwtTokensResult.value!);
 
     if (saveTokensResult.status == ResultStatus.error) {
       return saveTokensResult;

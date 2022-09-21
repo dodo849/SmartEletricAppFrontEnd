@@ -25,7 +25,7 @@ class AuthRepository implements AuthRepositoryInterface{
 
   /// 서버에서 받은 access/refresh 토큰을 내부 DB에 저장하기
   @override
-  Future<Result<bool, Exception>> setJwtTokenDTOInDB(JwtTokenDTO tokens) async {
+  Future<Result<bool, Exception>> saveJwtTokenToDB(JwtTokenDTO tokens) async {
     try {
       const storage = FlutterSecureStorage();
 

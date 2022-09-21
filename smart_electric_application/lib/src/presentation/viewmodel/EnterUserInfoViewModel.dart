@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupUseCase.dart';
-
-
 
 class EnterUserInfoViewModel extends GetxController {
   static EnterUserInfoViewModel get to => Get.find();
@@ -25,11 +25,15 @@ class EnterUserInfoViewModel extends GetxController {
   RxString emailError = "".obs;
   RxString passwordError = "".obs;
 
+  // API result variables
+  RxBool? isSmartMeter;
+
   // Usecase instance
   final signupUseCase = SignupUseCase();
   final checkCustomerValidationUseCase = CheckInfoAgreementUseCase();
   final sendEmailVerifiedUseCase = SendEmailVerificationUseCase();
   final checkEmailVerifiedUseCase = CheckEmailVerificationUseCase();
+  final checkIsSmartMeterUseCase = CheckIsSmartMeterUseCase();
 
   // Constructors
   @override
@@ -50,6 +54,27 @@ class EnterUserInfoViewModel extends GetxController {
     }, time: const Duration(milliseconds: 400));
   }
 
+  // 스마트 계량기인지 고객번호로 확인
+  void checkIsSmartMeter() async{
+    dynamic checkIsSmartMeterResult =
+        await checkIsSmartMeterUseCase.excute(customerNumber.value);
+
+    print("### Is Smart Meter");
+    print(checkIsSmartMeterResult.error.message);
+
+    switch (checkIsSmartMeterResult.status){
+      case Result.success:
+        if (checkIsSmartMeterResult.value == "true"){
+          isSmartMeter!(true);
+        } else if (checkIsSmartMeterResult.value == "false"){
+          isSmartMeter!(false);
+        }
+        break;
+      case Result.failure:
+        throw Exception("오류가 발생했습니다. 고객번호 입력부터 다시 시도해주세요.");
+    }
+  }
+
   void checkCustomerValidation() {
     checkCustomerValidationUseCase.excute();
   }
@@ -60,7 +85,6 @@ class EnterUserInfoViewModel extends GetxController {
     if (isSignupSuccess) {
       print("회원가입 성공");
       sendEmailVerification();
-
     } else {
       print("회원가입 실패");
     }

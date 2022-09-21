@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
+import 'package:smart_electric_application/src/presentation/view/module/first_access/CheckedIsSmartMeter.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EmailVerification.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserEmail.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserName.dart';
@@ -26,6 +27,7 @@ class EnterCustomerInfo extends StatelessWidget {
   static final EnterPages = <Widget>[
     const EnterCustomerNumber(),
     const EnterHouseholderName(),
+    CheckedIsSmartMeter(),
     const EnterUserName(),
     const EnterUserEmail(),
     const EnterUserPassword(),
@@ -95,7 +97,7 @@ class EnterCustomerInfo extends StatelessWidget {
                                 ? colorTheme.onPrimary
                                 : colorTheme.onSurface,
                         size: ButtonSize.large,
-                        action: () => buttonAction()),
+                        action: () => _nextButtonAction()),
                   ),
                 ]),
               ),
@@ -104,9 +106,17 @@ class EnterCustomerInfo extends StatelessWidget {
         ));
   }
 
-  void buttonAction() {
+  void _nextButtonAction() async {
     if (EnterUserInfoViewModel.to.isButtonEnable.value == true) {
       switch (EnterUserInfoViewModel.to.tempIdx.value) {
+        // 고객번호&세대주 입력 시 스마트 계량기인지 확인
+        case 0:
+          print("hihi");
+          EnterUserInfoViewModel.to.checkIsSmartMeter();
+          break;
+        case 1:
+          print(EnterUserInfoViewModel.to.isSmartMeter);
+          break;
         // 비밀번호 입력 페이지에서 다음 버튼 클릭 시 이메일 인증 전송
         case 4:
           EnterUserInfoViewModel.to.signup(); // 아직 가입 Exception 처리 X
