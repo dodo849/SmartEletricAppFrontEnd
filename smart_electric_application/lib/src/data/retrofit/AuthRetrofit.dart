@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:smart_electric_application/src/data/dto/IsEmailDuplicateDTO.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUseCase.dart';
 
 part 'AuthRetrofit.g.dart';
 
@@ -21,4 +23,8 @@ abstract class AuthRetrofit {
   // access 토큰 유효성 확인
   @POST('/login/verification/access')
   Future<JwtTokenDTO> checkAccessTokenVerification(@Header("Authorization") String accessToken);
+
+  // 이메일 중복 확인
+  @GET('/signup/email-duplicate/verification')
+  Future<IsEmailDuplicateDTO> checkEmailDuplicate(@Query("email") String email);
 }

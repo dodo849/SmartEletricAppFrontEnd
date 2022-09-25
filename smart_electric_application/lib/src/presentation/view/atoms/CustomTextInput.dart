@@ -55,7 +55,7 @@ class CustomTextInput extends StatelessWidget {
   Widget getTextFieldIsPlaceholder(String? placeholder, BuildContext context,
       TextEditingController controller) {
     // Theme define
-    var colorTheme = context.theme.colorScheme;
+    final colorTheme = context.theme.colorScheme;
     // 아웃라인 스타일 정의 (focus & enabled)
     var focusBorderStyle;
     var enabledBorderStyle;
@@ -114,7 +114,7 @@ class CustomTextInput extends StatelessWidget {
         hintText: placeholder,
         hintStyle: TextStyle(color: colorTheme.surfaceVariant),
         errorText: errorText,
-        errorStyle: TextStyle(color: colorTheme.error),
+        errorStyle: TextStyle(color: colorTheme.error, fontSize: 14),
         focusedBorder: focusBorderStyle,
         enabledBorder: enabledBorderStyle,
       ),

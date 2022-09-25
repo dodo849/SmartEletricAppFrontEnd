@@ -15,7 +15,11 @@ class BillSimulation extends StatelessWidget {
         margin: EdgeInsets.only(left: 20, right: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 25),
-          SimulationBanner(),
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 20),
+            child: SimulationBanner(),
+          ),
           SizedBox(height: 10),
           BillSimulationCard(),
           SizedBox(height: 30),

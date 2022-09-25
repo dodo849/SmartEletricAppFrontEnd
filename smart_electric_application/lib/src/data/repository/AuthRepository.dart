@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
@@ -5,7 +7,7 @@ import 'package:smart_electric_application/src/data/retrofit/AuthRetrofit.dart';
 import 'package:smart_electric_application/src/data/retrofit/config/getDefaultDio.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 
-class AuthRepository implements AuthRepositoryInterface{
+class AuthRepository implements AuthRepositoryInterface {
   /// firebase id token을 이용해 서버에서 access/refresh 토큰 발급받기
   @override
   Future<Result<JwtTokenDTO, Exception>> getJwtTokens(
@@ -15,7 +17,8 @@ class AuthRepository implements AuthRepositoryInterface{
       final authRetrofit = AuthRetrofit(dio);
 
       // 서버에서 firbase id token으로 access/refresh token 발급받기
-      JwtTokenDTO jwtTokens = await authRetrofit.getJwtTokens('Bearer ${firebaseIdToken}');
+      JwtTokenDTO jwtTokens =
+          await authRetrofit.getJwtTokens('Bearer ${firebaseIdToken}');
 
       return Result.success(jwtTokens);
     } catch (err) {
@@ -37,6 +40,24 @@ class AuthRepository implements AuthRepositoryInterface{
       await storage.write(key: 'REFRESH_TOKEN', value: tokens.refreshToken);
 
       return const Result.success(true);
+    } catch (err) {
+      return Result.failure(Exception(err));
+    }
+  }
+
+  @override
+  Future<Result<bool, Exception>> checkEmailDuplicate(String email) async {
+    try {
+      final dio = Dio();
+      final authRetrofit = AuthRetrofit(dio);
+
+      var emailDuplicateResult = await authRetrofit.checkEmailDuplicate(email);
+
+      if (emailDuplicateResult.isEmailDuplicated == true) {
+        return const Result.success(true);
+      } else {
+        return const Result.success(false);
+      }
     } catch (err) {
       return Result.failure(Exception(err));
     }

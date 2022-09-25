@@ -13,6 +13,8 @@ import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewM
 import 'package:smart_electric_application/CustomIcon.dart';
 
 class Home extends StatelessWidget {
+    const Home({Key? key}) : super(key: key);
+
   // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   // _saveThemeStatus() async {

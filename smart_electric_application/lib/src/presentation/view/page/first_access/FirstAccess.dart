@@ -32,50 +32,32 @@ class FirstAccess extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(height: 100),
-                  Text("안녕하세요,", style: textTheme.headline1),
+                  Text("안녕하세요 :)", style: textTheme.headline1),
                   SizedBox(height: 7),
                   Text("스마트전기앱이 처음이신가요?", style: textTheme.headline1),
-                  SizedBox(height: 40),
-                  Text("가입하기 전 먼저 확인해보세요", style: textTheme.bodyText1),
-                  SizedBox(height: 10),
+                  SizedBox(height: 30),
                   RoundedButton(
-                      text: "이용가능고객인지 확인하기",
-                      bgColor: colorTheme.surface,
+                      text: "서비스 가입하기",
+                      bgColor: colorTheme.secondaryContainer.withOpacity(0.2),
                       textColor: colorTheme.secondaryContainer,
                       size: ButtonSize.large,
                       action: () {
                         Get.to(() => EnterCustomerInfo(),
                             transition: Transition.rightToLeftWithFade);
                       }),
-                  SizedBox(height: 30),
-                  Text("바로 가입하실 수도 있어요", style: textTheme.bodyText1),
-                  SizedBox(height: 10),
+                  SizedBox(height: 40),
+                  Text("가입하신적이 있나요?", style: textTheme.bodyText1),
+                  SizedBox(height: 15),
                   RoundedButton(
-                      text: "서비스 가입하기",
-                      bgColor: colorTheme.secondaryContainer.withOpacity(0.2),
+                      text: "로그인하기",
+                      bgColor: colorTheme.surface,
                       textColor: colorTheme.secondaryContainer,
                       size: ButtonSize.large,
-                      action: () {}),
-                  SizedBox(height: 30),
-                  Divider(),
-                  SizedBox(height: 30),
-                  Text("가입하신적이 있나요?", style: textTheme.bodyText1),
+                      action: () {
+                        Get.to(() => RootScaffold(),
+                            transition: Transition.fade);
+                      }),
                   SizedBox(height: 10),
-                  CustomTextInput(
-                      placeholder: "고객번호 10자리를 입력해주세요",
-                      textInputStyle: TextInputStyle.bordered,
-                      focusColor: colorTheme.secondaryContainer,
-                      onChanged: () {}),
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Spacer(),
-                      GestureDetector(
-                          onTap: () => Get.back(),
-                          child: Text("시작하기", style: TextStyle(color: colorTheme.onSurface),)),
-                      SizedBox(width: 10),
-                    ],
-                  ),
                 ],
               ),
             )),

@@ -5,4 +5,5 @@ import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 abstract class AuthRepositoryInterface {
   Future<Result<JwtTokenDTO, Exception>> getJwtTokens(String firebaseIdToken);
   Future<Result<bool, Exception>> saveJwtTokenToDB(JwtTokenDTO tokens);
+  Future<Result<bool, Exception>> checkEmailDuplicate(String email);
 }

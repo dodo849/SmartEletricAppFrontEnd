@@ -80,4 +80,9 @@ class FirebaseRepository implements FirebaseRepositoryInterface {
       return Result.failure(Exception('알 수 없는 오류가 발생했습니다. 다시 시도해주세요.'));
     }
   }
+
+  // Future<Result<String, Exception>> getAllUser(){
+
+
+  // }
 }

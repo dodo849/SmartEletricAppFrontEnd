@@ -8,17 +8,10 @@ class SignupUseCase {
   final FirebaseRepositoryInterface firebaseRepository =
       GetIt.I.get<FirebaseRepositoryInterface>();
 
-  Future<bool> execute(email, password) async {
+  Future<Result<bool, Exception>> execute(email, password) async {
     Result<bool, Exception> signupResult =
         await firebaseRepository.signup(email, password);
 
-    // switch (signupResult.status) {
-    //   case ResultStatus.success:
-    //     User? user = firebaseRepository.getUser();
-    //     var idToken = await user?.getIdToken();
-
-    // }
-
-    return true;
+    return signupResult;
   }
 }
