@@ -17,6 +17,8 @@ class SignupUseCase {
       required String name,
       required String email,
       required String password}) async {
+
+    // 파이어베이스 회원가입    
     Result<bool, String> signupResult =
         await firebaseRepository.signup(email, password);
 
@@ -24,6 +26,14 @@ class SignupUseCase {
       return signupResult;
     }
 
+    // 이메일 서버에 저장
+    Result<bool, String> saveEmailToServerResult = await authRepository.saveEmailToServer(email);
+
+    if (saveEmailToServerResult.status == ResultStatus.error) {
+      return saveEmailToServerResult;
+    }
+
+    // 유저 정보 내부 DB에 저장
     Result<bool, String> saveUserResult = await authRepository.saveUserToDB(
         customerNumber: customerNumber, name: name, email: email);
 

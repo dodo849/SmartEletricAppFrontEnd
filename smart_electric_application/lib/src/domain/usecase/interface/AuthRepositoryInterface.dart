@@ -6,6 +6,7 @@ abstract class AuthRepositoryInterface {
   Future<Result<JwtTokenDTO, String>> getJwtTokens(String firebaseIdToken);
   Future<Result<bool, String>> saveJwtTokenToDB(JwtTokenDTO tokens);
   Future<Result<bool, String>> checkEmailDuplicate(String email);
+  Future<Result<bool, String>> saveEmailToServer(String email);
   Future<Result<bool, String>> saveUserToDB({
       required String customerNumber, required String name, required String email});
 }

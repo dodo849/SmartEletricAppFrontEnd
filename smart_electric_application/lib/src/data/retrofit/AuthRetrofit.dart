@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/IsEmailDuplicateDTO.dart';
+import 'package:smart_electric_application/src/data/dto/IsSaveEmailDTO.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUseCase.dart';
 
@@ -27,4 +28,8 @@ abstract class AuthRetrofit {
   // 이메일 중복 확인
   @GET('/signup/email-duplicate/verification')
   Future<IsEmailDuplicateDTO> checkEmailDuplicate(@Query("email") String email);
+
+  // 이메일 서버에 추가
+  @POST('/signup/email-duplicate/update')
+  Future<IsSaveEmailDTO> saveEmail(@Query("email") String email);
 }

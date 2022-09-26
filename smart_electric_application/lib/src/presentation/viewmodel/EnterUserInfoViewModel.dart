@@ -7,6 +7,7 @@ import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerifica
 import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupUseCase.dart';
+import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 
 class EnterUserInfoViewModel extends GetxController {
   static EnterUserInfoViewModel get to => Get.find();
@@ -81,6 +82,11 @@ class EnterUserInfoViewModel extends GetxController {
     ever(email, (_) {
       isEmailError(false);
     });
+
+    // 이메일 변경하면 에러메세지 초기화
+    ever(password, (_) {
+      isPasswordError(false);
+    });
   }
 
   // Button Function
@@ -103,9 +109,6 @@ class EnterUserInfoViewModel extends GetxController {
         case 5:
           EnterUserInfoViewModel.to.checkEmailVerification();
           break;
-        case 6:
-          // TODO: 마지막 문항이므로 dispose() 해야함
-          return;
         default:
           // 버튼 disabled
           EnterUserInfoViewModel.to.isButtonEnable(false);
@@ -136,7 +139,6 @@ class EnterUserInfoViewModel extends GetxController {
 
   /// 스마트 계량기인지 고객번호로 확인
   void checkIsSmartMeter() async {
-    print("checkIsSmartMeter 실행");
 
     Result<IsSmartMeterDTO, String> checkIsSmartMeterResult =
         await checkIsSmartMeterUseCase.excute(customerNumber.value);
@@ -191,8 +193,6 @@ class EnterUserInfoViewModel extends GetxController {
     // 에러 발생 시 메세지 view에 띄우기
     if (isSignupResult.status == ResultStatus.error) {
       isSingupError(true);
-      print(isSignupResult.error);
-      // signupErrorMessage(isSignupResult.error!.toString().replaceFirst('Exception: ', ""));
       signupErrorMessage(isSignupResult.error);
       return;
     }
@@ -216,5 +216,7 @@ class EnterUserInfoViewModel extends GetxController {
       isEmailVerificationError(true);
       emailVerificationErrorMessage("이메일 인증에 실패했습니다. 다시 시도해주세요.");
     }
+
+    Get.offAll(RootScaffold());
   }
 }

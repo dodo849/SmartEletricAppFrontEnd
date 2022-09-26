@@ -65,6 +65,24 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
+  Future<Result<bool, String>> saveEmailToServer(String email) async {
+    try {
+      final dio = Dio();
+      final authRetrofit = AuthRetrofit(dio);
+
+      var saveEmailResult = await authRetrofit.saveEmail(email);
+
+      if (saveEmailResult.updated == true) {
+        return const Result.success(true);
+      } else {
+        return const Result.success(false);
+      }
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
   Future<Result<bool, String>> saveUserToDB({
       required String customerNumber, required String name, required String email}) async {
     try {
