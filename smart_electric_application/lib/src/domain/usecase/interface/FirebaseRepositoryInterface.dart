@@ -3,10 +3,10 @@ import 'package:smart_electric_application/src/config/Result.dart';
 
 /// Firebase Authentication Repository Interface
 abstract class FirebaseRepositoryInterface {
-  Future<Result<bool, Exception>> signup(email, password);
-  Future<Result<bool, Exception>> login(email, password);
-  Future<Result<bool, Exception>> logout();
+  Future<Result<bool, String>> signup(email, password);
+  Future<Result<bool, String>> login(email, password);
+  Future<Result<bool, String>> logout();
   Future<void> sendEmailVerification();
   User? getUser();
-  Future<Result<String, Exception>> getIdToken();
+  Future<Result<String, String>> getIdToken();
 }

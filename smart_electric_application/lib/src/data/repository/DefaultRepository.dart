@@ -9,7 +9,7 @@ class DefaultRepository implements DefaultRepositoryInterface{
 
   // 스마트 계량기인지 고객번호로 확인
   @override
-  Future<Result<IsSmartMeterDTO, Exception>> checkIsSmartMeter(
+  Future<Result<IsSmartMeterDTO, String>> checkIsSmartMeter(
       String customerNumber) async {
     try {
       final dio = Dio();
@@ -20,7 +20,7 @@ class DefaultRepository implements DefaultRepositoryInterface{
 
       return Result.success(isSmartMeter);
     } catch (err) {
-      return Result.failure(Exception(err));
+      return Result.failure(err.toString());
     }
   }
 }

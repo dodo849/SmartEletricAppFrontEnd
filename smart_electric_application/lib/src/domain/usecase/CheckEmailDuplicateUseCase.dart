@@ -8,7 +8,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 class CheckEmailDuplicateUseCase {
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<bool, Exception>> execute(String email) async {
+  Future<Result<bool, String>> execute(String email) async {
     var result = await authRepository.checkEmailDuplicate(email);
     return result;
   }

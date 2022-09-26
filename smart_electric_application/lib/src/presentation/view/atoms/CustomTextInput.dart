@@ -15,6 +15,7 @@ class CustomTextInput extends StatelessWidget {
     this.maxLength,
     this.isFocus,
     this.errorText,
+    this.isObscureText,
     required this.onChanged,
   }) : super(key: key);
 
@@ -27,6 +28,7 @@ class CustomTextInput extends StatelessWidget {
   final int? maxLength;
   final bool? isFocus;
   final String? errorText;
+  final bool? isObscureText;
   final Function onChanged;
 
   @override
@@ -110,6 +112,7 @@ class CustomTextInput extends StatelessWidget {
       keyboardType: textInputType ?? TextInputType.none,
       maxLength: maxLength,
       autofocus: isFocus ?? false,
+      obscureText: isObscureText ?? false,
       decoration: InputDecoration(
         hintText: placeholder,
         hintStyle: TextStyle(color: colorTheme.surfaceVariant),

@@ -16,26 +16,30 @@ class EnterUserPassword extends StatelessWidget {
     var textTheme = context.theme.textTheme;
     var colorTheme = context.theme.colorScheme;
 
-    return Container(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(height: 50),
-        Text("비밀번호를 입력해주세요", style: textTheme.headline1),
-        SizedBox(height: 20),
-        CustomTextInput(
-          focusColor: colorTheme.secondaryContainer,
-          textInputType: TextInputType.visiblePassword,
-          textInputStyle: TextInputStyle.underline,
-          isFocus: true,
-          onChanged: (value) {
-            EnterUserInfoViewModel.to.password(value);
-            validate(value);
-          },
-        ),
-      ],
-    ));
+    return Obx(() => Container(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: 50),
+            Text("비밀번호를 입력해주세요", style: textTheme.headline1),
+            SizedBox(height: 20),
+            CustomTextInput(
+              focusColor: colorTheme.secondaryContainer,
+              textInputType: TextInputType.visiblePassword,
+              textInputStyle: TextInputStyle.underline,
+              isFocus: true,
+              isObscureText: true,
+              errorText: EnterUserInfoViewModel.to.isSingupError.value
+                  ? EnterUserInfoViewModel.to.signupErrorMessage.value
+                  : null,
+              onChanged: (value) {
+                EnterUserInfoViewModel.to.password(value);
+                validate(value);
+              },
+            ),
+          ],
+        )));
   }
 
   ///유효성 검사: 비밀번호

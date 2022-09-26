@@ -10,9 +10,9 @@ class LoginUseCase {
   final firebaseRepository = GetIt.I.get<FirebaseRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<dynamic, Exception>> execute(email, password) async {
+  Future<Result<dynamic, String>> execute(email, password) async {
     // firebase 로그인
-    Result<bool, Exception> loginResult =
+    Result<bool, String> loginResult =
         await firebaseRepository.login(email, password);
 
     if (loginResult.status == ResultStatus.error) {
@@ -20,7 +20,7 @@ class LoginUseCase {
     }
 
     // 로그인 성공 시 firebase id token 가져오기
-    Result<String, Exception> getIdTokenResult =
+    Result<String, String> getIdTokenResult =
         await firebaseRepository.getIdToken();
 
     if (getIdTokenResult.status == ResultStatus.error) {
@@ -28,7 +28,7 @@ class LoginUseCase {
     }
 
     // id 토큰으로 서버 토큰 발급받기
-    Result<JwtTokenDTO, Exception> getJwtTokensResult =
+    Result<JwtTokenDTO, String> getJwtTokensResult =
         await authRepository.getJwtTokens(getIdTokenResult.value!);
 
     if (getJwtTokensResult.status == ResultStatus.error) {
@@ -36,7 +36,7 @@ class LoginUseCase {
     }
 
     // 서버토큰 발급 성공 시 내부 DB에 저장하기
-    Result<bool, Exception> saveTokensResult =
+    Result<bool, String> saveTokensResult =
         await authRepository.saveJwtTokenToDB(getJwtTokensResult.value!);
 
     if (saveTokensResult.status == ResultStatus.error) {

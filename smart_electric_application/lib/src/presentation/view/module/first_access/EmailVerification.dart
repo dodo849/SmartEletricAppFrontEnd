@@ -37,6 +37,14 @@ class EmailVerification extends StatelessWidget {
           style: textTheme.bodyText1,
           textAlign: TextAlign.center,
         ),
+
+        if (EnterUserInfoViewModel.to.isEmailVerificationError.value) ... [
+                  Text(
+          EnterUserInfoViewModel.to.emailVerificationErrorMessage.value,
+          style: TextStyle(color: colorTheme.error, fontSize: 14),
+          textAlign: TextAlign.center,
+        ),
+        ]
       ],
     ));
   }

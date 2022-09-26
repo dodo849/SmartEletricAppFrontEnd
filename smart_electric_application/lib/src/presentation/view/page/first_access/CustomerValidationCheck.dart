@@ -10,9 +10,6 @@ class CustomerValidationCheck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    EnterUserInfoViewModel.to.checkCustomerValidation();
-    print("실행!!!!");
-
     // 테마 스타일
     var textTheme = context.theme.textTheme;
     var colorTheme = context.theme.colorScheme;

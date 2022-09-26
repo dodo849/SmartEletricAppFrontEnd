@@ -6,7 +6,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/DefaultR
 class CheckIsSmartMeterUseCase {
   final defaultRepository = GetIt.I.get<DefaultRepositoryInterface>();
 
-  Future<Result<IsSmartMeterDTO, Exception>> excute(customerNumber) async {
+  Future<Result<IsSmartMeterDTO, String>> excute(customerNumber) async {
     var isSmartMeterResult =
         await defaultRepository.checkIsSmartMeter(customerNumber);
 

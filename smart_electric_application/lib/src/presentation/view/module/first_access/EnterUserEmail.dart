@@ -24,21 +24,22 @@ class EnterUserEmail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Text("이메일을 입력해주세요", style: textTheme.headline1),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             CustomTextInput(
                 focusColor: colorTheme.secondaryContainer,
                 textInputStyle: TextInputStyle.underline,
                 textInputType: TextInputType.emailAddress,
                 placeholder: "smart@smarteletric.co.kr",
                 isFocus: true,
-                errorText: EnterUserInfoViewModel.to.emailErrorMessage.value,
+                errorText: EnterUserInfoViewModel.to.isEmailError.value ?
+                    EnterUserInfoViewModel.to.emailErrorMessage.value : null,
                 onChanged: (value) {
                   EnterUserInfoViewModel.to.email(value);
                   validate(value);
                 }),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
           ],
         )));
   }
