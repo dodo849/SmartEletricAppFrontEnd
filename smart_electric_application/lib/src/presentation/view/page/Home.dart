@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
+import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/BarGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
@@ -13,7 +14,7 @@ import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewM
 import 'package:smart_electric_application/CustomIcon.dart';
 
 class Home extends StatelessWidget {
-    const Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
@@ -39,16 +40,26 @@ class Home extends StatelessWidget {
       child: Column(children: [
         const SizedBox(height: 20),
 
-        ElevatedButton(onPressed: () async {
-          var firebaseRepository  = FirebaseRepository();
-          var user = firebaseRepository.getUser();
-          var idToken = await user?.getIdToken();
-          print('idToken $idToken');
+        ElevatedButton(
+            onPressed: () async {
+              // var firebaseRepository = FirebaseRepository();
+              // var user = firebaseRepository.getUser();
+              // var idToken = await user?.getIdToken();
+              // print('idToken $idToken');
 
-          var authRepository  = AuthRepository();
-          var jwtTokens = await authRepository.getJwtTokens(idToken!);
-          print(jwtTokens.value);
-        }, child: Text("Test Button")),
+              // var authRepository = AuthRepository();
+              // var jwtTokens = await authRepository.getJwtTokens(idToken!);
+              // print(jwtTokens.value);
+
+              var powerUsageRepository = PowerUsageRepository();
+              var powerUsageRepositoryData =
+                  await powerUsageRepository.getPowerUsageByDay(
+                      customerNumber: "0130392270",
+                      startDate: "20220801",
+                      endDate: "20220831");
+              print(powerUsageRepositoryData.error);
+            },
+            child: Text("Test Button")),
 
         // 스마트 전기앱 로고
         Padding(

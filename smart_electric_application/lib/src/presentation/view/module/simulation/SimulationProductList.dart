@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/entity/SimulationProductModel.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/SimulationProductListCell.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/SimulationProductCellViewModel.dart';
 
 // 클래스 변수 수정 로직
 // historyList.value.addAll(
@@ -34,21 +36,24 @@ class SimulationProductList extends GetView<SimulationProductListController> {
   Widget build(BuildContext context) {
     Get.put(SimulationProductListController());
 
-    return Obx(
-      () => ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: controller.simulationProducts.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            children: [
-              SizedBox(height: 15),
-              SimulationProductListCell(
-                  simulationProduct: controller.simulationProducts[index]),
-            ],
-          );
-        },
-      ),
+    // ViewModel DI
+    var simulationProductCellViewModel =
+        Get.put(SimulationProductCellViewModel());
+
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: controller.simulationProducts.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Column(
+          children: [
+            SizedBox(height: 15),
+            SimulationProductListCell(
+                simulationProduct: controller.simulationProducts[index],
+                index: index),
+          ],
+        );
+      },
     );
   }
 }

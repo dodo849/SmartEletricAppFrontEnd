@@ -89,7 +89,8 @@ class EnterUserInfoViewModel extends GetxController {
     });
   }
 
-  // Button Function
+  // Button Action Function
+
   void nextButtonAction() async {
     if (EnterUserInfoViewModel.to.isButtonEnable.value == true) {
       switch (EnterUserInfoViewModel.to.tempIdx.value) {
@@ -108,7 +109,7 @@ class EnterUserInfoViewModel extends GetxController {
           return;
         case 5:
           EnterUserInfoViewModel.to.checkEmailVerification();
-          break;
+          return;
         default:
           // 버튼 disabled
           EnterUserInfoViewModel.to.isButtonEnable(false);
@@ -199,10 +200,12 @@ class EnterUserInfoViewModel extends GetxController {
 
     // 성공시에만 다음 페이지로
     tempIdx++;
+    
     // 회원가입 성공시 이메일로 인증링크 보내기
     sendEmailVerified();
   }
 
+  /// 이메일 인증 보내기
   void sendEmailVerified() async {
     await sendEmailVerifiedUseCase.execute(email.value, password.value);
   }
@@ -215,8 +218,10 @@ class EnterUserInfoViewModel extends GetxController {
     if (!isVerification) {
       isEmailVerificationError(true);
       emailVerificationErrorMessage("이메일 인증에 실패했습니다. 다시 시도해주세요.");
+      return;
     }
 
+    // 회원가입 로직 완료 메인화면으로.
     Get.offAll(RootScaffold());
   }
 }

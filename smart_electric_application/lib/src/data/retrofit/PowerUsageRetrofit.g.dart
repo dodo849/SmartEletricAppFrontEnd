@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'DefaultRetrofit.dart';
+part of 'PowerUsageRetrofit.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,12 @@ part of 'DefaultRetrofit.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _DefaultRetrofit implements DefaultRetrofit {
-  _DefaultRetrofit(
+class _PowerUsageRetrofit implements PowerUsageRetrofit {
+  _PowerUsageRetrofit(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://api.smartelectric.kr/';
+    baseUrl ??= 'https://api.smartelectric.kr/power-usage';
   }
 
   final Dio _dio;
@@ -21,25 +21,36 @@ class _DefaultRetrofit implements DefaultRetrofit {
   String? baseUrl;
 
   @override
-  Future<IsSmartMeterDTO> checkIsSmartMeter(customerNumber) async {
+  Future<List<PowerUsageByDayDTO>> getPowerUsageByDay(
+    customerNumber,
+    startDate,
+    endDate,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'custNum': customerNumber};
+    final queryParameters = <String, dynamic>{
+      r'custNo': customerNumber,
+      r'startDate': startDate,
+      r'endDate': endDate,
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<IsSmartMeterDTO>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<PowerUsageByDayDTO>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'kepcoCustNumValidation',
+              '/specific-user/period/day',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = IsSmartMeterDTO.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            PowerUsageByDayDTO.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

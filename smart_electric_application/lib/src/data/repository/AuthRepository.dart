@@ -96,4 +96,16 @@ class AuthRepository implements AuthRepositoryInterface {
       return Result.failure(err.toString());
     }
   }
+
+  Future<Result<String, String>> getCustomerNumber() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      var customerNumber = prefs.getString('customerNumber');
+
+      return Result.success(customerNumber);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
 }
