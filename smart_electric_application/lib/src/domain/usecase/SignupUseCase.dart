@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
+import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
+import 'package:smart_electric_application/src/domain/usecase/LoginUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
@@ -26,7 +28,7 @@ class SignupUseCase {
       return signupResult;
     }
 
-    // 이메일 서버에 저장
+    // 이메일 정보 서버에 저장
     Result<bool, String> saveEmailToServerResult = await authRepository.saveEmailToServer(email);
 
     if (saveEmailToServerResult.status == ResultStatus.error) {
@@ -40,6 +42,10 @@ class SignupUseCase {
     if (saveUserResult.status == ResultStatus.error) {
       return saveUserResult;
     }
+
+    // 회원가입 성공시 로그인
+    var loginUseCase = LoginUseCase();
+    loginUseCase.execute(email, password);
 
     // 모든 과정 성공 시 true Result 반환
     return const Result.success(true);

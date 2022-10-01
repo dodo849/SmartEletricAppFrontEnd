@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageByDayDTO.dart';
 import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
+import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/DefaultRepositoryInterface.dart';
 
 class GetPowerUsageByDayUseCase {
@@ -21,10 +22,17 @@ class GetPowerUsageByDayUseCase {
       return Result.failure(isPowerUsageResult.error);
     }
 
-    print(isPowerUsageResult);
+    print("isPowerUsageResult.status ${isPowerUsageResult.status}");
 
-    // 바 그래프 형식으로 바꾸기
-    // PowerUsageByDayDTO powerUsageByDayDTO = isPowerUsageResult.value!;
+    // Presentation Model로 바꾸기
+    List<PowerUsageByDayDTO> powerUsageByDayDTOList = isPowerUsageResult.value!;
+    List<GraphPointModel> graphPointModelList = <GraphPointModel>[];
+    powerUsageByDayDTOList.map((value) => {
+          graphPointModelList
+              .add(GraphPointModel(value.dateTimeKr, value.powerUsageQuantity))
+        });
+
+    print(graphPointModelList);
 
     return isPowerUsageResult;
   }

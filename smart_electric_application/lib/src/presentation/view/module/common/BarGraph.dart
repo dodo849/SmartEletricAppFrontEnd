@@ -9,9 +9,9 @@ class BarGraphViewModel extends GetxController {
 
   Rx<ScrollController> scrollController = ScrollController().obs;
 
-  RxDouble maxBarHeight = 60.0.obs;
-  RxDouble barWidth = 7.0.obs;
-  RxDouble barGap = 10.0.obs;
+  RxDouble maxBarHeight = 0.0.obs;
+  RxDouble barWidth = 0.0.obs;
+  RxDouble barGap = 0.0.obs;
 
   // Graph mock data
   List<GraphPointModel> mockData = <GraphPointModel>[];
@@ -60,18 +60,31 @@ class BarGraph extends GetView<BarGraphViewModel> {
       {Key? key,
       this.graphHeight = 300,
       this.yAxisNumber = 6,
-      this.xAxisWidth = 20})
+      this.xAxisWidth = 20,
+      this.maxBarHeight = 60.0,
+      this.barWidth = 7.0,
+      this.barGap = 10.0,
+      })
       : super(key: key);
 
   // Custom variable define
   final double graphHeight; // 전체 그래프 높이
   final double yAxisNumber;
   final double xAxisWidth; // x축 넓이
+  final double maxBarHeight;
+  final double barWidth;
+  final double barGap;
 
   @override
   Widget build(BuildContext context) {
     // Viewmodel dependency injection
     Get.put(BarGraphViewModel());
+
+    // Bar Graph ViewModel Setup
+    controller.maxBarHeight(maxBarHeight);
+    controller.barWidth(barWidth);
+    controller.barGap(barGap);
+
 
     // theme style define
     var textTheme = context.theme.textTheme;

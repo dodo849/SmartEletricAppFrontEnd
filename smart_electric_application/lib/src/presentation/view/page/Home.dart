@@ -42,10 +42,10 @@ class Home extends StatelessWidget {
 
         ElevatedButton(
             onPressed: () async {
-              // var firebaseRepository = FirebaseRepository();
-              // var user = firebaseRepository.getUser();
-              // var idToken = await user?.getIdToken();
-              // print('idToken $idToken');
+              var firebaseRepository = FirebaseRepository();
+              var user = firebaseRepository.getUser();
+              var idToken = await user?.getIdToken();
+              print('user $user');
 
               // var authRepository = AuthRepository();
               // var jwtTokens = await authRepository.getJwtTokens(idToken!);
@@ -57,7 +57,9 @@ class Home extends StatelessWidget {
                       customerNumber: "0130392270",
                       startDate: "20220801",
                       endDate: "20220831");
+              print(powerUsageRepositoryData.status);
               print(powerUsageRepositoryData.error);
+              print(powerUsageRepositoryData.value);
             },
             child: Text("Test Button")),
 

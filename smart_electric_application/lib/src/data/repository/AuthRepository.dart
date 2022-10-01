@@ -14,7 +14,7 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<Result<JwtTokenDTO, String>> getJwtTokens(
       String firebaseIdToken) async {
     try {
-      final dio = await getDefaultDio();
+      final dio = Dio();
       final authRetrofit = AuthRetrofit(dio);
 
       // 서버에서 firbase id token으로 access/refresh token 발급받기

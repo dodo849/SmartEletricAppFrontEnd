@@ -7,11 +7,8 @@ part 'PowerUsageByDayDTO.g.dart';
 class PowerUsageByDayDTO with _$PowerUsageByDayDTO {
   factory PowerUsageByDayDTO({
     required String dateTimeKr,
-    required String powerUsageQuantity,
+    required double powerUsageQuantity,
   }) = _PowerUsageByDayDTO;
-
-factory List<Map<String, dynamic>> serializeTaskList(List<PowerUsageByDayDTO> objects) =>
-    objects.map((e) => e.toJson()).toList();
 
   factory PowerUsageByDayDTO.fromJson(Map<String, dynamic> json) =>
       _$PowerUsageByDayDTOFromJson(json);
