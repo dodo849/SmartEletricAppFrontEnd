@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/IsSmartMeterDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/DefaultRetrofit.dart';
-import 'package:smart_electric_application/src/data/retrofit/config/getDefaultDio.dart';
+import 'package:smart_electric_application/src/data/retrofit/config/getInterceptorDio.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/DefaultRepositoryInterface.dart';
 
 class DefaultRepository implements DefaultRepositoryInterface{

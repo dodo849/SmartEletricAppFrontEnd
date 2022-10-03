@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/config/Result.dart';
 import 'dart:math';
 
 import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUseCase.dart';
 
 class BarGraphViewModel extends GetxController {
   // static BarGraphViewModel get to => Get.find();
@@ -16,8 +18,11 @@ class BarGraphViewModel extends GetxController {
   // Graph mock data
   List<GraphPointModel> mockData = <GraphPointModel>[];
 
+  // UseCase
+  var getPowerUsageByDayUseCase = GetPowerUsageByDayUseCase();
+
   @override
-  void onInit() {
+  void onInit() async {
     // Create mock data
     for (int i = 0; i < 100; i += 5) {
       var yValue = i.toDouble();
@@ -31,6 +36,16 @@ class BarGraphViewModel extends GetxController {
       print("### first bar pos: ${scrollController.value.offset ~/ 27}");
       setMaxBarHeight();
     });
+
+    var getPowerUsageByDayResult = await getPowerUsageByDayUseCase.excute(
+        "0130392270", "20220801", "20220829");
+
+    if (getPowerUsageByDayResult.status == ResultStatus.success) {
+      mockData = getPowerUsageByDayResult.value!;
+      print("mockData ${mockData}");
+    } else {
+      print("error");
+    }
 
     super.onInit();
   }
@@ -56,16 +71,15 @@ class BarGraphViewModel extends GetxController {
 }
 
 class BarGraph extends GetView<BarGraphViewModel> {
-  const BarGraph(
-      {Key? key,
-      this.graphHeight = 300,
-      this.yAxisNumber = 6,
-      this.xAxisWidth = 20,
-      this.maxBarHeight = 60.0,
-      this.barWidth = 7.0,
-      this.barGap = 10.0,
-      })
-      : super(key: key);
+  const BarGraph({
+    Key? key,
+    this.graphHeight = 300,
+    this.yAxisNumber = 6,
+    this.xAxisWidth = 20,
+    this.maxBarHeight = 60.0,
+    this.barWidth = 7.0,
+    this.barGap = 10.0,
+  }) : super(key: key);
 
   // Custom variable define
   final double graphHeight; // 전체 그래프 높이
@@ -84,7 +98,6 @@ class BarGraph extends GetView<BarGraphViewModel> {
     controller.maxBarHeight(maxBarHeight);
     controller.barWidth(barWidth);
     controller.barGap(barGap);
-
 
     // theme style define
     var textTheme = context.theme.textTheme;

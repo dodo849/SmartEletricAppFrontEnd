@@ -4,11 +4,12 @@ import 'package:smart_electric_application/src/data/dto/PowerUsageByDayDTO.dart'
 import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
 import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/DefaultRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRetrofitInterface.dart';
 
 class GetPowerUsageByDayUseCase {
-  final powerUsageRepository = GetIt.I.get<PowerUsageRepository>();
+  final powerUsageRepository = GetIt.I.get<PowerUsageRetrofitInterface>();
 
-  Future<Result<List<PowerUsageByDayDTO>, String>> excute(
+  Future<Result<List<GraphPointModel>, String>> excute(
       customerNumber, startDate, endDate) async {
     // 네트워크
     Result<List<PowerUsageByDayDTO>, String> isPowerUsageResult =
@@ -27,13 +28,15 @@ class GetPowerUsageByDayUseCase {
     // Presentation Model로 바꾸기
     List<PowerUsageByDayDTO> powerUsageByDayDTOList = isPowerUsageResult.value!;
     List<GraphPointModel> graphPointModelList = <GraphPointModel>[];
-    powerUsageByDayDTOList.map((value) => {
-          graphPointModelList
-              .add(GraphPointModel(value.dateTimeKr, value.powerUsageQuantity))
-        });
+
+    for (var i = 0; i < powerUsageByDayDTOList.length; i++) {
+      graphPointModelList.add(GraphPointModel(
+          powerUsageByDayDTOList[i].dateTimeKr,
+          powerUsageByDayDTOList[i].powerUsageQuantity));
+    }
 
     print(graphPointModelList);
 
-    return isPowerUsageResult;
+    return Result.success(graphPointModelList);
   }
 }
