@@ -15,6 +15,7 @@ class CustomTextInput extends StatelessWidget {
     this.maxLength,
     this.isFocus,
     this.errorText,
+    this.isObscureText,
     required this.onChanged,
   }) : super(key: key);
 
@@ -27,6 +28,7 @@ class CustomTextInput extends StatelessWidget {
   final int? maxLength;
   final bool? isFocus;
   final String? errorText;
+  final bool? isObscureText;
   final Function onChanged;
 
   @override
@@ -39,12 +41,19 @@ class CustomTextInput extends StatelessWidget {
     return Container(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         // 라벨 값이 있으면 Text() 넣기
-        if (labelText != null) ...[
-          Text(
-            "$labelText",
-            style: TextStyle(color: colorTheme.onSurface),
-          )
-        ],
+        Row(children: [
+          if (labelText != null) ...[
+            // bordered 일때만 왼쪽 여백 조금 넣기
+            if (textInputStyle == TextInputStyle.bordered) ...[
+              const SizedBox(width: 15),
+            ],
+            Text(
+              "$labelText",
+              style: TextStyle(color: colorTheme.onSurface),
+            )
+          ],
+        ]),
+        const SizedBox(height: 10),
 
         // 플레이스홀더 값에 따라 TextField 반환
         getTextFieldIsPlaceholder(placeholder, context, controller),
@@ -55,7 +64,7 @@ class CustomTextInput extends StatelessWidget {
   Widget getTextFieldIsPlaceholder(String? placeholder, BuildContext context,
       TextEditingController controller) {
     // Theme define
-    var colorTheme = context.theme.colorScheme;
+    final colorTheme = context.theme.colorScheme;
     // 아웃라인 스타일 정의 (focus & enabled)
     var focusBorderStyle;
     var enabledBorderStyle;
@@ -110,11 +119,12 @@ class CustomTextInput extends StatelessWidget {
       keyboardType: textInputType ?? TextInputType.none,
       maxLength: maxLength,
       autofocus: isFocus ?? false,
+      obscureText: isObscureText ?? false,
       decoration: InputDecoration(
         hintText: placeholder,
         hintStyle: TextStyle(color: colorTheme.surfaceVariant),
         errorText: errorText,
-        errorStyle: TextStyle(color: colorTheme.error),
+        errorStyle: TextStyle(color: colorTheme.error, fontSize: 14),
         focusedBorder: focusBorderStyle,
         enabledBorder: enabledBorderStyle,
       ),

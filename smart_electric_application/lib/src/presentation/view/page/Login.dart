@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/BorderedTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/module/Common/EmptyAppBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
-import 'package:smart_electric_application/src/presentation/view/page/signup/Signup.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // ViewModel DI
+    Get.put(LoginViewModel());
+
     return Scaffold(
         // appBar: EmptyAppBar(),
         body: Container(
@@ -30,17 +35,22 @@ class Login extends StatelessWidget {
                 SizedBox(height: 25),
 
                 // id input
-                BorderedTextInput(
-                  labelText: "ID",
-                  placeholder: "아이디를 입력해주세요",
-                ),
+                CustomTextInput(
+                    labelText: "이메일",
+                    textInputStyle: TextInputStyle.bordered,
+                    onChanged: (value) {
+                      LoginViewModel.to.email(value);
+                    }),
                 SizedBox(height: 25),
 
                 // password input
-                BorderedTextInput(
-                  labelText: "PW",
-                  placeholder: "비밀번호를 입력해주세요",
-                ),
+                CustomTextInput(
+                    labelText: "비밀번호",
+                    textInputStyle: TextInputStyle.bordered,
+                    isObscureText: true,
+                    onChanged: (value) {
+                      LoginViewModel.to.password(value);
+                    }),
                 SizedBox(height: 25),
 
                 // login button
@@ -50,9 +60,9 @@ class Login extends StatelessWidget {
                     textColor: context.theme.colorScheme.primaryContainer,
                     size: ButtonSize.large,
                     action: () {
+                      LoginViewModel.to.login();
                       Get.to(() => RootScaffold(),
                           transition: Transition.fadeIn);
-                      // Get.back();
                     }),
                 SizedBox(height: 15),
 
@@ -60,11 +70,11 @@ class Login extends StatelessWidget {
                 RoundedButton(
                     text: "회원가입하기",
                     bgColor:
-                        context.theme.colorScheme.secondary.withOpacity(0.2),
-                    textColor: context.theme.colorScheme.secondary,
+                        context.theme.colorScheme.secondaryContainer.withOpacity(0.2),
+                    textColor: context.theme.colorScheme.secondaryContainer,
                     size: ButtonSize.large,
                     action: () {
-                      Get.to(Signup());
+                      // Get.to(Signup());
                     }),
 
                 Spacer(flex: 1),

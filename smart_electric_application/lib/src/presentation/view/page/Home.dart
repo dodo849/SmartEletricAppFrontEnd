@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
+import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/BarGraph.dart';
+import 'package:smart_electric_application/src/presentation/view/module/common/LineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
@@ -12,6 +15,8 @@ import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewM
 import 'package:smart_electric_application/CustomIcon.dart';
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   // Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   // _saveThemeStatus() async {
@@ -36,12 +41,28 @@ class Home extends StatelessWidget {
       child: Column(children: [
         const SizedBox(height: 20),
 
-        ElevatedButton(onPressed: () async {
-          var firebaseRepository  = FirebaseRepository();
-          var user = await firebaseRepository.getUser();
-          var token = await user?.getIdToken();
-          print(token);
-        }, child: Text("get user")),
+        ElevatedButton(
+            onPressed: () async {
+              var firebaseRepository = FirebaseRepository();
+              var user = firebaseRepository.getUser();
+              var idToken = await user?.getIdToken();
+              print('user $user');
+
+              // var authRepository = AuthRepository();
+              // var jwtTokens = await authRepository.getJwtTokens(idToken!);
+              // print(jwtTokens.value);
+
+              var powerUsageRepository = PowerUsageRepository();
+              var powerUsageRepositoryData =
+                  await powerUsageRepository.getPowerUsageByDay(
+                      customerNumber: "0130392270",
+                      startDate: "20220801",
+                      endDate: "20220831");
+              print(powerUsageRepositoryData.status);
+              print(powerUsageRepositoryData.error);
+              print(powerUsageRepositoryData.value);
+            },
+            child: Text("Test Button")),
 
         // 스마트 전기앱 로고
         Padding(
@@ -130,6 +151,21 @@ class Home extends StatelessWidget {
               Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
               const SizedBox(height: 15),
               BarGraph(),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+
+        SizedBox(height: 35),
+
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
+              const SizedBox(height: 15),
+              LineGraph(),
               const SizedBox(height: 40),
             ],
           ),

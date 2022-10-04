@@ -21,7 +21,7 @@ class _AuthRetrofit implements AuthRetrofit {
   String? baseUrl;
 
   @override
-  Future<JwtTokenDTO> getTokens(firebaseIdToken) async {
+  Future<JwtTokenDTO> getJwtTokens(firebaseIdToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': firebaseIdToken};
@@ -89,6 +89,52 @@ class _AuthRetrofit implements AuthRetrofit {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = JwtTokenDTO.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IsEmailDuplicateDTO> checkEmailDuplicate(email) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'email': email};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<IsEmailDuplicateDTO>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/signup/email-duplicate/verification',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = IsEmailDuplicateDTO.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<IsSaveEmailDTO> saveEmail(email) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'email': email};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<IsSaveEmailDTO>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/signup/email-duplicate/update',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = IsSaveEmailDTO.fromJson(_result.data!);
     return value;
   }
 

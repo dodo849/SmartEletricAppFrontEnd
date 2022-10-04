@@ -20,7 +20,9 @@ JwtTokenDTO _$JwtTokenDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JwtTokenDTO {
+  @JsonKey(name: "access-token")
   String get accessToken => throw _privateConstructorUsedError;
+  @JsonKey(name: "refresh-token")
   String get refreshToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +36,9 @@ abstract class $JwtTokenDTOCopyWith<$Res> {
   factory $JwtTokenDTOCopyWith(
           JwtTokenDTO value, $Res Function(JwtTokenDTO) then) =
       _$JwtTokenDTOCopyWithImpl<$Res>;
-  $Res call({String accessToken, String refreshToken});
+  $Res call(
+      {@JsonKey(name: "access-token") String accessToken,
+      @JsonKey(name: "refresh-token") String refreshToken});
 }
 
 /// @nodoc
@@ -70,7 +74,9 @@ abstract class _$$_JwtTokenDTOCopyWith<$Res>
           _$_JwtTokenDTO value, $Res Function(_$_JwtTokenDTO) then) =
       __$$_JwtTokenDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String accessToken, String refreshToken});
+  $Res call(
+      {@JsonKey(name: "access-token") String accessToken,
+      @JsonKey(name: "refresh-token") String refreshToken});
 }
 
 /// @nodoc
@@ -104,14 +110,18 @@ class __$$_JwtTokenDTOCopyWithImpl<$Res> extends _$JwtTokenDTOCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_JwtTokenDTO implements _JwtTokenDTO {
-  _$_JwtTokenDTO({required this.accessToken, required this.refreshToken});
+  _$_JwtTokenDTO(
+      {@JsonKey(name: "access-token") required this.accessToken,
+      @JsonKey(name: "refresh-token") required this.refreshToken});
 
   factory _$_JwtTokenDTO.fromJson(Map<String, dynamic> json) =>
       _$$_JwtTokenDTOFromJson(json);
 
   @override
+  @JsonKey(name: "access-token")
   final String accessToken;
   @override
+  @JsonKey(name: "refresh-token")
   final String refreshToken;
 
   @override
@@ -152,15 +162,18 @@ class _$_JwtTokenDTO implements _JwtTokenDTO {
 
 abstract class _JwtTokenDTO implements JwtTokenDTO {
   factory _JwtTokenDTO(
-      {required final String accessToken,
-      required final String refreshToken}) = _$_JwtTokenDTO;
+          {@JsonKey(name: "access-token") required final String accessToken,
+          @JsonKey(name: "refresh-token") required final String refreshToken}) =
+      _$_JwtTokenDTO;
 
   factory _JwtTokenDTO.fromJson(Map<String, dynamic> json) =
       _$_JwtTokenDTO.fromJson;
 
   @override
+  @JsonKey(name: "access-token")
   String get accessToken;
   @override
+  @JsonKey(name: "refresh-token")
   String get refreshToken;
   @override
   @JsonKey(ignore: true)

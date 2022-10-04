@@ -8,40 +8,33 @@ class SimulationBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colorTheme = context.theme.colorScheme;
+    var textTheme = context.theme.textTheme;
+
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: colorTheme.surface,
+      ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "요금 시뮬레이션",
-                style: context.theme.textTheme.headline1,
-              ),
-              SizedBox(height: 7),
-              Text(
-                "지금 고민하고 있는 제품,",
-                style: TextStyle(
-                    fontSize: 14,
-                    color: context.theme.colorScheme.onSurfaceVariant),
-              ),
-              SizedBox(height: 3),
-              Text(
-                "구매하기 전에 요금부터 확인해보세요",
-                style: TextStyle(
-                    fontSize: 14,
-                    color: context.theme.colorScheme.onSurfaceVariant),
-              ),
-            ],
-          ),
-          Spacer(),
-          Image.asset(
-            "assets/images/avatar_woman_checklist.png",
-            width: 100,
-            height: 100,
-          ),
-          Spacer(),
+          Flexible(
+              child: RichText(
+            text: TextSpan(
+              text: '요금 시뮬레이션',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: colorTheme.onBackground),
+              children: <TextSpan>[
+                TextSpan(
+                    text: '을 통해 지금 고민하고 있는 제품의 전기요금을 구매하기 전에 확인해보세요',
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: colorTheme.onSurface)),
+              ],
+            ),
+          )),
         ],
       ),
     );

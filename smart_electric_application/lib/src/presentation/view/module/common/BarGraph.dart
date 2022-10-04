@@ -1,35 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/config/Result.dart';
 import 'dart:math';
 
-class GraphPoint {
-  GraphPoint(String xValue, double yValue) {
-    this.xValue = xValue;
-    this.yValue = yValue;
-  }
-  late String xValue;
-  late double yValue;
-}
+import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUseCase.dart';
 
 class BarGraphViewModel extends GetxController {
   // static BarGraphViewModel get to => Get.find();
 
   Rx<ScrollController> scrollController = ScrollController().obs;
 
-  RxDouble maxBarHeight = 60.0.obs;
-  RxDouble barWidth = 7.0.obs;
-  RxDouble barGap = 10.0.obs;
+  RxDouble maxBarHeight = 0.0.obs;
+  RxDouble barWidth = 0.0.obs;
+  RxDouble barGap = 0.0.obs;
 
   // Graph mock data
-  List<GraphPoint> mockData = <GraphPoint>[];
+  List<GraphPointModel> mockData = <GraphPointModel>[];
+
+  // UseCase
+  var getPowerUsageByDayUseCase = GetPowerUsageByDayUseCase();
 
   @override
-  void onInit() {
+  void onInit() async {
     // Create mock data
     for (int i = 0; i < 100; i += 5) {
       var yValue = i.toDouble();
       // yValue = double.parse(yValue.toStringAsFixed(1));
-      mockData.add(GraphPoint("$i일", yValue));
+      mockData.add(GraphPointModel("$i일", yValue));
       print("mockData");
     }
 
@@ -39,6 +37,16 @@ class BarGraphViewModel extends GetxController {
       setMaxBarHeight();
     });
 
+    var getPowerUsageByDayResult = await getPowerUsageByDayUseCase.excute(
+        "0130392270", "20220801", "20220829");
+
+    if (getPowerUsageByDayResult.status == ResultStatus.success) {
+      mockData = getPowerUsageByDayResult.value!;
+      print("mockData ${mockData}");
+    } else {
+      print("error");
+    }
+
     super.onInit();
   }
 
@@ -46,7 +54,7 @@ class BarGraphViewModel extends GetxController {
     // 첫번째 Bar 위치
     var firstBarOnScreen = scrollController.value.offset ~/ 27;
     // 화면에 한번에 들어온 바 개수
-    var barNumberOnScreenTemp = 10;
+    var barNumberOnScreenTemp = 10; // #### 계산필요
     // 화면에 들어온 바 데이터 자르기
     var start = firstBarOnScreen;
     var end = firstBarOnScreen + barNumberOnScreenTemp;
@@ -54,39 +62,57 @@ class BarGraphViewModel extends GetxController {
     if (end > mockData.length) end = mockData.length;
     var subList = mockData.sublist(start, end);
     // 최댓값 구하기
-    var maxBarHeightPrimitive = [...subList].reduce(
-        (value, element) => value.yValue > element.yValue ? value : element);
+    var maxBarHeightPrimitive = [...subList].map((e) => e.yValue).fold<double>(0.0, max).round();
     // y축 조정 (20은 라벨 감안한 여분 값)
-    maxBarHeight(maxBarHeightPrimitive.yValue + 20);
+    maxBarHeight(maxBarHeightPrimitive + 20);
     print(maxBarHeightPrimitive);
   }
 }
 
 class BarGraph extends GetView<BarGraphViewModel> {
-  const BarGraph({Key? key}) : super(key: key);
+  const BarGraph({
+    Key? key,
+    this.graphHeight = 300,
+    this.yAxisNumber = 6,
+    this.xAxisWidth = 20,
+    this.maxBarHeight = 60.0,
+    this.barWidth = 7.0,
+    this.barGap = 10.0,
+  }) : super(key: key);
+
+  // Custom variable define
+  final double graphHeight; // 전체 그래프 높이
+  final double yAxisNumber;
+  final double xAxisWidth; // x축 넓이
+  final double maxBarHeight;
+  final double barWidth;
+  final double barGap;
 
   @override
   Widget build(BuildContext context) {
     // Viewmodel dependency injection
     Get.put(BarGraphViewModel());
 
+    // Bar Graph ViewModel Setup
+    controller.maxBarHeight(maxBarHeight);
+    controller.barWidth(barWidth);
+    controller.barGap(barGap);
+
     // theme style define
     var textTheme = context.theme.textTheme;
     var colorTheme = context.theme.colorScheme;
 
+    // Setting variables
+    double yAxisHeight = graphHeight / yAxisNumber - 10; // y축 하나 높이
+
     // Viewmodel initialize
     var deviceWidth = MediaQuery.of(context).size.width;
-    var contentWidth = deviceWidth - 60;
+    var contentWidth = deviceWidth - 60; // 패딩값 뺀거
     var barUnitWidth =
         controller.barWidth.value + (controller.barGap.value * 2);
     var barNumberPerScreen =
         (contentWidth / barUnitWidth).toInt(); //화면 당 bar 개수
     print("화면 당 바 개수 ${barNumberPerScreen}");
-
-    // Variable define
-    double graphHeight = 300;
-    double yHeight = graphHeight / 6 - 10;
-    double xWidth = 20;
 
     return Obx(() => SizedBox(
           height: graphHeight,
@@ -112,7 +138,7 @@ class BarGraph extends GetView<BarGraphViewModel> {
                           color: context.theme.colorScheme.outline,
                         ),
                       )),
-                      SizedBox(height: yHeight),
+                      SizedBox(height: yAxisHeight),
                     ],
                   ),
                 ],
@@ -120,8 +146,8 @@ class BarGraph extends GetView<BarGraphViewModel> {
             ),
             // layer 2 : x axis
             OverflowBox(
-              alignment: Alignment.bottomCenter,
-              maxHeight: graphHeight+500, //500은 overflow 임의값
+                alignment: Alignment.bottomCenter,
+                maxHeight: graphHeight + 500, //500은 overflow 임의값
                 child: ListView(
                   controller: controller.scrollController.value,
                   scrollDirection: Axis.horizontal,
