@@ -21,13 +21,13 @@ class _DefaultRetrofit implements DefaultRetrofit {
   String? baseUrl;
 
   @override
-  Future<IsSmartMeterDTO> checkIsSmartMeter(customerNumber) async {
+  Future<SmartMeterDTO> checkIsSmartMeter(customerNumber) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'custNum': customerNumber};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<IsSmartMeterDTO>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<SmartMeterDTO>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -39,7 +39,7 @@ class _DefaultRetrofit implements DefaultRetrofit {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = IsSmartMeterDTO.fromJson(_result.data!);
+    final value = SmartMeterDTO.fromJson(_result.data!);
     return value;
   }
 

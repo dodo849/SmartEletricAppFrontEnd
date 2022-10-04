@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'IsSaveEmailDTO.dart';
+part of 'SaveEmailDTO.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,36 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-IsSaveEmailDTO _$IsSaveEmailDTOFromJson(Map<String, dynamic> json) {
-  return _IsSaveEmailDTO.fromJson(json);
+SaveEmailDTO _$SaveEmailDTOFromJson(Map<String, dynamic> json) {
+  return _SaveEmailDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$IsSaveEmailDTO {
+mixin _$SaveEmailDTO {
   bool get updated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $IsSaveEmailDTOCopyWith<IsSaveEmailDTO> get copyWith =>
+  $SaveEmailDTOCopyWith<SaveEmailDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $IsSaveEmailDTOCopyWith<$Res> {
-  factory $IsSaveEmailDTOCopyWith(
-          IsSaveEmailDTO value, $Res Function(IsSaveEmailDTO) then) =
-      _$IsSaveEmailDTOCopyWithImpl<$Res>;
+abstract class $SaveEmailDTOCopyWith<$Res> {
+  factory $SaveEmailDTOCopyWith(
+          SaveEmailDTO value, $Res Function(SaveEmailDTO) then) =
+      _$SaveEmailDTOCopyWithImpl<$Res>;
   $Res call({bool updated});
 }
 
 /// @nodoc
-class _$IsSaveEmailDTOCopyWithImpl<$Res>
-    implements $IsSaveEmailDTOCopyWith<$Res> {
-  _$IsSaveEmailDTOCopyWithImpl(this._value, this._then);
+class _$SaveEmailDTOCopyWithImpl<$Res> implements $SaveEmailDTOCopyWith<$Res> {
+  _$SaveEmailDTOCopyWithImpl(this._value, this._then);
 
-  final IsSaveEmailDTO _value;
+  final SaveEmailDTO _value;
   // ignore: unused_field
-  final $Res Function(IsSaveEmailDTO) _then;
+  final $Res Function(SaveEmailDTO) _then;
 
   @override
   $Res call({
@@ -59,31 +58,31 @@ class _$IsSaveEmailDTOCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_IsSaveEmailDTOCopyWith<$Res>
-    implements $IsSaveEmailDTOCopyWith<$Res> {
-  factory _$$_IsSaveEmailDTOCopyWith(
-          _$_IsSaveEmailDTO value, $Res Function(_$_IsSaveEmailDTO) then) =
-      __$$_IsSaveEmailDTOCopyWithImpl<$Res>;
+abstract class _$$_SaveEmailDTOCopyWith<$Res>
+    implements $SaveEmailDTOCopyWith<$Res> {
+  factory _$$_SaveEmailDTOCopyWith(
+          _$_SaveEmailDTO value, $Res Function(_$_SaveEmailDTO) then) =
+      __$$_SaveEmailDTOCopyWithImpl<$Res>;
   @override
   $Res call({bool updated});
 }
 
 /// @nodoc
-class __$$_IsSaveEmailDTOCopyWithImpl<$Res>
-    extends _$IsSaveEmailDTOCopyWithImpl<$Res>
-    implements _$$_IsSaveEmailDTOCopyWith<$Res> {
-  __$$_IsSaveEmailDTOCopyWithImpl(
-      _$_IsSaveEmailDTO _value, $Res Function(_$_IsSaveEmailDTO) _then)
-      : super(_value, (v) => _then(v as _$_IsSaveEmailDTO));
+class __$$_SaveEmailDTOCopyWithImpl<$Res>
+    extends _$SaveEmailDTOCopyWithImpl<$Res>
+    implements _$$_SaveEmailDTOCopyWith<$Res> {
+  __$$_SaveEmailDTOCopyWithImpl(
+      _$_SaveEmailDTO _value, $Res Function(_$_SaveEmailDTO) _then)
+      : super(_value, (v) => _then(v as _$_SaveEmailDTO));
 
   @override
-  _$_IsSaveEmailDTO get _value => super._value as _$_IsSaveEmailDTO;
+  _$_SaveEmailDTO get _value => super._value as _$_SaveEmailDTO;
 
   @override
   $Res call({
     Object? updated = freezed,
   }) {
-    return _then(_$_IsSaveEmailDTO(
+    return _then(_$_SaveEmailDTO(
       updated: updated == freezed
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
@@ -94,25 +93,25 @@ class __$$_IsSaveEmailDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IsSaveEmailDTO implements _IsSaveEmailDTO {
-  _$_IsSaveEmailDTO({required this.updated});
+class _$_SaveEmailDTO implements _SaveEmailDTO {
+  _$_SaveEmailDTO({required this.updated});
 
-  factory _$_IsSaveEmailDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_IsSaveEmailDTOFromJson(json);
+  factory _$_SaveEmailDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_SaveEmailDTOFromJson(json);
 
   @override
   final bool updated;
 
   @override
   String toString() {
-    return 'IsSaveEmailDTO(updated: $updated)';
+    return 'SaveEmailDTO(updated: $updated)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IsSaveEmailDTO &&
+            other is _$_SaveEmailDTO &&
             const DeepCollectionEquality().equals(other.updated, updated));
   }
 
@@ -123,27 +122,27 @@ class _$_IsSaveEmailDTO implements _IsSaveEmailDTO {
 
   @JsonKey(ignore: true)
   @override
-  _$$_IsSaveEmailDTOCopyWith<_$_IsSaveEmailDTO> get copyWith =>
-      __$$_IsSaveEmailDTOCopyWithImpl<_$_IsSaveEmailDTO>(this, _$identity);
+  _$$_SaveEmailDTOCopyWith<_$_SaveEmailDTO> get copyWith =>
+      __$$_SaveEmailDTOCopyWithImpl<_$_SaveEmailDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IsSaveEmailDTOToJson(
+    return _$$_SaveEmailDTOToJson(
       this,
     );
   }
 }
 
-abstract class _IsSaveEmailDTO implements IsSaveEmailDTO {
-  factory _IsSaveEmailDTO({required final bool updated}) = _$_IsSaveEmailDTO;
+abstract class _SaveEmailDTO implements SaveEmailDTO {
+  factory _SaveEmailDTO({required final bool updated}) = _$_SaveEmailDTO;
 
-  factory _IsSaveEmailDTO.fromJson(Map<String, dynamic> json) =
-      _$_IsSaveEmailDTO.fromJson;
+  factory _SaveEmailDTO.fromJson(Map<String, dynamic> json) =
+      _$_SaveEmailDTO.fromJson;
 
   @override
   bool get updated;
   @override
   @JsonKey(ignore: true)
-  _$$_IsSaveEmailDTOCopyWith<_$_IsSaveEmailDTO> get copyWith =>
+  _$$_SaveEmailDTOCopyWith<_$_SaveEmailDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }

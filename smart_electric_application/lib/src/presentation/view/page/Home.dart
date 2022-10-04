@@ -163,7 +163,7 @@ class Home extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
+              Text("Test line graph", style: context.theme.textTheme.headline3),
               const SizedBox(height: 15),
               LineGraph(),
               const SizedBox(height: 40),

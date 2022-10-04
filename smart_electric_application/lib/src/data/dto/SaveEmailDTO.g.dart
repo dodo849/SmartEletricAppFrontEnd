@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'IsSaveEmailDTO.dart';
+part of 'SaveEmailDTO.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_IsSaveEmailDTO _$$_IsSaveEmailDTOFromJson(Map<String, dynamic> json) =>
-    _$_IsSaveEmailDTO(
+_$_SaveEmailDTO _$$_SaveEmailDTOFromJson(Map<String, dynamic> json) =>
+    _$_SaveEmailDTO(
       updated: json['updated'] as bool,
     );
 
-Map<String, dynamic> _$$_IsSaveEmailDTOToJson(_$_IsSaveEmailDTO instance) =>
+Map<String, dynamic> _$$_SaveEmailDTOToJson(_$_SaveEmailDTO instance) =>
     <String, dynamic>{
       'updated': instance.updated,
     };

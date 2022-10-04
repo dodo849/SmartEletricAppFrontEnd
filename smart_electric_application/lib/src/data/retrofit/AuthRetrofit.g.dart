@@ -93,13 +93,13 @@ class _AuthRetrofit implements AuthRetrofit {
   }
 
   @override
-  Future<IsEmailDuplicateDTO> checkEmailDuplicate(email) async {
+  Future<EmailDuplicateDTO> checkEmailDuplicate(email) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'email': email};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<IsEmailDuplicateDTO>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<EmailDuplicateDTO>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -111,18 +111,18 @@ class _AuthRetrofit implements AuthRetrofit {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = IsEmailDuplicateDTO.fromJson(_result.data!);
+    final value = EmailDuplicateDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<IsSaveEmailDTO> saveEmail(email) async {
+  Future<SaveEmailDTO> saveEmail(email) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'email': email};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<IsSaveEmailDTO>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<SaveEmailDTO>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -134,7 +134,30 @@ class _AuthRetrofit implements AuthRetrofit {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = IsSaveEmailDTO.fromJson(_result.data!);
+    final value = SaveEmailDTO.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SaveEmailDTO> removeEmail(email) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'email': email};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SaveEmailDTO>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/signup/email-duplicate/delete',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = SaveEmailDTO.fromJson(_result.data!);
     return value;
   }
 

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'IsEmailDuplicateDTO.dart';
+part of 'EmailDuplicateDTO.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,37 +14,37 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-IsEmailDuplicateDTO _$IsEmailDuplicateDTOFromJson(Map<String, dynamic> json) {
-  return _IsEmailDuplicateDTO.fromJson(json);
+EmailDuplicateDTO _$EmailDuplicateDTOFromJson(Map<String, dynamic> json) {
+  return _EmailDuplicateDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$IsEmailDuplicateDTO {
+mixin _$EmailDuplicateDTO {
   @JsonKey(name: "email-duplicated")
   bool get isEmailDuplicated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $IsEmailDuplicateDTOCopyWith<IsEmailDuplicateDTO> get copyWith =>
+  $EmailDuplicateDTOCopyWith<EmailDuplicateDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $IsEmailDuplicateDTOCopyWith<$Res> {
-  factory $IsEmailDuplicateDTOCopyWith(
-          IsEmailDuplicateDTO value, $Res Function(IsEmailDuplicateDTO) then) =
-      _$IsEmailDuplicateDTOCopyWithImpl<$Res>;
+abstract class $EmailDuplicateDTOCopyWith<$Res> {
+  factory $EmailDuplicateDTOCopyWith(
+          EmailDuplicateDTO value, $Res Function(EmailDuplicateDTO) then) =
+      _$EmailDuplicateDTOCopyWithImpl<$Res>;
   $Res call({@JsonKey(name: "email-duplicated") bool isEmailDuplicated});
 }
 
 /// @nodoc
-class _$IsEmailDuplicateDTOCopyWithImpl<$Res>
-    implements $IsEmailDuplicateDTOCopyWith<$Res> {
-  _$IsEmailDuplicateDTOCopyWithImpl(this._value, this._then);
+class _$EmailDuplicateDTOCopyWithImpl<$Res>
+    implements $EmailDuplicateDTOCopyWith<$Res> {
+  _$EmailDuplicateDTOCopyWithImpl(this._value, this._then);
 
-  final IsEmailDuplicateDTO _value;
+  final EmailDuplicateDTO _value;
   // ignore: unused_field
-  final $Res Function(IsEmailDuplicateDTO) _then;
+  final $Res Function(EmailDuplicateDTO) _then;
 
   @override
   $Res call({
@@ -60,31 +60,31 @@ class _$IsEmailDuplicateDTOCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_IsEmailDuplicateDTOCopyWith<$Res>
-    implements $IsEmailDuplicateDTOCopyWith<$Res> {
-  factory _$$_IsEmailDuplicateDTOCopyWith(_$_IsEmailDuplicateDTO value,
-          $Res Function(_$_IsEmailDuplicateDTO) then) =
-      __$$_IsEmailDuplicateDTOCopyWithImpl<$Res>;
+abstract class _$$_EmailDuplicateDTOCopyWith<$Res>
+    implements $EmailDuplicateDTOCopyWith<$Res> {
+  factory _$$_EmailDuplicateDTOCopyWith(_$_EmailDuplicateDTO value,
+          $Res Function(_$_EmailDuplicateDTO) then) =
+      __$$_EmailDuplicateDTOCopyWithImpl<$Res>;
   @override
   $Res call({@JsonKey(name: "email-duplicated") bool isEmailDuplicated});
 }
 
 /// @nodoc
-class __$$_IsEmailDuplicateDTOCopyWithImpl<$Res>
-    extends _$IsEmailDuplicateDTOCopyWithImpl<$Res>
-    implements _$$_IsEmailDuplicateDTOCopyWith<$Res> {
-  __$$_IsEmailDuplicateDTOCopyWithImpl(_$_IsEmailDuplicateDTO _value,
-      $Res Function(_$_IsEmailDuplicateDTO) _then)
-      : super(_value, (v) => _then(v as _$_IsEmailDuplicateDTO));
+class __$$_EmailDuplicateDTOCopyWithImpl<$Res>
+    extends _$EmailDuplicateDTOCopyWithImpl<$Res>
+    implements _$$_EmailDuplicateDTOCopyWith<$Res> {
+  __$$_EmailDuplicateDTOCopyWithImpl(
+      _$_EmailDuplicateDTO _value, $Res Function(_$_EmailDuplicateDTO) _then)
+      : super(_value, (v) => _then(v as _$_EmailDuplicateDTO));
 
   @override
-  _$_IsEmailDuplicateDTO get _value => super._value as _$_IsEmailDuplicateDTO;
+  _$_EmailDuplicateDTO get _value => super._value as _$_EmailDuplicateDTO;
 
   @override
   $Res call({
     Object? isEmailDuplicated = freezed,
   }) {
-    return _then(_$_IsEmailDuplicateDTO(
+    return _then(_$_EmailDuplicateDTO(
       isEmailDuplicated: isEmailDuplicated == freezed
           ? _value.isEmailDuplicated
           : isEmailDuplicated // ignore: cast_nullable_to_non_nullable
@@ -95,12 +95,12 @@ class __$$_IsEmailDuplicateDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IsEmailDuplicateDTO implements _IsEmailDuplicateDTO {
-  _$_IsEmailDuplicateDTO(
+class _$_EmailDuplicateDTO implements _EmailDuplicateDTO {
+  _$_EmailDuplicateDTO(
       {@JsonKey(name: "email-duplicated") required this.isEmailDuplicated});
 
-  factory _$_IsEmailDuplicateDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_IsEmailDuplicateDTOFromJson(json);
+  factory _$_EmailDuplicateDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_EmailDuplicateDTOFromJson(json);
 
   @override
   @JsonKey(name: "email-duplicated")
@@ -108,14 +108,14 @@ class _$_IsEmailDuplicateDTO implements _IsEmailDuplicateDTO {
 
   @override
   String toString() {
-    return 'IsEmailDuplicateDTO(isEmailDuplicated: $isEmailDuplicated)';
+    return 'EmailDuplicateDTO(isEmailDuplicated: $isEmailDuplicated)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IsEmailDuplicateDTO &&
+            other is _$_EmailDuplicateDTO &&
             const DeepCollectionEquality()
                 .equals(other.isEmailDuplicated, isEmailDuplicated));
   }
@@ -127,31 +127,31 @@ class _$_IsEmailDuplicateDTO implements _IsEmailDuplicateDTO {
 
   @JsonKey(ignore: true)
   @override
-  _$$_IsEmailDuplicateDTOCopyWith<_$_IsEmailDuplicateDTO> get copyWith =>
-      __$$_IsEmailDuplicateDTOCopyWithImpl<_$_IsEmailDuplicateDTO>(
+  _$$_EmailDuplicateDTOCopyWith<_$_EmailDuplicateDTO> get copyWith =>
+      __$$_EmailDuplicateDTOCopyWithImpl<_$_EmailDuplicateDTO>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IsEmailDuplicateDTOToJson(
+    return _$$_EmailDuplicateDTOToJson(
       this,
     );
   }
 }
 
-abstract class _IsEmailDuplicateDTO implements IsEmailDuplicateDTO {
-  factory _IsEmailDuplicateDTO(
+abstract class _EmailDuplicateDTO implements EmailDuplicateDTO {
+  factory _EmailDuplicateDTO(
       {@JsonKey(name: "email-duplicated")
-          required final bool isEmailDuplicated}) = _$_IsEmailDuplicateDTO;
+          required final bool isEmailDuplicated}) = _$_EmailDuplicateDTO;
 
-  factory _IsEmailDuplicateDTO.fromJson(Map<String, dynamic> json) =
-      _$_IsEmailDuplicateDTO.fromJson;
+  factory _EmailDuplicateDTO.fromJson(Map<String, dynamic> json) =
+      _$_EmailDuplicateDTO.fromJson;
 
   @override
   @JsonKey(name: "email-duplicated")
   bool get isEmailDuplicated;
   @override
   @JsonKey(ignore: true)
-  _$$_IsEmailDuplicateDTOCopyWith<_$_IsEmailDuplicateDTO> get copyWith =>
+  _$$_EmailDuplicateDTOCopyWith<_$_EmailDuplicateDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }

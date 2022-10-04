@@ -29,7 +29,7 @@ class AuthRepository implements AuthRepositoryInterface {
 
   /// 서버에서 받은 access/refresh 토큰을 내부 DB에 저장하기
   @override
-  Future<Result<bool, String>> saveJwtTokenToDB(JwtTokenDTO tokens) async {
+  Future<Result<bool, String>> saveJwtTokens(JwtTokenDTO tokens) async {
     try {
       const storage = FlutterSecureStorage();
 
@@ -65,7 +65,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Result<bool, String>> saveEmailToServer(String email) async {
+  Future<Result<bool, String>> saveEmail(String email) async {
     try {
       final dio = Dio();
       final authRetrofit = AuthRetrofit(dio);
@@ -83,7 +83,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Result<bool, String>> saveUserToDB({
+  Future<Result<bool, String>> saveUser({
       required String customerNumber, required String name, required String email}) async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -97,7 +97,21 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
+
   Future<Result<String, String>> getCustomerNumber() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      var customerNumber = prefs.getString('customerNumber');
+
+      return Result.success(customerNumber);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+
+  Future<Result<String, String>> removeJwtTokens() async {
     try {
       final prefs = await SharedPreferences.getInstance();
 

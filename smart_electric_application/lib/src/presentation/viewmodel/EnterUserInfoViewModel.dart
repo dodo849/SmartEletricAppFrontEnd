@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/data/dto/IsSmartMeterDTO.dart';
+import 'package:smart_electric_application/src/data/dto/SmartMeterDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailDuplicateUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUseCase.dart';
@@ -141,15 +141,15 @@ class EnterUserInfoViewModel extends GetxController {
   /// 스마트 계량기인지 고객번호로 확인
   void checkIsSmartMeter() async {
 
-    Result<IsSmartMeterDTO, String> checkIsSmartMeterResult =
+    Result<SmartMeterDTO, String> checkIsSmartMeterResult =
         await checkIsSmartMeterUseCase.excute(customerNumber.value);
 
     // 계량기 종류 확인 true: 스마트 계량기, false: 일반 계량기
     if (checkIsSmartMeterResult.status == ResultStatus.success) {
-      IsSmartMeterDTO isSmartMeterDTO = checkIsSmartMeterResult.value!;
+      SmartMeterDTO SmartMeterDTO = checkIsSmartMeterResult.value!;
 
       // 계량기 종류 설정
-      isSmartMeter(isSmartMeterDTO.custNumValidation);
+      isSmartMeter(SmartMeterDTO.custNumValidation);
 
       // 로딩 완료 설정
       isSmartMeterLoad(true);

@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'IsSmartMeterDTO.dart';
+part of 'SmartMeterDTO.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_IsSmartMeterDTO _$$_IsSmartMeterDTOFromJson(Map<String, dynamic> json) =>
-    _$_IsSmartMeterDTO(
+_$_SmartMeterDTO _$$_SmartMeterDTOFromJson(Map<String, dynamic> json) =>
+    _$_SmartMeterDTO(
       custNumValidation: json['custNumValidation'] as bool,
     );
 
-Map<String, dynamic> _$$_IsSmartMeterDTOToJson(_$_IsSmartMeterDTO instance) =>
+Map<String, dynamic> _$$_SmartMeterDTOToJson(_$_SmartMeterDTO instance) =>
     <String, dynamic>{
       'custNumValidation': instance.custNumValidation,
     };

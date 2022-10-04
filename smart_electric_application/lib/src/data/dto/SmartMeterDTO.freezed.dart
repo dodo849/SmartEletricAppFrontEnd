@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'IsSmartMeterDTO.dart';
+part of 'SmartMeterDTO.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,36 +14,36 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-IsSmartMeterDTO _$IsSmartMeterDTOFromJson(Map<String, dynamic> json) {
-  return _IsSmartMeterDTO.fromJson(json);
+SmartMeterDTO _$SmartMeterDTOFromJson(Map<String, dynamic> json) {
+  return _SmartMeterDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$IsSmartMeterDTO {
+mixin _$SmartMeterDTO {
   bool get custNumValidation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $IsSmartMeterDTOCopyWith<IsSmartMeterDTO> get copyWith =>
+  $SmartMeterDTOCopyWith<SmartMeterDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $IsSmartMeterDTOCopyWith<$Res> {
-  factory $IsSmartMeterDTOCopyWith(
-          IsSmartMeterDTO value, $Res Function(IsSmartMeterDTO) then) =
-      _$IsSmartMeterDTOCopyWithImpl<$Res>;
+abstract class $SmartMeterDTOCopyWith<$Res> {
+  factory $SmartMeterDTOCopyWith(
+          SmartMeterDTO value, $Res Function(SmartMeterDTO) then) =
+      _$SmartMeterDTOCopyWithImpl<$Res>;
   $Res call({bool custNumValidation});
 }
 
 /// @nodoc
-class _$IsSmartMeterDTOCopyWithImpl<$Res>
-    implements $IsSmartMeterDTOCopyWith<$Res> {
-  _$IsSmartMeterDTOCopyWithImpl(this._value, this._then);
+class _$SmartMeterDTOCopyWithImpl<$Res>
+    implements $SmartMeterDTOCopyWith<$Res> {
+  _$SmartMeterDTOCopyWithImpl(this._value, this._then);
 
-  final IsSmartMeterDTO _value;
+  final SmartMeterDTO _value;
   // ignore: unused_field
-  final $Res Function(IsSmartMeterDTO) _then;
+  final $Res Function(SmartMeterDTO) _then;
 
   @override
   $Res call({
@@ -59,31 +59,31 @@ class _$IsSmartMeterDTOCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_IsSmartMeterDTOCopyWith<$Res>
-    implements $IsSmartMeterDTOCopyWith<$Res> {
-  factory _$$_IsSmartMeterDTOCopyWith(
-          _$_IsSmartMeterDTO value, $Res Function(_$_IsSmartMeterDTO) then) =
-      __$$_IsSmartMeterDTOCopyWithImpl<$Res>;
+abstract class _$$_SmartMeterDTOCopyWith<$Res>
+    implements $SmartMeterDTOCopyWith<$Res> {
+  factory _$$_SmartMeterDTOCopyWith(
+          _$_SmartMeterDTO value, $Res Function(_$_SmartMeterDTO) then) =
+      __$$_SmartMeterDTOCopyWithImpl<$Res>;
   @override
   $Res call({bool custNumValidation});
 }
 
 /// @nodoc
-class __$$_IsSmartMeterDTOCopyWithImpl<$Res>
-    extends _$IsSmartMeterDTOCopyWithImpl<$Res>
-    implements _$$_IsSmartMeterDTOCopyWith<$Res> {
-  __$$_IsSmartMeterDTOCopyWithImpl(
-      _$_IsSmartMeterDTO _value, $Res Function(_$_IsSmartMeterDTO) _then)
-      : super(_value, (v) => _then(v as _$_IsSmartMeterDTO));
+class __$$_SmartMeterDTOCopyWithImpl<$Res>
+    extends _$SmartMeterDTOCopyWithImpl<$Res>
+    implements _$$_SmartMeterDTOCopyWith<$Res> {
+  __$$_SmartMeterDTOCopyWithImpl(
+      _$_SmartMeterDTO _value, $Res Function(_$_SmartMeterDTO) _then)
+      : super(_value, (v) => _then(v as _$_SmartMeterDTO));
 
   @override
-  _$_IsSmartMeterDTO get _value => super._value as _$_IsSmartMeterDTO;
+  _$_SmartMeterDTO get _value => super._value as _$_SmartMeterDTO;
 
   @override
   $Res call({
     Object? custNumValidation = freezed,
   }) {
-    return _then(_$_IsSmartMeterDTO(
+    return _then(_$_SmartMeterDTO(
       custNumValidation: custNumValidation == freezed
           ? _value.custNumValidation
           : custNumValidation // ignore: cast_nullable_to_non_nullable
@@ -94,25 +94,25 @@ class __$$_IsSmartMeterDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_IsSmartMeterDTO implements _IsSmartMeterDTO {
-  _$_IsSmartMeterDTO({required this.custNumValidation});
+class _$_SmartMeterDTO implements _SmartMeterDTO {
+  _$_SmartMeterDTO({required this.custNumValidation});
 
-  factory _$_IsSmartMeterDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_IsSmartMeterDTOFromJson(json);
+  factory _$_SmartMeterDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_SmartMeterDTOFromJson(json);
 
   @override
   final bool custNumValidation;
 
   @override
   String toString() {
-    return 'IsSmartMeterDTO(custNumValidation: $custNumValidation)';
+    return 'SmartMeterDTO(custNumValidation: $custNumValidation)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_IsSmartMeterDTO &&
+            other is _$_SmartMeterDTO &&
             const DeepCollectionEquality()
                 .equals(other.custNumValidation, custNumValidation));
   }
@@ -124,28 +124,28 @@ class _$_IsSmartMeterDTO implements _IsSmartMeterDTO {
 
   @JsonKey(ignore: true)
   @override
-  _$$_IsSmartMeterDTOCopyWith<_$_IsSmartMeterDTO> get copyWith =>
-      __$$_IsSmartMeterDTOCopyWithImpl<_$_IsSmartMeterDTO>(this, _$identity);
+  _$$_SmartMeterDTOCopyWith<_$_SmartMeterDTO> get copyWith =>
+      __$$_SmartMeterDTOCopyWithImpl<_$_SmartMeterDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IsSmartMeterDTOToJson(
+    return _$$_SmartMeterDTOToJson(
       this,
     );
   }
 }
 
-abstract class _IsSmartMeterDTO implements IsSmartMeterDTO {
-  factory _IsSmartMeterDTO({required final bool custNumValidation}) =
-      _$_IsSmartMeterDTO;
+abstract class _SmartMeterDTO implements SmartMeterDTO {
+  factory _SmartMeterDTO({required final bool custNumValidation}) =
+      _$_SmartMeterDTO;
 
-  factory _IsSmartMeterDTO.fromJson(Map<String, dynamic> json) =
-      _$_IsSmartMeterDTO.fromJson;
+  factory _SmartMeterDTO.fromJson(Map<String, dynamic> json) =
+      _$_SmartMeterDTO.fromJson;
 
   @override
   bool get custNumValidation;
   @override
   @JsonKey(ignore: true)
-  _$$_IsSmartMeterDTOCopyWith<_$_IsSmartMeterDTO> get copyWith =>
+  _$$_SmartMeterDTOCopyWith<_$_SmartMeterDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }

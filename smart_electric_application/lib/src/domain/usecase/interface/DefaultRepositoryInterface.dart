@@ -1,8 +1,8 @@
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/data/dto/IsSmartMeterDTO.dart';
+import 'package:smart_electric_application/src/data/dto/SmartMeterDTO.dart';
 
 /// Basic url api
 abstract class DefaultRepositoryInterface {
-  Future<Result<IsSmartMeterDTO, String>> checkIsSmartMeter(
+  Future<Result<SmartMeterDTO, String>> checkIsSmartMeter(
       String customerNumber);
 }
