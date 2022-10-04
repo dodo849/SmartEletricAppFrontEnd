@@ -62,10 +62,9 @@ class BarGraphViewModel extends GetxController {
     if (end > mockData.length) end = mockData.length;
     var subList = mockData.sublist(start, end);
     // 최댓값 구하기
-    var maxBarHeightPrimitive = [...subList].reduce(
-        (value, element) => value.yValue > element.yValue ? value : element);
+    var maxBarHeightPrimitive = [...subList].map((e) => e.yValue).fold<double>(0.0, max).round();
     // y축 조정 (20은 라벨 감안한 여분 값)
-    maxBarHeight(maxBarHeightPrimitive.yValue + 20);
+    maxBarHeight(maxBarHeightPrimitive + 20);
     print(maxBarHeightPrimitive);
   }
 }

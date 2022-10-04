@@ -5,6 +5,7 @@ import 'package:smart_electric_application/src/data/repository/AuthRepository.da
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/BarGraph.dart';
+import 'package:smart_electric_application/src/presentation/view/module/common/LineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
@@ -150,6 +151,21 @@ class Home extends StatelessWidget {
               Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
               const SizedBox(height: 15),
               BarGraph(),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+
+        SizedBox(height: 35),
+
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
+              const SizedBox(height: 15),
+              LineGraph(),
               const SizedBox(height: 40),
             ],
           ),
