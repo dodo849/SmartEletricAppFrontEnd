@@ -41,12 +41,19 @@ class CustomTextInput extends StatelessWidget {
     return Container(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         // 라벨 값이 있으면 Text() 넣기
-        if (labelText != null) ...[
-          Text(
-            "$labelText",
-            style: TextStyle(color: colorTheme.onSurface),
-          )
-        ],
+        Row(children: [
+          if (labelText != null) ...[
+            // bordered 일때만 왼쪽 여백 조금 넣기
+            if (textInputStyle == TextInputStyle.bordered) ...[
+              const SizedBox(width: 15),
+            ],
+            Text(
+              "$labelText",
+              style: TextStyle(color: colorTheme.onSurface),
+            )
+          ],
+        ]),
+        const SizedBox(height: 10),
 
         // 플레이스홀더 값에 따라 TextField 반환
         getTextFieldIsPlaceholder(placeholder, context, controller),
