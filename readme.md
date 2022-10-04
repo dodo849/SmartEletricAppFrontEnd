@@ -7,6 +7,8 @@
 - [Docs] : 문서 및 주석 수정
 - [Other] : 기타 작업
 
+- 두 줄 띄고 상세사항/남은사항 본문으로 작성
+
 ## Design pattern
 
 ##### Atomic 디자인패턴을 변형하여 적용해 UI 컴포넌트를 atom, module, page로 구분했다.
