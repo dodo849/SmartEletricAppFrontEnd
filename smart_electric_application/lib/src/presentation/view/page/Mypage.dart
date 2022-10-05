@@ -3,12 +3,17 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/module/mypage/MypageMenuList.dart';
+import 'package:smart_electric_application/src/presentation/view/page/Login.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/MypageViewModel.dart';
 
 class Mypage extends StatelessWidget {
   const Mypage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    Get.put(MypageViewModel());
+
     return Container(
         margin: EdgeInsets.only(left: 20, right: 20),
         child: Column(
@@ -37,6 +42,7 @@ class Mypage extends StatelessWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: GestureDetector(
                     onTap: () {
+                      MypageViewModel.to.logout();
                       Get.toNamed("/Login");
                     },
                     child: Text(

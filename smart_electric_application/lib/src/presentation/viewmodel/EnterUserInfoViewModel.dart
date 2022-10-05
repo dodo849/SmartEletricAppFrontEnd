@@ -146,10 +146,10 @@ class EnterUserInfoViewModel extends GetxController {
 
     // 계량기 종류 확인 true: 스마트 계량기, false: 일반 계량기
     if (checkIsSmartMeterResult.status == ResultStatus.success) {
-      SmartMeterDTO SmartMeterDTO = checkIsSmartMeterResult.value!;
+      SmartMeterDTO smartMeterDTO = checkIsSmartMeterResult.value!;
 
       // 계량기 종류 설정
-      isSmartMeter(SmartMeterDTO.custNumValidation);
+      isSmartMeter(smartMeterDTO.custNumValidation);
 
       // 로딩 완료 설정
       isSmartMeterLoad(true);
