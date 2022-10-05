@@ -27,6 +27,32 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
+  ///
+  @override
+  Future<Result<JwtTokenDTO, String>> readTokens() async {
+    try {
+      const storage = FlutterSecureStorage();
+
+      // 기존 로그인 정보 초기화
+      await storage.deleteAll();
+
+      // access/refesh token 내부 DB에 저장하기
+      var accessToken = await storage.read(key: 'ACCESS_TOKEN');
+      var refreshToken = await storage.read(key: 'REFRESH_TOKEN');
+
+      if (accessToken != null && refreshToken != null) {
+        var jwtTokenDTO =
+            JwtTokenDTO(accessToken: accessToken, refreshToken: refreshToken);
+        return Result.success(jwtTokenDTO);
+      }
+      else {
+        return const Result.failure("Token null");
+      }
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
   /// 서버에서 받은 access/refresh 토큰을 내부 DB에 저장하기
   @override
   Future<Result<bool, String>> saveJwtTokens(JwtTokenDTO tokens) async {
