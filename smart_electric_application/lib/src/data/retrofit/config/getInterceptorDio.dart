@@ -21,21 +21,6 @@ Future<Dio> getInterceptorDio() async {
     options.headers['Authorization'] = 'Bearer $accessToken';
     return handler.next(options);
   }, onError: (error, handler) async {
-    // // Access 토큰 유효성 검사
-    // var accessTokenCheckDio = Dio();
-
-    // accessTokenCheckDio.interceptors.clear();
-
-    // // 기기에 저장된 AccessToken 로드
-    // final accessToken = await storage.read(key: 'ACCESS_TOKEN');
-    // accessTokenCheckDio.options.headers['Authorization'] =
-    //     'Bearer $accessToken';
-
-    // var isAccessTokenVerification = await accessTokenCheckDio
-    //     .post('https://api.smartelectric.kr/auth/login/verification/access');
-
-    // print("### Interceptor");
-    // print(isAccessTokenVerification);
 
     // 인증 오류가 발생했을 경우: AccessToken의 만료
     if (error.response?.statusCode == 401) {
