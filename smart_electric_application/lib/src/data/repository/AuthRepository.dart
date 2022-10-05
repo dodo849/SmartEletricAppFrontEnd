@@ -29,7 +29,7 @@ class AuthRepository implements AuthRepositoryInterface {
 
   /// 서버에서 받은 access/refresh 토큰을 내부 DB에 저장하기
   @override
-  Future<Result<bool, String>> saveJwtTokenToDB(JwtTokenDTO tokens) async {
+  Future<Result<bool, String>> saveJwtTokens(JwtTokenDTO tokens) async {
     try {
       const storage = FlutterSecureStorage();
 
@@ -65,7 +65,7 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Result<bool, String>> saveEmailToServer(String email) async {
+  Future<Result<bool, String>> saveEmail(String email) async {
     try {
       final dio = Dio();
       final authRetrofit = AuthRetrofit(dio);
@@ -83,8 +83,10 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Result<bool, String>> saveUserToDB({
-      required String customerNumber, required String name, required String email}) async {
+  Future<Result<bool, String>> saveUser(
+      {required String customerNumber,
+      required String name,
+      required String email}) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('customerNumber', customerNumber);
@@ -97,6 +99,7 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
+  @override
   Future<Result<String, String>> getCustomerNumber() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -104,6 +107,60 @@ class AuthRepository implements AuthRepositoryInterface {
       var customerNumber = prefs.getString('customerNumber');
 
       return Result.success(customerNumber);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> removeJwtTokens() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+
+      prefs.remove('ACCESS_TOKEN');
+      prefs.remove('REFRESH_TOKEN');
+
+      return const Result.success(true);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> removeEmail(email) async {
+    try {
+      final dio = Dio();
+      final authRetrofit = AuthRetrofit(dio);
+
+      authRetrofit.removeEmail(email);
+
+      return const Result.success(true);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<String, String>> getEmail() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? email = prefs.getString('email');
+
+      return Result.success(email!);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> removeUser() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('customerNumber');
+      await prefs.remove('name');
+      await prefs.remove('email');
+
+      return const Result.success(true);
     } catch (err) {
       return Result.failure(err.toString());
     }

@@ -2,7 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import 'package:smart_electric_application/src/data/dto/IsSmartMeterDTO.dart';
+import 'package:smart_electric_application/src/data/dto/SmartMeterDTO.dart';
 
 
 part 'DefaultRetrofit.g.dart';
@@ -14,6 +14,6 @@ abstract class DefaultRetrofit{
 
   // 고객번호로 고객의 스마트 계량기 여부 확인
   @GET('kepcoCustNumValidation')
-  Future<IsSmartMeterDTO> checkIsSmartMeter(
+  Future<SmartMeterDTO> checkIsSmartMeter(
     @Query("custNum") String customerNumber);
 }

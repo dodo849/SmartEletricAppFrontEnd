@@ -29,14 +29,14 @@ class SignupUseCase {
     }
 
     // 이메일 정보 서버에 저장
-    Result<bool, String> saveEmailToServerResult = await authRepository.saveEmailToServer(email);
+    Result<bool, String> saveEmailResult = await authRepository.saveEmail(email);
 
-    if (saveEmailToServerResult.status == ResultStatus.error) {
-      return saveEmailToServerResult;
+    if (saveEmailResult.status == ResultStatus.error) {
+      return saveEmailResult;
     }
 
     // 유저 정보 내부 DB에 저장
-    Result<bool, String> saveUserResult = await authRepository.saveUserToDB(
+    Result<bool, String> saveUserResult = await authRepository.saveUser(
         customerNumber: customerNumber, name: name, email: email);
 
     if (saveUserResult.status == ResultStatus.error) {

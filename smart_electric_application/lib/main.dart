@@ -1,4 +1,3 @@
-
 import 'firebase_options.dart';
 import 'package:smart_electric_application/src/config/setupDI.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,15 +12,18 @@ import 'package:smart_electric_application/src/presentation/view/theme/Themes.da
 import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
 
 void main() async {
+  // Set up DI
   setupDI();
+
+  // Set up firebase settings
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // Default Setting
   runApp(const MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

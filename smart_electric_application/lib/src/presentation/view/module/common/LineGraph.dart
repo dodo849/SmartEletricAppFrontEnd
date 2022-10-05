@@ -63,6 +63,8 @@ class LineGraph extends GetView<LineGraphViewModel> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
+      height: 300,
       child: CustomPaint(
         child: Container(),
         painter: LineGraphPainter(),
