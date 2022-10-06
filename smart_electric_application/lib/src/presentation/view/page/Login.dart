@@ -26,8 +26,6 @@ class Login extends StatelessWidget {
             ),
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Spacer(),
                 // 로고 + 문구
@@ -60,9 +58,7 @@ class Login extends StatelessWidget {
                     textColor: context.theme.colorScheme.primaryContainer,
                     size: ButtonSize.large,
                     action: () {
-                      LoginViewModel.to.login();
-                      Get.to(() => RootScaffold(),
-                          transition: Transition.fadeIn);
+                      LoginViewModel.to.login(context);
                     }),
                 SizedBox(height: 15),
 
