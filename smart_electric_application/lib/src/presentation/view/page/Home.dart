@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/BarGraph.dart';
@@ -9,11 +8,7 @@ import 'package:smart_electric_application/src/presentation/view/module/common/L
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_electric_application/src/presentation/view/module/common/TestChart.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/RootScaffoldViewModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
-import 'package:smart_electric_application/CustomIcon.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

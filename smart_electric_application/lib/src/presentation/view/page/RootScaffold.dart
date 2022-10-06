@@ -27,23 +27,17 @@ class RootScaffold extends StatelessWidget {
     // 페이지 전환을 위한 MyBottomNavgationBarController 인스턴스화 (의존성 주입)
     // Get.put : 수명이 페이지와 같음
     Get.put(MyBottomNavgationBarController());
-    Get.put(RootScaffoldViewModel());
-
-    // 앱 실행 시 Login 여부 확인 함수 실행
-    RootScaffoldViewModel.to.checkLogin();
 
     // 로그인 여부에 따라 메인 or 로그인 페이지 띄우기
-    return Obx(() => RootScaffoldViewModel.to.isLogin.value == false
-        ? const Login()
-        : Scaffold(
-            backgroundColor: context.theme.colorScheme.background,
-            appBar: EmptyAppBar(),
-            body: Obx(() =>
-                // MyBottomNavgationBarController의 변수가 변하면 화면 변경
-                SafeArea(
-                    child: tabPages[MyBottomNavgationBarController
-                        .to.selectedIndex.value])),
-            bottomNavigationBar: const MyBottomNavgationBar(),
-          ));
+    return Scaffold(
+      backgroundColor: context.theme.colorScheme.background,
+      appBar: EmptyAppBar(),
+      body: Obx(() =>
+          // MyBottomNavgationBarController의 변수가 변하면 화면 변경
+          SafeArea(
+              child: tabPages[
+                  MyBottomNavgationBarController.to.selectedIndex.value])),
+      bottomNavigationBar: const MyBottomNavgationBar(),
+    );
   }
 }

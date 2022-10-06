@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckLoginUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/LoginUseCase.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 
@@ -11,8 +12,12 @@ class LoginViewModel extends GetxController {
   RxString email = "".obs;
   RxString password = "".obs;
 
+  // State variables
+  RxBool isLogin = false.obs; // 로그인 상태이면 true
+
   // Use case
   var loginUseCase = LoginUseCase();
+  var checkLoginUseCase = CheckLoginUseCase();
 
   @override
   void onInit() {
@@ -37,6 +42,14 @@ class LoginViewModel extends GetxController {
                   child: Text('Hello'),
                 ),
               ));
+    }
+  }
+
+  void checkLogin() async {
+    Result<bool, String> checkLoginResult = await checkLoginUseCase.excute();
+
+    if (checkLoginResult.value == true) {
+      isLogin(true);
     }
   }
 }
