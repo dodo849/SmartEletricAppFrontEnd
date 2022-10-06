@@ -27,14 +27,11 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
-  ///
+  /// 내부 저장소의 토큰값 읽어오기
   @override
   Future<Result<JwtTokenDTO, String>> readTokens() async {
     try {
       const storage = FlutterSecureStorage();
-
-      // 기존 로그인 정보 초기화
-      await storage.deleteAll();
 
       // access/refesh token 내부 DB에 저장하기
       var accessToken = await storage.read(key: 'ACCESS_TOKEN');

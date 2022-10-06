@@ -11,6 +11,7 @@ import 'package:smart_electric_application/src/presentation/view/module/home/Pre
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/TestChart.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/RootScaffoldViewModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
 import 'package:smart_electric_application/CustomIcon.dart';
 
