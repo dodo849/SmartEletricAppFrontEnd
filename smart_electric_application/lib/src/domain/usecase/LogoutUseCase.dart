@@ -18,11 +18,11 @@ class LogoutUseCase {
     }
 
     // 내부 DB 저장 값들 지우기
-    authRepository.removeUser();
-    authRepository.removeJwtTokens();
+    await authRepository.removeUser();
+    await authRepository.removeJwtTokens();
 
     // account 서버에 이메일 비활성화
-    var email = authRepository.getEmail();
+    var email = await authRepository.getEmail();
     authRepository.removeEmail(email);
 
     // 모든 과정 성공 시 true Result 반환

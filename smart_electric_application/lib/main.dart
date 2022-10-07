@@ -1,3 +1,5 @@
+import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
+
 import 'firebase_options.dart';
 import 'package:smart_electric_application/src/config/setupDI.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,10 +32,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // View model DI
     Get.put(ThemeViewModel());
+    Get.put(LoginViewModel());
+
+    // 앱 실행 시 Login 여부 확인 함수 실행
+    LoginViewModel.to.checkLogin();
 
     return GetMaterialApp(
-      home: RootScaffold(),
+      home: Obx(() => LoginViewModel.to.isLogin.value == false
+          ? const Login()
+          : const RootScaffold()),
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
