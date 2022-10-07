@@ -36,12 +36,24 @@ class LoginViewModel extends GetxController {
     } else {
       showDialog(
           context: context,
-          builder: (context) => const Center(
-                child: Material(
-                  color: Colors.transparent,
-                  child: Text('Hello'),
-                ),
-              ));
+          builder: (context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              titlePadding: EdgeInsets.fromLTRB(30, 30, 30, 0),
+              contentPadding: EdgeInsets.all(30),
+              title: Text("로그인 실패"),
+              content: Text(loginResult.error!),
+              actions: [
+                TextButton(
+                  child: Text("확인"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
     }
   }
 
