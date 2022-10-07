@@ -8,7 +8,6 @@ import 'package:smart_electric_application/src/presentation/view/page/Login.dart
 import 'package:smart_electric_application/src/presentation/view/page/Simulation.dart';
 import 'package:smart_electric_application/src/presentation/view/page/MyPage.dart';
 import 'package:smart_electric_application/src/presentation/view/page/SmartHome.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/RootScaffoldViewModel.dart';
 
 class RootScaffold extends StatelessWidget {
   const RootScaffold({super.key});
