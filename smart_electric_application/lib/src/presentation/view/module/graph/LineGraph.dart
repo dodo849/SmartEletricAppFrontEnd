@@ -62,12 +62,15 @@ class LineGraph extends GetView<LineGraphViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 300,
-      child: CustomPaint(
-        child: Container(),
-        painter: LineGraphPainter(),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        width: 1200,
+        height: 300,
+        child: CustomPaint(
+          // child: Container(),
+          painter: LineGraphPainter(),
+        ),
       ),
     );
   }
@@ -78,11 +81,24 @@ class LineGraphPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     var background = Paint()
       ..style = PaintingStyle.fill
-      ..color = Colors.lime
+      ..color = Colors.green
       ..isAntiAlias = true;
 
     Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
     canvas.drawRect(rect, background);
+
+    for (var i = 0; i < 5; i++) {
+      final tp = TextPainter(
+        text: TextSpan(
+          text: '메롱',
+          style: const TextStyle(fontSize: 12),
+        ),
+        textAlign: TextAlign.start,
+        textDirection: TextDirection.ltr,
+      );
+      tp.layout();
+      tp.paint(canvas, Offset(10, size.height - 10 - i * (size.height / 5.0)));
+    }
   }
 
   @override

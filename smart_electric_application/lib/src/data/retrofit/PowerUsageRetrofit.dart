@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
-import 'package:smart_electric_application/src/data/dto/PowerUsageByDayDTO.dart';
+import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUseCase.dart';
 
 part 'PowerUsageRetrofit.g.dart';
@@ -10,8 +10,27 @@ part 'PowerUsageRetrofit.g.dart';
 abstract class PowerUsageRetrofit {
   factory PowerUsageRetrofit(Dio dio, {String baseUrl}) = _PowerUsageRetrofit;
 
-  // 정보제공 동의 확인
+  @GET('/specific-user/period/hour')
+  Future<List<PowerUsageDTO>> getPowerUsageByHour(
+      @Query('custNo') String customerNumber,
+      @Query('startDate') String startDate,
+      @Query('endDate') String endDate);
+
   @GET('/specific-user/period/day')
-  Future<List<PowerUsageByDayDTO>> getPowerUsageByDay(@Query('custNo') String customerNumber,
-      @Query('startDate') String startDate, @Query('endDate') String endDate);
+  Future<List<PowerUsageDTO>> getPowerUsageByDay(
+      @Query('custNo') String customerNumber,
+      @Query('startDate') String startDate,
+      @Query('endDate') String endDate);
+
+  @GET('/specific-user/period/month')
+  Future<List<PowerUsageDTO>> getPowerUsageByMonth(
+      @Query('custNo') String customerNumber,
+      @Query('startDate') String startDate,
+      @Query('endDate') String endDate);
+
+  @GET('/specific-user/period/year')
+  Future<List<PowerUsageDTO>> getPowerUsageByYear(
+      @Query('custNo') String customerNumber,
+      @Query('startDate') String startDate,
+      @Query('endDate') String endDate);
 }
