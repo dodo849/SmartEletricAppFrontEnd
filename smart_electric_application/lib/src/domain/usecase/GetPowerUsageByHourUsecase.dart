@@ -11,7 +11,7 @@ class GetPowerUsageByDayUseCase {
       customerNumber, startDate, endDate) async {
     // 네트워크
     Result<List<PowerUsageDTO>, String> isPowerUsageResult =
-        await powerUsageRepository.getPowerUsageByDay(
+        await powerUsageRepository.getPowerUsageByHour(
             customerNumber: customerNumber,
             startDate: startDate,
             endDate: endDate);

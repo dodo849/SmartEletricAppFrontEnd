@@ -6,7 +6,7 @@ import 'package:smart_electric_application/src/data/repository/PowerUsageReposit
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/DefaultRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRetrofitInterface.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
 
 import '../data/repository/DefaultRepository.dart';
 
@@ -15,5 +15,5 @@ void setupDI() {
   GetIt.I.registerSingleton<AuthRepositoryInterface>(AuthRepository());
   GetIt.I.registerSingleton<DefaultRepositoryInterface>(DefaultRepository());
   GetIt.I
-      .registerSingleton<PowerUsageRetrofitInterface>(PowerUsageRepository());
+      .registerSingleton<PowerUsageRepositoryInterface>(PowerUsageRepository());
 }

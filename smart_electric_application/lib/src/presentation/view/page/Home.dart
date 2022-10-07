@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/data/repository/AiRepository.dart';
 import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
@@ -61,6 +62,13 @@ class Home extends StatelessWidget {
               print(powerUsageRepositoryData.status);
               print(powerUsageRepositoryData.error);
               print(powerUsageRepositoryData.value);
+
+              var aiRepository = AiRepository();
+              var predictionResult =
+                  await aiRepository.getAiPrediction("0130392270");
+              print("predictionResult: ${predictionResult.value}");
+              var reportResult = await aiRepository.getAiReport("0130392270");
+              print("reportResult: ${reportResult.value}");
             },
             child: Text("Test Button")),
 
