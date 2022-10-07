@@ -27,6 +27,28 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
+  /// 내부 저장소의 토큰값 읽어오기
+  @override
+  Future<Result<JwtTokenDTO, String>> readTokens() async {
+    try {
+      const storage = FlutterSecureStorage();
+
+      // access/refesh token 내부 DB에 저장하기
+      var accessToken = await storage.read(key: 'ACCESS_TOKEN');
+      var refreshToken = await storage.read(key: 'REFRESH_TOKEN');
+
+      if (accessToken != null && refreshToken != null) {
+        var jwtTokenDTO =
+            JwtTokenDTO(accessToken: accessToken, refreshToken: refreshToken);
+        return Result.success(jwtTokenDTO);
+      } else {
+        return const Result.failure("Token null");
+      }
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
   /// 서버에서 받은 access/refresh 토큰을 내부 DB에 저장하기
   @override
   Future<Result<bool, String>> saveJwtTokens(JwtTokenDTO tokens) async {
@@ -39,6 +61,20 @@ class AuthRepository implements AuthRepositoryInterface {
       // access/refesh token 내부 DB에 저장하기
       await storage.write(key: 'ACCESS_TOKEN', value: tokens.accessToken);
       await storage.write(key: 'REFRESH_TOKEN', value: tokens.refreshToken);
+
+      return const Result.success(true);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> removeJwtTokens() async {
+    try {
+      const storage = FlutterSecureStorage();
+
+      // 기존 로그인 정보 초기화
+      await storage.deleteAll();
 
       return const Result.success(true);
     } catch (err) {
@@ -113,26 +149,12 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future<Result<bool, String>> removeJwtTokens() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-
-      prefs.remove('ACCESS_TOKEN');
-      prefs.remove('REFRESH_TOKEN');
-
-      return const Result.success(true);
-    } catch (err) {
-      return Result.failure(err.toString());
-    }
-  }
-
-  @override
   Future<Result<bool, String>> removeEmail(email) async {
     try {
       final dio = Dio();
       final authRetrofit = AuthRetrofit(dio);
 
-      authRetrofit.removeEmail(email);
+      await authRetrofit.removeEmail(email);
 
       return const Result.success(true);
     } catch (err) {

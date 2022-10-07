@@ -4,7 +4,9 @@ import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 /// Server Authentication Repository Interface
 abstract class AuthRepositoryInterface {
   Future<Result<JwtTokenDTO, String>> getJwtTokens(String firebaseIdToken);
+  Future<Result<JwtTokenDTO, String>> readTokens();
   Future<Result<bool, String>> saveJwtTokens(JwtTokenDTO tokens);
+  Future<Result<bool, String>> removeJwtTokens();
   Future<Result<bool, String>> checkEmailDuplicate(String email);
   Future<Result<bool, String>> saveEmail(String email);
   Future<Result<bool, String>> saveUser(
@@ -12,7 +14,6 @@ abstract class AuthRepositoryInterface {
       required String name,
       required String email});
   Future<Result<String, String>> getCustomerNumber();
-  Future<Result<bool, String>> removeJwtTokens();
   Future<Result<bool, String>> removeEmail(email);
   Future<Result<String, String>> getEmail();
   Future<Result<bool, String>> removeUser();
