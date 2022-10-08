@@ -69,7 +69,8 @@ Future<Dio> getInterceptorDio() async {
       error.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
 
       // 수행하지 못했던 API 요청 복사본 생성
-      final clonedRequest = await dio.request(error.requestOptions.path,
+      final clonedRequest = await dio.request(
+        'https://api.smartelectric.kr/${error.requestOptions.path}',
           options: Options(
               method: error.requestOptions.method,
               headers: error.requestOptions.headers),
