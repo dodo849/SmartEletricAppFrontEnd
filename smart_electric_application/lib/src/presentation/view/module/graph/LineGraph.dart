@@ -9,14 +9,18 @@ class LineGraphViewModel extends GetxController {
 
   Rx<ScrollController> scrollController = ScrollController().obs;
 
+  // Graph setting variables
   RxDouble graphHeight = 300.0.obs; // 그래프 높이
+  RxDouble maxYValue = 0.0.obs; // 최대 y 크기
+
+  // Y Axis variables
   RxInt yAxisNumber = 6.obs; // y축 개수
   RxDouble yAxisFontSize = 14.0.obs; // x축 라벨 글자 크기
 
-  RxDouble maxYValue = 0.0.obs; // 최대 y 크기
+  // X Axis variables
   RxDouble dotGap = 40.0.obs; // x축 점들 간격
   RxDouble xAxisFontSize = 14.0.obs; // x축 라벨 글자 크기
-  RxDouble xAxisTopMargin = 20.0.obs;
+  RxDouble xAxisTopMargin = 20.0.obs; // x축이랑 그래프 사이
 
   // Graph mock data
   List<GraphPointModel> data = <GraphPointModel>[];
@@ -103,7 +107,18 @@ class LineGraph extends GetView<LineGraphViewModel> {
                           LineGraphViewModel.to.xAxisFontSize.value,
                       child: CustomPaint(
                         painter: LineGraphPainter(
+                          data: LineGraphViewModel.to.data,
                           lineColor: colorTheme.primary,
+                          dotGap: LineGraphViewModel.to.dotGap.value,
+                          graphHeight: LineGraphViewModel.to.graphHeight.value,
+                          maxYValue: LineGraphViewModel.to.maxYValue.value,
+                          xAxisFontSize:
+                              LineGraphViewModel.to.xAxisFontSize.value,
+                          xAxisTopMargin:
+                              LineGraphViewModel.to.xAxisTopMargin.value,
+                          yAxisFontSize:
+                              LineGraphViewModel.to.yAxisFontSize.value,
+                          yAxisNumber: LineGraphViewModel.to.yAxisNumber.value,
                         ),
                       ),
                     ),
@@ -115,7 +130,6 @@ class LineGraph extends GetView<LineGraphViewModel> {
         ));
   }
 }
-
 
 class LineGraphYAxis extends StatelessWidget {
   const LineGraphYAxis({super.key});
@@ -155,16 +169,36 @@ class LineGraphYAxis extends StatelessWidget {
 }
 
 class LineGraphPainter extends CustomPainter {
-  LineGraphPainter({required this.lineColor});
+  LineGraphPainter({
+    required this.data,
+    required this.lineColor,
+    required this.graphHeight,
+    required this.maxYValue,
+    required this.dotGap,
+    required this.xAxisFontSize,
+    required this.xAxisTopMargin,
+    required this.yAxisNumber,
+    required this.yAxisFontSize,
+  });
+
+  List<GraphPointModel> data;
 
   final Color lineColor;
 
+  double graphHeight; // 그래프 높이
+  double maxYValue; // 최대 y 크기
+
+  double dotGap; // x축 점들 간격
+  double xAxisFontSize; // x축 라벨 글자 크기
+  double xAxisTopMargin; // x축이랑 그래프 사이
+
+  int yAxisNumber; // y축 개수
+  double yAxisFontSize; // y축 라벨 글자 크기
+
   @override
   void paint(Canvas canvas, Size size) {
-    var graphHeight = LineGraphViewModel.to.graphHeight.value;
-
     // Draw dot
-    for (var i = 1; i < LineGraphViewModel.to.data.length + 1; i++) {
+    for (var i = 1; i < data.length + 1; i++) {
       var circlePaint = Paint()
         ..style = PaintingStyle.fill
         ..color = lineColor
@@ -172,39 +206,32 @@ class LineGraphPainter extends CustomPainter {
         ..strokeWidth = 2;
 
       // Dot position
-      var xValue = LineGraphViewModel.to.dotGap.value * i;
-      var yValue = LineGraphViewModel.to.graphHeight.value -
-          (LineGraphViewModel.to.graphHeight.value /
-              LineGraphViewModel.to.maxYValue.value *
-              LineGraphViewModel.to.data[i].yValue);
+      var xValue = dotGap * i;
+      var yValue = graphHeight - (graphHeight / maxYValue * data[i].yValue);
 
       // #. Draw dot
-      const circleRadius = 1;
+      const circleRadius = 4.0;
       var circlePosition = Offset(xValue, yValue);
-      canvas.drawCircle(circlePosition, 4, circlePaint);
+      canvas.drawCircle(circlePosition, circleRadius, circlePaint);
 
       // Next dot position
-      if (i != LineGraphViewModel.to.data.length) {
-        var nextXValue = LineGraphViewModel.to.dotGap.value * (i + 1);
-        var nextYValue = LineGraphViewModel.to.graphHeight.value -
-            (LineGraphViewModel.to.graphHeight.value /
-                LineGraphViewModel.to.maxYValue.value *
-                LineGraphViewModel.to.data[i + 1].yValue);
+      if (i != data.length) {
+        var nextXValue = dotGap * (i + 1);
+        var nextYValue =
+            graphHeight - (graphHeight / maxYValue * data[i + 1].yValue);
         var nextCirclePostion = Offset(nextXValue, nextYValue);
 
         canvas.drawLine(circlePosition, nextCirclePostion, circlePaint);
       }
 
       // X axis label
-      var xAxisText = LineGraphViewModel.to.data[i].xValue;
-      var xAxisTextSize = 14.0;
-      var xAxisTopMargin = LineGraphViewModel.to.xAxisTopMargin.value;
+      var xAxisText = data[i].xValue;
       _drawText(
           canvas,
           xValue,
-          graphHeight - xAxisTextSize + xAxisTopMargin,
+          graphHeight - xAxisFontSize + xAxisTopMargin,
           "${xAxisText}",
-          TextStyle(fontSize: xAxisTextSize, color: const Color(0xFF767676)));
+          TextStyle(fontSize: xAxisFontSize, color: const Color(0xFF767676)));
     }
   }
 
