@@ -11,9 +11,12 @@ class LineGraphViewModel extends GetxController {
 
   RxDouble graphHeight = 300.0.obs; // 그래프 높이
   RxInt yAxisNumber = 6.obs; // y축 개수
+  RxDouble yAxisFontSize = 14.0.obs; // x축 라벨 글자 크기
 
   RxDouble maxYValue = 0.0.obs; // 최대 y 크기
   RxDouble dotGap = 40.0.obs; // x축 점들 간격
+  RxDouble xAxisFontSize = 14.0.obs; // x축 라벨 글자 크기
+  RxDouble xAxisTopMargin = 20.0.obs;
 
   // Graph mock data
   List<GraphPointModel> data = <GraphPointModel>[];
@@ -56,6 +59,15 @@ class LineGraphViewModel extends GetxController {
     maxYValue(maxYValuePrimitive + 20);
     print("maxYValue ${maxYValue.value}");
   }
+
+  Size getTextSize(String text, TextStyle style) {
+    final TextPainter textPainter = TextPainter(
+        text: TextSpan(text: text, style: style),
+        maxLines: 1,
+        textDirection: TextDirection.ltr)
+      ..layout(minWidth: 0, maxWidth: double.infinity);
+    return textPainter.size;
+  }
 }
 
 class LineGraph extends GetView<LineGraphViewModel> {
@@ -65,28 +77,45 @@ class LineGraph extends GetView<LineGraphViewModel> {
   Widget build(BuildContext context) {
     Get.put(LineGraphViewModel());
 
-    return Obx(() => Row(
+    // Define theme
+    var colorTheme = context.theme.colorScheme;
+
+    return Obx(() => Stack(
           // alignment: Alignment.topLeft,
           children: [
+            // 1. y label
             LineGraphYAxis(),
-            Expanded(
-              child: SingleChildScrollView(
-                controller: LineGraphViewModel.to.scrollController.value,
-                scrollDirection: Axis.horizontal,
-                child: SizedBox(
-                  width: LineGraphViewModel.to.dotGap.value *
-                      LineGraphViewModel.to.data.length,
-                  height: 300,
-                  child: CustomPaint(
-                    painter: LineGraphPainter(),
+
+            // 2. line graph
+            Row(
+              children: [
+                SizedBox(width: 30),
+                Expanded(
+                  child: SingleChildScrollView(
+                    controller: LineGraphViewModel.to.scrollController.value,
+                    scrollDirection: Axis.horizontal,
+                    child: SizedBox(
+                      width: LineGraphViewModel.to.dotGap.value *
+                          LineGraphViewModel.to.data.length,
+                      // 기본 그래프 높이 + x축 라벨이랑 그래프 간격 + x축 라벨 폰트 높이
+                      height: LineGraphViewModel.to.graphHeight.value +
+                          LineGraphViewModel.to.xAxisTopMargin.value +
+                          LineGraphViewModel.to.xAxisFontSize.value,
+                      child: CustomPaint(
+                        painter: LineGraphPainter(
+                          lineColor: colorTheme.primary,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ],
         ));
   }
 }
+
 
 class LineGraphYAxis extends StatelessWidget {
   const LineGraphYAxis({super.key});
@@ -96,19 +125,29 @@ class LineGraphYAxis extends StatelessWidget {
     var colorTheme = context.theme.colorScheme;
 
     return Obx(() => SizedBox(
-        width: 30,
-        // 30은 x축 여분값
-        height: LineGraphViewModel.to.graphHeight.value - 30,
+        // width: double.infinity,
+        height: LineGraphViewModel.to.graphHeight.value - 30, // 30은 x축 여분값
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             for (var i = LineGraphViewModel.to.maxYValue.value.toInt();
                 i > 0;
                 i -= (LineGraphViewModel.to.maxYValue.value ~/
                     LineGraphViewModel.to.yAxisNumber.value)) ...[
-              Text('$i',
-                  style: TextStyle(
-                      fontSize: 14, color: colorTheme.surfaceVariant)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text('$i',
+                      style: TextStyle(
+                          fontSize: LineGraphViewModel.to.yAxisFontSize.value,
+                          color: colorTheme.surfaceVariant)),
+                  const SizedBox(width: 15),
+                  Expanded(
+                    child: Container(height: 1, color: colorTheme.outline),
+                  ),
+                ],
+              ),
             ],
           ],
         )));
@@ -116,37 +155,36 @@ class LineGraphYAxis extends StatelessWidget {
 }
 
 class LineGraphPainter extends CustomPainter {
+  LineGraphPainter({required this.lineColor});
+
+  final Color lineColor;
+
   @override
   void paint(Canvas canvas, Size size) {
     var graphHeight = LineGraphViewModel.to.graphHeight.value;
 
-    var background = Paint()
-      ..style = PaintingStyle.fill
-      ..color = Colors.green
-      ..isAntiAlias = true;
-
-    // Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
-    // canvas.drawRect(rect, background);
-
     // Draw dot
-    for (var i = 0; i < LineGraphViewModel.to.data.length; i++) {
+    for (var i = 1; i < LineGraphViewModel.to.data.length + 1; i++) {
       var circlePaint = Paint()
         ..style = PaintingStyle.fill
-        ..color = Colors.yellow
+        ..color = lineColor
         ..isAntiAlias = true
         ..strokeWidth = 2;
 
+      // Dot position
       var xValue = LineGraphViewModel.to.dotGap.value * i;
       var yValue = LineGraphViewModel.to.graphHeight.value -
           (LineGraphViewModel.to.graphHeight.value /
               LineGraphViewModel.to.maxYValue.value *
               LineGraphViewModel.to.data[i].yValue);
 
+      // #. Draw dot
       const circleRadius = 1;
       var circlePosition = Offset(xValue, yValue);
       canvas.drawCircle(circlePosition, 4, circlePaint);
 
-      if (i != 0) {
+      // Next dot position
+      if (i != LineGraphViewModel.to.data.length) {
         var nextXValue = LineGraphViewModel.to.dotGap.value * (i + 1);
         var nextYValue = LineGraphViewModel.to.graphHeight.value -
             (LineGraphViewModel.to.graphHeight.value /
@@ -155,12 +193,18 @@ class LineGraphPainter extends CustomPainter {
         var nextCirclePostion = Offset(nextXValue, nextYValue);
 
         canvas.drawLine(circlePosition, nextCirclePostion, circlePaint);
-
-        var xAxisText = LineGraphViewModel.to.data[i].xValue;
-        var xAxisTextSize = 14.0;
-        _drawText(canvas, xValue, graphHeight - xAxisTextSize, "${xAxisText}",
-            TextStyle(fontSize: xAxisTextSize, color: const Color(0xFF767676)));
       }
+
+      // X axis label
+      var xAxisText = LineGraphViewModel.to.data[i].xValue;
+      var xAxisTextSize = 14.0;
+      var xAxisTopMargin = LineGraphViewModel.to.xAxisTopMargin.value;
+      _drawText(
+          canvas,
+          xValue,
+          graphHeight - xAxisTextSize + xAxisTopMargin,
+          "${xAxisText}",
+          TextStyle(fontSize: xAxisTextSize, color: const Color(0xFF767676)));
     }
   }
 
