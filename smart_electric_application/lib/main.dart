@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:smart_electric_application/src/presentation/view/page/AIReport.dart';
+import 'package:smart_electric_application/src/presentation/view/page/AiReport.dart';
 import 'package:smart_electric_application/src/presentation/view/page/first_access/FirstAccess.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Login.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(
             name: "/AIReport",
-            page: () => const AIReport(),
+            page: () => const AiReport(),
             transition: Transition.native),
         GetPage(
             name: "/Login", page: () => Login(), transition: Transition.fade),

@@ -1,12 +1,13 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/data/repository/AiRepository.dart';
-import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
 import 'package:smart_electric_application/src/presentation/view/module/graph/BarGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/graph/LineGraph.dart';
+import 'package:smart_electric_application/src/presentation/view/module/graph/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
@@ -66,6 +67,11 @@ class Home extends StatelessWidget {
               print("predictionResult: ${predictionResult.value}");
               var reportResult = await aiRepository.getAiReport("0130392270");
               print("reportResult: ${reportResult.value}");
+
+              print("###### 파이어베이스 토큰");
+              final fcmToken = await FirebaseMessaging.instance.getToken();
+              print(fcmToken);
+
             },
             child: Text("Test Button")),
 
@@ -175,6 +181,12 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
+
+        SizedBox(height: 35),
+
+        Container(
+          height: 300,
+          child: PredictLineGraph()),
 
         // Obx(() => ElevatedButton(
         //     style: ButtonStyle(

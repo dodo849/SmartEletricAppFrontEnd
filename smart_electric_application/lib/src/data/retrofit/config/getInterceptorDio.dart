@@ -13,6 +13,7 @@ Future<Dio> getInterceptorDio() async {
   dio.interceptors.clear();
 
   dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
+
     // 기기에 저장된 AccessToken 로드
     final accessToken = await storage.read(key: 'ACCESS_TOKEN');
     print("accessToken $accessToken");
@@ -67,6 +68,8 @@ Future<Dio> getInterceptorDio() async {
 
       // AccessToken의 만료로 수행하지 못했던 API 요청에 담겼던 AccessToken 갱신
       error.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
+
+
 
       // 수행하지 못했던 API 요청 복사본 생성
       final clonedRequest = await dio.request(
