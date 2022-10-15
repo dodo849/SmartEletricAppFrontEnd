@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/domain/usecase/LogoutUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/LogoutUsecase.dart';
 
 class MypageViewModel extends GetxController {
   static MypageViewModel get to => Get.find();

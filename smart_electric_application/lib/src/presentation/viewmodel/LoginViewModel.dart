@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckLoginUseCase.dart';
-import 'package:smart_electric_application/src/domain/usecase/LoginUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckLoginUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/LoginUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 
 class LoginViewModel extends GetxController {
@@ -16,8 +16,8 @@ class LoginViewModel extends GetxController {
   RxBool isLogin = false.obs; // 로그인 상태이면 true
 
   // Use case
-  var loginUseCase = LoginUseCase();
-  var checkLoginUseCase = CheckLoginUseCase();
+  var loginUseCase = LoginUsecase();
+  var checkLoginUseCase = CheckLoginUsecase();
 
   @override
   void onInit() {

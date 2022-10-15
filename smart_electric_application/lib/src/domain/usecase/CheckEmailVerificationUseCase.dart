@@ -5,7 +5,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/Firebase
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class CheckEmailVerificationUseCase {
+class CheckEmailVerificationUsecase {
   // DI
   final FirebaseRepositoryInterface firebaseRepository =
       GetIt.I.get<FirebaseRepositoryInterface>();

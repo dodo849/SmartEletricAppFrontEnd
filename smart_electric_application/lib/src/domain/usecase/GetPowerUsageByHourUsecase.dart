@@ -4,7 +4,7 @@ import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
 import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
 
-class GetPowerUsageByDayUseCase {
+class GetPowerUsageByDayUsecase {
   final powerUsageRepository = GetIt.I.get<PowerUsageRepositoryInterface>();
 
   Future<Result<List<GraphPointModel>, String>> excute(

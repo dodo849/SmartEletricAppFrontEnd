@@ -4,7 +4,7 @@ import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
-class LogoutUseCase {
+class LogoutUsecase {
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
   final firebaseRepository = GetIt.I.get<FirebaseRepositoryInterface>();
 

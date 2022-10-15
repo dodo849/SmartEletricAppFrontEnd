@@ -4,7 +4,7 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'dart:math';
 
 import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUsecase.dart';
 
 class BarGraphViewModel extends GetxController {
   // static BarGraphViewModel get to => Get.find();
@@ -19,7 +19,7 @@ class BarGraphViewModel extends GetxController {
   List<GraphPointModel> mockData = <GraphPointModel>[];
 
   // UseCase
-  var getPowerUsageByDayUseCase = GetPowerUsageByDayUseCase();
+  var getPowerUsageByDayUseCase = GetPowerUsageByDayUsecase();
 
   @override
   void onInit() async {

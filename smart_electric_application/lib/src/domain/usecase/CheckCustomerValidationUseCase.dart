@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 /// 사용자 정보 제공 동의 확인 UseCase
-class CheckInfoAgreementUseCase {
+class CheckInfoAgreementUsecase {
   void excute() async {
     var url = Uri.parse(
       'https://api.smartelectric.kr/info/specific-user/validation?custNo=0130392270',
