@@ -7,7 +7,7 @@ class MypageViewModel extends GetxController {
   // Input variables
 
   // Use case
-  var logoutUseCase = LogoutUseCase();
+  var logoutUseCase = LogoutUsecase();
 
   @override
   void onInit() {
