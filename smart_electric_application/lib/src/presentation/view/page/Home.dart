@@ -176,7 +176,7 @@ class Home extends StatelessWidget {
             children: [
               Text("Test line graph", style: context.theme.textTheme.headline3),
               const SizedBox(height: 15),
-              LineGraph(),
+              // LineGraph(),
               const SizedBox(height: 40),
             ],
           ),

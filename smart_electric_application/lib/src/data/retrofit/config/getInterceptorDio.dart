@@ -67,7 +67,7 @@ Future<Dio> getInterceptorDio() async {
       // await storage.write(key: 'REFRESH_TOKEN', value: newRefreshToken);
 
       // AccessToken의 만료로 수행하지 못했던 API 요청에 담겼던 AccessToken 갱신
-      error.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
+      // error.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
 
 
 

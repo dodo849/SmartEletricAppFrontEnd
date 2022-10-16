@@ -1,14 +1,11 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
 
 class PredictLineGraphViewModel extends GetxController {
-  RxDouble minX = 0.0.obs;
+  RxDouble minX = 1.0.obs;
   RxDouble maxX = 30.0.obs;
 
   RxDouble minY = 0.0.obs;
@@ -38,7 +35,9 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
     // ViewModel DI
     Get.put(PredictLineGraphViewModel());
 
+    // Theme
     var colorTheme = context.theme.colorScheme;
+
     return Obx(() => Listener(
           onPointerSignal: (signal) {
             if (signal is PointerScrollEvent) {
@@ -57,7 +56,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
           },
           child: GestureDetector(
             onDoubleTap: () {
-              controller.minX(0);
+              controller.minX(1);
               controller.maxX(controller.data.length.toDouble());
             },
             onHorizontalDragUpdate: (dragUpdDet) {
@@ -74,12 +73,12 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
 
               if (primDelta != 0) {
                 if (primDelta.isNegative) {
-                  if (nextRightMinX > 0 && nextRightMaxX < 100) {
+                  if (nextRightMinX > 1 && nextRightMaxX < 100) {
                     controller.minX(nextRightMinX);
                     controller.maxX(nextRightMaxX);
                   }
                 } else {
-                  if (nextLeftMinX > 0 && nextLeftMaxX < 100) {
+                  if (nextLeftMinX > 1 && nextLeftMaxX < 100) {
                     controller.minX(nextLeftMinX);
                     controller.maxX(nextLeftMaxX);
                   }
@@ -93,17 +92,19 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                   maxY: controller.maxY.value,
                   showingTooltipIndicators: [],
                   titlesData: FlTitlesData(
-                      topTitles:
-                          AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      rightTitles: AxisTitles(
-                          sideTitles: SideTitles(showTitles: false)),
-                                                bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 20,
-            interval: 1,
-            getTitlesWidget: bottomTitleWidgets,
-          ),),),
+                    topTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 20,
+                        interval: 1,
+                        getTitlesWidget: _bottomTitleWidgets,
+                      ),
+                    ),
+                  ),
                   borderData: FlBorderData(
                       border: Border(
                           top: BorderSide(color: colorTheme.outline),
@@ -115,9 +116,16 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                           color: colorTheme.outline,
                           strokeWidth: 1,
                           dashArray: [1, 0])),
-                          
-
                   clipData: FlClipData.all(),
+                  // Set tooltip
+                  lineTouchData: LineTouchData(
+                      getTouchedSpotIndicator: _getTouchedSpotIndicator,
+                      touchTooltipData: LineTouchTooltipData(
+                          getTooltipItems: _getTooltipItems,
+                          tooltipBgColor: const Color(0xFF2D2D2D),
+                          tooltipRoundedRadius: 15,
+                          tooltipPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                          tooltipBorder: null)),
                   // read about it in the LineChartData section
                   lineBarsData: [
                     // data 1
@@ -141,7 +149,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                       ),
                       aboveBarData: BarAreaData(show: false),
                       barWidth: 1,
-                      color: colorTheme.secondary,
+                      color: colorTheme.secondaryContainer,
                       belowBarData: BarAreaData(
                         show: true,
                         color: colorTheme.primary.withOpacity(0.2),
@@ -170,8 +178,8 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                         color: colorTheme.primary.withOpacity(0.2),
                       ),
                       spots: const [
+                        // FlSpot(0, 0),
                         FlSpot(1, 0),
-                        FlSpot(1, 34),
                         FlSpot(2, 40),
                         FlSpot(3, 50),
                         FlSpot(4, 51),
@@ -189,7 +197,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
         ));
   }
 
-   Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  Widget _bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: Color(0xff68737d),
       fontWeight: FontWeight.normal,
@@ -203,5 +211,92 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
       space: 8.0,
       child: text,
     );
+  }
+
+  List<LineTooltipItem?> _getTooltipItems(List<LineBarSpot> touchedBarSpots) {
+    return touchedBarSpots.map((barSpot) {
+      final flSpot = barSpot;
+      if (flSpot.x == 0 || flSpot.x == 6) {
+        return null;
+      }
+
+      TextAlign textAlign = TextAlign.left;
+      // switch (flSpot.x.toInt()) {
+      //   case 1:
+      //     textAlign = TextAlign.left;
+      //     break;
+      //   case 5:
+      //     textAlign = TextAlign.right;
+      //     break;
+      //   default:
+      //     textAlign = TextAlign.center;
+      // }
+
+      return LineTooltipItem(
+        '',
+        // '${flSpot.x.toInt()}일 \n',
+        const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+        children: [
+          const TextSpan(
+            text: '지난달 사용량\n',
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+          TextSpan(
+            text: flSpot.y.toString(),
+            style: TextStyle(
+              color: Colors.grey[100],
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const TextSpan(
+            text: 'kWh',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ],
+        textAlign: textAlign,
+      );
+    }).toList();
+  }
+
+  List<TouchedSpotIndicatorData?> _getTouchedSpotIndicator(
+      LineChartBarData barData, List<int> spotIndexes) {
+    return spotIndexes.map((spotIndex) {
+      final spot = barData.spots[spotIndex];
+      if (spot.x == 0 || spot.x == 6) {
+        return null;
+      }
+      return TouchedSpotIndicatorData(
+        FlLine(color: Color(0xFFCBCBCB), strokeWidth: 0.5, dashArray: [3, 3]),
+        FlDotData(
+          getDotPainter: (spot, percent, barData, index) {
+            if (index < 7) {
+              return FlDotCirclePainter(
+                radius: 5,
+                color: Colors.white,
+                strokeWidth: 1,
+                strokeColor: Color(0xFFFECB54),
+              );
+            } else {
+              return FlDotCirclePainter(
+                radius: 5,
+                color: Colors.white,
+                strokeWidth: 1,
+                strokeColor: Color(0xFF6D6CE7),
+              );
+            }
+          },
+        ),
+      );
+    }).toList();
   }
 }
