@@ -28,20 +28,22 @@ class LoginUsecase {
     }
 
     // id 토큰으로 서버 토큰 발급받기
-    Result<JwtTokenDTO, String> getJwtTokensResult =
-        await authRepository.getJwtTokens(getIdTokenResult.value!);
+    Result<JwtTokenDTO, String> requestJwtResult =
+        await authRepository.requestJwt(getIdTokenResult.value!);
 
-    if (getJwtTokensResult.status == ResultStatus.error) {
-      return getJwtTokensResult;
+    if (requestJwtResult.status == ResultStatus.error) {
+      return requestJwtResult;
     }
 
     // 서버토큰 발급 성공 시 내부 DB에 저장하기
     Result<bool, String> saveTokensResult =
-        await authRepository.saveJwtTokens(getJwtTokensResult.value!);
+        await authRepository.saveJwt(requestJwtResult.value!);
 
     if (saveTokensResult.status == ResultStatus.error) {
       return saveTokensResult;
     }
+
+    // ### user 정보 저장하기 해야함
 
     // 모든 과정 성공 시 true Result 반환
     return const Result.success(true);

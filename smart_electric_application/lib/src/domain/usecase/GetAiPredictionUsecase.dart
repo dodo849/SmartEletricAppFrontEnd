@@ -4,7 +4,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
 
 /// Ai 예측 값 받아오기
-class GetAiReportUsecase {
+class GetAiPredictionUsecase {
   final aiRepository = GetIt.I.get<AiRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
@@ -17,12 +17,14 @@ class GetAiReportUsecase {
       return getCustomerNumberResult;
     }
 
+    print("getCustomerNumberResult ${getCustomerNumberResult.error}");
+
     String customerNumber = getCustomerNumberResult.value!;
 
     // AI 예측 정보 가져오기
-    var requestAiReportResult =
-        await aiRepository.requestAiReport(customerNumber: customerNumber);
+    var requestAiPredictionResult =
+        await aiRepository.requestAiPrediction(customerNumber: customerNumber);
 
-    return requestAiReportResult;
+    return requestAiPredictionResult;
   }
 }

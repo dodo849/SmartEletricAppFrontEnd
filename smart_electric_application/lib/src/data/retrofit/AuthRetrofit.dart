@@ -15,7 +15,7 @@ abstract class AuthRetrofit {
 
   // firebase id token으로 refresh/access 토큰 획득
   @POST('/login')
-  Future<JwtTokenDTO> getJwtTokens(
+  Future<JwtTokenDTO> requestJwt(
       @Header("Authorization") String firebaseIdToken);
 
   // refresh token으로 access token 획득

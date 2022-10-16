@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
               print('user $user');
 
               // var authRepository = AuthRepository();
-              // var jwtTokens = await authRepository.getJwtTokens(idToken!);
+              // var jwtTokens = await authRepository.requestJwt(idToken!);
               // print(jwtTokens.value);
 
               var powerUsageRepository = PowerUsageRepository();
@@ -63,9 +63,9 @@ class Home extends StatelessWidget {
 
               var aiRepository = AiRepository();
               var predictionResult =
-                  await aiRepository.getAiPrediction("0130392270");
+                  await aiRepository.requestAiPrediction(customerNumber: "0130392270");
               print("predictionResult: ${predictionResult.value}");
-              var reportResult = await aiRepository.getAiReport("0130392270");
+              var reportResult = await aiRepository.requestAiReport(customerNumber: "0130392270");
               print("reportResult: ${reportResult.value}");
 
               print("###### 파이어베이스 토큰");

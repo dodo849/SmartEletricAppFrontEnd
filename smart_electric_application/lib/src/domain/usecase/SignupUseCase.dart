@@ -14,6 +14,8 @@ class SignupUsecase {
   final AuthRepositoryInterface authRepository =
       GetIt.I.get<AuthRepositoryInterface>();
 
+  final loginUseCase = LoginUsecase();
+
   Future<Result<bool, String>> execute(
       {required String customerNumber,
       required String name,
@@ -44,7 +46,6 @@ class SignupUsecase {
     }
 
     // 회원가입 성공시 로그인
-    var loginUseCase = LoginUseCase();
     loginUseCase.execute(email, password);
 
     // 모든 과정 성공 시 true Result 반환

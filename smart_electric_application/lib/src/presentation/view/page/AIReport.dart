@@ -6,16 +6,23 @@ import 'package:smart_electric_application/src/presentation/view/module/ai_repor
 import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Home.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/AiReportViewModel.dart';
 
-class AiReport extends StatelessWidget {
+class AiReport extends GetView<AiReportViewModel> {
   const AiReport({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    // ViewModel DI
+    Get.put(AiReportViewModel());
+
     var colorTheme = context.theme.colorScheme;
 
     var bannerTitleTextStyle = TextStyle(
-        color: colorTheme.onBackground, fontSize: 22, fontWeight: FontWeight.bold);
+        color: colorTheme.onBackground,
+        fontSize: 22,
+        fontWeight: FontWeight.bold);
     var bannerBodyTextStyle = TextStyle(
         color: colorTheme.onBackground,
         fontSize: 14,
@@ -128,7 +135,7 @@ class AiReport extends StatelessWidget {
                     ),
                     child: Column(children: [
                       SizedBox(height: 25),
-                      Text("6.4kWh"),
+                      Text("${controller.todayUsagePrediction}kWh"),
                       SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -221,18 +228,16 @@ class AiReport extends StatelessWidget {
                                   text: TextSpan(
                                     text: '￦ ',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      color: colorTheme.error
-                                    ),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                        color: colorTheme.error),
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: '2,234',
                                         style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: colorTheme.error
-                                    ),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: colorTheme.error),
                                       ),
                                     ],
                                   ),
@@ -241,7 +246,7 @@ class AiReport extends StatelessWidget {
                             )),
                       ),
                       SizedBox(width: 7),
-                     Expanded(
+                      Expanded(
                         child: Container(
                             padding: EdgeInsets.all(15),
                             height: 130,
@@ -268,17 +273,16 @@ class AiReport extends StatelessWidget {
                                   text: TextSpan(
                                     text: '￦ ',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      color: colorTheme.tertiaryContainer
-                                    ),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                        color: colorTheme.tertiaryContainer),
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: '2,234',
                                         style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -287,7 +291,7 @@ class AiReport extends StatelessWidget {
                             )),
                       ),
                       SizedBox(width: 7),
-                     Expanded(
+                      Expanded(
                         child: Container(
                             padding: EdgeInsets.all(15),
                             height: 130,
@@ -314,17 +318,16 @@ class AiReport extends StatelessWidget {
                                   text: TextSpan(
                                     text: '￦ ',
                                     style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14,
-                                      color: colorTheme.primaryContainer
-                                    ),
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14,
+                                        color: colorTheme.primaryContainer),
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: '2,234',
                                         style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -358,22 +361,39 @@ class AiReport extends StatelessWidget {
                   DayTypeCard(),
                   SizedBox(height: 20),
                   NightTypeCard(),
-                  
+
                   // Content 6
                   SizedBox(height: contentGap),
                   Text("평일보다 주말 사용량이 많아요!", style: contentBodyTextStyle),
                   SizedBox(height: 7),
-                  Text("두번째 누진구간이 적용됩니다.", style: contentTitleTextStyle),
+                  RichText(
+                    text: TextSpan(
+                      text: '월',
+                      style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          color: colorTheme.surfaceVariant,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '화',
+                          style: TextStyle(color: colorTheme.primaryContainer),
+                        ),
+                        TextSpan(text: "수"),
+                        TextSpan(text: "목"),
+                        TextSpan(text: "금"),
+                        TextSpan(text: "토"),
+                        TextSpan(text: "일"),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 20),
                   // Content 6 Card
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    width: double.infinity,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: colorTheme.surface,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/weekday.png'),
+                    ],
                   ),
                 ],
               ),
