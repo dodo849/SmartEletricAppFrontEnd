@@ -3,6 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
 
 class PredictLineGraphViewModel extends GetxController {
   RxDouble minX = 1.0.obs;
@@ -11,7 +13,27 @@ class PredictLineGraphViewModel extends GetxController {
   RxDouble minY = 0.0.obs;
   RxDouble maxY = 100.0.obs;
 
-  List<GraphPointModel> data = <GraphPointModel>[];
+  List<GraphPointModel> lastMonthUsage = <GraphPointModel>[];
+  List<FlSpot> thisMonthUsage = [
+    FlSpot(1, 0),
+    FlSpot(2, 40),
+    FlSpot(3, 50),
+    FlSpot(4, 51),
+    FlSpot(5, 58),
+    FlSpot(6, 62),
+    FlSpot(7, 65),
+  ];
+  List<FlSpot> predictUsage = [
+    FlSpot(7, 65),
+    FlSpot(8, 68),
+    FlSpot(9, 70),
+    FlSpot(10, 72),
+    FlSpot(11, 74),
+    FlSpot(12, 78),
+    FlSpot(13, 80),
+    FlSpot(14, 82),
+    FlSpot(15, 90),
+  ];
 
   @override
   void onInit() async {
@@ -19,10 +41,10 @@ class PredictLineGraphViewModel extends GetxController {
     for (int i = 1; i < 101; i += 10) {
       var yValue = i.toDouble();
       // yValue = double.parse(yValue.toStringAsFixed(1));
-      data.add(GraphPointModel("$i일", yValue));
+      lastMonthUsage.add(GraphPointModel("$i일", yValue));
     }
 
-    maxX(data.length.toDouble());
+    maxX(lastMonthUsage.length.toDouble());
     super.onInit();
   }
 }
@@ -57,19 +79,19 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
           child: GestureDetector(
             onDoubleTap: () {
               controller.minX(1);
-              controller.maxX(controller.data.length.toDouble());
+              controller.maxX(controller.lastMonthUsage.length.toDouble());
             },
             onHorizontalDragUpdate: (dragUpdDet) {
               double primDelta = dragUpdDet.primaryDelta ?? 0.0;
 
               var nextRightMinX =
-                  controller.minX.value + controller.maxX.value * 0.015;
+                  controller.minX.value + controller.maxX.value * 0.01;
               var nextRightMaxX =
-                  controller.maxX.value + controller.maxX.value * 0.015;
+                  controller.maxX.value + controller.maxX.value * 0.01;
               var nextLeftMinX =
-                  controller.minX.value - controller.maxX.value * 0.015;
+                  controller.minX.value - controller.maxX.value * 0.01;
               var nextLeftMaxX =
-                  controller.maxX.value - controller.maxX.value * 0.015;
+                  controller.maxX.value - controller.maxX.value * 0.01;
 
               if (primDelta != 0) {
                 if (primDelta.isNegative) {
@@ -124,7 +146,8 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                           getTooltipItems: _getTooltipItems,
                           tooltipBgColor: const Color(0xFF2D2D2D),
                           tooltipRoundedRadius: 15,
-                          tooltipPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                          tooltipPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
                           tooltipBorder: null)),
                   // read about it in the LineChartData section
                   lineBarsData: [
@@ -135,8 +158,11 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                       ),
                       aboveBarData: BarAreaData(show: false),
                       barWidth: 1,
-                      color: colorTheme.onSurface,
-                      spots: controller.data.asMap().entries.map((element) {
+                      color: Colors.grey[400],
+                      spots: controller.lastMonthUsage
+                          .asMap()
+                          .entries
+                          .map((element) {
                         // print(element.key);
                         return FlSpot(
                             element.key.toDouble(), element.value.yValue);
@@ -144,50 +170,31 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                     ),
                     // data 2
                     LineChartBarData(
-                      dotData: FlDotData(
-                        show: false,
-                      ),
-                      aboveBarData: BarAreaData(show: false),
-                      barWidth: 1,
-                      color: colorTheme.secondaryContainer,
-                      belowBarData: BarAreaData(
-                        show: true,
-                        color: colorTheme.primary.withOpacity(0.2),
-                      ),
-                      spots: const [
-                        FlSpot(7, 65),
-                        FlSpot(9, 68),
-                        FlSpot(10, 70),
-                        FlSpot(11, 74),
-                        FlSpot(12, 78),
-                        FlSpot(13, 80),
-                        FlSpot(14, 82),
-                        FlSpot(15, 90),
-                      ],
-                    ),
+                        dotData: FlDotData(
+                          show: false,
+                        ),
+                        aboveBarData: BarAreaData(show: false),
+                        barWidth: 1,
+                        color: colorTheme.primary,
+                        belowBarData: BarAreaData(
+                          show: true,
+                          color: colorTheme.primary.withOpacity(0.2),
+                        ),
+                        spots: controller.thisMonthUsage),
+
                     // data 3
                     LineChartBarData(
-                      dotData: FlDotData(
-                        show: false,
-                      ),
-                      aboveBarData: BarAreaData(show: false),
-                      barWidth: 1,
-                      color: colorTheme.primary,
-                      belowBarData: BarAreaData(
-                        show: true,
-                        color: colorTheme.primary.withOpacity(0.2),
-                      ),
-                      spots: const [
-                        // FlSpot(0, 0),
-                        FlSpot(1, 0),
-                        FlSpot(2, 40),
-                        FlSpot(3, 50),
-                        FlSpot(4, 51),
-                        FlSpot(5, 58),
-                        FlSpot(6, 62),
-                        FlSpot(7, 65),
-                      ],
-                    ),
+                        dotData: FlDotData(
+                          show: false,
+                        ),
+                        aboveBarData: BarAreaData(show: false),
+                        barWidth: 1,
+                        color: colorTheme.secondaryContainer,
+                        belowBarData: BarAreaData(
+                          show: true,
+                          color: colorTheme.primary.withOpacity(0.2),
+                        ),
+                        spots: controller.predictUsage),
                   ]),
               swapAnimationDuration:
                   const Duration(milliseconds: 150), // Optional
@@ -216,21 +223,43 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
   List<LineTooltipItem?> _getTooltipItems(List<LineBarSpot> touchedBarSpots) {
     return touchedBarSpots.map((barSpot) {
       final flSpot = barSpot;
-      if (flSpot.x == 0 || flSpot.x == 6) {
+
+      // 이번달이랑 예측에서 겹치는 부분이면 이번달 사용량 그래프의 tooltip null
+      print("barSpot ${barSpot.spotIndex}");
+      if (barSpot.spotIndex == 6 && barSpot.barIndex == 1){
+        print("return null");
         return null;
       }
 
+      // 텍스트 정렬 설정
       TextAlign textAlign = TextAlign.left;
-      // switch (flSpot.x.toInt()) {
-      //   case 1:
-      //     textAlign = TextAlign.left;
-      //     break;
-      //   case 5:
-      //     textAlign = TextAlign.right;
-      //     break;
-      //   default:
-      //     textAlign = TextAlign.center;
-      // }
+
+      // 데이터 종류 라벨 텍스트 설정
+      String dataLabelText;
+      if (barSpot.barIndex == 0) {
+        dataLabelText = '지난달 사용량 \n';
+      } else if (barSpot.barIndex == 1) {
+        dataLabelText = '이번달 사용량 \n';
+      } else {
+        dataLabelText = '예상 사용량 \n';
+      }
+
+      TextStyle usageTextStyle;
+      if (barSpot.barIndex == 0) {
+        usageTextStyle = TextStyle(
+            color: Colors.white, fontSize: 14, fontWeight: FontWeight.normal);
+      } else if (barSpot.barIndex == 1) {
+        usageTextStyle = TextStyle(
+            color: LightColors.yellow1,
+            fontSize: 18,
+            fontWeight: FontWeight.bold);
+      } else {
+        dataLabelText = '예상 사용량 \n';
+        usageTextStyle = TextStyle(
+            color: Color.fromARGB(255, 154, 154, 255),
+            fontSize: 18,
+            fontWeight: FontWeight.bold);
+      }
 
       return LineTooltipItem(
         '',
@@ -240,8 +269,8 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
           fontWeight: FontWeight.bold,
         ),
         children: [
-          const TextSpan(
-            text: '지난달 사용량\n',
+          TextSpan(
+            text: dataLabelText,
             style: TextStyle(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.normal,
@@ -249,14 +278,10 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
           ),
           TextSpan(
             text: flSpot.y.toString(),
-            style: TextStyle(
-              color: Colors.grey[100],
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            style: usageTextStyle,
           ),
           const TextSpan(
-            text: 'kWh',
+            text: ' kWh',
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.normal,
@@ -272,28 +297,29 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
       LineChartBarData barData, List<int> spotIndexes) {
     return spotIndexes.map((spotIndex) {
       final spot = barData.spots[spotIndex];
-      if (spot.x == 0 || spot.x == 6) {
-        return null;
+
+      Color spotIndicatorColor;
+      // 어떤 선인지 y값으로 확인
+      if (spotIndex < controller.predictUsage.length &&
+          spot.y == controller.predictUsage[spotIndex].y) {
+        spotIndicatorColor = LightColors.purple;
+      } else if (spotIndex < controller.thisMonthUsage.length &&
+          spot.y == controller.thisMonthUsage[spotIndex].y) {
+        spotIndicatorColor = LightColors.yellow1;
+      } else {
+        spotIndicatorColor = Colors.grey[400]!;
       }
+
       return TouchedSpotIndicatorData(
-        FlLine(color: Color(0xFFCBCBCB), strokeWidth: 0.5, dashArray: [3, 3]),
+        FlLine(color: Color(0xFFCBCBCB), strokeWidth: 1, dashArray: [3, 3]),
         FlDotData(
           getDotPainter: (spot, percent, barData, index) {
-            if (index < 7) {
-              return FlDotCirclePainter(
-                radius: 5,
-                color: Colors.white,
-                strokeWidth: 1,
-                strokeColor: Color(0xFFFECB54),
-              );
-            } else {
-              return FlDotCirclePainter(
-                radius: 5,
-                color: Colors.white,
-                strokeWidth: 1,
-                strokeColor: Color(0xFF6D6CE7),
-              );
-            }
+            return FlDotCirclePainter(
+              radius: 5,
+              color: Colors.white,
+              strokeWidth: 1,
+              strokeColor: spotIndicatorColor,
+            );
           },
         ),
       );

@@ -16,10 +16,9 @@ Future<Dio> getInterceptorDio() async {
 
     // 기기에 저장된 AccessToken 로드
     final accessToken = await storage.read(key: 'ACCESS_TOKEN');
-    print("accessToken $accessToken");
 
     // 매 요청마다 헤더에 AccessToken을 포함
-    options.headers['Authorization'] = 'Bearer $accessToken';
+    options.headers['Authorization'] = 'Bearer ${accessToken}';
     return handler.next(options);
   }, onError: (error, handler) async {
 
@@ -67,18 +66,23 @@ Future<Dio> getInterceptorDio() async {
       // await storage.write(key: 'REFRESH_TOKEN', value: newRefreshToken);
 
       // AccessToken의 만료로 수행하지 못했던 API 요청에 담겼던 AccessToken 갱신
-      // error.requestOptions.headers['Authorization'] = 'Bearer $newAccessToken';
+      error.requestOptions.headers['Authorization'] = 'Bearer ${newAccessToken}';
 
+      // 베이스 url 설정
+      // error.requestOptions.baseUrl = 'https://api.smartelectric.kr';
 
+      print("interceptor error : base url -> ${error.requestOptions.baseUrl}");
 
       // 수행하지 못했던 API 요청 복사본 생성
       final clonedRequest = await dio.request(
-        'https://api.smartelectric.kr/${error.requestOptions.path}',
+        '${error.requestOptions.baseUrl}${error.requestOptions.path}',
           options: Options(
               method: error.requestOptions.method,
               headers: error.requestOptions.headers),
           data: error.requestOptions.data,
           queryParameters: error.requestOptions.queryParameters);
+
+      print(clonedRequest);
 
       // API 복사본으로 재요청
       return handler.resolve(clonedRequest);
