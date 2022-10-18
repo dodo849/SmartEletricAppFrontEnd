@@ -4,6 +4,7 @@ import 'package:smart_electric_application/src/presentation/view/atoms/ImageButt
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/SimulationBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/SimulationProductList.dart';
+import 'package:smart_electric_application/src/presentation/view/page/AddsimulationProduct.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class BillSimulation extends StatelessWidget {
@@ -11,7 +12,6 @@ class BillSimulation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // VeiwModel DI
     Get.put(BillSimulationViewModel());
 
@@ -28,7 +28,12 @@ class BillSimulation extends StatelessWidget {
               children: [
                 Text("시뮬레이션 가전 목록", style: context.theme.textTheme.headline3),
                 Spacer(),
-                Text("추가하기"),
+                GestureDetector(
+                    onTap: () {
+                      Get.to(AddSimulationProduct(),
+                          transition: Transition.rightToLeft);
+                    },
+                    child: Text("추가하기")),
                 SizedBox(width: 10),
                 Text("편집하기"),
               ],

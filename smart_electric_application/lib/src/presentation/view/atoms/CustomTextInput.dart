@@ -9,6 +9,7 @@ class CustomTextInput extends StatelessWidget {
     Key? key,
     this.labelText,
     this.placeholder,
+    this.suffixText,
     this.textInputStyle,
     this.focusColor,
     this.textInputType,
@@ -22,6 +23,7 @@ class CustomTextInput extends StatelessWidget {
   // 부모 컴포넌트에게 값을 받을 클래스 변수 정의
   final String? labelText;
   final String? placeholder;
+  final String? suffixText;
   final TextInputStyle? textInputStyle;
   final Color? focusColor;
   final TextInputType? textInputType;
@@ -120,6 +122,7 @@ class CustomTextInput extends StatelessWidget {
       maxLength: maxLength,
       autofocus: isFocus ?? false,
       obscureText: isObscureText ?? false,
+      cursorColor: focusColor,
       decoration: InputDecoration(
         hintText: placeholder,
         hintStyle: TextStyle(color: colorTheme.surfaceVariant),
@@ -127,6 +130,8 @@ class CustomTextInput extends StatelessWidget {
         errorStyle: TextStyle(color: colorTheme.error, fontSize: 14),
         focusedBorder: focusBorderStyle,
         enabledBorder: enabledBorderStyle,
+        suffixText: suffixText,
+        suffixStyle: TextStyle(color: colorTheme.onBackground, fontSize: 14),
       ),
       onChanged: (text) {
         onChanged(text);

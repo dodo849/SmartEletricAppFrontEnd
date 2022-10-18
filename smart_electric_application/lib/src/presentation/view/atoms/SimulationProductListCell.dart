@@ -43,7 +43,7 @@ class SimulationProductListCell extends StatelessWidget {
                   border: Border.all(
                     width: 1,
                     color: viewModel.isSelected.isTrue
-                        ? colorTheme.secondary
+                        ? colorTheme.secondaryContainer
                         : colorTheme.outline,
                   ),
                 ),
@@ -51,7 +51,7 @@ class SimulationProductListCell extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/product_${simulationProduct.type}.svg",
-                      color: context.theme.colorScheme.secondary,
+                      color: context.theme.colorScheme.secondaryContainer,
                       width: 50,
                       height: 50,
                     ),

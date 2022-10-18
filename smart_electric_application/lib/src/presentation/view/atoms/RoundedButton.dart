@@ -33,7 +33,7 @@ class RoundedButton extends StatelessWidget {
         shadowColor: MaterialStateProperty.all(Colors.transparent),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(20.0),
         )));
 
 
@@ -52,7 +52,7 @@ class RoundedButton extends StatelessWidget {
 
     switch (size) {
       case ButtonSize.large:
-        returnSize = Size(double.infinity, 50);
+        returnSize = Size(double.infinity, 55);
         break;
       case ButtonSize.midium: // 아직 미정
         break;

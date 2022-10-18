@@ -48,7 +48,9 @@ class BillSimulationCard extends StatelessWidget {
                       onTap: () {
                         BillSimulationViewModel.to.toggleIsCardOpen();
                       },
-                      child: SvgPicture.asset('assets/icons/arrow_down.svg')),
+                      child: BillSimulationViewModel.to.isCardOpen.value
+                          ? SvgPicture.asset('assets/icons/arrow_down.svg')
+                          : SvgPicture.asset('assets/icons/arrow_up.svg')),
                 ],
               ),
 
@@ -60,7 +62,7 @@ class BillSimulationCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
-                  color: context.theme.colorScheme.secondary,
+                  color: context.theme.colorScheme.secondaryContainer,
                 ),
               ),
 
@@ -144,7 +146,7 @@ class BillSimulationCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
-                        color: context.theme.colorScheme.secondary,
+                        color: context.theme.colorScheme.secondaryContainer,
                       ),
                     ),
                   ],

@@ -6,6 +6,7 @@ class SimulationProductCellViewModel extends GetxController {
   RxBool isSelected = false.obs; // 셀 선택 bool
 
   void toggleisSelected(String index) {
+    print("product cell click index : ${index}");
     isSelected.isTrue ? isSelected(false) : isSelected(true);
 
     update([index]);
