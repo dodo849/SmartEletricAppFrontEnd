@@ -18,6 +18,7 @@ class CustomTextInput extends StatelessWidget {
     this.errorText,
     this.isObscureText,
     this.onChanged,
+    this.isRequiredInput,
   }) : super(key: key);
 
   // 부모 컴포넌트에게 값을 받을 클래스 변수 정의
@@ -31,6 +32,7 @@ class CustomTextInput extends StatelessWidget {
   final bool? isFocus;
   final String? errorText;
   final bool? isObscureText;
+  final bool? isRequiredInput;
   final Function(String)? onChanged;
 
   @override
@@ -55,7 +57,16 @@ class CustomTextInput extends StatelessWidget {
                   fontSize: 14,
                   color: colorTheme.onSurface,
                   fontWeight: FontWeight.normal),
-            )
+            ),
+            if (isRequiredInput == true) ...[
+              Text(
+                "*",
+                style: TextStyle(
+                    fontSize: 16,
+                    color: colorTheme.error,
+                    fontWeight: FontWeight.normal),
+              )
+            ]
           ],
         ]),
         const SizedBox(height: 10),

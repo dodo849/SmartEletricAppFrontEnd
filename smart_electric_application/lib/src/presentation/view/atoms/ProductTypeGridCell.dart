@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/model/ProductTypeModel.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/AddSimulationProductViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/AddBillSimulationProductViewModel.dart';
 
 class ProductTypeCellViewModel extends GetxController {
   // 가전 분류 종류 목록
@@ -33,7 +33,7 @@ class ProductTypeCellViewModel extends GetxController {
   // Function
   void select() {
     isSelected.value ? isSelected(false) : isSelected(true);
-    update();
+    // update();
   }
 }
 
@@ -56,7 +56,7 @@ class ProductTypeGridCell extends StatelessWidget {
 
     var colorTheme = context.theme.colorScheme;
 
-    return GetBuilder<ProductTypeCellViewModel>(builder: (viewModel) {
+    return GetX<ProductTypeCellViewModel>(builder: (viewModel) {
       return GestureDetector(
         onTap: () {
           // 부모한테 받은 탭 이벤트 실행
@@ -66,7 +66,7 @@ class ProductTypeGridCell extends StatelessWidget {
           viewModel.select();
 
           // 이전 뷰에 표시되도록 이전 뷰모델 설정
-          AddSimulationProductViewModel.to.selectedProductIndex();
+          AddBillSimulationProductViewModel.to.selectedProductIndex();
 
           // 모달 pop
           Navigator.of(context).pop();

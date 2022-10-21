@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/ImageButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationCard.dart';
-import 'package:smart_electric_application/src/presentation/view/module/simulation/SimulationBanner.dart';
+import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/SimulationProductList.dart';
-import 'package:smart_electric_application/src/presentation/view/page/AddsimulationProduct.dart';
+import 'package:smart_electric_application/src/presentation/view/page/AddBillSimulationProduct.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class BillSimulation extends StatelessWidget {
@@ -22,7 +22,7 @@ class BillSimulation extends StatelessWidget {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SizedBox(height: 25),
-            SimulationBanner(),
+            BillSimulationBanner(),
             SizedBox(height: 30),
             Row(
               children: [
@@ -30,7 +30,7 @@ class BillSimulation extends StatelessWidget {
                 Spacer(),
                 GestureDetector(
                     onTap: () {
-                      Get.to(AddSimulationProduct(),
+                      Get.to(AddBillSimulationProduct(),
                           transition: Transition.rightToLeft);
                     },
                     child: Text("추가하기")),

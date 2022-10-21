@@ -3,17 +3,17 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/domain/model/SimulationProductModel.dart';
+import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/SimulationProductCellViewModel.dart';
 
 class SimulationProductListCell extends StatelessWidget {
   const SimulationProductListCell(
       {Key? key,
-      required SimulationProductModel this.simulationProduct,
+      required BillSimulationProductModel this.simulationProduct,
       required this.index})
       : super(key: key);
 
-  final SimulationProductModel simulationProduct;
+  final BillSimulationProductModel simulationProduct;
   final int index;
 
   // final String productName = "";
@@ -50,7 +50,7 @@ class SimulationProductListCell extends StatelessWidget {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      "assets/icons/product_${simulationProduct.type}.svg",
+                      "assets/icons/product_${simulationProduct.productType.engName}.svg",
                       color: context.theme.colorScheme.secondaryContainer,
                       width: 50,
                       height: 50,
@@ -60,14 +60,14 @@ class SimulationProductListCell extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${simulationProduct.name}",
+                          "${simulationProduct.productName}",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: colorTheme.onBackground, fontSize: 16),
                         ),
                         SizedBox(height: 5),
                         Text(
-                          "${simulationProduct.serialNumber}",
+                          "${simulationProduct.modelName}",
                           style: TextStyle(
                               color: colorTheme.onSurface, fontSize: 14),
                         ),
