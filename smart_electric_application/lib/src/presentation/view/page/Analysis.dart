@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/ImageButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/AnlaysisBanner.dart';
-import 'package:smart_electric_application/src/presentation/view/module/analysis/SavingTipTypeGrid.dart';
+import 'package:smart_electric_application/src/presentation/view/module/analysis/SavingTipProductTypeGrid.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/TestChart.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/%08BeforeUsageCard.dart';
 
@@ -57,7 +57,7 @@ class Analysis extends StatelessWidget {
                   SizedBox(height: 30),
 
                   // 절약 팁 분류 목록
-                  SavingTipTypeGrid(),
+                  SavingTipProductTypeGrid(),
                 ],
               )),
         ],

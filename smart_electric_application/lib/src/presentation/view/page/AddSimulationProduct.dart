@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
+import 'package:smart_electric_application/src/presentation/view/module/simulation/SelectProductTypeModal.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/AddSimulationProductViewModel.dart';
 
 class AddSimulationProduct extends StatelessWidget {
   const AddSimulationProduct({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class AddSimulationProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ViewModel DI
+    Get.put(AddSimulationProductViewModel());
 
     // Theme
     var colorTheme = context.theme.colorScheme;
@@ -23,7 +26,7 @@ class AddSimulationProduct extends StatelessWidget {
           backgroundColor: colorTheme.background,
         ),
         body: SingleChildScrollView(
-          child: Container(
+          child: Obx(() => Container(
               decoration: BoxDecoration(
                 color: context.theme.colorScheme.background,
               ),
@@ -62,14 +65,68 @@ class AddSimulationProduct extends StatelessWidget {
 
                   // Input - 종류
                   SizedBox(height: 30),
-                  CustomTextInput(
-                      labelText: "종류",
-                      placeholder: "종류..선택되게..으아악..",
-                      textInputStyle: TextInputStyle.bordered,
-                      focusColor: colorTheme.secondaryContainer,
-                      onChanged: (value) {
-                        print(value);
-                      }),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Text(
+                      "종류",
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: colorTheme.onSurface,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  GestureDetector(
+                    onTap: () {
+                      // Get.to(SelectProdauctType(),
+                      //     transition: Transition.cupertinoDialog);
+                      showGeneralDialog(
+                          context: context,
+                          barrierDismissible: true,
+                          barrierLabel: MaterialLocalizations.of(context)
+                              .modalBarrierDismissLabel,
+                          barrierColor: Colors.black45,
+                          transitionDuration: const Duration(milliseconds: 200),
+                          pageBuilder: (BuildContext buildContext,
+                              Animation animation,
+                              Animation secondaryAnimation) {
+                            return SelectProductTypeModal();
+                          });
+                    },
+                    child: Container(
+                        width: double.infinity,
+                        height: 60,
+                        padding: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            width: 1,
+                            color: colorTheme.outline,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (AddSimulationProductViewModel
+                                    .to.selectedProductIndex.value ==
+                                -1) ...[
+                              Text("가전 종류를 선택해주세요.",
+                                  style: TextStyle(
+                                      color: colorTheme.surfaceVariant,
+                                      fontSize: 16)),
+                            ] else ...[
+                              Text("냔냐",
+                                  style: TextStyle(
+                                      color: colorTheme.surfaceVariant,
+                                      fontSize: 16))
+                            ],
+                            SvgPicture.asset(
+                              'assets/icons/arrow_right.svg',
+                              color: colorTheme.onSurface,
+                            ),
+                          ],
+                        )),
+                  ),
 
                   // Input - 월간 소비 전력량
                   SizedBox(height: 30),
@@ -109,7 +166,7 @@ class AddSimulationProduct extends StatelessWidget {
                           width: 1,
                           color: colorTheme.outline,
                         ),
-                      ), //  POINT: BoxDecoration
+                      ),
                       child: Image.asset(
                           'assets/images/power_consumption_information.png')),
 
@@ -124,6 +181,6 @@ class AddSimulationProduct extends StatelessWidget {
                   SizedBox(height: 60),
                 ],
               )),
-        ));
+        )));
   }
 }

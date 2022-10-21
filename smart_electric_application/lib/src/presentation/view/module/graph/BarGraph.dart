@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'dart:math';
 
-import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUsecase.dart';
 
 class BarGraphViewModel extends GetxController {

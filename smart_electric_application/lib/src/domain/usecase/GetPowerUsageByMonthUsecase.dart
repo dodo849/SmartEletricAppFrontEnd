@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
-import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
 
 class GetPowerUsageByDayUsecase {

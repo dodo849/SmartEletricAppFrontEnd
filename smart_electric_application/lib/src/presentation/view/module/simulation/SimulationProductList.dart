@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/domain/entity/SimulationProductModel.dart';
+import 'package:smart_electric_application/src/domain/model/SimulationProductModel.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/SimulationProductListCell.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/SimulationProductCellViewModel.dart';
 
 // 클래스 변수 수정 로직

@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
 

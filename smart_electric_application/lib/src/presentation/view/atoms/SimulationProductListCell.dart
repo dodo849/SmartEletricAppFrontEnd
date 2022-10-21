@@ -3,7 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/domain/entity/SimulationProductModel.dart';
+import 'package:smart_electric_application/src/domain/model/SimulationProductModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/SimulationProductCellViewModel.dart';
 
 class SimulationProductListCell extends StatelessWidget {

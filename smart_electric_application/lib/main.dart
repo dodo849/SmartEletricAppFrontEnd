@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
+      
       getPages: [
         GetPage(
             name: "/AIReport",

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
 
 class LineGraphViewModel extends GetxController {
   static LineGraphViewModel get to => Get.find();
