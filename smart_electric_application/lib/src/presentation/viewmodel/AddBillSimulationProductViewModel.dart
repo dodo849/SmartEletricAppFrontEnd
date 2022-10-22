@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
@@ -33,7 +32,7 @@ class AddBillSimulationProductViewModel extends GetxController {
   }
 
   /// 시뮬레이션 가전 내부 저장소에 저장하기
-  void addBillSimulationProduct(BuildContext context) async {
+  void addBillSimulationProduct() async {
     Result<dynamic, String> result = await addSimulationProductUsecase.execute(
         BillSimulationProductModel(
             productName: productName.value,
@@ -41,8 +40,6 @@ class AddBillSimulationProductViewModel extends GetxController {
             productType:
                 ProductTypeData.productTypes[selectedProductIndex.value],
             monthPowerUsage: double.parse(monthPowerUsage.value)));
-
-    print("error ${result.error}");
   }
 
   /// 필수 항목 전부 입력했는지 확인

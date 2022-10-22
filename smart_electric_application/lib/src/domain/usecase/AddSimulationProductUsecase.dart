@@ -4,11 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/BillSimulationRepositoryInterface.dart';
 
 class AddSimulationProductUsecase {
   // GetIt으로 DI 교체 해야함
-  // final billSimulationRepository = GetIt.I.get<BillSimulationRepository>();
-  final billSimulationRepository = BillSimulationRepository();
+  final billSimulationRepository = GetIt.I.get<BillSimulationRepositoryInterface>();
 
   Future<Result<dynamic, String>> execute(
       BillSimulationProductModel billSimulationProduct) async {

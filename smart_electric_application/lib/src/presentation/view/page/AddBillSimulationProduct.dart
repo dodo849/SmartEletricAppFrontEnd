@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/model/ProductTypeData.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/ProductTypeGridCell.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/SelectProductTypeModal.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/AddBillSimulationProductViewModel.dart';
@@ -215,7 +213,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                             : colorTheme.onSurface,
                         size: ButtonSize.large,
                         action: () {
-                          // viewModel.addBillSimulationProduct(context);
+                          viewModel.addBillSimulationProduct();
                           Get.back();
                         }),
                     SizedBox(height: 60),
