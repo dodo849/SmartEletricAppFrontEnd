@@ -6,6 +6,7 @@ import 'package:smart_electric_application/src/presentation/view/atoms/CustomTex
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/SelectProductTypeModal.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/AddBillSimulationProductViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class AddBillSimulationProduct extends StatelessWidget {
   const AddBillSimulationProduct({Key? key}) : super(key: key);

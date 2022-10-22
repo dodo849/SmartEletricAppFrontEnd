@@ -7,10 +7,10 @@ import 'package:smart_electric_application/src/domain/usecase/interface/BillSimu
 
 class GetSimulationProductsUsecase {
   // GetIt으로 DI 교체 해야함
-    final billSimulationRepository = GetIt.I.get<BillSimulationRepositoryInterface>();
+  final billSimulationRepository =
+      GetIt.I.get<BillSimulationRepositoryInterface>();
 
-  Future<Result<dynamic, String>> execute(
-      BillSimulationProductModel billSimulationProduct) async {
+  Future<Result<dynamic, String>> execute() async {
     // 1. Get product list
     Result<String, String> getBillSimulationProductResult =
         await billSimulationRepository.getBillSimulationProduct();
@@ -20,8 +20,12 @@ class GetSimulationProductsUsecase {
     }
 
     // 2. Decode product list
-    List<dynamic> billSimulationProducts =
+    var billSimulationProducts =
         json.decode(getBillSimulationProductResult.value!);
+
+    // 3. Convert json to model
+    billSimulationProducts = billSimulationProducts
+        .map((item) => BillSimulationProductModel.fromJson(item)).toList();
 
     return Result.success(billSimulationProducts);
   }

@@ -3,6 +3,7 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/domain/model/ProductTypeData.dart';
 import 'package:smart_electric_application/src/domain/usecase/AddSimulationProductUsecase.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class AddBillSimulationProductViewModel extends GetxController {
   static AddBillSimulationProductViewModel get to => Get.find();
@@ -40,6 +41,9 @@ class AddBillSimulationProductViewModel extends GetxController {
             productType:
                 ProductTypeData.productTypes[selectedProductIndex.value],
             monthPowerUsage: double.parse(monthPowerUsage.value)));
+
+    // 요금 시뮬레이션 메인 탭 리로드되도록 product 다시 받아오기
+    BillSimulationViewModel.to.getBillSimulationProducts();
   }
 
   /// 필수 항목 전부 입력했는지 확인

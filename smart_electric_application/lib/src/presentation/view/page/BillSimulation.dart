@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/ImageButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationBanner.dart';
-import 'package:smart_electric_application/src/presentation/view/module/simulation/SimulationProductList.dart';
+import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationProductList.dart';
 import 'package:smart_electric_application/src/presentation/view/page/AddBillSimulationProduct.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
@@ -39,7 +39,7 @@ class BillSimulation extends StatelessWidget {
               ],
             ),
             SizedBox(height: 5),
-            SimulationProductList(),
+            BillSimulationProductList(),
             SizedBox(height: 200),
           ]),
         ),
