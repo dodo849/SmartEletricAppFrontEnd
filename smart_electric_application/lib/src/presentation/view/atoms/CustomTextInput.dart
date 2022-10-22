@@ -19,6 +19,7 @@ class CustomTextInput extends StatelessWidget {
     this.isObscureText,
     this.onChanged,
     this.isRequiredInput,
+    this.innerValue,
   }) : super(key: key);
 
   // 부모 컴포넌트에게 값을 받을 클래스 변수 정의
@@ -34,6 +35,7 @@ class CustomTextInput extends StatelessWidget {
   final bool? isObscureText;
   final bool? isRequiredInput;
   final Function(String)? onChanged;
+  final String? innerValue;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,13 @@ class CustomTextInput extends StatelessWidget {
 
     // Theme define
     var colorTheme = context.theme.colorScheme;
+
+    // Set text value
+    if (innerValue != null) {
+      controller.text = innerValue!;
+      // 커서 맨 끝으로 설정
+      controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+    }
 
     return Container(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

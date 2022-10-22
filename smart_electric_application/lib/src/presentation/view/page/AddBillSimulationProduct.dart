@@ -53,6 +53,9 @@ class AddBillSimulationProduct extends StatelessWidget {
                         textInputStyle: TextInputStyle.bordered,
                         focusColor: colorTheme.secondaryContainer,
                         isRequiredInput: true,
+                        innerValue: viewModel.productName.value.length != 0
+                            ? viewModel.productName.value
+                            : null,
                         onChanged: (value) {
                           viewModel.productName(value);
                         }),
@@ -64,6 +67,9 @@ class AddBillSimulationProduct extends StatelessWidget {
                         placeholder: "제품 모델명을 입력해 주세요.(선택)",
                         textInputStyle: TextInputStyle.bordered,
                         focusColor: colorTheme.secondaryContainer,
+                        innerValue: viewModel.modelName.value.length != 0
+                            ? viewModel.modelName.value
+                            : null,
                         onChanged: (value) {
                           viewModel.modelName(value);
                         }),
@@ -139,7 +145,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                                             .selectedProductIndex.value]
                                         .krName,
                                     style: TextStyle(
-                                        color: colorTheme.surfaceVariant,
+                                        color: colorTheme.onBackground,
                                         fontSize: 16))
                               ],
                               SvgPicture.asset(
@@ -160,8 +166,11 @@ class AddBillSimulationProduct extends StatelessWidget {
                         suffixText: "kWh",
                         textInputType: TextInputType.number,
                         isRequiredInput: true,
+                        innerValue: viewModel.monthPowerUsage.value.length != 0
+                            ? viewModel.monthPowerUsage.value
+                            : null,
                         onChanged: (value) {
-                          viewModel.monthPowerUsage(double.parse(value));
+                          viewModel.monthPowerUsage(value);
                         }),
                     SizedBox(height: 10),
                     Row(
@@ -206,7 +215,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                             : colorTheme.onSurface,
                         size: ButtonSize.large,
                         action: () {
-                          viewModel.addBillSimulationProduct(context);
+                          // viewModel.addBillSimulationProduct(context);
                           Get.back();
                         }),
                     SizedBox(height: 60),

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/data/dto/AiPredictionDTO.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/domain/model/ProductTypeData.dart';
 import 'package:smart_electric_application/src/domain/usecase/AddSimulationProductUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetAiPredictionUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetAiReportUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetTodayUsagePredictionUsecase.dart';
 
 class AddBillSimulationProductViewModel extends GetxController {
   static AddBillSimulationProductViewModel get to => Get.find();
@@ -17,7 +13,7 @@ class AddBillSimulationProductViewModel extends GetxController {
   RxString productName = "".obs;
   RxString modelName = "".obs;
   RxInt selectedProductIndex = (-1).obs;
-  RxDouble monthPowerUsage = 0.0.obs;
+  RxString monthPowerUsage = "".obs;
 
   RxBool submitButtonEnabled = false.obs;
 
@@ -36,18 +32,24 @@ class AddBillSimulationProductViewModel extends GetxController {
     super.onInit();
   }
 
-  void addBillSimulationProduct(BuildContext context) {
-    print("call addBillSimulationProduct");
+  /// 시뮬레이션 가전 내부 저장소에 저장하기
+  void addBillSimulationProduct(BuildContext context) async {
+    Result<dynamic, String> result = await addSimulationProductUsecase.execute(
+        BillSimulationProductModel(
+            productName: productName.value,
+            modelName: modelName.value,
+            productType:
+                ProductTypeData.productTypes[selectedProductIndex.value],
+            monthPowerUsage: double.parse(monthPowerUsage.value)));
 
-    addSimulationProductUsecase.execute(BillSimulationProductModel(
-        productName: productName.value,
-        modelName: modelName.value,
-        productType: ProductTypeData.productTypes[selectedProductIndex.value],
-        monthPowerUsage: monthPowerUsage.value));
+    print("error ${result.error}");
   }
 
-  void checkRequiredInputs(){
-    if(productName.value.length != 0 && selectedProductIndex.value != -1 && monthPowerUsage.value != 0.0){
+  /// 필수 항목 전부 입력했는지 확인
+  void checkRequiredInputs() {
+    if (productName.value.length != 0 &&
+        selectedProductIndex.value != -1 &&
+        monthPowerUsage.value != 0.0) {
       submitButtonEnabled(true);
     } else {
       submitButtonEnabled(false);

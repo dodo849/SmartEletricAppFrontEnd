@@ -52,7 +52,8 @@ class ProductTypeGridCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ViewModel DI
-    Get.create<ProductTypeCellViewModel>(() => ProductTypeCellViewModel());
+    Get.create<ProductTypeCellViewModel>(() => ProductTypeCellViewModel(),
+        permanent: false);
 
     var colorTheme = context.theme.colorScheme;
 
