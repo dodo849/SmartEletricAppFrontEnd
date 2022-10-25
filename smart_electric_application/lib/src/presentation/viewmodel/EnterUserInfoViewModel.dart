@@ -189,12 +189,15 @@ class EnterUserInfoViewModel extends GetxController {
         customerNumber: customerNumber.value,
         name: name.value,
         email: email.value,
-        password: password.value);
+        password: password.value,
+        isSmartMeter: isSmartMeter.value);
 
     // 에러 발생 시 메세지 view에 띄우기
     if (isSignupResult.status == ResultStatus.error) {
       isSingupError(true);
       signupErrorMessage(isSignupResult.error);
+
+      assert(false, isSignupResult.error);
       return;
     }
 

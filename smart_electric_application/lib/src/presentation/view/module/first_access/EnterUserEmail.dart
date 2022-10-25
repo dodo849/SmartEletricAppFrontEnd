@@ -33,7 +33,7 @@ class EnterUserEmail extends StatelessWidget {
                 textInputType: TextInputType.emailAddress,
                 placeholder: "smart@smarteletric.co.kr",
                 isFocus: true,
-                errorText: EnterUserInfoViewModel.to.isEmailError.value ?
+                errorText: EnterUserInfoViewModel.to.isEmailError.isTrue ?
                     EnterUserInfoViewModel.to.emailErrorMessage.value : null,
                 onChanged: (value) {
                   EnterUserInfoViewModel.to.email(value);

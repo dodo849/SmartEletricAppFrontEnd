@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/BorderedTextInput.dart';
-import 'package:smart_electric_application/src/presentation/view/module/Common/EmptyAppBar.dart';
-import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
-import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
+import 'package:smart_electric_application/src/presentation/view/page/first_access/EnterCustomerInfo.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 
 class Login extends StatelessWidget {
@@ -70,7 +66,7 @@ class Login extends StatelessWidget {
                     textColor: context.theme.colorScheme.secondaryContainer,
                     size: ButtonSize.large,
                     action: () {
-                      // Get.to(Signup());
+                      Get.to(EnterCustomerInfo());
                     }),
 
                 Spacer(flex: 1),
