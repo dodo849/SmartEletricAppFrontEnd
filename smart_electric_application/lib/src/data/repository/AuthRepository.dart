@@ -1,11 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/AuthRetrofit.dart';
-import 'package:smart_electric_application/src/data/retrofit/config/getInterceptorDio.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 
 class AuthRepository implements AuthRepositoryInterface {

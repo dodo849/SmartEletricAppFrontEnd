@@ -39,10 +39,10 @@ class AddBillSimulationProduct extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Title text
-                    SizedBox(height: 30),
-                    Text("시뮬레이션을 위한", style: textTheme.headline1),
-                    SizedBox(height: 7),
-                    Text("가전목록을 추가해주세요", style: textTheme.headline1),
+                    // SizedBox(height: 30),
+                    // Text("시뮬레이션을 위한", style: textTheme.headline1),
+                    // SizedBox(height: 7),
+                    // Text("가전목록을 추가해주세요", style: textTheme.headline1),
 
                     // Input - 제품명
                     SizedBox(height: 30),

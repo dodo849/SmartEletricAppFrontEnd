@@ -1,13 +1,8 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
-import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
-import 'package:smart_electric_application/src/domain/model/BillSimulationProductsModel.dart';
-import 'package:smart_electric_application/src/domain/model/ProductTypeData.dart';
-import 'package:smart_electric_application/src/domain/usecase/AddSimulationProductUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/module/graph/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
@@ -43,6 +38,8 @@ class Home extends StatelessWidget {
 
         ElevatedButton(
             onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.remove("billSimulationProducts");
 
               var result =
                   await BillSimulationRepository().getBillSimulationProduct();

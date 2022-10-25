@@ -9,6 +9,7 @@ part of 'BillSimulationProductModel.dart';
 _$_BillSimulationProductModel _$$_BillSimulationProductModelFromJson(
         Map<String, dynamic> json) =>
     _$_BillSimulationProductModel(
+      order: json['order'] as int,
       productName: json['productName'] as String,
       modelName: json['modelName'] as String,
       productType: ProductTypeModel.fromJson(
@@ -19,6 +20,7 @@ _$_BillSimulationProductModel _$$_BillSimulationProductModelFromJson(
 Map<String, dynamic> _$$_BillSimulationProductModelToJson(
         _$_BillSimulationProductModel instance) =>
     <String, dynamic>{
+      'order': instance.order,
       'productName': instance.productName,
       'modelName': instance.modelName,
       'productType': instance.productType,

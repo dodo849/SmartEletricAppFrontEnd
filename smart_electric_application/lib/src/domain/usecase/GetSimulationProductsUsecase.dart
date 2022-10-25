@@ -15,7 +15,8 @@ class GetSimulationProductsUsecase {
     Result<String, String> getBillSimulationProductResult =
         await billSimulationRepository.getBillSimulationProduct();
 
-    if (getBillSimulationProductResult.status == ResultStatus.error) {
+    if (getBillSimulationProductResult.status == ResultStatus.error ||
+        getBillSimulationProductResult.value == null) {
       return getBillSimulationProductResult;
     }
 
@@ -25,7 +26,8 @@ class GetSimulationProductsUsecase {
 
     // 3. Convert json to model
     billSimulationProducts = billSimulationProducts
-        .map((item) => BillSimulationProductModel.fromJson(item)).toList();
+        .map((item) => BillSimulationProductModel.fromJson(item))
+        .toList();
 
     return Result.success(billSimulationProducts);
   }

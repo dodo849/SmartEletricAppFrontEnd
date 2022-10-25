@@ -8,7 +8,8 @@ import 'package:smart_electric_application/src/domain/usecase/interface/BillSimu
 
 class AddSimulationProductUsecase {
   // GetIt으로 DI 교체 해야함
-  final billSimulationRepository = GetIt.I.get<BillSimulationRepositoryInterface>();
+  final billSimulationRepository =
+      GetIt.I.get<BillSimulationRepositoryInterface>();
 
   Future<Result<dynamic, String>> execute(
       BillSimulationProductModel billSimulationProduct) async {

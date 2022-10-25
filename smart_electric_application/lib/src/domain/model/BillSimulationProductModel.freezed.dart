@@ -21,6 +21,7 @@ BillSimulationProductModel _$BillSimulationProductModelFromJson(
 
 /// @nodoc
 mixin _$BillSimulationProductModel {
+  int get order => throw _privateConstructorUsedError;
   String get productName => throw _privateConstructorUsedError;
   String get modelName => throw _privateConstructorUsedError;
   ProductTypeModel get productType => throw _privateConstructorUsedError;
@@ -38,7 +39,8 @@ abstract class $BillSimulationProductModelCopyWith<$Res> {
           $Res Function(BillSimulationProductModel) then) =
       _$BillSimulationProductModelCopyWithImpl<$Res>;
   $Res call(
-      {String productName,
+      {int order,
+      String productName,
       String modelName,
       ProductTypeModel productType,
       double monthPowerUsage});
@@ -57,12 +59,17 @@ class _$BillSimulationProductModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? order = freezed,
     Object? productName = freezed,
     Object? modelName = freezed,
     Object? productType = freezed,
     Object? monthPowerUsage = freezed,
   }) {
     return _then(_value.copyWith(
+      order: order == freezed
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
       productName: productName == freezed
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -99,7 +106,8 @@ abstract class _$$_BillSimulationProductModelCopyWith<$Res>
       __$$_BillSimulationProductModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String productName,
+      {int order,
+      String productName,
       String modelName,
       ProductTypeModel productType,
       double monthPowerUsage});
@@ -123,12 +131,17 @@ class __$$_BillSimulationProductModelCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? order = freezed,
     Object? productName = freezed,
     Object? modelName = freezed,
     Object? productType = freezed,
     Object? monthPowerUsage = freezed,
   }) {
     return _then(_$_BillSimulationProductModel(
+      order: order == freezed
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
       productName: productName == freezed
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -153,7 +166,8 @@ class __$$_BillSimulationProductModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BillSimulationProductModel implements _BillSimulationProductModel {
   _$_BillSimulationProductModel(
-      {required this.productName,
+      {required this.order,
+      required this.productName,
       required this.modelName,
       required this.productType,
       required this.monthPowerUsage});
@@ -161,6 +175,8 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
   factory _$_BillSimulationProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_BillSimulationProductModelFromJson(json);
 
+  @override
+  final int order;
   @override
   final String productName;
   @override
@@ -172,7 +188,7 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
 
   @override
   String toString() {
-    return 'BillSimulationProductModel(productName: $productName, modelName: $modelName, productType: $productType, monthPowerUsage: $monthPowerUsage)';
+    return 'BillSimulationProductModel(order: $order, productName: $productName, modelName: $modelName, productType: $productType, monthPowerUsage: $monthPowerUsage)';
   }
 
   @override
@@ -180,6 +196,7 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillSimulationProductModel &&
+            const DeepCollectionEquality().equals(other.order, order) &&
             const DeepCollectionEquality()
                 .equals(other.productName, productName) &&
             const DeepCollectionEquality().equals(other.modelName, modelName) &&
@@ -193,6 +210,7 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(order),
       const DeepCollectionEquality().hash(productName),
       const DeepCollectionEquality().hash(modelName),
       const DeepCollectionEquality().hash(productType),
@@ -215,7 +233,8 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
 abstract class _BillSimulationProductModel
     implements BillSimulationProductModel {
   factory _BillSimulationProductModel(
-      {required final String productName,
+      {required final int order,
+      required final String productName,
       required final String modelName,
       required final ProductTypeModel productType,
       required final double monthPowerUsage}) = _$_BillSimulationProductModel;
@@ -223,6 +242,8 @@ abstract class _BillSimulationProductModel
   factory _BillSimulationProductModel.fromJson(Map<String, dynamic> json) =
       _$_BillSimulationProductModel.fromJson;
 
+  @override
+  int get order;
   @override
   String get productName;
   @override
