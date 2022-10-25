@@ -5,7 +5,7 @@ import 'package:smart_electric_application/src/presentation/view/module/common/M
 import 'package:smart_electric_application/src/presentation/view/page/Analysis.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Home.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Login.dart';
-import 'package:smart_electric_application/src/presentation/view/page/Simulation.dart';
+import 'package:smart_electric_application/src/presentation/view/page/BillSimulation.dart';
 import 'package:smart_electric_application/src/presentation/view/page/MyPage.dart';
 import 'package:smart_electric_application/src/presentation/view/page/SmartHome.dart';
 

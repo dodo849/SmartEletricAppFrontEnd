@@ -264,13 +264,13 @@ class _TestChart extends State<TestChart> {
       lineBarsData: [
         LineChartBarData(
           spots: const [
-            FlSpot(0, 3.44),
-            FlSpot(2.6, 3.44),
-            FlSpot(4.9, 3.44),
-            FlSpot(6.8, 3.44),
-            FlSpot(8, 3.44),
-            FlSpot(9.5, 3.44),
-            FlSpot(11, 3.44),
+            FlSpot(0, 2),
+            FlSpot(2.6, 23),
+            FlSpot(4.9, 26),
+            FlSpot(6.8, 34),
+            FlSpot(8, 37),
+            FlSpot(9.5, 48),
+            FlSpot(11, 3.78),
           ],
           isCurved: true,
           gradient: LinearGradient(

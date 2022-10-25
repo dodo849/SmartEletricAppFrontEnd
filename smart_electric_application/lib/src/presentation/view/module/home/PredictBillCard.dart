@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smart_electric_application/src/presentation/view/page/AIReport.dart';
+import 'package:smart_electric_application/src/presentation/view/page/AiReport.dart';
 
 class EstimatedBillCard extends StatelessWidget {
   const EstimatedBillCard({Key? key}) : super(key: key);
@@ -14,10 +14,13 @@ class EstimatedBillCard extends StatelessWidget {
     var bodyValue = "325 kWh";
     var bodyDetailValue = "12";
 
+    // Theme
+    var colorTheme = context.theme.colorScheme;
+
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: context.theme.colorScheme.background,
+          color: colorTheme.background,
         ),
         width: double.infinity,
         padding: EdgeInsets.all(25),
@@ -32,8 +35,8 @@ class EstimatedBillCard extends StatelessWidget {
                   "이번달 예상 요금",
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: context.theme.colorScheme.onSurface,
+                    fontWeight: FontWeight.w500,
+                    color: colorTheme.onSurface,
                   ),
                 ),
                 Spacer(),
@@ -48,7 +51,7 @@ class EstimatedBillCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: context.theme.colorScheme.secondary,
+                          color: colorTheme.secondary,
                         ),
                       ),
                     ),
@@ -57,7 +60,7 @@ class EstimatedBillCard extends StatelessWidget {
                       'assets/icons/arrow.svg',
                       width: 14,
                       height: 14,
-                      color: context.theme.colorScheme.secondary,
+                      color: colorTheme.secondary,
                     ),
                   ],
                 ),
@@ -74,18 +77,27 @@ class EstimatedBillCard extends StatelessWidget {
                 Text(
                   "${dataValue}",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: context.theme.colorScheme.onBackground,
+                    color: colorTheme.onBackground,
                   ),
                 ),
                 SizedBox(width: 3),
                 Text(
-                  "원 / ${bodyValue}",
+                  "원",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: colorTheme.onBackground,
+                  ),
+                ),
+                SizedBox(width: 3),
+                Text(
+                  "/ ${bodyValue}",
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
-                    color: context.theme.colorScheme.onSurface,
+                    color: colorTheme.onSurface,
                   ),
                 ),
               ],
@@ -95,26 +107,33 @@ class EstimatedBillCard extends StatelessWidget {
 
             // 예측 누진구간 정보
             Row(
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                      color: colorTheme.primary,
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                SizedBox(width: 5),
                 Text(
                   "두번째 누진 구간",
                   style: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: context.theme.colorScheme.onBackground,
+                    fontWeight: FontWeight.w600,
+                    color: colorTheme.onBackground,
                   ),
                 ),
                 SizedBox(
                   width: 5,
                 ),
                 Text(
-                  "적용 예정입니다",
+                  "적용 예상",
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: context.theme.colorScheme.onSurface,
+                    color: colorTheme.onSurface,
                   ),
                 ),
               ],

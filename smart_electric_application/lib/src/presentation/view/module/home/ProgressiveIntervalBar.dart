@@ -15,6 +15,9 @@ class ProgressiveIntervalBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Define theme
+    var colorTheme = context.theme.colorScheme;
+
     // 현재는 3구간만 고려
     assert(0 < currentSectionNumber && currentSectionNumber < 4,
         "존재하지 않는 구간 입력 오류");
@@ -46,10 +49,10 @@ class ProgressiveIntervalBar extends StatelessWidget {
                         height: 5,
                         margin: EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
-                            color: context.theme.colorScheme.tertiaryContainer,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                bottomLeft: Radius.circular(10)))),
+                            color: currentSectionNumber == 1
+                                ? context.theme.colorScheme.tertiaryContainer
+                                : colorTheme.surfaceVariant,
+                            borderRadius: BorderRadius.circular(10))),
                     SizedBox(height: 5),
                     Text("0~200 kWh",
                         style: TextStyle(
@@ -71,7 +74,10 @@ class ProgressiveIntervalBar extends StatelessWidget {
                         height: 5,
                         margin: EdgeInsets.only(top: 5, bottom: 5),
                         decoration: BoxDecoration(
-                          color: Color(0xFFFFBF1A),
+                          color: currentSectionNumber == 2
+                              ? Color(0xFFFFBF1A)
+                              : colorTheme.surfaceVariant,
+                          borderRadius: BorderRadius.circular(10),
                         )),
                     SizedBox(height: 5),
                     Text("201~400 kWh",
@@ -94,14 +100,14 @@ class ProgressiveIntervalBar extends StatelessWidget {
                         height: 5,
                         margin: EdgeInsets.only(top: 5, bottom: 5),
                         decoration: BoxDecoration(
-                            color: Color(0xFFFF5D5D),
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(10),
-                                bottomRight: Radius.circular(10)))),
+                            color: currentSectionNumber == 3
+                                ? Color(0xFFFF5D5D)
+                                : colorTheme.surfaceVariant,
+                            borderRadius: BorderRadius.circular(10))),
                     SizedBox(height: 5),
                     Text("401~ kWh",
                         style: TextStyle(
-                          color: context.theme.colorScheme.onSurface,
+                          color: colorTheme.onSurface,
                           fontSize: 12,
                         )),
                   ],

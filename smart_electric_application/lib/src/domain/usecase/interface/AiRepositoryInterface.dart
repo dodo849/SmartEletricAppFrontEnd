@@ -3,7 +3,8 @@ import 'package:smart_electric_application/src/data/dto/AiPredictionDTO.dart';
 import 'package:smart_electric_application/src/data/dto/AiReportDTO.dart';
 
 abstract class AiRepositoryInterface {
-  Future<Result<AiReportDTO, String>> getAiReport(String customerNumber);
-  Future<Result<AiPredictionDTO, String>> getAiPrediction(
-      String customerNumber);
+  Future<Result<AiReportDTO, String>> requestAiReport(
+      {required String customerNumber});
+  Future<Result<AiPredictionDTO, String>> requestAiPrediction(
+      {required String customerNumber});
 }

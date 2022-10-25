@@ -5,7 +5,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/EmailDuplicateDTO.dart';
 import 'package:smart_electric_application/src/data/dto/SaveEmailDTO.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUsecase.dart';
 
 part 'AuthRetrofit.g.dart';
 
@@ -15,7 +15,7 @@ abstract class AuthRetrofit {
 
   // firebase id token으로 refresh/access 토큰 획득
   @POST('/login')
-  Future<JwtTokenDTO> getJwtTokens(
+  Future<JwtTokenDTO> requestJwt(
       @Header("Authorization") String firebaseIdToken);
 
   // refresh token으로 access token 획득

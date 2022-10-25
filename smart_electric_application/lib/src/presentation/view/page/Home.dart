@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/data/repository/AiRepository.dart';
-import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
-import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
-import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
-import 'package:smart_electric_application/src/presentation/view/module/graph/BarGraph.dart';
-import 'package:smart_electric_application/src/presentation/view/module/graph/LineGraph.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
+import 'package:smart_electric_application/src/presentation/view/module/graph/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
@@ -41,31 +38,43 @@ class Home extends StatelessWidget {
 
         ElevatedButton(
             onPressed: () async {
-              var firebaseRepository = FirebaseRepository();
-              var user = firebaseRepository.getUser();
-              var idToken = await user?.getIdToken();
-              print('user $user');
+              final prefs = await SharedPreferences.getInstance();
+              prefs.remove("billSimulationProducts");
 
-              // var authRepository = AuthRepository();
-              // var jwtTokens = await authRepository.getJwtTokens(idToken!);
-              // print(jwtTokens.value);
+              var result =
+                  await BillSimulationRepository().getBillSimulationProduct();
+              print("getBillSimulationProduct ${result.value}");
 
-              var powerUsageRepository = PowerUsageRepository();
-              var powerUsageRepositoryData =
-                  await powerUsageRepository.getPowerUsageByDay(
-                      customerNumber: "0130392270",
-                      startDate: "20220801",
-                      endDate: "20220831");
-              print(powerUsageRepositoryData.status);
-              print(powerUsageRepositoryData.error);
-              print(powerUsageRepositoryData.value);
+              // var firebaseRepository = FirebaseRepository();
+              // var user = firebaseRepository.getUser();
+              // var idToken = await user?.getIdToken();
+              // print('user $user');
 
-              var aiRepository = AiRepository();
-              var predictionResult =
-                  await aiRepository.getAiPrediction("0130392270");
-              print("predictionResult: ${predictionResult.value}");
-              var reportResult = await aiRepository.getAiReport("0130392270");
-              print("reportResult: ${reportResult.value}");
+              // // var authRepository = AuthRepository();
+              // // var jwtTokens = await authRepository.requestJwt(idToken!);
+              // // print(jwtTokens.value);
+
+              // var powerUsageRepository = PowerUsageRepository();
+              // var powerUsageRepositoryData =
+              //     await powerUsageRepository.getPowerUsageByDay(
+              //         customerNumber: "0130392270",
+              //         startDate: "20220801",
+              //         endDate: "20220831");
+              // print(powerUsageRepositoryData.status);
+              // print(powerUsageRepositoryData.error);
+              // print(powerUsageRepositoryData.value);
+
+              // var aiRepository = AiRepository();
+              // var predictionResult = await aiRepository.requestAiPrediction(
+              //     customerNumber: "0130392270");
+              // print("predictionResult: ${predictionResult.value}");
+              // var reportResult = await aiRepository.requestAiReport(
+              //     customerNumber: "0130392270");
+              // print("reportResult: ${reportResult.value}");
+
+              // print("###### 파이어베이스 토큰");
+              // final fcmToken = await FirebaseMessaging.instance.getToken();
+              // print(fcmToken);
             },
             child: Text("Test Button")),
 
@@ -135,43 +144,37 @@ class Home extends StatelessWidget {
         // 예측 요금
         SizedBox(height: 15),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          // padding: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(color: colorTheme.surface),
           child: Column(
-            children: [
-              SizedBox(height: 30),
-              EstimatedBillCard(),
-              SizedBox(height: 30),
-            ],
-          ),
-        ),
-
-        SizedBox(height: 35),
-
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("이번달 예측 사용량", style: context.theme.textTheme.headline3),
-              const SizedBox(height: 15),
-              BarGraph(),
-              const SizedBox(height: 40),
-            ],
-          ),
-        ),
+              SizedBox(height: 35),
 
-        SizedBox(height: 35),
+              // 요금 분석 카드
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Text("요금 분석", style: context.theme.textTheme.headline3),
+              ),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: EstimatedBillCard(),
+              ),
 
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Test line graph", style: context.theme.textTheme.headline3),
-              const SizedBox(height: 15),
-              LineGraph(),
-              const SizedBox(height: 40),
+              SizedBox(height: 80),
+
+              // 그래프
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                child: Text("이번달 예측 사용량",
+                    style: context.theme.textTheme.headline3),
+              ),
+              SizedBox(height: 45),
+              Container(height: 300, child: PredictLineGraph()),
+
+              SizedBox(height: 80),
             ],
           ),
         ),

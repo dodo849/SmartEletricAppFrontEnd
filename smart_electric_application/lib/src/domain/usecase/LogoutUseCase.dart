@@ -4,7 +4,7 @@ import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
-class LogoutUseCase {
+class LogoutUsecase {
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
   final firebaseRepository = GetIt.I.get<FirebaseRepositoryInterface>();
 
@@ -19,7 +19,7 @@ class LogoutUseCase {
 
     // 내부 DB 저장 값들 지우기
     await authRepository.removeUser();
-    await authRepository.removeJwtTokens();
+    await authRepository.removeJwt();
 
     // account 서버에 이메일 비활성화
     var email = await authRepository.getEmail();

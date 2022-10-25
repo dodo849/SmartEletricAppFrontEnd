@@ -10,9 +10,9 @@ abstract class AiRetrofit {
   factory AiRetrofit(Dio dio, {String baseUrl}) = _AiRetrofit;
 
   @GET("/report/issue")
-  Future<AiReportDTO> getAiReport(@Query("custNo") String customerNumber);
+  Future<AiReportDTO> requestAiReport(@Query("custNo") String customerNumber);
 
   @GET("/prediction")
-  Future<AiPredictionDTO> getAiPrediction(
+  Future<AiPredictionDTO> requestAiPrediction(
       @Query("custNo") String customerNumber);
 }

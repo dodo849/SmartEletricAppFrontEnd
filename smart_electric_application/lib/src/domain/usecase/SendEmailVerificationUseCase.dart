@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
-class SendEmailVerificationUseCase {
+class SendEmailVerificationUsecase {
   // DI
   final FirebaseRepositoryInterface firebaseRepository =
       GetIt.I.get<FirebaseRepositoryInterface>();

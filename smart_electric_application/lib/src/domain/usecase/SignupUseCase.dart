@@ -7,12 +7,14 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
 /// 
-class SignupUseCase {
+class SignupUsecase {
   // DI
   final FirebaseRepositoryInterface firebaseRepository =
       GetIt.I.get<FirebaseRepositoryInterface>();
   final AuthRepositoryInterface authRepository =
       GetIt.I.get<AuthRepositoryInterface>();
+
+  final loginUseCase = LoginUsecase();
 
   Future<Result<bool, String>> execute(
       {required String customerNumber,
@@ -44,7 +46,6 @@ class SignupUseCase {
     }
 
     // 회원가입 성공시 로그인
-    var loginUseCase = LoginUseCase();
     loginUseCase.execute(email, password);
 
     // 모든 과정 성공 시 true Result 반환

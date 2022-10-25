@@ -10,14 +10,14 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AiReposi
 class AiRepository implements AiRepositoryInterface {
   /// 한전 고객번호를 이용해 AI 서버에서 지난 요금 납부일부터 다음 요금 납부일까지의 예측 결과 받기
   @override
-  Future<Result<AiPredictionDTO, String>> getAiPrediction(
-      String customerNumber) async {
+  Future<Result<AiPredictionDTO, String>> requestAiPrediction({required
+      String customerNumber}) async {
     try {
       final dio = await getInterceptorDio();
       final aiRetrofit = AiRetrofit(dio);
 
       AiPredictionDTO aiPredictionDTO =
-          await aiRetrofit.getAiPrediction(customerNumber);
+          await aiRetrofit.requestAiPrediction(customerNumber);
       return Result.success(aiPredictionDTO);
       //
     } catch (err) {
@@ -26,12 +26,12 @@ class AiRepository implements AiRepositoryInterface {
   }
 
   @override
-  Future<Result<AiReportDTO, String>> getAiReport(String customerNumber) async {
+  Future<Result<AiReportDTO, String>> requestAiReport({required String customerNumber}) async {
     try {
       final dio = await getInterceptorDio();
       final aiRetrofit = AiRetrofit(dio);
 
-      AiReportDTO aiReportDTO = await aiRetrofit.getAiReport(customerNumber);
+      AiReportDTO aiReportDTO = await aiRetrofit.requestAiReport(customerNumber);
 
       return Result.success(aiReportDTO);
     } catch (err) {

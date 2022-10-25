@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/SmartMeterDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUseCase.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckEmailDuplicateUseCase.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUseCase.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUseCase.dart';
-import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUseCase.dart';
-import 'package:smart_electric_application/src/domain/usecase/SignupUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckEmailDuplicateUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/SignupUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 
 class EnterUserInfoViewModel extends GetxController {
@@ -43,12 +43,12 @@ class EnterUserInfoViewModel extends GetxController {
   RxString emailVerificationErrorMessage = "".obs;
 
   // Usecase instance
-  final signupUseCase = SignupUseCase();
-  final checkCustomerValidationUseCase = CheckInfoAgreementUseCase();
-  final sendEmailVerifiedUseCase = SendEmailVerificationUseCase();
-  final checkEmailVerifiedUseCase = CheckEmailVerificationUseCase();
-  final checkIsSmartMeterUseCase = CheckIsSmartMeterUseCase();
-  final checkEmailDuplicateUseCase = CheckEmailDuplicateUseCase();
+  final signupUseCase = SignupUsecase();
+  final checkCustomerValidationUseCase = CheckInfoAgreementUsecase();
+  final sendEmailVerifiedUseCase = SendEmailVerificationUsecase();
+  final checkEmailVerifiedUseCase = CheckEmailVerificationUsecase();
+  final checkIsSmartMeterUseCase = CheckIsSmartMeterUsecase();
+  final checkEmailDuplicateUseCase = CheckEmailDuplicateUsecase();
 
   // Constructor
   @override

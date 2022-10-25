@@ -3,8 +3,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-class SimulationBanner extends StatelessWidget {
-  const SimulationBanner({Key? key}) : super(key: key);
+class BillSimulationBanner extends StatelessWidget {
+  const BillSimulationBanner({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

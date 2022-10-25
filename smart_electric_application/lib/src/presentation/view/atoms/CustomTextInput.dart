@@ -9,6 +9,7 @@ class CustomTextInput extends StatelessWidget {
     Key? key,
     this.labelText,
     this.placeholder,
+    this.suffixText,
     this.textInputStyle,
     this.focusColor,
     this.textInputType,
@@ -16,12 +17,15 @@ class CustomTextInput extends StatelessWidget {
     this.isFocus,
     this.errorText,
     this.isObscureText,
-    required this.onChanged,
+    this.onChanged,
+    this.isRequiredInput,
+    this.innerValue,
   }) : super(key: key);
 
   // 부모 컴포넌트에게 값을 받을 클래스 변수 정의
   final String? labelText;
   final String? placeholder;
+  final String? suffixText;
   final TextInputStyle? textInputStyle;
   final Color? focusColor;
   final TextInputType? textInputType;
@@ -29,7 +33,9 @@ class CustomTextInput extends StatelessWidget {
   final bool? isFocus;
   final String? errorText;
   final bool? isObscureText;
-  final Function onChanged;
+  final bool? isRequiredInput;
+  final Function(String)? onChanged;
+  final String? innerValue;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +43,13 @@ class CustomTextInput extends StatelessWidget {
 
     // Theme define
     var colorTheme = context.theme.colorScheme;
+
+    // Set text value
+    if (innerValue != null) {
+      controller.text = innerValue!;
+      // 커서 맨 끝으로 설정
+      controller.selection = TextSelection.fromPosition(TextPosition(offset: controller.text.length));
+    }
 
     return Container(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -49,8 +62,20 @@ class CustomTextInput extends StatelessWidget {
             ],
             Text(
               "$labelText",
-              style: TextStyle(color: colorTheme.onSurface),
-            )
+              style: TextStyle(
+                  fontSize: 14,
+                  color: colorTheme.onSurface,
+                  fontWeight: FontWeight.normal),
+            ),
+            if (isRequiredInput == true) ...[
+              Text(
+                "*",
+                style: TextStyle(
+                    fontSize: 16,
+                    color: colorTheme.error,
+                    fontWeight: FontWeight.normal),
+              )
+            ]
           ],
         ]),
         const SizedBox(height: 10),
@@ -120,6 +145,7 @@ class CustomTextInput extends StatelessWidget {
       maxLength: maxLength,
       autofocus: isFocus ?? false,
       obscureText: isObscureText ?? false,
+      cursorColor: focusColor,
       decoration: InputDecoration(
         hintText: placeholder,
         hintStyle: TextStyle(color: colorTheme.surfaceVariant),
@@ -127,10 +153,10 @@ class CustomTextInput extends StatelessWidget {
         errorStyle: TextStyle(color: colorTheme.error, fontSize: 14),
         focusedBorder: focusBorderStyle,
         enabledBorder: enabledBorderStyle,
+        suffixText: suffixText,
+        suffixStyle: TextStyle(color: colorTheme.onBackground, fontSize: 14),
       ),
-      onChanged: (text) {
-        onChanged(text);
-      },
+      onChanged: onChanged,
     );
 
     return textField;

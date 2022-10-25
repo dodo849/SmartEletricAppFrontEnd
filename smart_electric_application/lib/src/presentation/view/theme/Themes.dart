@@ -42,7 +42,7 @@ ThemeData lightTheme = ThemeData(
         color: LightColors.important,
       ),
       headline3: TextStyle(
-          fontSize: 16, fontWeight: FontWeight.bold, color: LightColors.gray5),
+          fontSize: 18, fontWeight: FontWeight.w600, color: LightColors.gray5),
       bodyText1: TextStyle(
           color: LightColors.gray5,
           fontSize: 16,
@@ -94,8 +94,8 @@ ThemeData darkTheme = ThemeData(
           color: DarkColors.important,
         ),
         headline3: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
           color: DarkColors.gray5,
         ),
         bodyText1: TextStyle(

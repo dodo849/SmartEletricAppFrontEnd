@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUsecase.dart';
 
 part 'PowerUsageRetrofit.g.dart';
 

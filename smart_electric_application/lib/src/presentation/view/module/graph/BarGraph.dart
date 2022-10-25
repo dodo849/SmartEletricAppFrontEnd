@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'dart:math';
 
-import 'package:smart_electric_application/src/domain/entity/GraphPointModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUseCase.dart';
+import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUsecase.dart';
 
 class BarGraphViewModel extends GetxController {
   // static BarGraphViewModel get to => Get.find();
@@ -19,7 +19,7 @@ class BarGraphViewModel extends GetxController {
   List<GraphPointModel> mockData = <GraphPointModel>[];
 
   // UseCase
-  var getPowerUsageByDayUseCase = GetPowerUsageByDayUseCase();
+  var getPowerUsageByDayUseCase = GetPowerUsageByDayUsecase();
 
   @override
   void onInit() async {
@@ -59,7 +59,7 @@ class BarGraphViewModel extends GetxController {
     var start = firstBarOnScreen;
     var end = firstBarOnScreen + barNumberOnScreenTemp;
     if (start < 0) start = 0;
-    if (end > mockData.length) end = mockData.length;
+    if (end >= mockData.length) end = mockData.length - 1;
     var subList = mockData.sublist(start, end);
     // 최댓값 구하기
     var maxBarHeightPrimitive = [...subList].map((e) => e.yValue).fold<double>(0.0, max).round();

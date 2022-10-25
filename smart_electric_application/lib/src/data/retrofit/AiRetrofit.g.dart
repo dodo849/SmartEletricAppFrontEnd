@@ -21,7 +21,7 @@ class _AiRetrofit implements AiRetrofit {
   String? baseUrl;
 
   @override
-  Future<AiReportDTO> getAiReport(customerNumber) async {
+  Future<AiReportDTO> requestAiReport(customerNumber) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'custNo': customerNumber};
     final _headers = <String, dynamic>{};
@@ -44,7 +44,7 @@ class _AiRetrofit implements AiRetrofit {
   }
 
   @override
-  Future<AiPredictionDTO> getAiPrediction(customerNumber) async {
+  Future<AiPredictionDTO> requestAiPrediction(customerNumber) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'custNo': customerNumber};
     final _headers = <String, dynamic>{};

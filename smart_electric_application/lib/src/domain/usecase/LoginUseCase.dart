@@ -6,7 +6,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
 /// 로그인시 firebase login -> 서버에서 access/refresh token 발급 -> 내부 DB 저장 순으로 진행
-class LoginUseCase {
+class LoginUsecase {
   final firebaseRepository = GetIt.I.get<FirebaseRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
@@ -28,20 +28,22 @@ class LoginUseCase {
     }
 
     // id 토큰으로 서버 토큰 발급받기
-    Result<JwtTokenDTO, String> getJwtTokensResult =
-        await authRepository.getJwtTokens(getIdTokenResult.value!);
+    Result<JwtTokenDTO, String> requestJwtResult =
+        await authRepository.requestJwt(getIdTokenResult.value!);
 
-    if (getJwtTokensResult.status == ResultStatus.error) {
-      return getJwtTokensResult;
+    if (requestJwtResult.status == ResultStatus.error) {
+      return requestJwtResult;
     }
 
     // 서버토큰 발급 성공 시 내부 DB에 저장하기
     Result<bool, String> saveTokensResult =
-        await authRepository.saveJwtTokens(getJwtTokensResult.value!);
+        await authRepository.saveJwt(requestJwtResult.value!);
 
     if (saveTokensResult.status == ResultStatus.error) {
       return saveTokensResult;
     }
+
+    // ### user 정보 저장하기 해야함
 
     // 모든 과정 성공 시 true Result 반환
     return const Result.success(true);
