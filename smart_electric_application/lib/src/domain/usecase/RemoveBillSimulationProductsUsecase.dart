@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/BillSimulationRepositoryInterface.dart';
 
 class RemoveBillSimulationProductsUsecase {
@@ -15,10 +14,9 @@ class RemoveBillSimulationProductsUsecase {
         await billSimulationRepository.getBillSimulationProduct();
 
     if (getBillSimulationProductResult.status == ResultStatus.error) {
-      return getBillSimulationProductResult;
+      return Result.failure(getBillSimulationProductResult.error.toString());
     }
 
-    var billSimulationProductsJson;
     // 2. Decode product list
     List<dynamic> billSimulationProducts =
         json.decode(getBillSimulationProductResult.value!);
@@ -29,7 +27,7 @@ class RemoveBillSimulationProductsUsecase {
     }
 
     // 4. Encode
-    billSimulationProductsJson = json.encode(billSimulationProducts);
+    var billSimulationProductsJson = json.encode(billSimulationProducts);
 
     // 4. Save to storage
     var saveBillSimulationProductResult =
@@ -39,8 +37,7 @@ class RemoveBillSimulationProductsUsecase {
     if (saveBillSimulationProductResult.status == ResultStatus.success) {
       return Result.success(true);
     } else {
-      return Result.failure(
-          "Failed to save bill simulation products to storage");
+      return Result.failure(saveBillSimulationProductResult.error.toString());
     }
   }
 }

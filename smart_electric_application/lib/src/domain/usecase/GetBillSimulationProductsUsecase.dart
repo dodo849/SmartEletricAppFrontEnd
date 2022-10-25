@@ -17,7 +17,7 @@ class GetBillSimulationProductsUsecase {
 
     if (getBillSimulationProductResult.status == ResultStatus.error ||
         getBillSimulationProductResult.value == null) {
-      return getBillSimulationProductResult;
+      return Result.failure(getBillSimulationProductResult.error.toString());
     }
 
     // 2. Decode product list

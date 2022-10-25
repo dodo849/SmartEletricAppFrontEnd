@@ -18,7 +18,7 @@ class AddBillSimulationProductUsecase {
         await billSimulationRepository.getBillSimulationProduct();
 
     if (getBillSimulationProductResult.status == ResultStatus.error) {
-      return getBillSimulationProductResult;
+      return Result.failure(getBillSimulationProductResult.error.toString());
     }
 
     // 시뮬레이션 기능 첫 이용시 null일 수 있음
@@ -46,8 +46,8 @@ class AddBillSimulationProductUsecase {
     if (saveBillSimulationProductResult.status == ResultStatus.success) {
       return Result.success(true);
     } else {
-      return Result.failure(
-          "Failed to save bill simulation products to storage");
+      return Result.failure(saveBillSimulationProductResult.error.toString());
+      ;
     }
   }
 }
