@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/domain/model/ProductTypeData.dart';
-import 'package:smart_electric_application/src/domain/usecase/AddSimulationProductUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetSimulationProductsUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/AddBillSimulationProductUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetBillSimulationProductsUsecase.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class AddBillSimulationProductViewModel extends GetxController {
@@ -20,8 +20,8 @@ class AddBillSimulationProductViewModel extends GetxController {
   RxBool submitButtonEnabled = false.obs;
 
   // Usecase
-  var addSimulationProductUsecase = AddSimulationProductUsecase();
-  var getSimulationProductsUsecase = GetSimulationProductsUsecase();
+  var addSimulationProductUsecase = AddBillSimulationProductUsecase();
+  var getBillSimulationProductsUsecase = GetBillSimulationProductsUsecase();
 
   @override
   void onInit() {
@@ -38,7 +38,7 @@ class AddBillSimulationProductViewModel extends GetxController {
   /// 시뮬레이션 가전 내부 저장소에 저장하기
   void addBillSimulationProduct() async {
     Result<dynamic, String> getSimulationProductsResult =
-        await getSimulationProductsUsecase.execute();
+        await getBillSimulationProductsUsecase.execute();
 
     if (getSimulationProductsResult.status == ResultStatus.error) {
       return;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/SimulationProductListCell.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/BillSimulationProductListCell.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class BillSimulationProductList extends StatelessWidget {
@@ -21,7 +21,7 @@ class BillSimulationProductList extends StatelessWidget {
             return Column(
               children: [
                 const SizedBox(height: 15),
-                SimulationProductListCell(
+                BillSimulationProductListCell(
                     // simulationProduct: controller.billSimulationProducts[index],
                     simulationProduct: BillSimulationViewModel
                         .to.billSimulationProducts.value[index],
