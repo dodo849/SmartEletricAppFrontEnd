@@ -1,18 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
+import 'package:smart_electric_application/src/data/dto/AccountRegistrationDTO.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/LoginUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/AccountRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
-/// 
+///
 class SignupUsecase {
   // DI
   final FirebaseRepositoryInterface firebaseRepository =
       GetIt.I.get<FirebaseRepositoryInterface>();
   final AuthRepositoryInterface authRepository =
       GetIt.I.get<AuthRepositoryInterface>();
+  final AccountRepositoryInterface accountRepository =
+      GetIt.I.get<AccountRepositoryInterface>();
 
   final loginUseCase = LoginUsecase();
 
@@ -20,9 +24,9 @@ class SignupUsecase {
       {required String customerNumber,
       required String name,
       required String email,
-      required String password}) async {
-
-    // 파이어베이스 회원가입    
+      required String password,
+      required bool isSmartMeter}) async {
+    // 파이어베이스 회원가입
     Result<bool, String> signupResult =
         await firebaseRepository.signup(email, password);
 
@@ -31,10 +35,31 @@ class SignupUsecase {
     }
 
     // 이메일 정보 서버에 저장
-    Result<bool, String> saveEmailResult = await authRepository.saveEmail(email);
+    Result<bool, String> saveEmailResult =
+        await authRepository.saveEmail(email);
 
     if (saveEmailResult.status == ResultStatus.error) {
       return saveEmailResult;
+    }
+
+    // Account 서버에 유저 생성
+    var firebaseUidResult = await firebaseRepository.getIdToken();
+    if (firebaseUidResult.status == ResultStatus.error) {
+      return Result.failure(firebaseUidResult.error.toString());
+    }
+
+    Result<bool, String> requestRegisterAccountResult =
+        await accountRepository.requestRegisterAccount(
+            accountRegistrationDTO: AccountRegistrationDTO(
+                customerNumber: customerNumber,
+                email: email,
+                firebaseMessageToken: "test",
+                firebaseUid: firebaseUidResult.value!,
+                isSmartMeter: isSmartMeter,
+                name: name));
+
+    if (requestRegisterAccountResult.status == ResultStatus.error) {
+      return Result.failure(requestRegisterAccountResult.error.toString());
     }
 
     // 유저 정보 내부 DB에 저장
