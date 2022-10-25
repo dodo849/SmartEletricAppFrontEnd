@@ -22,14 +22,14 @@ class CheckedIsSmartMeter extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 50),
-            getContent(textTheme),
+            const SizedBox(height: 20),
+            _getContent(textTheme, colorTheme),
             const SizedBox(height: 20),
           ],
         )));
   }
 
-  Widget getContent(TextTheme textTheme) {
+  Widget _getContent(TextTheme textTheme, ColorScheme colorTheme) {
     // 로딩중이면
     if (EnterUserInfoViewModel.to.isSmartMeterLoad.value == false) {
       return Container(
@@ -52,17 +52,22 @@ class CheckedIsSmartMeter extends StatelessWidget {
     // 로딩 완료 시
     // 스마트 계량기 이면
     if (EnterUserInfoViewModel.to.isSmartMeter.value == true) {
-      return Column(children: [
-        Row(
-          children: [
-            Text("스마트 계량기", style: textTheme.headline1),
-            SizedBox(width: 10),
-            Text("이용가능 고객이십니다", style: textTheme.bodyText1),
-          ],
-        ),
-        SizedBox(height: 10),
-        Text("다음으로 버튼을 눌러주세요.", style: textTheme.bodyText1),
-      ]);
+      return Container(
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: colorTheme.surface, borderRadius: BorderRadius.circular(20)),
+        child: Column(children: [
+          Row(
+            children: [
+              Text("스마트 계량기", style: textTheme.headline1),
+              SizedBox(width: 10),
+              Text("이용가능 고객이십니다", style: textTheme.bodyText1),
+            ],
+          ),
+          SizedBox(height: 10),
+          Text("다음으로 버튼을 눌러주세요.", style: textTheme.bodyText1),
+        ]),
+      );
 
       // 일반 계량기 이면
     } else {
