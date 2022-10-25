@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationProductList.dart';
@@ -16,8 +18,11 @@ class BillSimulation extends StatelessWidget {
 
     // Theme
     var colorTheme = context.theme.colorScheme;
+    var textTheme = context.theme.textTheme;
 
-    return Obx(() => Stack(children: [
+    // Text style
+
+    return Stack(children: [
           SingleChildScrollView(
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
@@ -32,42 +37,61 @@ class BillSimulation extends StatelessWidget {
                         Text("시뮬레이션 가전 목록",
                             style: context.theme.textTheme.headline3),
                         const Spacer(),
-                        GestureDetector(
-                            onTap: () {
-                              Get.to(AddBillSimulationProduct(),
-                                  transition: Transition.rightToLeft);
-                            },
-                            child: const Text("추가하기")),
                         const SizedBox(width: 10),
                         GestureDetector(
-                          onTap: (){
-                            BillSimulationViewModel.to.toggleEditMode();
-                          },
-                          child: Text("편집하기")),
+                            onTap: () {
+                              BillSimulationViewModel.to.showRemoveWarningDialog(context);
+                            },
+                            child: Text(
+                              "삭제하기",
+                              style: textTheme.bodyText2,
+                            )),
                       ],
                     ),
 
-                    // 리스트에 아무것도 없으면 띄우는 문구
-                    if (BillSimulationViewModel
-                            .to.billSimulationProductsIsEmpty.value ==
-                        true) ...[
-                      SizedBox(height: 20),
-                      Container(
-                        decoration: BoxDecoration(color: colorTheme.surface, borderRadius: BorderRadius.circular(20)),
-                        padding: EdgeInsets.all(20),
-                        child: const Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "아직 추가된 가전이 없습니다. \n추가하기를 눌러 가전 정보를 추가해주세요 :)",
-                            style: TextStyle(
-                              fontSize: 16,
-                              height: 1.4,
+                    SizedBox(height: 15),
+
+                    // add simulation product button
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(AddBillSimulationProduct(),
+                            transition: Transition.rightToLeft);
+                      },
+                      child: Container(
+                          //padding of outer Container
+                          child: DottedBorder(
+                        color: colorTheme.outline, //color of dotted/dash line
+                        strokeWidth: 1, //thickness of dash/dots
+                        dashPattern: [3, 3],
+                        borderType: BorderType.RRect,
+                        radius: Radius.circular(20.0),
+                        //dash patterns, 10 is dash width, 6 is space width
+                        child: Container(
+                          //inner container
+                          padding: EdgeInsets.all(20),
+                          width: double
+                              .infinity, //width to 100% match to parent container.
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(12.0),
                             ),
-                            textAlign: TextAlign.center,
                           ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset('assets/icons/plus.svg',
+                                  color: colorTheme.onSurface, width: 12),
+                              const SizedBox(width: 5),
+                              Text(
+                                "가전 추가하기",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: colorTheme.onSurface),
+                              ),
+                            ],
+                          ), //background color of inner container
                         ),
-                      ),
-                    ],
+                      )),
+                    ),
 
                     // 리스트
                     SizedBox(height: 5),
@@ -82,6 +106,6 @@ class BillSimulation extends StatelessWidget {
               BillSimulationCard(),
             ]),
           )
-        ]));
+        ]);
   }
 }
