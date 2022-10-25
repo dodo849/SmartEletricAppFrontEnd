@@ -11,7 +11,8 @@ class BillSimulationViewModel extends GetxController {
 
   // Pagination Presentation variables
   RxBool isCardOpen = false.obs; // 카드 열림/닫힘
-  RxBool billSimulationProductsIsEmpty = false.obs;
+  RxBool billSimulationProductsIsEmpty = false.obs; // 가전 리스트 비었는지
+  RxBool editMode = false.obs; // 편집하기 모드
 
   // Usecase
   var getSimulationProductsUsecase = GetSimulationProductsUsecase();
@@ -35,6 +36,12 @@ class BillSimulationViewModel extends GetxController {
   void toggleIsCardOpen() {
     isCardOpen.isTrue ? isCardOpen(false) : isCardOpen(true);
   }
+
+
+  void toggleEditMode() {
+    editMode.isTrue ? editMode(false) : editMode(true);
+  }
+
 
 // Fetch bill simulation product from storage
   void getBillSimulationProducts() async {

@@ -31,15 +31,19 @@ class BillSimulation extends StatelessWidget {
                       children: [
                         Text("시뮬레이션 가전 목록",
                             style: context.theme.textTheme.headline3),
-                        Spacer(),
+                        const Spacer(),
                         GestureDetector(
                             onTap: () {
                               Get.to(AddBillSimulationProduct(),
                                   transition: Transition.rightToLeft);
                             },
-                            child: Text("추가하기")),
-                        SizedBox(width: 10),
-                        Text("편집하기"),
+                            child: const Text("추가하기")),
+                        const SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: (){
+                            BillSimulationViewModel.to.toggleEditMode();
+                          },
+                          child: Text("편집하기")),
                       ],
                     ),
 

@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationProductCellViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class SimulationProductListCell extends StatelessWidget {
   const SimulationProductListCell(
@@ -29,46 +30,67 @@ class SimulationProductListCell extends StatelessWidget {
     return GetX<BillSimulationProductCellViewModel>(builder: (viewModel) {
       return GestureDetector(
         onTap: () => viewModel.toggleisSelected(),
-        child: Container(
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                width: 1,
-                color: viewModel.isSelected.isTrue
-                    ? colorTheme.secondaryContainer
-                    : colorTheme.outline,
-              ),
-            ),
-            child: Row(
-              children: [
-                SvgPicture.asset(
-                  "assets/icons/product_${simulationProduct.productType.engName}.svg",
-                  color: context.theme.colorScheme.secondaryContainer,
-                  width: 50,
-                  height: 50,
+        child: Stack(
+          children: [
+            // Remove icon
+
+
+            // Cell
+            Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    width: 1,
+                    color: viewModel.isSelected.isTrue
+                        ? colorTheme.secondaryContainer
+                        : colorTheme.outline,
+                  ),
                 ),
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(
-                      "${simulationProduct.productName}",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: colorTheme.onBackground, fontSize: 16),
+                    SvgPicture.asset(
+                      "assets/icons/product_${simulationProduct.productType.engName}.svg",
+                      color: context.theme.colorScheme.secondaryContainer,
+                      width: 50,
+                      height: 50,
                     ),
-                    SizedBox(height: 5),
-                    Text(
-                      "${simulationProduct.modelName}",
-                      style:
-                          TextStyle(color: colorTheme.onSurface, fontSize: 14),
-                    ),
+                    SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${simulationProduct.productName}",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: colorTheme.onBackground, fontSize: 16),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          "${simulationProduct.modelName}",
+                          style:
+                              TextStyle(color: colorTheme.onSurface, fontSize: 14),
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            )),
+                )),
+          ],
+        ),
       );
     });
+  }
+
+  Color _getBorderColor(BuildContext context, BillSimulationProductCellViewModel viewModel){
+    Color color = Colors.black;
+
+    if (viewModel.isSelected.isTrue){
+      if(BillSimulationViewModel.to.editMode.isTrue){
+        color = context.theme.colorScheme.error;
+      }
+      color = context.theme.colorScheme.primaryContainer;
+    }
+
+    return color;
   }
 }

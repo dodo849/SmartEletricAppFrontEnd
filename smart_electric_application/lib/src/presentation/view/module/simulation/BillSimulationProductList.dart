@@ -20,7 +20,7 @@ class BillSimulationProductList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return Column(
               children: [
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 SimulationProductListCell(
                     // simulationProduct: controller.billSimulationProducts[index],
                     simulationProduct: BillSimulationViewModel
