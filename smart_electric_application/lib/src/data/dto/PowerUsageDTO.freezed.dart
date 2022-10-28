@@ -20,6 +20,8 @@ PowerUsageDTO _$PowerUsageDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PowerUsageDTO {
+  String get startDateKr => throw _privateConstructorUsedError;
+  String get endDateKr => throw _privateConstructorUsedError;
   String get dateTimeKr => throw _privateConstructorUsedError;
   double get powerUsageQuantity => throw _privateConstructorUsedError;
 
@@ -34,7 +36,11 @@ abstract class $PowerUsageDTOCopyWith<$Res> {
   factory $PowerUsageDTOCopyWith(
           PowerUsageDTO value, $Res Function(PowerUsageDTO) then) =
       _$PowerUsageDTOCopyWithImpl<$Res>;
-  $Res call({String dateTimeKr, double powerUsageQuantity});
+  $Res call(
+      {String startDateKr,
+      String endDateKr,
+      String dateTimeKr,
+      double powerUsageQuantity});
 }
 
 /// @nodoc
@@ -48,10 +54,20 @@ class _$PowerUsageDTOCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? startDateKr = freezed,
+    Object? endDateKr = freezed,
     Object? dateTimeKr = freezed,
     Object? powerUsageQuantity = freezed,
   }) {
     return _then(_value.copyWith(
+      startDateKr: startDateKr == freezed
+          ? _value.startDateKr
+          : startDateKr // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDateKr: endDateKr == freezed
+          ? _value.endDateKr
+          : endDateKr // ignore: cast_nullable_to_non_nullable
+              as String,
       dateTimeKr: dateTimeKr == freezed
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
@@ -71,7 +87,11 @@ abstract class _$$_PowerUsageDTOCopyWith<$Res>
           _$_PowerUsageDTO value, $Res Function(_$_PowerUsageDTO) then) =
       __$$_PowerUsageDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String dateTimeKr, double powerUsageQuantity});
+  $Res call(
+      {String startDateKr,
+      String endDateKr,
+      String dateTimeKr,
+      double powerUsageQuantity});
 }
 
 /// @nodoc
@@ -87,10 +107,20 @@ class __$$_PowerUsageDTOCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? startDateKr = freezed,
+    Object? endDateKr = freezed,
     Object? dateTimeKr = freezed,
     Object? powerUsageQuantity = freezed,
   }) {
     return _then(_$_PowerUsageDTO(
+      startDateKr: startDateKr == freezed
+          ? _value.startDateKr
+          : startDateKr // ignore: cast_nullable_to_non_nullable
+              as String,
+      endDateKr: endDateKr == freezed
+          ? _value.endDateKr
+          : endDateKr // ignore: cast_nullable_to_non_nullable
+              as String,
       dateTimeKr: dateTimeKr == freezed
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
@@ -107,11 +137,18 @@ class __$$_PowerUsageDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PowerUsageDTO implements _PowerUsageDTO {
   _$_PowerUsageDTO(
-      {required this.dateTimeKr, required this.powerUsageQuantity});
+      {required this.startDateKr,
+      required this.endDateKr,
+      required this.dateTimeKr,
+      required this.powerUsageQuantity});
 
   factory _$_PowerUsageDTO.fromJson(Map<String, dynamic> json) =>
       _$$_PowerUsageDTOFromJson(json);
 
+  @override
+  final String startDateKr;
+  @override
+  final String endDateKr;
   @override
   final String dateTimeKr;
   @override
@@ -119,7 +156,7 @@ class _$_PowerUsageDTO implements _PowerUsageDTO {
 
   @override
   String toString() {
-    return 'PowerUsageDTO(dateTimeKr: $dateTimeKr, powerUsageQuantity: $powerUsageQuantity)';
+    return 'PowerUsageDTO(startDateKr: $startDateKr, endDateKr: $endDateKr, dateTimeKr: $dateTimeKr, powerUsageQuantity: $powerUsageQuantity)';
   }
 
   @override
@@ -127,6 +164,9 @@ class _$_PowerUsageDTO implements _PowerUsageDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PowerUsageDTO &&
+            const DeepCollectionEquality()
+                .equals(other.startDateKr, startDateKr) &&
+            const DeepCollectionEquality().equals(other.endDateKr, endDateKr) &&
             const DeepCollectionEquality()
                 .equals(other.dateTimeKr, dateTimeKr) &&
             const DeepCollectionEquality()
@@ -137,6 +177,8 @@ class _$_PowerUsageDTO implements _PowerUsageDTO {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(startDateKr),
+      const DeepCollectionEquality().hash(endDateKr),
       const DeepCollectionEquality().hash(dateTimeKr),
       const DeepCollectionEquality().hash(powerUsageQuantity));
 
@@ -155,12 +197,18 @@ class _$_PowerUsageDTO implements _PowerUsageDTO {
 
 abstract class _PowerUsageDTO implements PowerUsageDTO {
   factory _PowerUsageDTO(
-      {required final String dateTimeKr,
+      {required final String startDateKr,
+      required final String endDateKr,
+      required final String dateTimeKr,
       required final double powerUsageQuantity}) = _$_PowerUsageDTO;
 
   factory _PowerUsageDTO.fromJson(Map<String, dynamic> json) =
       _$_PowerUsageDTO.fromJson;
 
+  @override
+  String get startDateKr;
+  @override
+  String get endDateKr;
   @override
   String get dateTimeKr;
   @override

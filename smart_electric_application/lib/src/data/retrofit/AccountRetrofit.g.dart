@@ -34,7 +34,7 @@ class _AccountRetrofit implements AccountRetrofit {
     )
         .compose(
           _dio.options,
-          '/user',
+          '/user/signup',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -57,7 +57,7 @@ class _AccountRetrofit implements AccountRetrofit {
     )
             .compose(
               _dio.options,
-              '/user',
+              '/user/search',
               queryParameters: queryParameters,
               data: _data,
             )

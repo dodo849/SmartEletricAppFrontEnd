@@ -77,12 +77,22 @@ class FirebaseRepository implements FirebaseRepositoryInterface {
       var idToken = await user?.getIdToken(true);
       return Result.success(idToken);
     } catch (err) {
-      return Result.failure('알 수 없는 오류가 발생했습니다. 다시 시도해주세요.');
+      return Result.failure('Fail to load id token. Try again.');
     }
   }
 
-  // Future<Result<String, Exception>> getAllUser(){
+    @override
+  Future<Result<String, String>> getUid() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    try {
+      var uid = await user?.uid;
+      return Result.success(uid);
+    } catch (err) {
+      return Result.failure('Fail to load uid. Try again.');
+    }
+  }
 
 
-  // }
+
 }

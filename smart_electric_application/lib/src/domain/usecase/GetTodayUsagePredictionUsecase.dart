@@ -24,6 +24,6 @@ class GetTodayUsagePredictionUsecase {
       }
     }
 
-    return Result.failure("Today's usage prediction was not found.");
+    return const Result.failure("Today's usage prediction was not found.");
   }
 }

@@ -17,4 +17,5 @@ abstract class AuthRepositoryInterface {
   Future<Result<bool, String>> removeEmail(email);
   Future<Result<String, String>> getEmail();
   Future<Result<bool, String>> removeUser();
+  Future<Result<String, String>> getUserName();
 }

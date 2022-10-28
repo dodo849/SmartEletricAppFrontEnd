@@ -18,6 +18,7 @@ class SignupUsecase {
   final AccountRepositoryInterface accountRepository =
       GetIt.I.get<AccountRepositoryInterface>();
 
+  // Usecase
   final loginUseCase = LoginUsecase();
 
   Future<Result<bool, String>> execute(
@@ -43,7 +44,13 @@ class SignupUsecase {
     }
 
     // Account 서버에 유저 생성
-    var firebaseUidResult = await firebaseRepository.getIdToken();
+    var firebaseUidResult = await firebaseRepository.getUid();
+    if (firebaseUidResult.status == ResultStatus.error) {
+      return Result.failure(firebaseUidResult.error.toString());
+    }
+
+    // ### firebase message token으로 바꿔야함
+    var firebaseIdTokenResult = await firebaseRepository.getIdToken();
     if (firebaseUidResult.status == ResultStatus.error) {
       return Result.failure(firebaseUidResult.error.toString());
     }
@@ -53,7 +60,7 @@ class SignupUsecase {
             accountRegistrationDTO: AccountRegistrationDTO(
                 customerNumber: customerNumber,
                 email: email,
-                firebaseMessageToken: "test",
+                firebaseMessageToken: firebaseIdTokenResult.value!,
                 firebaseUid: firebaseUidResult.value!,
                 isSmartMeter: isSmartMeter,
                 name: name));

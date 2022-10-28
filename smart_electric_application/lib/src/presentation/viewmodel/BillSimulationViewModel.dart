@@ -16,7 +16,6 @@ class BillSimulationViewModel extends GetxController {
 
   // Pagination Presentation variables
   RxBool isCardOpen = false.obs; // 카드 열림/닫힘
-  RxBool billSimulationProductsIsEmpty = false.obs; // 가전 리스트 비었는지
 
   // Usecase
   var getBillSimulationProductsUsecase = GetBillSimulationProductsUsecase();
@@ -28,13 +27,6 @@ class BillSimulationViewModel extends GetxController {
     // TODO: implement onInit
 
     getBillSimulationProducts();
-
-    // fetch 할때마다 가전 목록 비어있는지 확인
-    ever(billSimulationProducts, (_) {
-      billSimulationProducts.value.length == 0
-          ? billSimulationProductsIsEmpty(true)
-          : billSimulationProductsIsEmpty(false);
-    });
 
     super.onInit();
   }
@@ -51,10 +43,6 @@ class BillSimulationViewModel extends GetxController {
     // 리스트가 존재하면
     if (getSimulationProductsResult.value != null) {
       billSimulationProducts(getSimulationProductsResult.value);
-      billSimulationProductsIsEmpty(false);
-      // 리스트 존재하지않으면
-    } else {
-      
     }
   }
 

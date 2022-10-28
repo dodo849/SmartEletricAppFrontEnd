@@ -53,7 +53,7 @@ class AddBillSimulationProductViewModel extends GetxController {
     }
 
     await addSimulationProductUsecase.execute(BillSimulationProductModel(
-        order: order, // 임시 순서
+        order: order,
         productName: productName.value,
         modelName: modelName.value,
         productType: ProductTypeData.productTypes[selectedProductIndex.value],

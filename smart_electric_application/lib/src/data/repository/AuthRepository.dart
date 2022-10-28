@@ -185,4 +185,20 @@ class AuthRepository implements AuthRepositoryInterface {
       return Result.failure(err.toString());
     }
   }
+
+    @override
+  Future<Result<String, String>> getUserName() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var userName = await prefs.getString('name');
+
+      if (userName == null){
+        return const Result.failure("The name is null");
+      }
+
+      return Result.success(userName);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
 }
