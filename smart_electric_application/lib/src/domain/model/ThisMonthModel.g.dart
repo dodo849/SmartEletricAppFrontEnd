@@ -10,14 +10,14 @@ _$_ThisMonthModel _$$_ThisMonthModelFromJson(Map<String, dynamic> json) =>
     _$_ThisMonthModel(
       userName: json['userName'] as String,
       powerUsage: (json['powerUsage'] as num).toDouble(),
-      bill: json['bill'] as int,
+      bill: (json['bill'] as num).toDouble(),
       progressiveSection: json['progressiveSection'] as int,
       accumulateThresholdFirst: json['accumulateThresholdFirst'] as int,
       accumulateThresholdSecond: json['accumulateThresholdSecond'] as int,
       accumulateThresholdSuper: json['accumulateThresholdSuper'] as int,
       predictionPowerUsage: (json['predictionPowerUsage'] as num).toDouble(),
-      predictionBill: json['predictionBill'] as int,
-      predictedProgressiveSection: json['predictedProgressiveSection'] as int,
+      predictionBill: (json['predictionBill'] as num).toDouble(),
+      predictionProgressiveSection: json['predictionProgressiveSection'] as int,
     );
 
 Map<String, dynamic> _$$_ThisMonthModelToJson(_$_ThisMonthModel instance) =>
@@ -31,5 +31,5 @@ Map<String, dynamic> _$$_ThisMonthModelToJson(_$_ThisMonthModel instance) =>
       'accumulateThresholdSuper': instance.accumulateThresholdSuper,
       'predictionPowerUsage': instance.predictionPowerUsage,
       'predictionBill': instance.predictionBill,
-      'predictedProgressiveSection': instance.predictedProgressiveSection,
+      'predictionProgressiveSection': instance.predictionProgressiveSection,
     };

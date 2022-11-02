@@ -17,8 +17,6 @@ class GetAiPredictionUsecase {
       return getCustomerNumberResult;
     }
 
-    print("getCustomerNumberResult ${getCustomerNumberResult.error}");
-
     String customerNumber = getCustomerNumberResult.value!;
 
     // AI 예측 정보 가져오기

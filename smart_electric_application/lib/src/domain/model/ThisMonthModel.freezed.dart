@@ -22,14 +22,14 @@ ThisMonthModel _$ThisMonthModelFromJson(Map<String, dynamic> json) {
 mixin _$ThisMonthModel {
   String get userName => throw _privateConstructorUsedError;
   double get powerUsage => throw _privateConstructorUsedError;
-  int get bill => throw _privateConstructorUsedError;
+  double get bill => throw _privateConstructorUsedError;
   int get progressiveSection => throw _privateConstructorUsedError;
   int get accumulateThresholdFirst => throw _privateConstructorUsedError;
   int get accumulateThresholdSecond => throw _privateConstructorUsedError;
   int get accumulateThresholdSuper => throw _privateConstructorUsedError;
   double get predictionPowerUsage => throw _privateConstructorUsedError;
-  int get predictionBill => throw _privateConstructorUsedError;
-  int get predictedProgressiveSection => throw _privateConstructorUsedError;
+  double get predictionBill => throw _privateConstructorUsedError;
+  int get predictionProgressiveSection => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,14 +45,14 @@ abstract class $ThisMonthModelCopyWith<$Res> {
   $Res call(
       {String userName,
       double powerUsage,
-      int bill,
+      double bill,
       int progressiveSection,
       int accumulateThresholdFirst,
       int accumulateThresholdSecond,
       int accumulateThresholdSuper,
       double predictionPowerUsage,
-      int predictionBill,
-      int predictedProgressiveSection});
+      double predictionBill,
+      int predictionProgressiveSection});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$ThisMonthModelCopyWithImpl<$Res>
     Object? accumulateThresholdSuper = freezed,
     Object? predictionPowerUsage = freezed,
     Object? predictionBill = freezed,
-    Object? predictedProgressiveSection = freezed,
+    Object? predictionProgressiveSection = freezed,
   }) {
     return _then(_value.copyWith(
       userName: userName == freezed
@@ -89,7 +89,7 @@ class _$ThisMonthModelCopyWithImpl<$Res>
       bill: bill == freezed
           ? _value.bill
           : bill // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       progressiveSection: progressiveSection == freezed
           ? _value.progressiveSection
           : progressiveSection // ignore: cast_nullable_to_non_nullable
@@ -113,10 +113,10 @@ class _$ThisMonthModelCopyWithImpl<$Res>
       predictionBill: predictionBill == freezed
           ? _value.predictionBill
           : predictionBill // ignore: cast_nullable_to_non_nullable
-              as int,
-      predictedProgressiveSection: predictedProgressiveSection == freezed
-          ? _value.predictedProgressiveSection
-          : predictedProgressiveSection // ignore: cast_nullable_to_non_nullable
+              as double,
+      predictionProgressiveSection: predictionProgressiveSection == freezed
+          ? _value.predictionProgressiveSection
+          : predictionProgressiveSection // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -132,14 +132,14 @@ abstract class _$$_ThisMonthModelCopyWith<$Res>
   $Res call(
       {String userName,
       double powerUsage,
-      int bill,
+      double bill,
       int progressiveSection,
       int accumulateThresholdFirst,
       int accumulateThresholdSecond,
       int accumulateThresholdSuper,
       double predictionPowerUsage,
-      int predictionBill,
-      int predictedProgressiveSection});
+      double predictionBill,
+      int predictionProgressiveSection});
 }
 
 /// @nodoc
@@ -164,7 +164,7 @@ class __$$_ThisMonthModelCopyWithImpl<$Res>
     Object? accumulateThresholdSuper = freezed,
     Object? predictionPowerUsage = freezed,
     Object? predictionBill = freezed,
-    Object? predictedProgressiveSection = freezed,
+    Object? predictionProgressiveSection = freezed,
   }) {
     return _then(_$_ThisMonthModel(
       userName: userName == freezed
@@ -178,7 +178,7 @@ class __$$_ThisMonthModelCopyWithImpl<$Res>
       bill: bill == freezed
           ? _value.bill
           : bill // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       progressiveSection: progressiveSection == freezed
           ? _value.progressiveSection
           : progressiveSection // ignore: cast_nullable_to_non_nullable
@@ -202,10 +202,10 @@ class __$$_ThisMonthModelCopyWithImpl<$Res>
       predictionBill: predictionBill == freezed
           ? _value.predictionBill
           : predictionBill // ignore: cast_nullable_to_non_nullable
-              as int,
-      predictedProgressiveSection: predictedProgressiveSection == freezed
-          ? _value.predictedProgressiveSection
-          : predictedProgressiveSection // ignore: cast_nullable_to_non_nullable
+              as double,
+      predictionProgressiveSection: predictionProgressiveSection == freezed
+          ? _value.predictionProgressiveSection
+          : predictionProgressiveSection // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -224,7 +224,7 @@ class _$_ThisMonthModel implements _ThisMonthModel {
       required this.accumulateThresholdSuper,
       required this.predictionPowerUsage,
       required this.predictionBill,
-      required this.predictedProgressiveSection});
+      required this.predictionProgressiveSection});
 
   factory _$_ThisMonthModel.fromJson(Map<String, dynamic> json) =>
       _$$_ThisMonthModelFromJson(json);
@@ -234,7 +234,7 @@ class _$_ThisMonthModel implements _ThisMonthModel {
   @override
   final double powerUsage;
   @override
-  final int bill;
+  final double bill;
   @override
   final int progressiveSection;
   @override
@@ -246,13 +246,13 @@ class _$_ThisMonthModel implements _ThisMonthModel {
   @override
   final double predictionPowerUsage;
   @override
-  final int predictionBill;
+  final double predictionBill;
   @override
-  final int predictedProgressiveSection;
+  final int predictionProgressiveSection;
 
   @override
   String toString() {
-    return 'ThisMonthModel(userName: $userName, powerUsage: $powerUsage, bill: $bill, progressiveSection: $progressiveSection, accumulateThresholdFirst: $accumulateThresholdFirst, accumulateThresholdSecond: $accumulateThresholdSecond, accumulateThresholdSuper: $accumulateThresholdSuper, predictionPowerUsage: $predictionPowerUsage, predictionBill: $predictionBill, predictedProgressiveSection: $predictedProgressiveSection)';
+    return 'ThisMonthModel(userName: $userName, powerUsage: $powerUsage, bill: $bill, progressiveSection: $progressiveSection, accumulateThresholdFirst: $accumulateThresholdFirst, accumulateThresholdSecond: $accumulateThresholdSecond, accumulateThresholdSuper: $accumulateThresholdSuper, predictionPowerUsage: $predictionPowerUsage, predictionBill: $predictionBill, predictionProgressiveSection: $predictionProgressiveSection)';
   }
 
   @override
@@ -277,8 +277,8 @@ class _$_ThisMonthModel implements _ThisMonthModel {
             const DeepCollectionEquality()
                 .equals(other.predictionBill, predictionBill) &&
             const DeepCollectionEquality().equals(
-                other.predictedProgressiveSection,
-                predictedProgressiveSection));
+                other.predictionProgressiveSection,
+                predictionProgressiveSection));
   }
 
   @JsonKey(ignore: true)
@@ -294,7 +294,7 @@ class _$_ThisMonthModel implements _ThisMonthModel {
       const DeepCollectionEquality().hash(accumulateThresholdSuper),
       const DeepCollectionEquality().hash(predictionPowerUsage),
       const DeepCollectionEquality().hash(predictionBill),
-      const DeepCollectionEquality().hash(predictedProgressiveSection));
+      const DeepCollectionEquality().hash(predictionProgressiveSection));
 
   @JsonKey(ignore: true)
   @override
@@ -313,14 +313,14 @@ abstract class _ThisMonthModel implements ThisMonthModel {
   factory _ThisMonthModel(
       {required final String userName,
       required final double powerUsage,
-      required final int bill,
+      required final double bill,
       required final int progressiveSection,
       required final int accumulateThresholdFirst,
       required final int accumulateThresholdSecond,
       required final int accumulateThresholdSuper,
       required final double predictionPowerUsage,
-      required final int predictionBill,
-      required final int predictedProgressiveSection}) = _$_ThisMonthModel;
+      required final double predictionBill,
+      required final int predictionProgressiveSection}) = _$_ThisMonthModel;
 
   factory _ThisMonthModel.fromJson(Map<String, dynamic> json) =
       _$_ThisMonthModel.fromJson;
@@ -330,7 +330,7 @@ abstract class _ThisMonthModel implements ThisMonthModel {
   @override
   double get powerUsage;
   @override
-  int get bill;
+  double get bill;
   @override
   int get progressiveSection;
   @override
@@ -342,9 +342,9 @@ abstract class _ThisMonthModel implements ThisMonthModel {
   @override
   double get predictionPowerUsage;
   @override
-  int get predictionBill;
+  double get predictionBill;
   @override
-  int get predictedProgressiveSection;
+  int get predictionProgressiveSection;
   @override
   @JsonKey(ignore: true)
   _$$_ThisMonthModelCopyWith<_$_ThisMonthModel> get copyWith =>

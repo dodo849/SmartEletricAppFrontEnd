@@ -19,4 +19,6 @@ abstract class PowerUsageRepositoryInterface {
       {required String customerNumber,
       required String startDate,
       required String endDate});
+  Future<Result<PowerUsageDTO, String>> getRecentPowerUsageByMonth(
+      {required String customerNumber});
 }

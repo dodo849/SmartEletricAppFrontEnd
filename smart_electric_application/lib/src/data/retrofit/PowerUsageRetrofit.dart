@@ -33,4 +33,9 @@ abstract class PowerUsageRetrofit {
       @Query('custNo') String customerNumber,
       @Query('startDate') String startDate,
       @Query('endDate') String endDate);
+
+  @GET('/specific-user/period/month/most-recent')
+  Future<PowerUsageDTO> getRecentPowerUsageByMonth(
+    @Query('custNo') String customerNumber,
+  );
 }

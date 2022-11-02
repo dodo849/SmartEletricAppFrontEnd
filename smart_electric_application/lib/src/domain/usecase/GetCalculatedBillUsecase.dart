@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/data/dto/CalculateBillDTO.dart';
+import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageOfSpecificMonthUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
@@ -14,7 +14,7 @@ class GetCalculatedBillUsecase {
   // Usecase
   final getPowerUsageOfThisMonthUsecase = GetPowerUsageOfSpecificMonthUsecase();
 
-  Future<Result<CalculateBillDTO, String>> excute(
+  Future<Result<BillCalculationDTO, String>> excute(
       double powerUsageQuantity) async {
     // 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =
@@ -27,7 +27,7 @@ class GetCalculatedBillUsecase {
     }
 
     // 이번달 예상 요금 계산하기
-    Result<CalculateBillDTO, String> requestCalculateBillResult =
+    Result<BillCalculationDTO, String> requestCalculateBillResult =
         await aiRepository.requestCalculateBill(
             customerNumber: getCustomerNumberResult.value!,
             powerUsageQuantity: powerUsageQuantity);

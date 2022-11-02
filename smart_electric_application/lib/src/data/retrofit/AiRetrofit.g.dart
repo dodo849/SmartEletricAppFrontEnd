@@ -67,7 +67,7 @@ class _AiRetrofit implements AiRetrofit {
   }
 
   @override
-  Future<CalculateBillDTO> requestCalculateBill(
+  Future<BillCalculationDTO> requestCalculateBill(
     customerNumber,
     powerUsageQuantity,
   ) async {
@@ -79,7 +79,7 @@ class _AiRetrofit implements AiRetrofit {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CalculateBillDTO>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<BillCalculationDTO>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -91,7 +91,7 @@ class _AiRetrofit implements AiRetrofit {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CalculateBillDTO.fromJson(_result.data!);
+    final value = BillCalculationDTO.fromJson(_result.data!);
     return value;
   }
 

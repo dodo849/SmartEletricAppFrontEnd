@@ -34,8 +34,8 @@ class PowerUsageRepository implements PowerUsageRepositoryInterface {
       final dio = await getInterceptorDio(); // Provide a dio instance
       final retrofit = PowerUsageRetrofit(dio);
 
-      List<PowerUsageDTO> powerUsageByDayDTO =
-          await retrofit.getPowerUsageByDay(customerNumber, startDate, endDate);
+      List<PowerUsageDTO> powerUsageByDayDTO = await retrofit
+          .getPowerUsageByHour(customerNumber, startDate, endDate);
 
       return Result.success(powerUsageByDayDTO);
     } catch (err) {
@@ -52,8 +52,8 @@ class PowerUsageRepository implements PowerUsageRepositoryInterface {
       final dio = await getInterceptorDio(); // Provide a dio instance
       final retrofit = PowerUsageRetrofit(dio);
 
-      List<PowerUsageDTO> powerUsageByDayDTO =
-          await retrofit.getPowerUsageByDay(customerNumber, startDate, endDate);
+      List<PowerUsageDTO> powerUsageByDayDTO = await retrofit
+          .getPowerUsageByMonth(customerNumber, startDate, endDate);
 
       return Result.success(powerUsageByDayDTO);
     } catch (err) {
@@ -70,8 +70,24 @@ class PowerUsageRepository implements PowerUsageRepositoryInterface {
       final dio = await getInterceptorDio(); // Provide a dio instance
       final retrofit = PowerUsageRetrofit(dio);
 
-      List<PowerUsageDTO> powerUsageByDayDTO =
-          await retrofit.getPowerUsageByDay(customerNumber, startDate, endDate);
+      List<PowerUsageDTO> powerUsageByDayDTO = await retrofit
+          .getPowerUsageByYear(customerNumber, startDate, endDate);
+
+      return Result.success(powerUsageByDayDTO);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<PowerUsageDTO, String>> getRecentPowerUsageByMonth(
+      {required String customerNumber}) async {
+    try {
+      final dio = await getInterceptorDio(); // Provide a dio instance
+      final retrofit = PowerUsageRetrofit(dio);
+
+      PowerUsageDTO powerUsageByDayDTO =
+          await retrofit.getRecentPowerUsageByMonth(customerNumber);
 
       return Result.success(powerUsageByDayDTO);
     } catch (err) {

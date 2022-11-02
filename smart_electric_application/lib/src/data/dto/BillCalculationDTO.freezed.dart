@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'CalculateBillDTO.dart';
+part of 'BillCalculationDTO.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,40 +14,40 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-CalculateBillDTO _$CalculateBillDTOFromJson(Map<String, dynamic> json) {
-  return _CalculateBillDTO.fromJson(json);
+BillCalculationDTO _$BillCalculationDTOFromJson(Map<String, dynamic> json) {
+  return _BillCalculationDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$CalculateBillDTO {
-  int get result => throw _privateConstructorUsedError;
+mixin _$BillCalculationDTO {
+  double get result => throw _privateConstructorUsedError;
   int get accumulate => throw _privateConstructorUsedError;
   PowerBillInfoDTO get powerBillInfo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $CalculateBillDTOCopyWith<CalculateBillDTO> get copyWith =>
+  $BillCalculationDTOCopyWith<BillCalculationDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CalculateBillDTOCopyWith<$Res> {
-  factory $CalculateBillDTOCopyWith(
-          CalculateBillDTO value, $Res Function(CalculateBillDTO) then) =
-      _$CalculateBillDTOCopyWithImpl<$Res>;
-  $Res call({int result, int accumulate, PowerBillInfoDTO powerBillInfo});
+abstract class $BillCalculationDTOCopyWith<$Res> {
+  factory $BillCalculationDTOCopyWith(
+          BillCalculationDTO value, $Res Function(BillCalculationDTO) then) =
+      _$BillCalculationDTOCopyWithImpl<$Res>;
+  $Res call({double result, int accumulate, PowerBillInfoDTO powerBillInfo});
 
   $PowerBillInfoDTOCopyWith<$Res> get powerBillInfo;
 }
 
 /// @nodoc
-class _$CalculateBillDTOCopyWithImpl<$Res>
-    implements $CalculateBillDTOCopyWith<$Res> {
-  _$CalculateBillDTOCopyWithImpl(this._value, this._then);
+class _$BillCalculationDTOCopyWithImpl<$Res>
+    implements $BillCalculationDTOCopyWith<$Res> {
+  _$BillCalculationDTOCopyWithImpl(this._value, this._then);
 
-  final CalculateBillDTO _value;
+  final BillCalculationDTO _value;
   // ignore: unused_field
-  final $Res Function(CalculateBillDTO) _then;
+  final $Res Function(BillCalculationDTO) _then;
 
   @override
   $Res call({
@@ -59,7 +59,7 @@ class _$CalculateBillDTOCopyWithImpl<$Res>
       result: result == freezed
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       accumulate: accumulate == freezed
           ? _value.accumulate
           : accumulate // ignore: cast_nullable_to_non_nullable
@@ -80,28 +80,28 @@ class _$CalculateBillDTOCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_CalculateBillDTOCopyWith<$Res>
-    implements $CalculateBillDTOCopyWith<$Res> {
-  factory _$$_CalculateBillDTOCopyWith(
-          _$_CalculateBillDTO value, $Res Function(_$_CalculateBillDTO) then) =
-      __$$_CalculateBillDTOCopyWithImpl<$Res>;
+abstract class _$$_BillCalculationDTOCopyWith<$Res>
+    implements $BillCalculationDTOCopyWith<$Res> {
+  factory _$$_BillCalculationDTOCopyWith(_$_BillCalculationDTO value,
+          $Res Function(_$_BillCalculationDTO) then) =
+      __$$_BillCalculationDTOCopyWithImpl<$Res>;
   @override
-  $Res call({int result, int accumulate, PowerBillInfoDTO powerBillInfo});
+  $Res call({double result, int accumulate, PowerBillInfoDTO powerBillInfo});
 
   @override
   $PowerBillInfoDTOCopyWith<$Res> get powerBillInfo;
 }
 
 /// @nodoc
-class __$$_CalculateBillDTOCopyWithImpl<$Res>
-    extends _$CalculateBillDTOCopyWithImpl<$Res>
-    implements _$$_CalculateBillDTOCopyWith<$Res> {
-  __$$_CalculateBillDTOCopyWithImpl(
-      _$_CalculateBillDTO _value, $Res Function(_$_CalculateBillDTO) _then)
-      : super(_value, (v) => _then(v as _$_CalculateBillDTO));
+class __$$_BillCalculationDTOCopyWithImpl<$Res>
+    extends _$BillCalculationDTOCopyWithImpl<$Res>
+    implements _$$_BillCalculationDTOCopyWith<$Res> {
+  __$$_BillCalculationDTOCopyWithImpl(
+      _$_BillCalculationDTO _value, $Res Function(_$_BillCalculationDTO) _then)
+      : super(_value, (v) => _then(v as _$_BillCalculationDTO));
 
   @override
-  _$_CalculateBillDTO get _value => super._value as _$_CalculateBillDTO;
+  _$_BillCalculationDTO get _value => super._value as _$_BillCalculationDTO;
 
   @override
   $Res call({
@@ -109,11 +109,11 @@ class __$$_CalculateBillDTOCopyWithImpl<$Res>
     Object? accumulate = freezed,
     Object? powerBillInfo = freezed,
   }) {
-    return _then(_$_CalculateBillDTO(
+    return _then(_$_BillCalculationDTO(
       result: result == freezed
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       accumulate: accumulate == freezed
           ? _value.accumulate
           : accumulate // ignore: cast_nullable_to_non_nullable
@@ -128,17 +128,17 @@ class __$$_CalculateBillDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CalculateBillDTO implements _CalculateBillDTO {
-  _$_CalculateBillDTO(
+class _$_BillCalculationDTO implements _BillCalculationDTO {
+  _$_BillCalculationDTO(
       {required this.result,
       required this.accumulate,
       required this.powerBillInfo});
 
-  factory _$_CalculateBillDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_CalculateBillDTOFromJson(json);
+  factory _$_BillCalculationDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_BillCalculationDTOFromJson(json);
 
   @override
-  final int result;
+  final double result;
   @override
   final int accumulate;
   @override
@@ -146,14 +146,14 @@ class _$_CalculateBillDTO implements _CalculateBillDTO {
 
   @override
   String toString() {
-    return 'CalculateBillDTO(result: $result, accumulate: $accumulate, powerBillInfo: $powerBillInfo)';
+    return 'BillCalculationDTO(result: $result, accumulate: $accumulate, powerBillInfo: $powerBillInfo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CalculateBillDTO &&
+            other is _$_BillCalculationDTO &&
             const DeepCollectionEquality().equals(other.result, result) &&
             const DeepCollectionEquality()
                 .equals(other.accumulate, accumulate) &&
@@ -171,35 +171,36 @@ class _$_CalculateBillDTO implements _CalculateBillDTO {
 
   @JsonKey(ignore: true)
   @override
-  _$$_CalculateBillDTOCopyWith<_$_CalculateBillDTO> get copyWith =>
-      __$$_CalculateBillDTOCopyWithImpl<_$_CalculateBillDTO>(this, _$identity);
+  _$$_BillCalculationDTOCopyWith<_$_BillCalculationDTO> get copyWith =>
+      __$$_BillCalculationDTOCopyWithImpl<_$_BillCalculationDTO>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CalculateBillDTOToJson(
+    return _$$_BillCalculationDTOToJson(
       this,
     );
   }
 }
 
-abstract class _CalculateBillDTO implements CalculateBillDTO {
-  factory _CalculateBillDTO(
-      {required final int result,
+abstract class _BillCalculationDTO implements BillCalculationDTO {
+  factory _BillCalculationDTO(
+      {required final double result,
       required final int accumulate,
-      required final PowerBillInfoDTO powerBillInfo}) = _$_CalculateBillDTO;
+      required final PowerBillInfoDTO powerBillInfo}) = _$_BillCalculationDTO;
 
-  factory _CalculateBillDTO.fromJson(Map<String, dynamic> json) =
-      _$_CalculateBillDTO.fromJson;
+  factory _BillCalculationDTO.fromJson(Map<String, dynamic> json) =
+      _$_BillCalculationDTO.fromJson;
 
   @override
-  int get result;
+  double get result;
   @override
   int get accumulate;
   @override
   PowerBillInfoDTO get powerBillInfo;
   @override
   @JsonKey(ignore: true)
-  _$$_CalculateBillDTOCopyWith<_$_CalculateBillDTO> get copyWith =>
+  _$$_BillCalculationDTOCopyWith<_$_BillCalculationDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -222,13 +223,13 @@ mixin _$PowerBillInfoDTO {
   @JsonKey(name: "base_bill_third")
   int get baseBillThired => throw _privateConstructorUsedError;
   @JsonKey(name: "power_bill_first")
-  int get powerBillFrist => throw _privateConstructorUsedError;
+  double get powerBillFrist => throw _privateConstructorUsedError;
   @JsonKey(name: "power_bill_second")
-  int get powerBillSecond => throw _privateConstructorUsedError;
+  double get powerBillSecond => throw _privateConstructorUsedError;
   @JsonKey(name: "power_bill_third")
-  int get powerBillThird => throw _privateConstructorUsedError;
+  double get powerBillThird => throw _privateConstructorUsedError;
   @JsonKey(name: "power_bill_super")
-  int get powerBillSuper => throw _privateConstructorUsedError;
+  double get powerBillSuper => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -255,13 +256,13 @@ abstract class $PowerBillInfoDTOCopyWith<$Res> {
       @JsonKey(name: "base_bill_third")
           int baseBillThired,
       @JsonKey(name: "power_bill_first")
-          int powerBillFrist,
+          double powerBillFrist,
       @JsonKey(name: "power_bill_second")
-          int powerBillSecond,
+          double powerBillSecond,
       @JsonKey(name: "power_bill_third")
-          int powerBillThird,
+          double powerBillThird,
       @JsonKey(name: "power_bill_super")
-          int powerBillSuper});
+          double powerBillSuper});
 }
 
 /// @nodoc
@@ -314,19 +315,19 @@ class _$PowerBillInfoDTOCopyWithImpl<$Res>
       powerBillFrist: powerBillFrist == freezed
           ? _value.powerBillFrist
           : powerBillFrist // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       powerBillSecond: powerBillSecond == freezed
           ? _value.powerBillSecond
           : powerBillSecond // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       powerBillThird: powerBillThird == freezed
           ? _value.powerBillThird
           : powerBillThird // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       powerBillSuper: powerBillSuper == freezed
           ? _value.powerBillSuper
           : powerBillSuper // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -352,13 +353,13 @@ abstract class _$$_PowerBillInfoDTOCopyWith<$Res>
       @JsonKey(name: "base_bill_third")
           int baseBillThired,
       @JsonKey(name: "power_bill_first")
-          int powerBillFrist,
+          double powerBillFrist,
       @JsonKey(name: "power_bill_second")
-          int powerBillSecond,
+          double powerBillSecond,
       @JsonKey(name: "power_bill_third")
-          int powerBillThird,
+          double powerBillThird,
       @JsonKey(name: "power_bill_super")
-          int powerBillSuper});
+          double powerBillSuper});
 }
 
 /// @nodoc
@@ -413,19 +414,19 @@ class __$$_PowerBillInfoDTOCopyWithImpl<$Res>
       powerBillFrist: powerBillFrist == freezed
           ? _value.powerBillFrist
           : powerBillFrist // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       powerBillSecond: powerBillSecond == freezed
           ? _value.powerBillSecond
           : powerBillSecond // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       powerBillThird: powerBillThird == freezed
           ? _value.powerBillThird
           : powerBillThird // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       powerBillSuper: powerBillSuper == freezed
           ? _value.powerBillSuper
           : powerBillSuper // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -478,16 +479,16 @@ class _$_PowerBillInfoDTO implements _PowerBillInfoDTO {
   final int baseBillThired;
   @override
   @JsonKey(name: "power_bill_first")
-  final int powerBillFrist;
+  final double powerBillFrist;
   @override
   @JsonKey(name: "power_bill_second")
-  final int powerBillSecond;
+  final double powerBillSecond;
   @override
   @JsonKey(name: "power_bill_third")
-  final int powerBillThird;
+  final double powerBillThird;
   @override
   @JsonKey(name: "power_bill_super")
-  final int powerBillSuper;
+  final double powerBillSuper;
 
   @override
   String toString() {
@@ -567,13 +568,13 @@ abstract class _PowerBillInfoDTO implements PowerBillInfoDTO {
       @JsonKey(name: "base_bill_third")
           required final int baseBillThired,
       @JsonKey(name: "power_bill_first")
-          required final int powerBillFrist,
+          required final double powerBillFrist,
       @JsonKey(name: "power_bill_second")
-          required final int powerBillSecond,
+          required final double powerBillSecond,
       @JsonKey(name: "power_bill_third")
-          required final int powerBillThird,
+          required final double powerBillThird,
       @JsonKey(name: "power_bill_super")
-          required final int powerBillSuper}) = _$_PowerBillInfoDTO;
+          required final double powerBillSuper}) = _$_PowerBillInfoDTO;
 
   factory _PowerBillInfoDTO.fromJson(Map<String, dynamic> json) =
       _$_PowerBillInfoDTO.fromJson;
@@ -598,16 +599,16 @@ abstract class _PowerBillInfoDTO implements PowerBillInfoDTO {
   int get baseBillThired;
   @override
   @JsonKey(name: "power_bill_first")
-  int get powerBillFrist;
+  double get powerBillFrist;
   @override
   @JsonKey(name: "power_bill_second")
-  int get powerBillSecond;
+  double get powerBillSecond;
   @override
   @JsonKey(name: "power_bill_third")
-  int get powerBillThird;
+  double get powerBillThird;
   @override
   @JsonKey(name: "power_bill_super")
-  int get powerBillSuper;
+  double get powerBillSuper;
   @override
   @JsonKey(ignore: true)
   _$$_PowerBillInfoDTOCopyWith<_$_PowerBillInfoDTO> get copyWith =>

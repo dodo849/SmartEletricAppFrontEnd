@@ -1,20 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'CalculateBillDTO.dart';
+part of 'BillCalculationDTO.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CalculateBillDTO _$$_CalculateBillDTOFromJson(Map<String, dynamic> json) =>
-    _$_CalculateBillDTO(
-      result: json['result'] as int,
+_$_BillCalculationDTO _$$_BillCalculationDTOFromJson(
+        Map<String, dynamic> json) =>
+    _$_BillCalculationDTO(
+      result: (json['result'] as num).toDouble(),
       accumulate: json['accumulate'] as int,
       powerBillInfo: PowerBillInfoDTO.fromJson(
           json['powerBillInfo'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_CalculateBillDTOToJson(_$_CalculateBillDTO instance) =>
+Map<String, dynamic> _$$_BillCalculationDTOToJson(
+        _$_BillCalculationDTO instance) =>
     <String, dynamic>{
       'result': instance.result,
       'accumulate': instance.accumulate,
@@ -32,10 +34,10 @@ _$_PowerBillInfoDTO _$$_PowerBillInfoDTOFromJson(Map<String, dynamic> json) =>
       baseBillFirst: json['base_bill_first'] as int,
       baseBillSecond: json['base_bill_second'] as int,
       baseBillThired: json['base_bill_third'] as int,
-      powerBillFrist: json['power_bill_first'] as int,
-      powerBillSecond: json['power_bill_second'] as int,
-      powerBillThird: json['power_bill_third'] as int,
-      powerBillSuper: json['power_bill_super'] as int,
+      powerBillFrist: (json['power_bill_first'] as num).toDouble(),
+      powerBillSecond: (json['power_bill_second'] as num).toDouble(),
+      powerBillThird: (json['power_bill_third'] as num).toDouble(),
+      powerBillSuper: (json['power_bill_super'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_PowerBillInfoDTOToJson(_$_PowerBillInfoDTO instance) =>

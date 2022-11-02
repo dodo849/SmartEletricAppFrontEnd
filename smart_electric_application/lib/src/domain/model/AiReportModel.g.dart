@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'AiReportDTO.dart';
+part of 'AiReportModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AiReportDTO _$$_AiReportDTOFromJson(Map<String, dynamic> json) =>
-    _$_AiReportDTO(
+_$_AiReportModel _$$_AiReportModelFromJson(Map<String, dynamic> json) =>
+    _$_AiReportModel(
       timePeriodIndex: (json['timePeriodIndex'] as List<dynamic>)
           .map((e) => e as int)
           .toList(),
@@ -30,9 +30,12 @@ _$_AiReportDTO _$$_AiReportDTOFromJson(Map<String, dynamic> json) =>
       dayPowerUsageMinInWon: (json['dayPowerUsageMinInWon'] as num).toDouble(),
       dayPowerUsageMax: (json['dayPowerUsageMax'] as num).toDouble(),
       dayPowerUsageMaxInWon: (json['dayPowerUsageMaxInWon'] as num).toDouble(),
+      predictionBill: (json['predictionBill'] as num).toDouble(),
+      predictionPowerUsage: (json['predictionPowerUsage'] as num).toDouble(),
+      predictionSection: json['predictionSection'] as int,
     );
 
-Map<String, dynamic> _$$_AiReportDTOToJson(_$_AiReportDTO instance) =>
+Map<String, dynamic> _$$_AiReportModelToJson(_$_AiReportModel instance) =>
     <String, dynamic>{
       'timePeriodIndex': instance.timePeriodIndex,
       'timePeriodPowerUsage': instance.timePeriodPowerUsage,
@@ -48,4 +51,7 @@ Map<String, dynamic> _$$_AiReportDTOToJson(_$_AiReportDTO instance) =>
       'dayPowerUsageMinInWon': instance.dayPowerUsageMinInWon,
       'dayPowerUsageMax': instance.dayPowerUsageMax,
       'dayPowerUsageMaxInWon': instance.dayPowerUsageMaxInWon,
+      'predictionBill': instance.predictionBill,
+      'predictionPowerUsage': instance.predictionPowerUsage,
+      'predictionSection': instance.predictionSection,
     };

@@ -38,7 +38,7 @@ class BarGraphViewModel extends GetxController {
     });
 
     var getPowerUsageByDayResult = await getPowerUsageByDayUseCase.excute(
-        "0130392270", "20220801", "20220829");
+        "0130392270", "20220801");
 
     if (getPowerUsageByDayResult.status == ResultStatus.success) {
       mockData = getPowerUsageByDayResult.value!;

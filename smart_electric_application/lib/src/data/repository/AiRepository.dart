@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:smart_electric_application/src/data/dto/AiReportDTO.dart';
 import 'package:smart_electric_application/src/data/dto/AiPredictionDTO.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/data/dto/CalculateBillDTO.dart';
+import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/AiRetrofit.dart';
 import 'package:smart_electric_application/src/data/retrofit/config/getInterceptorDio.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
@@ -43,14 +43,14 @@ class AiRepository implements AiRepositoryInterface {
   }
 
   @override
-  Future<Result<CalculateBillDTO, String>> requestCalculateBill(
+  Future<Result<BillCalculationDTO, String>> requestCalculateBill(
       {required String customerNumber,
       required double powerUsageQuantity}) async {
     try {
       final dio = await getInterceptorDio();
       final aiRetrofit = AiRetrofit(dio);
 
-      CalculateBillDTO calculateBillDTO = await aiRetrofit.requestCalculateBill(
+      BillCalculationDTO calculateBillDTO = await aiRetrofit.requestCalculateBill(
           customerNumber, powerUsageQuantity);
 
       return Result.success(calculateBillDTO);

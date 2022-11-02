@@ -1,11 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:smart_electric_application/src/domain/model/ProductTypeModel.dart';
 
-part 'AiReportDTO.freezed.dart';
-part 'AiReportDTO.g.dart';
+part 'AiReportModel.freezed.dart';
+part 'AiReportModel.g.dart';
+
+/// Ai Report View에 필요한 로직
+
 
 @freezed
-class AiReportDTO with _$AiReportDTO {
-  factory AiReportDTO(
+class AiReportModel with _$AiReportModel {
+  factory AiReportModel(
       {required List<int> timePeriodIndex,
       required List<double> timePeriodPowerUsage,
       required double standbyPower,
@@ -19,7 +23,13 @@ class AiReportDTO with _$AiReportDTO {
       required double dayPowerUsageMin,
       required double dayPowerUsageMinInWon,
       required double dayPowerUsageMax,
-      required double dayPowerUsageMaxInWon}) = _AiReportDTO;
-  factory AiReportDTO.fromJson(Map<String, dynamic> json) =>
-      _$AiReportDTOFromJson(json);
+      required double dayPowerUsageMaxInWon,
+
+      required double predictionBill,
+      required double predictionPowerUsage,
+      required int predictionSection,
+      }) = _AiReportModel;
+
+  factory AiReportModel.fromJson(Map<String, dynamic> json) =>
+      _$AiReportModelFromJson(json);
 }

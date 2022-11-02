@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_electric_application/src/presentation/view/page/AiReport.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/HomeViewModel.dart';
 
-class EstimatedBillCard extends StatelessWidget {
-  const EstimatedBillCard({Key? key}) : super(key: key);
+class PredictBillCard extends StatelessWidget {
+  const PredictBillCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // 데이터
-    var dataValue = "53,120";
+
     var bodyValue = "325 kWh";
     var bodyDetailValue = "12";
 
     // Theme
     var colorTheme = context.theme.colorScheme;
 
-    return Container(
+    return Obx(() => Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: colorTheme.background,
@@ -75,7 +76,7 @@ class EstimatedBillCard extends StatelessWidget {
               textBaseline: TextBaseline.alphabetic,
               children: [
                 Text(
-                  "${dataValue}",
+                  "${HomeViewModel.to.predictionBillOfThisMonth.value}",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -93,7 +94,7 @@ class EstimatedBillCard extends StatelessWidget {
                 ),
                 SizedBox(width: 3),
                 Text(
-                  "/ ${bodyValue}",
+                  "/ ${HomeViewModel.to.predictionPowerUsageOfThisMonthStr.value} kWh",
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
@@ -113,12 +114,12 @@ class EstimatedBillCard extends StatelessWidget {
                   width: 10,
                   height: 10,
                   decoration: BoxDecoration(
-                      color: colorTheme.primary,
+                      color: HomeViewModel.to.predictionProgressiveSectionType.value.color,
                       borderRadius: BorderRadius.circular(10)),
                 ),
                 SizedBox(width: 5),
                 Text(
-                  "두번째 누진 구간",
+                  "${HomeViewModel.to.predictionProgressiveSectionType.value.krString} 누진 구간",
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -139,6 +140,6 @@ class EstimatedBillCard extends StatelessWidget {
               ],
             ),
           ],
-        ));
+        )));
   }
 }

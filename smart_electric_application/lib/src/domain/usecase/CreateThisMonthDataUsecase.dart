@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/AiPredictionDTO.dart';
-import 'package:smart_electric_application/src/data/dto/CalculateBillDTO.dart';
+import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetCalculatedBillUsecase.dart';
@@ -11,7 +11,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AiReposi
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
 
-class GetThisMonthDataUsecase {
+class CreateThisMonthDataUsecase {
   final PowerUsageRepositoryInterface powerUsageRepository =
       GetIt.I.get<PowerUsageRepositoryInterface>();
   final AuthRepositoryInterface authRepository =
@@ -43,23 +43,24 @@ class GetThisMonthDataUsecase {
 
     // Get power usage of this month
     DateTime now = DateTime.now();
-    Result<PowerUsageDTO, String> getPowerUsageOfThisMonthResult =
-        await getPowerUsageOfSpecificMonthUsecase.execute(now);
+    Result<PowerUsageDTO, String> getRecentPowerUsageByMonthResult =
+        await powerUsageRepository.getRecentPowerUsageByMonth(
+            customerNumber: getCustomerNumberResult.value!);
 
-    if (getPowerUsageOfThisMonthResult.status == ResultStatus.error) {
-      return Result.failure(getPowerUsageOfThisMonthResult.error);
+    if (getRecentPowerUsageByMonthResult.status == ResultStatus.error) {
+      return Result.failure(getRecentPowerUsageByMonthResult.error);
     }
 
     // Get bill, progressive section ... of this month
-    Result<CalculateBillDTO, String> getCalculatedBillResult =
+    Result<BillCalculationDTO, String> getCalculatedBillResult =
         await getCalculatedBillUsecase
-            .excute(getPowerUsageOfThisMonthResult.value!.powerUsageQuantity);
+            .excute(getRecentPowerUsageByMonthResult.value!.powerUsageQuantity);
 
     if (getCalculatedBillResult.status == ResultStatus.error) {
       return Result.failure(getCalculatedBillResult.error);
     }
 
-    // Get pridected power usage
+    // Get predected power usage
     Result<AiPredictionDTO, String> requestAiPredictionResult =
         await aiRepository.requestAiPrediction(
             customerNumber: getCustomerNumberResult.value!);
@@ -68,14 +69,14 @@ class GetThisMonthDataUsecase {
       return Result.failure(requestAiPredictionResult.error);
     }
 
-    // Sum ai pridcited value
+    // Sum ai prediction
     double pridictedPowerUsageOfThisMonth = 0.0;
-    requestAiPredictionResult.value!.prediction.map((element) {
+    for (var element in requestAiPredictionResult.value!.prediction) {
       pridictedPowerUsageOfThisMonth += element.powerUsageQuantity;
-    });
+    }
 
-    // Calculate the pridected power usage
-    Result<CalculateBillDTO, String> getCalculatedPredictedBillResult =
+    // Calculate the power usage prediction
+    Result<BillCalculationDTO, String> getCalculatedPredictedBillResult =
         await getCalculatedBillUsecase.excute(pridictedPowerUsageOfThisMonth);
 
     if (getCalculatedPredictedBillResult.status == ResultStatus.error) {
@@ -85,7 +86,7 @@ class GetThisMonthDataUsecase {
     // Change DTO to Model
     return Result.success(ThisMonthModel(
         userName: getUserNameResult.value!,
-        powerUsage: getPowerUsageOfThisMonthResult.value!.powerUsageQuantity,
+        powerUsage: getRecentPowerUsageByMonthResult.value!.powerUsageQuantity,
         bill: getCalculatedBillResult.value!.result,
         progressiveSection: getCalculatedPredictedBillResult.value!.accumulate,
         accumulateThresholdFirst: getCalculatedPredictedBillResult
@@ -96,7 +97,7 @@ class GetThisMonthDataUsecase {
             .value!.powerBillInfo.powerAccumulateThresholdSuper,
         predictionPowerUsage: pridictedPowerUsageOfThisMonth,
         predictionBill: getCalculatedPredictedBillResult.value!.result,
-        predictedProgressiveSection:
+        predictionProgressiveSection:
             getCalculatedPredictedBillResult.value!.accumulate));
   }
 }

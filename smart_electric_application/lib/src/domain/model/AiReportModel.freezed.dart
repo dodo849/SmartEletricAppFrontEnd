@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'AiReportDTO.dart';
+part of 'AiReportModel.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-AiReportDTO _$AiReportDTOFromJson(Map<String, dynamic> json) {
-  return _AiReportDTO.fromJson(json);
+AiReportModel _$AiReportModelFromJson(Map<String, dynamic> json) {
+  return _AiReportModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$AiReportDTO {
+mixin _$AiReportModel {
   List<int> get timePeriodIndex => throw _privateConstructorUsedError;
   List<double> get timePeriodPowerUsage => throw _privateConstructorUsedError;
   double get standbyPower => throw _privateConstructorUsedError;
@@ -34,18 +34,21 @@ mixin _$AiReportDTO {
   double get dayPowerUsageMinInWon => throw _privateConstructorUsedError;
   double get dayPowerUsageMax => throw _privateConstructorUsedError;
   double get dayPowerUsageMaxInWon => throw _privateConstructorUsedError;
+  double get predictionBill => throw _privateConstructorUsedError;
+  double get predictionPowerUsage => throw _privateConstructorUsedError;
+  int get predictionSection => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AiReportDTOCopyWith<AiReportDTO> get copyWith =>
+  $AiReportModelCopyWith<AiReportModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AiReportDTOCopyWith<$Res> {
-  factory $AiReportDTOCopyWith(
-          AiReportDTO value, $Res Function(AiReportDTO) then) =
-      _$AiReportDTOCopyWithImpl<$Res>;
+abstract class $AiReportModelCopyWith<$Res> {
+  factory $AiReportModelCopyWith(
+          AiReportModel value, $Res Function(AiReportModel) then) =
+      _$AiReportModelCopyWithImpl<$Res>;
   $Res call(
       {List<int> timePeriodIndex,
       List<double> timePeriodPowerUsage,
@@ -60,16 +63,20 @@ abstract class $AiReportDTOCopyWith<$Res> {
       double dayPowerUsageMin,
       double dayPowerUsageMinInWon,
       double dayPowerUsageMax,
-      double dayPowerUsageMaxInWon});
+      double dayPowerUsageMaxInWon,
+      double predictionBill,
+      double predictionPowerUsage,
+      int predictionSection});
 }
 
 /// @nodoc
-class _$AiReportDTOCopyWithImpl<$Res> implements $AiReportDTOCopyWith<$Res> {
-  _$AiReportDTOCopyWithImpl(this._value, this._then);
+class _$AiReportModelCopyWithImpl<$Res>
+    implements $AiReportModelCopyWith<$Res> {
+  _$AiReportModelCopyWithImpl(this._value, this._then);
 
-  final AiReportDTO _value;
+  final AiReportModel _value;
   // ignore: unused_field
-  final $Res Function(AiReportDTO) _then;
+  final $Res Function(AiReportModel) _then;
 
   @override
   $Res call({
@@ -87,6 +94,9 @@ class _$AiReportDTOCopyWithImpl<$Res> implements $AiReportDTOCopyWith<$Res> {
     Object? dayPowerUsageMinInWon = freezed,
     Object? dayPowerUsageMax = freezed,
     Object? dayPowerUsageMaxInWon = freezed,
+    Object? predictionBill = freezed,
+    Object? predictionPowerUsage = freezed,
+    Object? predictionSection = freezed,
   }) {
     return _then(_value.copyWith(
       timePeriodIndex: timePeriodIndex == freezed
@@ -145,16 +155,28 @@ class _$AiReportDTOCopyWithImpl<$Res> implements $AiReportDTOCopyWith<$Res> {
           ? _value.dayPowerUsageMaxInWon
           : dayPowerUsageMaxInWon // ignore: cast_nullable_to_non_nullable
               as double,
+      predictionBill: predictionBill == freezed
+          ? _value.predictionBill
+          : predictionBill // ignore: cast_nullable_to_non_nullable
+              as double,
+      predictionPowerUsage: predictionPowerUsage == freezed
+          ? _value.predictionPowerUsage
+          : predictionPowerUsage // ignore: cast_nullable_to_non_nullable
+              as double,
+      predictionSection: predictionSection == freezed
+          ? _value.predictionSection
+          : predictionSection // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$$_AiReportDTOCopyWith<$Res>
-    implements $AiReportDTOCopyWith<$Res> {
-  factory _$$_AiReportDTOCopyWith(
-          _$_AiReportDTO value, $Res Function(_$_AiReportDTO) then) =
-      __$$_AiReportDTOCopyWithImpl<$Res>;
+abstract class _$$_AiReportModelCopyWith<$Res>
+    implements $AiReportModelCopyWith<$Res> {
+  factory _$$_AiReportModelCopyWith(
+          _$_AiReportModel value, $Res Function(_$_AiReportModel) then) =
+      __$$_AiReportModelCopyWithImpl<$Res>;
   @override
   $Res call(
       {List<int> timePeriodIndex,
@@ -170,18 +192,22 @@ abstract class _$$_AiReportDTOCopyWith<$Res>
       double dayPowerUsageMin,
       double dayPowerUsageMinInWon,
       double dayPowerUsageMax,
-      double dayPowerUsageMaxInWon});
+      double dayPowerUsageMaxInWon,
+      double predictionBill,
+      double predictionPowerUsage,
+      int predictionSection});
 }
 
 /// @nodoc
-class __$$_AiReportDTOCopyWithImpl<$Res> extends _$AiReportDTOCopyWithImpl<$Res>
-    implements _$$_AiReportDTOCopyWith<$Res> {
-  __$$_AiReportDTOCopyWithImpl(
-      _$_AiReportDTO _value, $Res Function(_$_AiReportDTO) _then)
-      : super(_value, (v) => _then(v as _$_AiReportDTO));
+class __$$_AiReportModelCopyWithImpl<$Res>
+    extends _$AiReportModelCopyWithImpl<$Res>
+    implements _$$_AiReportModelCopyWith<$Res> {
+  __$$_AiReportModelCopyWithImpl(
+      _$_AiReportModel _value, $Res Function(_$_AiReportModel) _then)
+      : super(_value, (v) => _then(v as _$_AiReportModel));
 
   @override
-  _$_AiReportDTO get _value => super._value as _$_AiReportDTO;
+  _$_AiReportModel get _value => super._value as _$_AiReportModel;
 
   @override
   $Res call({
@@ -199,8 +225,11 @@ class __$$_AiReportDTOCopyWithImpl<$Res> extends _$AiReportDTOCopyWithImpl<$Res>
     Object? dayPowerUsageMinInWon = freezed,
     Object? dayPowerUsageMax = freezed,
     Object? dayPowerUsageMaxInWon = freezed,
+    Object? predictionBill = freezed,
+    Object? predictionPowerUsage = freezed,
+    Object? predictionSection = freezed,
   }) {
-    return _then(_$_AiReportDTO(
+    return _then(_$_AiReportModel(
       timePeriodIndex: timePeriodIndex == freezed
           ? _value._timePeriodIndex
           : timePeriodIndex // ignore: cast_nullable_to_non_nullable
@@ -257,14 +286,26 @@ class __$$_AiReportDTOCopyWithImpl<$Res> extends _$AiReportDTOCopyWithImpl<$Res>
           ? _value.dayPowerUsageMaxInWon
           : dayPowerUsageMaxInWon // ignore: cast_nullable_to_non_nullable
               as double,
+      predictionBill: predictionBill == freezed
+          ? _value.predictionBill
+          : predictionBill // ignore: cast_nullable_to_non_nullable
+              as double,
+      predictionPowerUsage: predictionPowerUsage == freezed
+          ? _value.predictionPowerUsage
+          : predictionPowerUsage // ignore: cast_nullable_to_non_nullable
+              as double,
+      predictionSection: predictionSection == freezed
+          ? _value.predictionSection
+          : predictionSection // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_AiReportDTO implements _AiReportDTO {
-  _$_AiReportDTO(
+class _$_AiReportModel implements _AiReportModel {
+  _$_AiReportModel(
       {required final List<int> timePeriodIndex,
       required final List<double> timePeriodPowerUsage,
       required this.standbyPower,
@@ -278,14 +319,17 @@ class _$_AiReportDTO implements _AiReportDTO {
       required this.dayPowerUsageMin,
       required this.dayPowerUsageMinInWon,
       required this.dayPowerUsageMax,
-      required this.dayPowerUsageMaxInWon})
+      required this.dayPowerUsageMaxInWon,
+      required this.predictionBill,
+      required this.predictionPowerUsage,
+      required this.predictionSection})
       : _timePeriodIndex = timePeriodIndex,
         _timePeriodPowerUsage = timePeriodPowerUsage,
         _weekdayIndex = weekdayIndex,
         _weekdayPowerUsage = weekdayPowerUsage;
 
-  factory _$_AiReportDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_AiReportDTOFromJson(json);
+  factory _$_AiReportModel.fromJson(Map<String, dynamic> json) =>
+      _$$_AiReportModelFromJson(json);
 
   final List<int> _timePeriodIndex;
   @override
@@ -335,17 +379,23 @@ class _$_AiReportDTO implements _AiReportDTO {
   final double dayPowerUsageMax;
   @override
   final double dayPowerUsageMaxInWon;
+  @override
+  final double predictionBill;
+  @override
+  final double predictionPowerUsage;
+  @override
+  final int predictionSection;
 
   @override
   String toString() {
-    return 'AiReportDTO(timePeriodIndex: $timePeriodIndex, timePeriodPowerUsage: $timePeriodPowerUsage, standbyPower: $standbyPower, weekdayIndex: $weekdayIndex, weekdayPowerUsage: $weekdayPowerUsage, dayOrNight: $dayOrNight, dayTimePowerUsage: $dayTimePowerUsage, nightTimePowerUsage: $nightTimePowerUsage, dayPowerUsageMean: $dayPowerUsageMean, dayPowerUsageMeanInWon: $dayPowerUsageMeanInWon, dayPowerUsageMin: $dayPowerUsageMin, dayPowerUsageMinInWon: $dayPowerUsageMinInWon, dayPowerUsageMax: $dayPowerUsageMax, dayPowerUsageMaxInWon: $dayPowerUsageMaxInWon)';
+    return 'AiReportModel(timePeriodIndex: $timePeriodIndex, timePeriodPowerUsage: $timePeriodPowerUsage, standbyPower: $standbyPower, weekdayIndex: $weekdayIndex, weekdayPowerUsage: $weekdayPowerUsage, dayOrNight: $dayOrNight, dayTimePowerUsage: $dayTimePowerUsage, nightTimePowerUsage: $nightTimePowerUsage, dayPowerUsageMean: $dayPowerUsageMean, dayPowerUsageMeanInWon: $dayPowerUsageMeanInWon, dayPowerUsageMin: $dayPowerUsageMin, dayPowerUsageMinInWon: $dayPowerUsageMinInWon, dayPowerUsageMax: $dayPowerUsageMax, dayPowerUsageMaxInWon: $dayPowerUsageMaxInWon, predictionBill: $predictionBill, predictionPowerUsage: $predictionPowerUsage, predictionSection: $predictionSection)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AiReportDTO &&
+            other is _$_AiReportModel &&
             const DeepCollectionEquality()
                 .equals(other._timePeriodIndex, _timePeriodIndex) &&
             const DeepCollectionEquality()
@@ -373,7 +423,13 @@ class _$_AiReportDTO implements _AiReportDTO {
             const DeepCollectionEquality()
                 .equals(other.dayPowerUsageMax, dayPowerUsageMax) &&
             const DeepCollectionEquality()
-                .equals(other.dayPowerUsageMaxInWon, dayPowerUsageMaxInWon));
+                .equals(other.dayPowerUsageMaxInWon, dayPowerUsageMaxInWon) &&
+            const DeepCollectionEquality()
+                .equals(other.predictionBill, predictionBill) &&
+            const DeepCollectionEquality()
+                .equals(other.predictionPowerUsage, predictionPowerUsage) &&
+            const DeepCollectionEquality()
+                .equals(other.predictionSection, predictionSection));
   }
 
   @JsonKey(ignore: true)
@@ -393,23 +449,26 @@ class _$_AiReportDTO implements _AiReportDTO {
       const DeepCollectionEquality().hash(dayPowerUsageMin),
       const DeepCollectionEquality().hash(dayPowerUsageMinInWon),
       const DeepCollectionEquality().hash(dayPowerUsageMax),
-      const DeepCollectionEquality().hash(dayPowerUsageMaxInWon));
+      const DeepCollectionEquality().hash(dayPowerUsageMaxInWon),
+      const DeepCollectionEquality().hash(predictionBill),
+      const DeepCollectionEquality().hash(predictionPowerUsage),
+      const DeepCollectionEquality().hash(predictionSection));
 
   @JsonKey(ignore: true)
   @override
-  _$$_AiReportDTOCopyWith<_$_AiReportDTO> get copyWith =>
-      __$$_AiReportDTOCopyWithImpl<_$_AiReportDTO>(this, _$identity);
+  _$$_AiReportModelCopyWith<_$_AiReportModel> get copyWith =>
+      __$$_AiReportModelCopyWithImpl<_$_AiReportModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AiReportDTOToJson(
+    return _$$_AiReportModelToJson(
       this,
     );
   }
 }
 
-abstract class _AiReportDTO implements AiReportDTO {
-  factory _AiReportDTO(
+abstract class _AiReportModel implements AiReportModel {
+  factory _AiReportModel(
       {required final List<int> timePeriodIndex,
       required final List<double> timePeriodPowerUsage,
       required final double standbyPower,
@@ -423,10 +482,13 @@ abstract class _AiReportDTO implements AiReportDTO {
       required final double dayPowerUsageMin,
       required final double dayPowerUsageMinInWon,
       required final double dayPowerUsageMax,
-      required final double dayPowerUsageMaxInWon}) = _$_AiReportDTO;
+      required final double dayPowerUsageMaxInWon,
+      required final double predictionBill,
+      required final double predictionPowerUsage,
+      required final int predictionSection}) = _$_AiReportModel;
 
-  factory _AiReportDTO.fromJson(Map<String, dynamic> json) =
-      _$_AiReportDTO.fromJson;
+  factory _AiReportModel.fromJson(Map<String, dynamic> json) =
+      _$_AiReportModel.fromJson;
 
   @override
   List<int> get timePeriodIndex;
@@ -457,7 +519,13 @@ abstract class _AiReportDTO implements AiReportDTO {
   @override
   double get dayPowerUsageMaxInWon;
   @override
+  double get predictionBill;
+  @override
+  double get predictionPowerUsage;
+  @override
+  int get predictionSection;
+  @override
   @JsonKey(ignore: true)
-  _$$_AiReportDTOCopyWith<_$_AiReportDTO> get copyWith =>
+  _$$_AiReportModelCopyWith<_$_AiReportModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

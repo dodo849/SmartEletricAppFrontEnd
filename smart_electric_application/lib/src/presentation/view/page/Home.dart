@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetThisMonthDataUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDataUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/module/graph/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
@@ -47,47 +47,16 @@ class Home extends StatelessWidget {
         ElevatedButton(
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
-              prefs.remove("billSimulationProducts");
+              // prefs.remove("billSimulationProducts");
 
               var result =
                   await BillSimulationRepository().getBillSimulationProduct();
               print("getBillSimulationProduct ${result.value}");
 
-              var getThisMonthDataUsecase = GetThisMonthDataUsecase();
+              var getThisMonthDataUsecase = CreateThisMonthDataUsecase();
               Result<ThisMonthModel, String> rresult = await getThisMonthDataUsecase.execute();
 
               print("ThisMonthModel ${rresult.value}");
-
-              // var firebaseRepository = FirebaseRepository();
-              // var user = firebaseRepository.getUser();
-              // var idToken = await user?.getIdToken();
-              // print('user $user');
-
-              // // var authRepository = AuthRepository();
-              // // var jwtTokens = await authRepository.requestJwt(idToken!);
-              // // print(jwtTokens.value);
-
-              // var powerUsageRepository = PowerUsageRepository();
-              // var powerUsageRepositoryData =
-              //     await powerUsageRepository.getPowerUsageByDay(
-              //         customerNumber: "0130392270",
-              //         startDate: "20220801",
-              //         endDate: "20220831");
-              // print(powerUsageRepositoryData.status);
-              // print(powerUsageRepositoryData.error);
-              // print(powerUsageRepositoryData.value);
-
-              // var aiRepository = AiRepository();
-              // var predictionResult = await aiRepository.requestAiPrediction(
-              //     customerNumber: "0130392270");
-              // print("predictionResult: ${predictionResult.value}");
-              // var reportResult = await aiRepository.requestAiReport(
-              //     customerNumber: "0130392270");
-              // print("reportResult: ${reportResult.value}");
-
-              // print("###### 파이어베이스 토큰");
-              // final fcmToken = await FirebaseMessaging.instance.getToken();
-              // print(fcmToken);
             },
             child: Text("Test Button")),
 
@@ -121,29 +90,11 @@ class Home extends StatelessWidget {
         // 현재 요금 정보
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Row(
-            children: [
-              NowBillBanner(),
-              Spacer(),
-              Obx(
-                () => GestureDetector(
-                  onTap: () {
-                    ThemeViewModel.to.changeTheme();
-                  }, // Image tapped
-                  child: ThemeViewModel.to.isLightTheme.isTrue
-                      ? Image.asset("assets/images/day.png",
-                          width: 70, height: 70)
-                      : Image.asset("assets/images/night.png",
-                          width: 70, height: 70),
-                ),
-              ),
-              Spacer(flex: 2),
-            ],
-          ),
+          child: NowBillBanner(),
         ),
 
         // 누진 구간 바
-        SizedBox(height: 15),
+        SizedBox(height: 7),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: ProgressiveIntervalBar(
@@ -173,7 +124,7 @@ class Home extends StatelessWidget {
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: EstimatedBillCard(),
+                child: PredictBillCard(),
               ),
 
               SizedBox(height: 80),

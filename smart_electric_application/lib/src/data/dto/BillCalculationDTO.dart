@@ -1,17 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'CalculateBillDTO.freezed.dart';
-part 'CalculateBillDTO.g.dart';
+part 'BillCalculationDTO.freezed.dart';
+part 'BillCalculationDTO.g.dart';
 
 ///
 @freezed
-class CalculateBillDTO with _$CalculateBillDTO {
-  factory CalculateBillDTO(
-      {required int result,
+class BillCalculationDTO with _$BillCalculationDTO {
+  factory BillCalculationDTO(
+      {required double result,
       required int accumulate,
-      required PowerBillInfoDTO powerBillInfo}) = _CalculateBillDTO;
-  factory CalculateBillDTO.fromJson(Map<String, dynamic> json) =>
-      _$CalculateBillDTOFromJson(json);
+      required PowerBillInfoDTO powerBillInfo}) = _BillCalculationDTO;
+  factory BillCalculationDTO.fromJson(Map<String, dynamic> json) =>
+      _$BillCalculationDTOFromJson(json);
 }
 
 @freezed
@@ -30,13 +30,13 @@ class PowerBillInfoDTO with _$PowerBillInfoDTO {
       @JsonKey(name: "base_bill_third")
           required int baseBillThired,
       @JsonKey(name: "power_bill_first")
-          required int powerBillFrist,
+          required double powerBillFrist,
       @JsonKey(name: "power_bill_second")
-          required int powerBillSecond,
+          required double powerBillSecond,
       @JsonKey(name: "power_bill_third")
-          required int powerBillThird,
+          required double powerBillThird,
       @JsonKey(name: "power_bill_super")
-          required int powerBillSuper}) = _PowerBillInfoDTO;
+          required double powerBillSuper}) = _PowerBillInfoDTO;
   factory PowerBillInfoDTO.fromJson(Map<String, dynamic> json) =>
       _$PowerBillInfoDTOFromJson(json);
 }
