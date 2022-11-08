@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/ImageButton.dart';
+import 'package:smart_electric_application/src/presentation/view/module/ai_report/AiReportBarGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/AnlaysisBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/SavingTipProductTypeGrid.dart';
+import 'package:smart_electric_application/src/presentation/view/module/analysis/ShowPreviousUsageCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/TestChart.dart';
-import 'package:smart_electric_application/src/presentation/view/module/analysis/%08BeforeUsageCard.dart';
+import 'package:smart_electric_application/src/presentation/view/page/PreviousUsage.dart';
 
 class Analysis extends StatelessWidget {
   const Analysis({Key? key}) : super(key: key);
@@ -27,11 +29,17 @@ class Analysis extends StatelessWidget {
                 SizedBox(height: 30),
 
                 // 어제 사용량 그래프
-                TestChart(),
+                Container(
+                  width: double.infinity, height: 300,
+                  child: AiReportBarGraph()),
                 SizedBox(height: 30),
 
                 // 이전 사용량 보기 버튼
-                BeforeUsageCard(),
+                GestureDetector(
+                  onTap: (){
+                    Get.to(PreviousUsage());
+                  },
+                  child: ShowPreviousUsageCard()),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
@@ -33,7 +34,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // View model DI
     Get.put(HomeViewModel());
 
@@ -46,17 +46,14 @@ class Home extends StatelessWidget {
 
         ElevatedButton(
             onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              // prefs.remove("billSimulationProducts");
+              // 어제 날짜 가져오기
+              var yesterday = DateTime.now().subtract(const Duration(hours: 5));
 
-              var result =
-                  await BillSimulationRepository().getBillSimulationProduct();
-              print("getBillSimulationProduct ${result.value}");
+              // 날짜 형식 변경
+              DateFormat formatter = DateFormat('yyyyMMHH');
+              var formattedYesterday = formatter.format(yesterday);
 
-              var getThisMonthDataUsecase = CreateThisMonthDataUsecase();
-              Result<ThisMonthModel, String> rresult = await getThisMonthDataUsecase.execute();
-
-              print("ThisMonthModel ${rresult.value}");
+              print("formattedYesterday $formattedYesterday");
             },
             child: Text("Test Button")),
 

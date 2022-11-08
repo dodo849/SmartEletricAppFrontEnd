@@ -20,8 +20,8 @@ PowerUsageDTO _$PowerUsageDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PowerUsageDTO {
-  String get startDateKr => throw _privateConstructorUsedError;
-  String get endDateKr => throw _privateConstructorUsedError;
+  String? get startDateKr => throw _privateConstructorUsedError;
+  String? get endDateKr => throw _privateConstructorUsedError;
   String get dateTimeKr => throw _privateConstructorUsedError;
   double get powerUsageQuantity => throw _privateConstructorUsedError;
 
@@ -37,8 +37,8 @@ abstract class $PowerUsageDTOCopyWith<$Res> {
           PowerUsageDTO value, $Res Function(PowerUsageDTO) then) =
       _$PowerUsageDTOCopyWithImpl<$Res>;
   $Res call(
-      {String startDateKr,
-      String endDateKr,
+      {String? startDateKr,
+      String? endDateKr,
       String dateTimeKr,
       double powerUsageQuantity});
 }
@@ -63,11 +63,11 @@ class _$PowerUsageDTOCopyWithImpl<$Res>
       startDateKr: startDateKr == freezed
           ? _value.startDateKr
           : startDateKr // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       endDateKr: endDateKr == freezed
           ? _value.endDateKr
           : endDateKr // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       dateTimeKr: dateTimeKr == freezed
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
@@ -88,8 +88,8 @@ abstract class _$$_PowerUsageDTOCopyWith<$Res>
       __$$_PowerUsageDTOCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String startDateKr,
-      String endDateKr,
+      {String? startDateKr,
+      String? endDateKr,
       String dateTimeKr,
       double powerUsageQuantity});
 }
@@ -116,11 +116,11 @@ class __$$_PowerUsageDTOCopyWithImpl<$Res>
       startDateKr: startDateKr == freezed
           ? _value.startDateKr
           : startDateKr // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       endDateKr: endDateKr == freezed
           ? _value.endDateKr
           : endDateKr // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       dateTimeKr: dateTimeKr == freezed
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
@@ -137,8 +137,8 @@ class __$$_PowerUsageDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PowerUsageDTO implements _PowerUsageDTO {
   _$_PowerUsageDTO(
-      {required this.startDateKr,
-      required this.endDateKr,
+      {this.startDateKr,
+      this.endDateKr,
       required this.dateTimeKr,
       required this.powerUsageQuantity});
 
@@ -146,9 +146,9 @@ class _$_PowerUsageDTO implements _PowerUsageDTO {
       _$$_PowerUsageDTOFromJson(json);
 
   @override
-  final String startDateKr;
+  final String? startDateKr;
   @override
-  final String endDateKr;
+  final String? endDateKr;
   @override
   final String dateTimeKr;
   @override
@@ -197,8 +197,8 @@ class _$_PowerUsageDTO implements _PowerUsageDTO {
 
 abstract class _PowerUsageDTO implements PowerUsageDTO {
   factory _PowerUsageDTO(
-      {required final String startDateKr,
-      required final String endDateKr,
+      {final String? startDateKr,
+      final String? endDateKr,
       required final String dateTimeKr,
       required final double powerUsageQuantity}) = _$_PowerUsageDTO;
 
@@ -206,9 +206,9 @@ abstract class _PowerUsageDTO implements PowerUsageDTO {
       _$_PowerUsageDTO.fromJson;
 
   @override
-  String get startDateKr;
+  String? get startDateKr;
   @override
-  String get endDateKr;
+  String? get endDateKr;
   @override
   String get dateTimeKr;
   @override

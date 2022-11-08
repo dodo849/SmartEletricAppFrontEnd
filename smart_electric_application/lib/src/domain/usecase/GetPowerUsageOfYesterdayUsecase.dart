@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
@@ -5,12 +6,11 @@ import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
 
-class GetPowerUsageByHourUsecase {
+class GetPowerUsageOfYesterdayUsecase {
   final powerUsageRepository = GetIt.I.get<PowerUsageRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<List<GraphPointModel>, String>> excute(
-      startDate, endDate) async {
+  Future<Result<List<GraphPointModel>, String>> excute() async {
     // 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();
@@ -18,15 +18,25 @@ class GetPowerUsageByHourUsecase {
     if (getCustomerNumberResult.status == ResultStatus.error) {
       return Result.failure(getCustomerNumberResult.error);
     } else if (getCustomerNumberResult.value == null) {
-      return const Result.failure("고객번호 가져오기 실패");
+      return const Result.failure(
+          "There is no customer number stored on the device.");
     }
+
+    // 오늘, 어제 날짜 가져오기
+    var today = DateTime.now().subtract(Duration(hours: DateTime.now().hour));
+    var yesterday = today.subtract(const Duration(days: 1));
+
+    // 날짜 형식 변경
+    DateFormat formatter = DateFormat('yyyyMMddHH');
+    var formattedToday = formatter.format(today);
+    var formattedYesterday = formatter.format(yesterday);
 
     // 네트워크
     Result<List<PowerUsageDTO>, String> isPowerUsageResult =
         await powerUsageRepository.getPowerUsageByHour(
             customerNumber: getCustomerNumberResult.value!,
-            startDate: startDate,
-            endDate: endDate);
+            startDate: formattedYesterday,
+            endDate: formattedToday);
 
     // 예외 처리
     if (isPowerUsageResult.status == ResultStatus.error) {
@@ -37,9 +47,13 @@ class GetPowerUsageByHourUsecase {
     List<PowerUsageDTO> powerUsageByDayDTOList = isPowerUsageResult.value!;
     List<GraphPointModel> graphPointModelList = <GraphPointModel>[];
 
+    // 서버스키마 dateTimeKr을 DateTime형으로 바꾸기
+    DateFormat timeFormatter = DateFormat('H시');
+
     for (var i = 0; i < powerUsageByDayDTOList.length; i++) {
       graphPointModelList.add(GraphPointModel(
-          powerUsageByDayDTOList[i].dateTimeKr,
+          timeFormatter
+              .format(DateTime.parse(powerUsageByDayDTOList[i].dateTimeKr)),
           powerUsageByDayDTOList[i].powerUsageQuantity));
     }
 

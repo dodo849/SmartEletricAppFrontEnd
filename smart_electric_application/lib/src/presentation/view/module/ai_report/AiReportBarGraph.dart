@@ -2,51 +2,55 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageOfYesterdayUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/AiReportViewModel.dart';
 
 class AiReportBarGraphViewModel extends GetxController {
-  RxDouble minX = 1.0.obs;
-  RxDouble maxX = 30.0.obs;
+  // Presentation variables
+  RxBool loading = true.obs;
 
-  RxDouble minY = 0.0.obs;
-  RxDouble maxY = 100.0.obs;
+  RxDouble maxY = 100.0.obs; // Graph y-axis maximum
 
-  List<GraphPointModel> lastMonthUsage = <GraphPointModel>[];
-  List<FlSpot> thisMonthUsage = [
-    FlSpot(1, 0),
-    FlSpot(2, 40),
-    FlSpot(3, 50),
-    FlSpot(4, 51),
-    FlSpot(5, 58),
-    FlSpot(6, 62),
-    FlSpot(7, 65),
-  ];
-  List<FlSpot> predictUsage = [
-    FlSpot(7, 65),
-    FlSpot(8, 68),
-    FlSpot(9, 70),
-    FlSpot(10, 72),
-    FlSpot(11, 74),
-    FlSpot(12, 78),
-    FlSpot(13, 80),
-    FlSpot(14, 82),
-    FlSpot(15, 90),
-  ];
+  // Data
+  List<GraphPointModel> yesterdayUsage = [GraphPointModel("0", 0)];
+
+  // Usecase
+  var getPowerUsageOfYesterdayUsecase = GetPowerUsageOfYesterdayUsecase();
 
   @override
   void onInit() async {
-    // Create mock data
-    for (int i = 1; i < 101; i += 5) {
-      var yValue = i.toDouble();
-      // yValue = double.parse(yValue.toStringAsFixed(1));
-      lastMonthUsage.add(GraphPointModel("$i시", yValue));
-    }
+    await fetchPowerUsageOfYesterday();
 
-    maxX(lastMonthUsage.length.toDouble());
+    // Y 최대값 지정
+    maxY(findYMax(yesterdayUsage) * 1.1);
+
+    // 로딩완료
+    loading(false);
+
     super.onInit();
+  }
+
+  Future<void> fetchPowerUsageOfYesterday() async {
+    Result<List<GraphPointModel>, String> getPowerUsageOfYesterdayResult =
+        await getPowerUsageOfYesterdayUsecase.excute();
+
+    yesterdayUsage = getPowerUsageOfYesterdayResult.value!;
+
+    return;
+  }
+
+  double findYMax(List<GraphPointModel> target) {
+    double max = 0;
+    for (var element in target) {
+      if (element.yValue > max) {
+        max = element.yValue;
+      }
+    }
+    return max;
   }
 }
 
@@ -61,108 +65,182 @@ class AiReportBarGraph extends GetView<AiReportBarGraphViewModel> {
     // Theme
     var colorTheme = context.theme.colorScheme;
 
-    return Obx(() => SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-                minWidth: 200,
-                maxWidth: 400,
-              ),
-        child: BarChart(
-              BarChartData(
-                // minX: controller.minX.value,
-                // maxX: controller.maxX.value,
-                maxY: controller.maxY.value,
-                // showingTooltipIndicators: [],
-                titlesData: FlTitlesData(
-                  topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles:
-                      AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  bottomTitles: AxisTitles(
-                    sideTitles: SideTitles(
+    return Obx(() => controller.loading.isTrue
+        ? Text("그래프 로딩중입니다")
+        : OverflowBox(
+            alignment: Alignment.bottomCenter,
+            child: Stack(
+              children: [
+                // y축만 따로 그리는 레이어
+                BarChart(BarChartData(
+                  maxY: controller.maxY.value,
+                  titlesData: FlTitlesData(
+                    topTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 20,
-                      interval: 1,
-                      getTitlesWidget: _bottomTitleWidgets,
+                      reservedSize: 30,
+                      getTitlesWidget: (value, meta) => Text(
+                        "${value.toStringAsFixed(2)}",
+                        style: TextStyle(
+                            fontSize: 11, color: colorTheme.onSurface),
+                      ),
+                    )),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 20,
+                        interval: 1,
+                        // x축 빈자리 만들기 위해 빈 Text 위젯 설정
+                        getTitlesWidget: (double, TitleMeta) => const Text(""),
+                      ),
+                    ),
+                  ),
+                  // Remove both side border
+                  borderData: FlBorderData(
+                      border: Border(
+                          top: BorderSide(color: colorTheme.outline),
+                          bottom:
+                              BorderSide(color: colorTheme.outline, width: 0))),
+                  // Remove vertical line
+                  gridData: FlGridData(
+                    drawVerticalLine: false,
+                    drawHorizontalLine: false,
+                  ),
+                  // Create invisible bar
+                  barGroups: [
+                    BarChartGroupData(x: 0, barRods: [
+                      BarChartRodData(
+                        color: Colors.transparent,
+                        toY: 0,
+                        width: 0,
+                      )
+                    ])
+                  ],
+                )),
+                // padding으로 y축 공간 살짝 띄기
+                Padding(
+                  padding: const EdgeInsets.only(left: 30),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        minWidth: 200,
+                        maxWidth: 630,
+                      ),
+                      // 데이터 들어간 바 그래프
+                      child: BarChart(
+                        BarChartData(
+                          maxY: controller.maxY.value,
+                          titlesData: FlTitlesData(
+                            topTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            rightTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            leftTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                reservedSize: 20,
+                                interval: 1,
+                                getTitlesWidget: _bottomTitleWidgets,
+                              ),
+                            ),
+                          ),
+                          borderData: FlBorderData(
+                              border: Border(
+                                  top: BorderSide(color: colorTheme.outline),
+                                  bottom: BorderSide(
+                                      color: colorTheme.outline, width: 0))),
+                          gridData: FlGridData(
+                              drawVerticalLine: false,
+                              getDrawingHorizontalLine: (value) => FlLine(
+                                  color: colorTheme.outline,
+                                  strokeWidth: 1,
+                                  dashArray: [1, 0])),
+                          // Set tooltip
+                          barTouchData: BarTouchData(
+                              // getTouchedSpotIndicator: _getTouchedSpotIndicator,
+                              touchTooltipData: BarTouchTooltipData(
+                                  getTooltipItem: _getTooltipItem,
+                                  tooltipBgColor: const Color(0xFF2D2D2D),
+                                  tooltipRoundedRadius: 15,
+                                  tooltipPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 15),
+                                  tooltipBorder: null)),
+                          // read about it in the LineChartData section
+                          barGroups:
+                              // data 1
+                              controller.yesterdayUsage
+                                  .asMap()
+                                  .entries
+                                  .map((element) {
+                            return BarChartGroupData(
+                              x: element.key.toInt(),
+                              barRods: [
+                                BarChartRodData(
+                                  color: _getBarColor(
+                                      context, element.key.toInt()),
+                                  toY: element.value.yValue,
+                                  width: 6,
+                                ),
+                              ],
+                              // showingTooltipIndicators: [0],
+                            );
+                          }).toList(),
+                        ),
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 150), // Optional
+                        swapAnimationCurve: Curves.linear, // Optional
+                      ),
                     ),
                   ),
                 ),
-                borderData: FlBorderData(
-                    border: Border(
-                        top: BorderSide(color: colorTheme.outline),
-                        bottom: BorderSide(color: colorTheme.outline, width: 2))),
-                gridData: FlGridData(
-                    drawVerticalLine: false,
-                    getDrawingHorizontalLine: (value) => FlLine(
-                        color: colorTheme.outline,
-                        strokeWidth: 1,
-                        dashArray: [1, 0])),
-                // clipData: FlClipData.all(),
-                // Set tooltip
-                barTouchData: BarTouchData(
-                    // getTouchedSpotIndicator: _getTouchedSpotIndicator,
-                    touchTooltipData: BarTouchTooltipData(
-                        // getTooltipItems: _getTooltipItems,
-                        tooltipBgColor: const Color(0xFF2D2D2D),
-                        tooltipRoundedRadius: 15,
-                        tooltipPadding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                        tooltipBorder: null)),
-                // read about it in the LineChartData section
-                barGroups:
-                    // data 1
-                    controller.lastMonthUsage.asMap().entries.map((element) {
-                  return BarChartGroupData(
-                    x: element.key.toInt(),
-                    barRods: [
-                      BarChartRodData(
-                        color: _getBarColor(context, element.key.toInt()),
-                        toY: element.value.yValue,
-                        width: 6,
-                      ),
-                    ],
-                    // showingTooltipIndicators: [0],
-                  );
-                }).toList(),
-      
-                // LineChartBarData(
-                //   dotData: FlDotData(
-                //     show: false,
-                //   ),
-                //   aboveBarData: BarAreaData(show: false),
-                //   barWidth: 1,
-                //   color: Colors.grey[400],
-                //   spots: controller.lastMonthUsage
-                //       .asMap()
-                //       .entries
-                //       .map((element) {
-                //     // print(element.key);
-                //     return FlSpot(
-                //         element.key.toDouble(), element.value.yValue);
-                //   }).toList(),
-                // ),
-              ),
-              swapAnimationDuration: const Duration(milliseconds: 150), // Optional
-              swapAnimationCurve: Curves.linear, // Optional
+              ],
             ),
-      ),
-    ));
+          ));
   }
 
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: Color(0xff68737d),
       fontWeight: FontWeight.normal,
-      fontSize: 12,
+      fontSize: 11,
     );
     Widget text;
     text = Text('${value.toInt()}시', style: style);
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      space: 8.0,
+      space: 5.0,
       child: text,
     );
+  }
+
+  BarTooltipItem? _getTooltipItem(BarChartGroupData group, int groupIndex,
+      BarChartRodData rod, int rodIndex) {
+    return BarTooltipItem(
+        "",
+        const TextStyle(
+            color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+        children: [
+          TextSpan(
+              text: "${rod.toY.toString()}",
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: " kWh",
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.normal))
+        ]);
   }
 
   List<LineTooltipItem?> _getTooltipItems(List<LineBarSpot> touchedBarSpots) {
@@ -238,39 +316,6 @@ class AiReportBarGraph extends GetView<AiReportBarGraphViewModel> {
     }).toList();
   }
 
-  List<TouchedSpotIndicatorData?> _getTouchedSpotIndicator(
-      LineChartBarData barData, List<int> spotIndexes) {
-    return spotIndexes.map((spotIndex) {
-      final spot = barData.spots[spotIndex];
-
-      Color spotIndicatorColor;
-      // 어떤 선인지 y값으로 확인
-      if (spotIndex < controller.predictUsage.length &&
-          spot.y == controller.predictUsage[spotIndex].y) {
-        spotIndicatorColor = LightColors.purple;
-      } else if (spotIndex < controller.thisMonthUsage.length &&
-          spot.y == controller.thisMonthUsage[spotIndex].y) {
-        spotIndicatorColor = LightColors.yellow1;
-      } else {
-        spotIndicatorColor = Colors.grey[400]!;
-      }
-
-      return TouchedSpotIndicatorData(
-        FlLine(color: Color(0xFFCBCBCB), strokeWidth: 1, dashArray: [3, 3]),
-        FlDotData(
-          getDotPainter: (spot, percent, barData, index) {
-            return FlDotCirclePainter(
-              radius: 5,
-              color: Colors.white,
-              strokeWidth: 1,
-              strokeColor: spotIndicatorColor,
-            );
-          },
-        ),
-      );
-    }).toList();
-  }
-
   Color? _getBarColor(BuildContext context, int xValue) {
     var colorTheme = context.theme.colorScheme;
 
@@ -279,8 +324,8 @@ class AiReportBarGraph extends GetView<AiReportBarGraphViewModel> {
     List<int> timePeriodIndex =
         AiReportViewModel.to.aiReport.value.timePeriodIndex;
 
-    if (timePeriodIndex[0] * 4 < xValue &&
-        xValue <= timePeriodIndex[0] * 4 + 4) {
+    if (timePeriodIndex[0] * 4 <= xValue &&
+        xValue < timePeriodIndex[0] * 4 + 4) {
       return colorTheme.primary;
     } else {
       return colorTheme.surfaceVariant;

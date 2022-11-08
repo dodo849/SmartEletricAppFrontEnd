@@ -42,7 +42,7 @@ class GetPowerUsageOfSpecificMonthUsecase {
 
     for (var powerUsage in isPowerUsageResult.value!) {
       // 리스트 요소의 endDataKr를 내부 DateTime 형으로 변경
-      var elementDate = DateTime.parse(powerUsage.endDateKr);
+      var elementDate = DateTime.parse(powerUsage.endDateKr!);
 
       // 연도 비교해서 이번달 사용정보이면 return
       if (elementDate.month == date.month) {

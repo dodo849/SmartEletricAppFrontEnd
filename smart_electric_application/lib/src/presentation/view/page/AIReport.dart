@@ -100,7 +100,9 @@ class AiReport extends GetView<AiReportViewModel> {
                             style: contentTitleTextStyle,
                             children: <TextSpan>[
                               TextSpan(
-                                text: '1시~4시 사이',
+                                text:
+                                    '${controller.aiReport.value.timePeriodIndex[0] * 4}시~${controller.aiReport.value.timePeriodIndex[0] * 4 + 3}시',
+                                // text: '1시~4시 사이',
                                 style: TextStyle(
                                     color: colorTheme.primaryContainer),
                               ),
@@ -111,14 +113,15 @@ class AiReport extends GetView<AiReportViewModel> {
                         SizedBox(height: 5),
                         Text("전력 사용량이 가장 높았어요", style: contentTitleTextStyle),
                         SizedBox(height: 7),
-                        Text("그 외에 5시~8시 사이에도 높은 사용량을 보였습니다.",
+                        Text(
+                            "그 외에 ${controller.aiReport.value.timePeriodIndex[1] * 4}시~${controller.aiReport.value.timePeriodIndex[1] * 4 + 3}시 사이에도 높은 사용량을 보였습니다.",
                             style: contentBodyTextStyle),
                         SizedBox(height: 20),
                         // Content 1 Card
                         Container(
                           width: double.infinity,
                           height: 250,
-                          padding: EdgeInsets.fromLTRB(0, 40, 20, 40),
+                          padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: colorTheme.surface,
@@ -169,7 +172,9 @@ class AiReport extends GetView<AiReportViewModel> {
                         SizedBox(height: contentGap),
                         Text("지금까지로 보자면 이번달엔", style: contentBodyTextStyle),
                         SizedBox(height: 7),
-                        Text("두번째 누진구간이 적용됩니다.", style: contentTitleTextStyle),
+                        Text(
+                            "${controller.predictionSectionType.value.krString} 누진구간이 적용됩니다.",
+                            style: contentTitleTextStyle),
                         SizedBox(height: 20),
                         // Content 3 Card
                         Container(
@@ -377,9 +382,9 @@ class AiReport extends GetView<AiReportViewModel> {
                         ),
                         SizedBox(height: 20),
                         // Content 5 Card
-                        DayTypeCard(),
-                        SizedBox(height: 20),
-                        NightTypeCard(),
+                        controller.aiReport.value.dayOrNight == "daytime"
+                            ? DayTypeCard()
+                            : NightTypeCard(),
 
                         // Content 6
                         SizedBox(height: contentGap),

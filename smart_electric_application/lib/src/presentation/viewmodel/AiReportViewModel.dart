@@ -32,11 +32,11 @@ class AiReportViewModel extends GetxController {
           dayPowerUsageMaxInWon: 0.0,
           predictionBill: 0.0,
           predictionPowerUsage: 0.0,
-          predictionSection: -1)
+          predictionSection: 0)
       .obs;
 
   // Usecase
-  var createCreateAiReportUsecase = CreateAiReportUsecase();
+  var createAiReportUsecase = CreateAiReportUsecase();
 
   @override
   void onInit() async {
@@ -52,15 +52,15 @@ class AiReportViewModel extends GetxController {
 
   Future<void> fetchAiReport() async {
     // 예측 값 받아오기
-    var createCreateAiReportResult = await createCreateAiReportUsecase.excute();
+    var createAiReportResult = await createAiReportUsecase.excute();
 
-    if (createCreateAiReportResult.status == ResultStatus.error) {
-      print("createCreateAiReportResult ${createCreateAiReportResult.error}");
+    if (createAiReportResult.status == ResultStatus.error) {
+      print("createCreateAiReportResult ${createAiReportResult.error}");
       // ### 실패 오류 처리하기...
       return;
     }
 
-    aiReport(createCreateAiReportResult.value!);
+    aiReport(createAiReportResult.value!);
     print("aiReport: $aiReport");
     return;
   }
