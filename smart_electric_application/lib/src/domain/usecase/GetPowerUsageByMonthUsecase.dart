@@ -43,8 +43,6 @@ class GetPowerUsageByMonthUsecase {
           powerUsageByDayDTOList[i].powerUsageQuantity));
     }
 
-    print(graphPointModelList);
-
     return Result.success(graphPointModelList);
   }
 }

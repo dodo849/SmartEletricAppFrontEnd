@@ -8,13 +8,16 @@ import 'package:smart_electric_application/src/presentation/viewmodel/enum/Progr
 class AiReportViewModel extends GetxController {
   static AiReportViewModel get to => Get.find();
 
-  // View variables
+  // Presentation variables
+  RxBool loading = true.obs;
+
+  // Data variables
   RxDouble todayUsagePrediction = 0.0.obs;
   RxDouble todayUsagePredictionBill = 0.0.obs;
 
-  Rx<ProgressiveSectionType> predictionSectionType = ProgressiveSectionType.undefined.obs;
+  Rx<ProgressiveSectionType> predictionSectionType =
+      ProgressiveSectionType.undefined.obs;
 
-  RxBool loading = true.obs;
   Rx<AiReportModel> aiReport = AiReportModel(
           timePeriodIndex: [0],
           timePeriodPowerUsage: [],
@@ -41,11 +44,14 @@ class AiReportViewModel extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
+
+    // 데이터 가져오기
     await fetchAiReport();
+    // 로딩 끝
     loading(false);
     // 예측구간 enum 형 지정
-    predictionSectionType(ProgressiveSectionType.values[aiReport.value.predictionSection]);
-    print("aiReport ${aiReport}");
+    predictionSectionType(
+        ProgressiveSectionType.values[aiReport.value.predictionSection]);
 
     super.onInit();
   }
@@ -61,7 +67,6 @@ class AiReportViewModel extends GetxController {
     }
 
     aiReport(createAiReportResult.value!);
-    print("aiReport: $aiReport");
     return;
   }
 
@@ -69,4 +74,5 @@ class AiReportViewModel extends GetxController {
     var formatter = NumberFormat('###,###,###,###');
     return formatter.format(won);
   }
+
 }

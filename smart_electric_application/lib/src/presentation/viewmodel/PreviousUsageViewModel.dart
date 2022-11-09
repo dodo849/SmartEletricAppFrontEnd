@@ -6,13 +6,14 @@ import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart
 import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByHourUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByMonthUsecase.dart';
-import 'package:smart_electric_application/src/presentation/view/module/previous_usage/PreviousUsageBarGraph.dart';
 
 class PreviousUsageViewModel extends GetxController {
   static PreviousUsageViewModel get to => Get.find();
 
   // Presentation variables
+  RxBool isBeforeFiveOclock = false.obs;
 
+  // Data variables
   // 일/주/월/연 선택 토글
   RxList<bool> dateUnitToggleButtons = <bool>[true, false, false].obs;
   RxInt dateUnitButtonIndex = 0.obs;
@@ -28,8 +29,11 @@ class PreviousUsageViewModel extends GetxController {
   RxBool leftButtonDisabled = false.obs;
   RxBool rightButtonDisabled = false.obs;
 
-  // Data variables
+  // Banner
   RxString selectedPowerUsage = "0.0".obs;
+  RxString selectedDate = "".obs;
+
+  // Graph data
   List<GraphPointModel> graphPoints = [GraphPointModel("0", 0)];
 
   // Graph setting
@@ -50,6 +54,7 @@ class PreviousUsageViewModel extends GetxController {
   void onInit() async {
     // TODO: implement onInit
 
+    // Listener
     // 토글버튼 바뀔때마다 인덱스 관리
     ever(dateUnitToggleButtons, (_) {
       var selectedIndex = dateUnitToggleButtons.indexWhere((value) => value);
@@ -67,10 +72,13 @@ class PreviousUsageViewModel extends GetxController {
       bool isOver = checkPeriodOverNow();
       setRightButtonDisabled(isOver);
 
-      // 데이터 fetch
+      // 로딩 시작
       loading(true);
+      // 데이터 가져오기
       await fetchPowerUsage();
-      maxY(findYMax(graphPoints) * 1.1);
+      // 그래프 세팅
+      setGraphSetting(graphPoints);
+      // 로딩 완료
       loading(false);
     });
 
@@ -80,12 +88,51 @@ class PreviousUsageViewModel extends GetxController {
     setPeriodBarText();
     // 값 불러오기
     await fetchPowerUsage();
-    // Y 최대값 지정
-    maxY(findYMax(graphPoints) * 1.1);
+    // 그래프 세팅
+    setGraphSetting(graphPoints);
     // 그래프 로딩완료
     loading(false);
 
     super.onInit();
+  }
+
+  void setSelectedDate(int index) {
+    String xValue = graphPoints[index].xValue;
+
+    DateTime xDate = DateTime.parse(xValue);
+
+    DateFormat formatter = DateFormat('');
+    if (dateUnitButtonIndex.value == 0) {
+      // 일단위
+      formatter = DateFormat('yy년 M월 d일 h시');
+    } else if (dateUnitButtonIndex.value == 1) {
+      // 월단위
+      formatter = DateFormat('yy년 M월 d일');
+    } else if (dateUnitButtonIndex.value == 2) {
+      // 연단위
+      formatter = DateFormat('yy년 M월');
+    }
+
+    selectedDate(formatter.format(xDate));
+  }
+
+  void setSelectedPowerUsage(int index) {
+    selectedPowerUsage(graphPoints[index].yValue.toStringAsFixed(2));
+  }
+
+// ###
+  void setIsBeforeFiveOclock() {
+    isBeforeFiveOclock(checkBeforeFiveOclock());
+  }
+
+  bool checkBeforeFiveOclock() {
+    return DateTime.now().hour < 5;
+  }
+
+  void setGraphSetting(List<GraphPointModel> graphPoints) {
+    barNumber(graphPoints.length);
+    maxY(findYMax(graphPoints) * 1.2);
+    update();
   }
 
   // 날짜 바 변경
@@ -178,7 +225,8 @@ class PreviousUsageViewModel extends GetxController {
   }
 
   Future<void> fetchPowerUsage() async {
-    DateTime targetDate = PreviousUsageViewModel.to.periodBarDate[dateUnitButtonIndex.value];
+    DateTime targetDate =
+        PreviousUsageViewModel.to.periodBarDate[dateUnitButtonIndex.value];
     // 일단위
     if (dateUnitButtonIndex.value == 0) {
       // 0시 설정

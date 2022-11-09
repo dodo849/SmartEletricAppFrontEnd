@@ -34,8 +34,6 @@ class GetPowerUsageByYearUsecase {
       return Result.failure(isPowerUsageResult.error);
     }
 
-    print("isPowerUsageResult.status ${isPowerUsageResult.status}");
-
     // Presentation Model로 바꾸기
     List<PowerUsageDTO> powerUsageByDayDTOList = isPowerUsageResult.value!;
     List<GraphPointModel> graphPointModelList = <GraphPointModel>[];
@@ -45,8 +43,6 @@ class GetPowerUsageByYearUsecase {
           powerUsageByDayDTOList[i].dateTimeKr,
           powerUsageByDayDTOList[i].powerUsageQuantity));
     }
-
-    print(graphPointModelList);
 
     return Result.success(graphPointModelList);
   }

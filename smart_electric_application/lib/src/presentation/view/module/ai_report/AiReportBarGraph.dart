@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageOfYesterdayUsecase.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/NoticeBar.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/AiReportViewModel.dart';
@@ -12,6 +13,7 @@ import 'package:smart_electric_application/src/presentation/viewmodel/AiReportVi
 class AiReportBarGraphViewModel extends GetxController {
   // Presentation variables
   RxBool loading = true.obs;
+  RxBool isBeforeFiveOclock = false.obs;
 
   RxDouble maxY = 100.0.obs; // Graph y-axis maximum
 
@@ -23,11 +25,18 @@ class AiReportBarGraphViewModel extends GetxController {
 
   @override
   void onInit() async {
-    await fetchPowerUsageOfYesterday();
+    // 5시 이전인지 체크
+    var isBefore = checkBeforeFiveOclock();
+    setIsBeforeFiveOclock(isBefore);
+    // 5시 이전이면 데이터 fetch X
+    if (!isBefore) {
+      return;
+    }
 
+    // 데이터 가져오기
+    await fetchPowerUsageOfYesterday();
     // Y 최대값 지정
     maxY(findYMax(yesterdayUsage) * 1.1);
-
     // 로딩완료
     loading(false);
 
@@ -52,6 +61,14 @@ class AiReportBarGraphViewModel extends GetxController {
     }
     return max;
   }
+
+  void setIsBeforeFiveOclock(bool isBefore) {
+    isBeforeFiveOclock(isBefore);
+  }
+
+  bool checkBeforeFiveOclock() {
+    return DateTime.now().hour < 5;
+  }
 }
 
 class AiReportBarGraph extends GetView<AiReportBarGraphViewModel> {
@@ -65,144 +82,151 @@ class AiReportBarGraph extends GetView<AiReportBarGraphViewModel> {
     // Theme
     var colorTheme = context.theme.colorScheme;
 
-    return Obx(() => controller.loading.isTrue
-        ? Text("그래프 로딩중입니다")
-        : OverflowBox(
-            alignment: Alignment.bottomCenter,
-            child: Stack(
-              children: [
-                // y축만 따로 그리는 레이어
-                BarChart(BarChartData(
-                  maxY: controller.maxY.value,
-                  titlesData: FlTitlesData(
-                    topTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    leftTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                      showTitles: true,
-                      reservedSize: 30,
-                      getTitlesWidget: (value, meta) => Text(
-                        "${value.toStringAsFixed(2)}",
-                        style: TextStyle(
-                            fontSize: 11, color: colorTheme.onSurface),
-                      ),
-                    )),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 20,
-                        interval: 1,
-                        // x축 빈자리 만들기 위해 빈 Text 위젯 설정
-                        getTitlesWidget: (double, TitleMeta) => const Text(""),
-                      ),
-                    ),
-                  ),
-                  // Remove both side border
-                  borderData: FlBorderData(
-                      border: Border(
-                          top: BorderSide(color: colorTheme.outline),
-                          bottom:
-                              BorderSide(color: colorTheme.outline, width: 0))),
-                  // Remove vertical line
-                  gridData: FlGridData(
-                    drawVerticalLine: false,
-                    drawHorizontalLine: false,
-                  ),
-                  // Create invisible bar
-                  barGroups: [
-                    BarChartGroupData(x: 0, barRods: [
-                      BarChartRodData(
-                        color: Colors.transparent,
-                        toY: 0,
-                        width: 0,
-                      )
-                    ])
-                  ],
-                )),
-                // padding으로 y축 공간 살짝 띄기
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        minWidth: 200,
-                        maxWidth: 630,
-                      ),
-                      // 데이터 들어간 바 그래프
-                      child: BarChart(
-                        BarChartData(
-                          maxY: controller.maxY.value,
-                          titlesData: FlTitlesData(
-                            topTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            rightTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            leftTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            bottomTitles: AxisTitles(
-                              sideTitles: SideTitles(
-                                showTitles: true,
-                                reservedSize: 20,
-                                interval: 1,
-                                getTitlesWidget: _bottomTitleWidgets,
-                              ),
-                            ),
+    return Obx(() => controller.isBeforeFiveOclock.isTrue
+        ? const NoticeBar(
+            content: "새벽 0시부터 5시는 데이터 수집 시간입니다.\n조금만 기다려주세요 :)",
+          )
+        : controller.loading.isTrue
+            ? const NoticeBar(content: "그래프 로딩중입니다")
+            : OverflowBox(
+                alignment: Alignment.bottomCenter,
+                child: Stack(
+                  children: [
+                    // y축만 따로 그리는 레이어
+                    BarChart(BarChartData(
+                      maxY: controller.maxY.value,
+                      titlesData: FlTitlesData(
+                        topTitles: AxisTitles(
+                            sideTitles: SideTitles(showTitles: false)),
+                        rightTitles: AxisTitles(
+                            sideTitles: SideTitles(showTitles: false)),
+                        leftTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 30,
+                          getTitlesWidget: (value, meta) => Text(
+                            "${value.toStringAsFixed(2)}",
+                            style: TextStyle(
+                                fontSize: 11, color: colorTheme.onSurface),
                           ),
-                          borderData: FlBorderData(
-                              border: Border(
-                                  top: BorderSide(color: colorTheme.outline),
-                                  bottom: BorderSide(
-                                      color: colorTheme.outline, width: 0))),
-                          gridData: FlGridData(
-                              drawVerticalLine: false,
-                              getDrawingHorizontalLine: (value) => FlLine(
-                                  color: colorTheme.outline,
-                                  strokeWidth: 1,
-                                  dashArray: [1, 0])),
-                          // Set tooltip
-                          barTouchData: BarTouchData(
-                              // getTouchedSpotIndicator: _getTouchedSpotIndicator,
-                              touchTooltipData: BarTouchTooltipData(
-                                  getTooltipItem: _getTooltipItem,
-                                  tooltipBgColor: const Color(0xFF2D2D2D),
-                                  tooltipRoundedRadius: 15,
-                                  tooltipPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 15),
-                                  tooltipBorder: null)),
-                          // read about it in the LineChartData section
-                          barGroups:
-                              // data 1
-                              controller.yesterdayUsage
-                                  .asMap()
-                                  .entries
-                                  .map((element) {
-                            return BarChartGroupData(
-                              x: element.key.toInt(),
-                              barRods: [
-                                BarChartRodData(
-                                  color: _getBarColor(
-                                      context, element.key.toInt()),
-                                  toY: element.value.yValue,
-                                  width: 6,
-                                ),
-                              ],
-                              // showingTooltipIndicators: [0],
-                            );
-                          }).toList(),
+                        )),
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 20,
+                            interval: 1,
+                            // x축 빈자리 만들기 위해 빈 Text 위젯 설정
+                            getTitlesWidget: (double, TitleMeta) =>
+                                const Text(""),
+                          ),
                         ),
-                        swapAnimationDuration:
-                            const Duration(milliseconds: 150), // Optional
-                        swapAnimationCurve: Curves.linear, // Optional
+                      ),
+                      // Remove both side border
+                      borderData: FlBorderData(
+                          border: Border(
+                              top: BorderSide(color: colorTheme.outline),
+                              bottom: BorderSide(
+                                  color: colorTheme.outline, width: 0))),
+                      // Remove vertical line
+                      gridData: FlGridData(
+                        drawVerticalLine: false,
+                        drawHorizontalLine: false,
+                      ),
+                      // Create invisible bar
+                      barGroups: [
+                        BarChartGroupData(x: 0, barRods: [
+                          BarChartRodData(
+                            color: Colors.transparent,
+                            toY: 0,
+                            width: 0,
+                          )
+                        ])
+                      ],
+                    )),
+                    // padding으로 y축 공간 살짝 띄기
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minWidth: 200,
+                            maxWidth: 630,
+                          ),
+                          // 데이터 들어간 바 그래프
+                          child: BarChart(
+                            BarChartData(
+                              maxY: controller.maxY.value,
+                              titlesData: FlTitlesData(
+                                topTitles: AxisTitles(
+                                    sideTitles: SideTitles(showTitles: false)),
+                                rightTitles: AxisTitles(
+                                    sideTitles: SideTitles(showTitles: false)),
+                                leftTitles: AxisTitles(
+                                    sideTitles: SideTitles(showTitles: false)),
+                                bottomTitles: AxisTitles(
+                                  sideTitles: SideTitles(
+                                    showTitles: true,
+                                    reservedSize: 20,
+                                    interval: 1,
+                                    getTitlesWidget: _bottomTitleWidgets,
+                                  ),
+                                ),
+                              ),
+                              borderData: FlBorderData(
+                                  border: Border(
+                                      top:
+                                          BorderSide(color: colorTheme.outline),
+                                      bottom: BorderSide(
+                                          color: colorTheme.outline,
+                                          width: 0))),
+                              gridData: FlGridData(
+                                  drawVerticalLine: false,
+                                  getDrawingHorizontalLine: (value) => FlLine(
+                                      color: colorTheme.outline,
+                                      strokeWidth: 1,
+                                      dashArray: [1, 0])),
+                              // Set tooltip
+                              barTouchData: BarTouchData(
+                                  // getTouchedSpotIndicator: _getTouchedSpotIndicator,
+                                  touchTooltipData: BarTouchTooltipData(
+                                      getTooltipItem: _getTooltipItem,
+                                      tooltipBgColor: const Color(0xFF2D2D2D),
+                                      tooltipRoundedRadius: 15,
+                                      tooltipPadding: EdgeInsets.symmetric(
+                                          horizontal: 20, vertical: 15),
+                                      tooltipBorder: null)),
+                              // read about it in the LineChartData section
+                              barGroups:
+                                  // data 1
+                                  controller.yesterdayUsage
+                                      .asMap()
+                                      .entries
+                                      .map((element) {
+                                return BarChartGroupData(
+                                  x: element.key.toInt(),
+                                  barRods: [
+                                    BarChartRodData(
+                                      color: _getBarColor(
+                                          context, element.key.toInt()),
+                                      toY: element.value.yValue,
+                                      width: 6,
+                                    ),
+                                  ],
+                                  // showingTooltipIndicators: [0],
+                                );
+                              }).toList(),
+                            ),
+                            swapAnimationDuration:
+                                const Duration(milliseconds: 150), // Optional
+                            swapAnimationCurve: Curves.linear, // Optional
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ));
+              ));
   }
 
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
