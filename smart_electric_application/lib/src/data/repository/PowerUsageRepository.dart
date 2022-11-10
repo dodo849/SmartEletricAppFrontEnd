@@ -94,4 +94,20 @@ class PowerUsageRepository implements PowerUsageRepositoryInterface {
       return Result.failure(err.toString());
     }
   }
+
+    @override
+  Future<Result<List<PowerUsageDTO>, String>> getRecentPowerUsageByHour(
+      {required String customerNumber}) async {
+    try {
+      final dio = await getInterceptorDio(); // Provide a dio instance
+      final retrofit = PowerUsageRetrofit(dio);
+
+      List<PowerUsageDTO> powerUsageByDayDTO =
+          await retrofit.getRecentPowerUsageByHour(customerNumber);
+
+      return Result.success(powerUsageByDayDTO);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
 }

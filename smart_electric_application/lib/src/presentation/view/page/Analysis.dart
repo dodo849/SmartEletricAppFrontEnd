@@ -5,6 +5,7 @@ import 'package:smart_electric_application/src/presentation/view/module/ai_repor
 import 'package:smart_electric_application/src/presentation/view/module/analysis/AnlaysisBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/SavingTipProductTypeGrid.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/ShowPreviousUsageCard.dart';
+import 'package:smart_electric_application/src/presentation/view/module/analysis/YesterdayUsageBarGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/common/TestChart.dart';
 import 'package:smart_electric_application/src/presentation/view/page/PreviousUsage.dart';
 
@@ -13,7 +14,8 @@ class Analysis extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("create");
+  
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -24,14 +26,14 @@ class Analysis extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 전력분석 배너 (title + image)
-                SizedBox(height: 25),
+                SizedBox(height: 35),
                 AnlaysisBanner(),
-                SizedBox(height: 30),
+                SizedBox(height: 55),
 
                 // 어제 사용량 그래프
                 Container(
                   width: double.infinity, height: 300,
-                  child: AiReportBarGraph()),
+                  child: YesterdayUsageBarGraph()),
                 SizedBox(height: 30),
 
                 // 이전 사용량 보기 버튼

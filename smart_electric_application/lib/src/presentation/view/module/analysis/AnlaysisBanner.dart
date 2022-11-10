@@ -45,8 +45,6 @@ class AnlaysisBanner extends StatelessWidget {
             ),
           ],
         ),
-        Spacer(flex:2),
-        Image.asset("assets/images/light.png", width: 80, height: 80),
         Spacer(),
       ],
     ));

@@ -31,7 +31,7 @@ class PreviousUsageViewModel extends GetxController {
 
   // Banner
   RxString selectedPowerUsage = "0.0".obs;
-  RxString selectedDate = "".obs;
+  RxString selectedDate = "-".obs;
 
   // Graph data
   List<GraphPointModel> graphPoints = [GraphPointModel("0", 0)];

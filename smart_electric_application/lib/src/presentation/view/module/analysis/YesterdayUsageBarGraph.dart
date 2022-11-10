@@ -11,7 +11,7 @@ import 'package:smart_electric_application/src/presentation/view/theme/Colors.da
 import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/AiReportViewModel.dart';
 
-class AiReportBarGraphViewModel extends GetxController {
+class YesterdayUsageBarGraphViewModel extends GetxController {
   // Presentation variables
   RxBool loading = true.obs;
   RxBool isBeforeFiveOclock = false.obs;
@@ -74,13 +74,13 @@ class AiReportBarGraphViewModel extends GetxController {
   }
 }
 
-class AiReportBarGraph extends GetView<AiReportBarGraphViewModel> {
-  const AiReportBarGraph({super.key});
+class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
+  const YesterdayUsageBarGraph({super.key});
 
   @override
   Widget build(BuildContext context) {
     // ViewModel DI
-    Get.put(AiReportBarGraphViewModel());
+    Get.put(YesterdayUsageBarGraphViewModel());
 
     // Theme
     var colorTheme = context.theme.colorScheme;
@@ -346,16 +346,6 @@ class AiReportBarGraph extends GetView<AiReportBarGraphViewModel> {
   Color? _getBarColor(BuildContext context, int xValue) {
     var colorTheme = context.theme.colorScheme;
 
-    /// 0~23시를 6등분해서 나눠놓은거고 0은 0~4시, 5는 20~24시입니다.
-    /// 전력 사용량 기준 내림차순으로 정렬되어 있습니다.
-    List<int> timePeriodIndex =
-        AiReportViewModel.to.aiReport.value.timePeriodIndex;
-
-    if (timePeriodIndex[0] * 4 <= xValue &&
-        xValue < timePeriodIndex[0] * 4 + 4) {
-      return colorTheme.primary;
-    } else {
-      return colorTheme.surfaceVariant;
-    }
+    return colorTheme.primary;
   }
 }

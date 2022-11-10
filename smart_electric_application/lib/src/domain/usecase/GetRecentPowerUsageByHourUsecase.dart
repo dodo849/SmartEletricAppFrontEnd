@@ -5,12 +5,11 @@ import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
 
-class GetPowerUsageByDayUsecase {
+class GetRecentPowerUsageByHourUsecase {
   final powerUsageRepository = GetIt.I.get<PowerUsageRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<List<GraphPointModel>, String>> excute(
-      startDate, endDate) async {
+  Future<Result<List<GraphPointModel>, String>> excute() async {
     // 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();
@@ -23,10 +22,8 @@ class GetPowerUsageByDayUsecase {
 
     // 네트워크
     Result<List<PowerUsageDTO>, String> isPowerUsageResult =
-        await powerUsageRepository.getPowerUsageByDay(
-            customerNumber: getCustomerNumberResult.value!,
-            startDate: startDate,
-            endDate: endDate);
+        await powerUsageRepository.getRecentPowerUsageByHour(
+            customerNumber: getCustomerNumberResult.value!);
 
     // 예외 처리
     if (isPowerUsageResult.status == ResultStatus.error) {
