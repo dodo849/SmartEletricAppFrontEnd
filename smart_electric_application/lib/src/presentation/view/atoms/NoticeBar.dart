@@ -14,13 +14,17 @@ class NoticeBar extends StatelessWidget {
 
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         decoration: BoxDecoration(
             color: colorTheme.surface, borderRadius: BorderRadius.circular(10)),
-        child: Text(
-          content,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14),
+        child: ConstrainedBox(
+          constraints:
+              BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 100),
+          child: Text(
+            content,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, height: 1.8),
+          ),
         ),
       ),
     ]);

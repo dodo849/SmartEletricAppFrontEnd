@@ -27,7 +27,7 @@ class ProductTypeData {
     ProductTypeModel(krName: "청소기", engName: "cleaner"),
     ProductTypeModel(krName: "드라이기", engName: "dryer"),
     ProductTypeModel(krName: "전자레인지", engName: "microwave"),
-    ProductTypeModel(krName: "에어프라이기", engName: "airfryer"),
+    // ProductTypeModel(krName: "에어프라이기", engName: "airfryer"), // 아이콘 문제로 삭제
     ProductTypeModel(krName: "전기밥솥", engName: "ricecooker"),
     ProductTypeModel(krName: "식기세척기", engName: "dishwasher"),
     ProductTypeModel(krName: "온열기", engName: "warmer"),

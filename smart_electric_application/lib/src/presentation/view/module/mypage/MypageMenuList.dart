@@ -5,7 +5,13 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MypageMenuListCell.dart';
 
 class MypageMunuListController extends GetxController {
-  final mypageMenuList = <String>["개인정보 변경", "알림 설정", "고객번호 관리", "문의하기"].obs;
+  final mypageMenuList = <String>["개인정보", "알림 설정", "고객번호 관리", "문의하기"];
+  final mypageMenuPageName = <String>[
+    "PersonalInfo",
+    "NotificationSettings",
+    "ManageCustomerNumber",
+    "ContactUs"
+  ];
 }
 
 class MypageMunuList extends GetView<MypageMunuListController> {
@@ -13,20 +19,23 @@ class MypageMunuList extends GetView<MypageMunuListController> {
   Widget build(BuildContext context) {
     Get.put(MypageMunuListController());
 
-    return Obx(
-      () => ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: controller.mypageMenuList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MypageMenuListCell(text: controller.mypageMenuList[index]),
-            ],
-          );
-        },
-      ),
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: controller.mypageMenuList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  Get.toNamed('${controller.mypageMenuPageName[index]}');
+                },
+                child:
+                    MypageMenuListCell(text: controller.mypageMenuList[index])),
+          ],
+        );
+      },
     );
   }
 }
