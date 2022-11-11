@@ -14,7 +14,7 @@ _$_BillSimulationProductModel _$$_BillSimulationProductModelFromJson(
       modelName: json['modelName'] as String,
       productType: ProductTypeModel.fromJson(
           json['productType'] as Map<String, dynamic>),
-      monthPowerUsage: (json['monthPowerUsage'] as num).toDouble(),
+      annualBill: (json['annualBill'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_BillSimulationProductModelToJson(
@@ -24,5 +24,5 @@ Map<String, dynamic> _$$_BillSimulationProductModelToJson(
       'productName': instance.productName,
       'modelName': instance.modelName,
       'productType': instance.productType,
-      'monthPowerUsage': instance.monthPowerUsage,
+      'annualBill': instance.annualBill,
     };

@@ -10,14 +10,16 @@ class GetBillSimulationProductsUsecase {
   final billSimulationRepository =
       GetIt.I.get<BillSimulationRepositoryInterface>();
 
-  Future<Result<dynamic, String>> execute() async {
+  Future<Result<List<BillSimulationProductModel>, String>> execute() async {
     // 1. Get product list
     Result<String, String> getBillSimulationProductResult =
         await billSimulationRepository.getBillSimulationProduct();
 
-    if (getBillSimulationProductResult.status == ResultStatus.error ||
-        getBillSimulationProductResult.value == null) {
+    if (getBillSimulationProductResult.status == ResultStatus.error 
+        ) {
       return Result.failure(getBillSimulationProductResult.error.toString());
+    } else if (getBillSimulationProductResult.value == null) {
+      return const Result.success(null);
     }
 
     // 2. Decode product list

@@ -8,7 +8,7 @@ class RemoveBillSimulationProductsUsecase {
   final billSimulationRepository =
       GetIt.I.get<BillSimulationRepositoryInterface>();
 
-  Future<Result<dynamic, String>> execute(List<int> removeProducts) async {
+  Future<Result<bool, String>> execute(List<int> removeProducts) async {
     // 1. Get product list
     Result<String, String> getBillSimulationProductResult =
         await billSimulationRepository.getBillSimulationProduct();

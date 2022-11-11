@@ -1,0 +1,29 @@
+import 'package:get_it/get_it.dart';
+import 'package:smart_electric_application/src/config/Result.dart';
+import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
+import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
+import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageOfSpecificMonthUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
+
+/// 선택된 시뮬레이션 가전으로 요금 계산
+class CaculateBillSimulationUsecase {
+  // final billSimulationRepository = GetIt.I.get<BillSimulationRepository>();
+
+  // Usecase
+  final getPowerUsageOfThisMonthUsecase = GetPowerUsageOfSpecificMonthUsecase();
+
+  Future<Result<double, String>> excute(
+    List<BillSimulationProductModel> products
+  ) async {
+
+    // Sum product bill
+    double totalBill = 0.0;
+    for(var product in products){
+      totalBill += product.annualBill / 12;
+    }
+
+    return Result.success(totalBill);
+  }
+}

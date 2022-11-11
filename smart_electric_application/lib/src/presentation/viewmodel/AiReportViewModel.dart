@@ -70,6 +70,8 @@ class AiReportViewModel extends GetxController {
     return;
   }
 
+
+  // Formatter Function
   String fomattingWon(double won) {
     var formatter = NumberFormat('###,###,###,###');
     return formatter.format(won);

@@ -158,12 +158,12 @@ class AddBillSimulationProduct extends StatelessWidget {
                     // Input - 월간 소비 전력량
                     SizedBox(height: 30),
                     CustomTextInput(
-                        labelText: "월간 소비 전력량",
-                        placeholder: "월간 소비 전력량을 입력해주세요.",
+                        labelText: "연간 소비 전력 요금",
+                        placeholder: "연간 소비 전력 요금을 입력해주세요.",
                         textInputStyle: TextInputStyle.bordered,
                         focusColor: colorTheme.secondaryContainer,
-                        suffixText: "kWh",
-                        textInputType: TextInputType.number,
+                        suffixText: "원",
+                        textInputType: TextInputType.number, 
                         isRequiredInput: true,
                         innerValue: viewModel.monthPowerUsage.value.length != 0
                             ? viewModel.monthPowerUsage.value

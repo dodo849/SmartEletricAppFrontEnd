@@ -25,7 +25,7 @@ mixin _$BillSimulationProductModel {
   String get productName => throw _privateConstructorUsedError;
   String get modelName => throw _privateConstructorUsedError;
   ProductTypeModel get productType => throw _privateConstructorUsedError;
-  double get monthPowerUsage => throw _privateConstructorUsedError;
+  double get annualBill => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +43,7 @@ abstract class $BillSimulationProductModelCopyWith<$Res> {
       String productName,
       String modelName,
       ProductTypeModel productType,
-      double monthPowerUsage});
+      double annualBill});
 
   $ProductTypeModelCopyWith<$Res> get productType;
 }
@@ -63,7 +63,7 @@ class _$BillSimulationProductModelCopyWithImpl<$Res>
     Object? productName = freezed,
     Object? modelName = freezed,
     Object? productType = freezed,
-    Object? monthPowerUsage = freezed,
+    Object? annualBill = freezed,
   }) {
     return _then(_value.copyWith(
       order: order == freezed
@@ -82,9 +82,9 @@ class _$BillSimulationProductModelCopyWithImpl<$Res>
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
               as ProductTypeModel,
-      monthPowerUsage: monthPowerUsage == freezed
-          ? _value.monthPowerUsage
-          : monthPowerUsage // ignore: cast_nullable_to_non_nullable
+      annualBill: annualBill == freezed
+          ? _value.annualBill
+          : annualBill // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -110,7 +110,7 @@ abstract class _$$_BillSimulationProductModelCopyWith<$Res>
       String productName,
       String modelName,
       ProductTypeModel productType,
-      double monthPowerUsage});
+      double annualBill});
 
   @override
   $ProductTypeModelCopyWith<$Res> get productType;
@@ -135,7 +135,7 @@ class __$$_BillSimulationProductModelCopyWithImpl<$Res>
     Object? productName = freezed,
     Object? modelName = freezed,
     Object? productType = freezed,
-    Object? monthPowerUsage = freezed,
+    Object? annualBill = freezed,
   }) {
     return _then(_$_BillSimulationProductModel(
       order: order == freezed
@@ -154,9 +154,9 @@ class __$$_BillSimulationProductModelCopyWithImpl<$Res>
           ? _value.productType
           : productType // ignore: cast_nullable_to_non_nullable
               as ProductTypeModel,
-      monthPowerUsage: monthPowerUsage == freezed
-          ? _value.monthPowerUsage
-          : monthPowerUsage // ignore: cast_nullable_to_non_nullable
+      annualBill: annualBill == freezed
+          ? _value.annualBill
+          : annualBill // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -170,7 +170,7 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
       required this.productName,
       required this.modelName,
       required this.productType,
-      required this.monthPowerUsage});
+      required this.annualBill});
 
   factory _$_BillSimulationProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_BillSimulationProductModelFromJson(json);
@@ -184,11 +184,11 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
   @override
   final ProductTypeModel productType;
   @override
-  final double monthPowerUsage;
+  final double annualBill;
 
   @override
   String toString() {
-    return 'BillSimulationProductModel(order: $order, productName: $productName, modelName: $modelName, productType: $productType, monthPowerUsage: $monthPowerUsage)';
+    return 'BillSimulationProductModel(order: $order, productName: $productName, modelName: $modelName, productType: $productType, annualBill: $annualBill)';
   }
 
   @override
@@ -203,7 +203,7 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
             const DeepCollectionEquality()
                 .equals(other.productType, productType) &&
             const DeepCollectionEquality()
-                .equals(other.monthPowerUsage, monthPowerUsage));
+                .equals(other.annualBill, annualBill));
   }
 
   @JsonKey(ignore: true)
@@ -214,7 +214,7 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
       const DeepCollectionEquality().hash(productName),
       const DeepCollectionEquality().hash(modelName),
       const DeepCollectionEquality().hash(productType),
-      const DeepCollectionEquality().hash(monthPowerUsage));
+      const DeepCollectionEquality().hash(annualBill));
 
   @JsonKey(ignore: true)
   @override
@@ -237,7 +237,7 @@ abstract class _BillSimulationProductModel
       required final String productName,
       required final String modelName,
       required final ProductTypeModel productType,
-      required final double monthPowerUsage}) = _$_BillSimulationProductModel;
+      required final double annualBill}) = _$_BillSimulationProductModel;
 
   factory _BillSimulationProductModel.fromJson(Map<String, dynamic> json) =
       _$_BillSimulationProductModel.fromJson;
@@ -251,7 +251,7 @@ abstract class _BillSimulationProductModel
   @override
   ProductTypeModel get productType;
   @override
-  double get monthPowerUsage;
+  double get annualBill;
   @override
   @JsonKey(ignore: true)
   _$$_BillSimulationProductModelCopyWith<_$_BillSimulationProductModel>

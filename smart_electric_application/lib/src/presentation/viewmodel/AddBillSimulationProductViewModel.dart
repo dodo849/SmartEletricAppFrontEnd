@@ -57,7 +57,7 @@ class AddBillSimulationProductViewModel extends GetxController {
         productName: productName.value,
         modelName: modelName.value,
         productType: ProductTypeData.productTypes[selectedProductIndex.value],
-        monthPowerUsage: double.parse(monthPowerUsage.value)));
+        annualBill: double.parse(monthPowerUsage.value)));
 
     // 요금 시뮬레이션 메인 탭 리로드되도록 product 다시 받아오기
     BillSimulationViewModel.to.getBillSimulationProducts();

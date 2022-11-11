@@ -5,7 +5,7 @@ import 'package:smart_electric_application/src/data/dto/AiPredictionDTO.dart';
 import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetCalculatedBillUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CalculateBillUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageOfSpecificMonthUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
@@ -22,7 +22,7 @@ class CreateThisMonthDataUsecase {
   // Usecase
   var getPowerUsageOfSpecificMonthUsecase =
       GetPowerUsageOfSpecificMonthUsecase();
-  var getCalculatedBillUsecase = GetCalculatedBillUsecase();
+  var getCalculatedBillUsecase = CalculateBillUsecase();
 
   Future<Result<ThisMonthModel, String>> execute() async {
     // Get user name

@@ -12,7 +12,7 @@ class BillSimulationProductModel with _$BillSimulationProductModel {
       required String productName,
       required String modelName,
       required ProductTypeModel productType,
-      required double monthPowerUsage}) = _BillSimulationProductModel;
+      required double annualBill}) = _BillSimulationProductModel;
 
   factory BillSimulationProductModel.fromJson(Map<String, dynamic> json) =>
       _$BillSimulationProductModelFromJson(json);

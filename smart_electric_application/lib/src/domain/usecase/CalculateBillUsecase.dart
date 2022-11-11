@@ -5,7 +5,8 @@ import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageOfSpe
 import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 
-class GetCalculatedBillUsecase {
+/// 전력 사용량(kWh)로 요금(원) 계산
+class CalculateBillUsecase {
   // final powerUsageRepository = GetIt.I.get<PowerUsageRepositoryInterface>();
   final aiRepository = GetIt.I.get<AiRepositoryInterface>();
   final authRepository =
