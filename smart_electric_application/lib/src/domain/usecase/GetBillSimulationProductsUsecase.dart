@@ -27,7 +27,7 @@ class GetBillSimulationProductsUsecase {
         json.decode(getBillSimulationProductResult.value!);
 
     // 3. Convert json to model
-    billSimulationProducts = billSimulationProducts
+    var convertedBillSimulationProducts = billSimulationProducts
         .map((item) => BillSimulationProductModel.fromJson(item))
         .toList();
 
