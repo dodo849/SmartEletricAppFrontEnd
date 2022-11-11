@@ -9,21 +9,18 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 
 /// 선택된 시뮬레이션 가전으로 요금 계산
 class CaculateBillSimulationUsecase {
-  // final billSimulationRepository = GetIt.I.get<BillSimulationRepository>();
 
   // Usecase
   final getPowerUsageOfThisMonthUsecase = GetPowerUsageOfSpecificMonthUsecase();
 
-  Future<Result<double, String>> excute(
-    List<BillSimulationProductModel> products
-  ) async {
-
+  double excute(
+      List<BillSimulationProductModel> products) {
     // Sum product bill
     double totalBill = 0.0;
-    for(var product in products){
+    for (var product in products) {
       totalBill += product.annualBill / 12;
     }
 
-    return Result.success(totalBill);
+    return totalBill;
   }
 }

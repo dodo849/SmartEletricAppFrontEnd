@@ -37,7 +37,8 @@ class AddBillSimulationProductViewModel extends GetxController {
 
   /// 시뮬레이션 가전 내부 저장소에 저장하기
   void addBillSimulationProduct() async {
-    Result<dynamic, String> getSimulationProductsResult =
+    Result<List<BillSimulationProductModel>, String>
+        getSimulationProductsResult =
         await getBillSimulationProductsUsecase.execute();
 
     if (getSimulationProductsResult.status == ResultStatus.error) {
@@ -49,7 +50,7 @@ class AddBillSimulationProductViewModel extends GetxController {
     if (getSimulationProductsResult.value == null) {
       order = 1; // 아무것도 저장 안되어 있으면 1번째
     } else {
-      order = getSimulationProductsResult.value.length;
+      order = getSimulationProductsResult.value!.length;
     }
 
     await addSimulationProductUsecase.execute(BillSimulationProductModel(

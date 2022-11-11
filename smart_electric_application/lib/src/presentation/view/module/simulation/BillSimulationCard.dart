@@ -61,7 +61,7 @@ class BillSimulationCard extends StatelessWidget {
               // 총 예상 요금
               RichText(
                 text: TextSpan(
-                  text: '33,400',
+                  text: '${BillSimulationViewModel.to.totalBill.value}',
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
@@ -79,17 +79,15 @@ class BillSimulationCard extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 5),
-
               // 증가된 요금 계산
-              Text(
-                "182,239원 증가 ▲",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: colorTheme.onSurface,
-                ),
-              ),
+              // Text(
+              //   "182,239원 증가 ▲",
+              //   style: TextStyle(
+              //     fontSize: 14,
+              //     fontWeight: FontWeight.w500,
+              //     color: colorTheme.onSurface,
+              //   ),
+              // ),
 
               if (BillSimulationViewModel.to.isCardOpen.isTrue) ...[
                 SizedBox(height: 10),
@@ -131,7 +129,7 @@ class BillSimulationCard extends StatelessWidget {
                     ),
                     Spacer(),
                     Text(
-                      "13,830원",
+                      "${BillSimulationViewModel.to.additionalBill.value}원",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

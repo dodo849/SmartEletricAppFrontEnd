@@ -18,13 +18,13 @@ class BillSimulationProductCellViewModel extends GetxController {
   void manageSelectedProducts(index) {
     // 선택된 상태면서 list에 없다면 인덱스 추가
     if (isSelected.isTrue) {
-      if (!BillSimulationViewModel.to.selectedBillSimulationProducts
+      if (!BillSimulationViewModel.to.selectedProductsIndex
           .contains(index)) {
-            BillSimulationViewModel.to.selectedBillSimulationProducts.add(index);
+            BillSimulationViewModel.to.selectedProductsIndex.add(index);
           }
       // 선택 해제 탭이면 요소 삭제
     } else {
-      BillSimulationViewModel.to.selectedBillSimulationProducts.remove(index);
+      BillSimulationViewModel.to.selectedProductsIndex.remove(index);
     }
   }
 }

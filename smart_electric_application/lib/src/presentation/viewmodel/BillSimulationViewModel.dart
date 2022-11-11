@@ -6,10 +6,7 @@ import 'package:smart_electric_application/src/domain/model/BillSimulationProduc
 import 'package:smart_electric_application/src/domain/usecase/CaculateBillSimulationUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetBillOfThisMonthUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetBillSimulationProductsUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/CalculateBillUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetTodayUsagePredictionUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/RemoveBillSimulationProductsUsecase.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationProductRemoveDialog.dart';
 
 class BillSimulationViewModel extends GetxController {
@@ -18,11 +15,17 @@ class BillSimulationViewModel extends GetxController {
   // - Data variables
   RxList<BillSimulationProductModel> billSimulationProducts =
       <BillSimulationProductModel>[].obs;
-  List<int> selectedBillSimulationProducts = <int>[];
+  RxList<int> selectedProductsIndex = <int>[].obs;
+  RxList<BillSimulationProductModel> selectedBillSimulationProducts =
+      <BillSimulationProductModel>[].obs;
 
   RxString billOfThisMonth = "-".obs;
+  RxString additionalBill = "0".obs;
+  RxString totalBill = "-".obs;
 
-  // - Pagination Presentation variables
+  double originalBill = 0.0;
+
+  // - Presentation variables
   RxBool isCardOpen = false.obs; // 카드 열림/닫힘
 
   // - Usecase
@@ -36,6 +39,12 @@ class BillSimulationViewModel extends GetxController {
   void onInit() {
     // TODO: implement onInit
 
+    // - Listener
+    ever(selectedProductsIndex, (_) {
+      caculateAdditionalBill();
+    });
+
+    // - Initialize
     getBillSimulationProducts();
 
     fetchBillOfThisMonth();
@@ -66,7 +75,7 @@ class BillSimulationViewModel extends GetxController {
   Future<void> removeBillSimulationProducts() async {
     Result<bool, String> removeBillSimulationProductsResult =
         await removeBillSimulationProductsUsecase
-            .execute(selectedBillSimulationProducts);
+            .execute(selectedProductsIndex);
 
     return;
     // 에러처리 아직 안함.
@@ -86,16 +95,30 @@ class BillSimulationViewModel extends GetxController {
       return;
     } else {
       billOfThisMonth(fomattingWon(getBillOfThisMonthResult.value!));
+      originalBill = getBillOfThisMonthResult.value!;
     }
   }
 
-  void caculateBillSimulation() {
-    Iterable<MapEntry<int, BillSimulationProductModel>> productsWhere = billSimulationProducts.value
-        .asMap().entries
-        .where(
-            (element) => selectedBillSimulationProducts.contains(element.key));
-    List<BillSimulationProductModel> products = productsWhere.map((e) => e.value).toList();
-    var bill = caculateBillSimulationUsecase.excute(products);
+  void caculateAdditionalBill() {
+    Iterable<MapEntry<int, BillSimulationProductModel>> productsWhere =
+        billSimulationProducts.value
+            .asMap()
+            .entries
+            .where((element) => selectedProductsIndex.contains(element.key));
+    List<BillSimulationProductModel> products =
+        productsWhere.map((e) => e.value).toList();
+    double bill = caculateBillSimulationUsecase.excute(products);
+
+    setAdditionalBill(bill);
+    setTotalBill(bill);
+  }
+
+  void setAdditionalBill(double bill) {
+    additionalBill(fomattingWon(bill));
+  }
+
+  void setTotalBill(double bill) {
+    totalBill(fomattingWon(bill + originalBill));
   }
 
   // - Formatter Function

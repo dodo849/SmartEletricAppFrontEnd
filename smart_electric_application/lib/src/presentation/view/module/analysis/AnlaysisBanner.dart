@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/AnalysisViewModel.dart';
 
 class AnlaysisBanner extends StatelessWidget {
   const AnlaysisBanner({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class AnlaysisBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "소마님은",
+              "${AnalysisViewModel.to.userName.value}님은",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

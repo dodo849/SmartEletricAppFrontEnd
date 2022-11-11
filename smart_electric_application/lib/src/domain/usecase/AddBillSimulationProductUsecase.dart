@@ -11,7 +11,7 @@ class AddBillSimulationProductUsecase {
   final billSimulationRepository =
       GetIt.I.get<BillSimulationRepositoryInterface>();
 
-  Future<Result<dynamic, String>> execute(
+  Future<Result<bool, String>> execute(
       BillSimulationProductModel billSimulationProduct) async {
     // 1. Get product list
     Result<String, String> getBillSimulationProductResult =

@@ -15,22 +15,22 @@ class GetBillSimulationProductsUsecase {
     Result<String, String> getBillSimulationProductResult =
         await billSimulationRepository.getBillSimulationProduct();
 
-    if (getBillSimulationProductResult.status == ResultStatus.error 
-        ) {
+    if (getBillSimulationProductResult.status == ResultStatus.error) {
       return Result.failure(getBillSimulationProductResult.error.toString());
     } else if (getBillSimulationProductResult.value == null) {
       return const Result.success(null);
     }
 
     // 2. Decode product list
-    var billSimulationProducts =
+    List<dynamic> billSimulationProducts =
         json.decode(getBillSimulationProductResult.value!);
 
     // 3. Convert json to model
-    var convertedBillSimulationProducts = billSimulationProducts
-        .map((item) => BillSimulationProductModel.fromJson(item))
-        .toList();
+    List<BillSimulationProductModel> convertedBillSimulationProducts =
+        billSimulationProducts
+            .map((item) => BillSimulationProductModel.fromJson(item))
+            .toList();
 
-    return Result.success(billSimulationProducts);
+    return Result.success(convertedBillSimulationProducts);
   }
 }
