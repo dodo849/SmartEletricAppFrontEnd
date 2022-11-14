@@ -54,6 +54,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                         textInputStyle: TextInputStyle.bordered,
                         focusColor: colorTheme.primary,
                         isRequiredInput: true,
+                        maxLength: 20,
                         innerValue: viewModel.productName.value.length != 0
                             ? viewModel.productName.value
                             : null,
@@ -62,7 +63,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                         }),
 
                     // Input - 모델명
-                    SizedBox(height: 30),
+                    SizedBox(height: 15),
                     CustomTextInput(
                         labelText: "모델명",
                         placeholder: "제품 모델명을 입력해 주세요.(선택)",
@@ -71,12 +72,13 @@ class AddBillSimulationProduct extends StatelessWidget {
                         innerValue: viewModel.modelName.value.length != 0
                             ? viewModel.modelName.value
                             : null,
+                        maxLength: 20,
                         onChanged: (value) {
                           viewModel.modelName(value);
                         }),
 
                     // Input - 종류
-                    SizedBox(height: 30),
+                    SizedBox(height: 15),
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Row(
