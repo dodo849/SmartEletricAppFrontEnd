@@ -9,6 +9,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 
 /// 선택된 시뮬레이션 가전으로 요금 계산
 class CaculateBillSimulationUsecase {
+  
 
   // Usecase
   final getPowerUsageOfThisMonthUsecase = GetPowerUsageOfSpecificMonthUsecase();
@@ -18,7 +19,7 @@ class CaculateBillSimulationUsecase {
     // Sum product bill
     double totalBill = 0.0;
     for (var product in products) {
-      totalBill += product.annualBill / 12;
+      totalBill += product.monthPowerUsage / 12;
     }
 
     return totalBill;

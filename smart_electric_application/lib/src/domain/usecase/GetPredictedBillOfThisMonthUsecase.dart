@@ -8,7 +8,7 @@ import 'package:smart_electric_application/src/domain/usecase/GetTodayUsagePredi
 import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 
-class GetBillOfThisMonthUsecase {
+class GetPredictedBillOfThisMonthUsecase {
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
   // Usecase

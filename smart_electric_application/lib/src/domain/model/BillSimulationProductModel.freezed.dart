@@ -21,11 +21,12 @@ BillSimulationProductModel _$BillSimulationProductModelFromJson(
 
 /// @nodoc
 mixin _$BillSimulationProductModel {
-  int get order => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get productName => throw _privateConstructorUsedError;
   String get modelName => throw _privateConstructorUsedError;
-  ProductTypeModel get productType => throw _privateConstructorUsedError;
-  double get annualBill => throw _privateConstructorUsedError;
+  String get typeKrName => throw _privateConstructorUsedError;
+  String get typeEngName => throw _privateConstructorUsedError;
+  double get monthPowerUsage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,13 +40,12 @@ abstract class $BillSimulationProductModelCopyWith<$Res> {
           $Res Function(BillSimulationProductModel) then) =
       _$BillSimulationProductModelCopyWithImpl<$Res>;
   $Res call(
-      {int order,
+      {int? id,
       String productName,
       String modelName,
-      ProductTypeModel productType,
-      double annualBill});
-
-  $ProductTypeModelCopyWith<$Res> get productType;
+      String typeKrName,
+      String typeEngName,
+      double monthPowerUsage});
 }
 
 /// @nodoc
@@ -59,17 +59,18 @@ class _$BillSimulationProductModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? order = freezed,
+    Object? id = freezed,
     Object? productName = freezed,
     Object? modelName = freezed,
-    Object? productType = freezed,
-    Object? annualBill = freezed,
+    Object? typeKrName = freezed,
+    Object? typeEngName = freezed,
+    Object? monthPowerUsage = freezed,
   }) {
     return _then(_value.copyWith(
-      order: order == freezed
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       productName: productName == freezed
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -78,22 +79,19 @@ class _$BillSimulationProductModelCopyWithImpl<$Res>
           ? _value.modelName
           : modelName // ignore: cast_nullable_to_non_nullable
               as String,
-      productType: productType == freezed
-          ? _value.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as ProductTypeModel,
-      annualBill: annualBill == freezed
-          ? _value.annualBill
-          : annualBill // ignore: cast_nullable_to_non_nullable
+      typeKrName: typeKrName == freezed
+          ? _value.typeKrName
+          : typeKrName // ignore: cast_nullable_to_non_nullable
+              as String,
+      typeEngName: typeEngName == freezed
+          ? _value.typeEngName
+          : typeEngName // ignore: cast_nullable_to_non_nullable
+              as String,
+      monthPowerUsage: monthPowerUsage == freezed
+          ? _value.monthPowerUsage
+          : monthPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
     ));
-  }
-
-  @override
-  $ProductTypeModelCopyWith<$Res> get productType {
-    return $ProductTypeModelCopyWith<$Res>(_value.productType, (value) {
-      return _then(_value.copyWith(productType: value));
-    });
   }
 }
 
@@ -106,14 +104,12 @@ abstract class _$$_BillSimulationProductModelCopyWith<$Res>
       __$$_BillSimulationProductModelCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int order,
+      {int? id,
       String productName,
       String modelName,
-      ProductTypeModel productType,
-      double annualBill});
-
-  @override
-  $ProductTypeModelCopyWith<$Res> get productType;
+      String typeKrName,
+      String typeEngName,
+      double monthPowerUsage});
 }
 
 /// @nodoc
@@ -131,17 +127,18 @@ class __$$_BillSimulationProductModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? order = freezed,
+    Object? id = freezed,
     Object? productName = freezed,
     Object? modelName = freezed,
-    Object? productType = freezed,
-    Object? annualBill = freezed,
+    Object? typeKrName = freezed,
+    Object? typeEngName = freezed,
+    Object? monthPowerUsage = freezed,
   }) {
     return _then(_$_BillSimulationProductModel(
-      order: order == freezed
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       productName: productName == freezed
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
@@ -150,13 +147,17 @@ class __$$_BillSimulationProductModelCopyWithImpl<$Res>
           ? _value.modelName
           : modelName // ignore: cast_nullable_to_non_nullable
               as String,
-      productType: productType == freezed
-          ? _value.productType
-          : productType // ignore: cast_nullable_to_non_nullable
-              as ProductTypeModel,
-      annualBill: annualBill == freezed
-          ? _value.annualBill
-          : annualBill // ignore: cast_nullable_to_non_nullable
+      typeKrName: typeKrName == freezed
+          ? _value.typeKrName
+          : typeKrName // ignore: cast_nullable_to_non_nullable
+              as String,
+      typeEngName: typeEngName == freezed
+          ? _value.typeEngName
+          : typeEngName // ignore: cast_nullable_to_non_nullable
+              as String,
+      monthPowerUsage: monthPowerUsage == freezed
+          ? _value.monthPowerUsage
+          : monthPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -166,29 +167,32 @@ class __$$_BillSimulationProductModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BillSimulationProductModel implements _BillSimulationProductModel {
   _$_BillSimulationProductModel(
-      {required this.order,
+      {this.id,
       required this.productName,
       required this.modelName,
-      required this.productType,
-      required this.annualBill});
+      required this.typeKrName,
+      required this.typeEngName,
+      required this.monthPowerUsage});
 
   factory _$_BillSimulationProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_BillSimulationProductModelFromJson(json);
 
   @override
-  final int order;
+  final int? id;
   @override
   final String productName;
   @override
   final String modelName;
   @override
-  final ProductTypeModel productType;
+  final String typeKrName;
   @override
-  final double annualBill;
+  final String typeEngName;
+  @override
+  final double monthPowerUsage;
 
   @override
   String toString() {
-    return 'BillSimulationProductModel(order: $order, productName: $productName, modelName: $modelName, productType: $productType, annualBill: $annualBill)';
+    return 'BillSimulationProductModel(id: $id, productName: $productName, modelName: $modelName, typeKrName: $typeKrName, typeEngName: $typeEngName, monthPowerUsage: $monthPowerUsage)';
   }
 
   @override
@@ -196,25 +200,28 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillSimulationProductModel &&
-            const DeepCollectionEquality().equals(other.order, order) &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.productName, productName) &&
             const DeepCollectionEquality().equals(other.modelName, modelName) &&
             const DeepCollectionEquality()
-                .equals(other.productType, productType) &&
+                .equals(other.typeKrName, typeKrName) &&
             const DeepCollectionEquality()
-                .equals(other.annualBill, annualBill));
+                .equals(other.typeEngName, typeEngName) &&
+            const DeepCollectionEquality()
+                .equals(other.monthPowerUsage, monthPowerUsage));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(order),
+      const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(productName),
       const DeepCollectionEquality().hash(modelName),
-      const DeepCollectionEquality().hash(productType),
-      const DeepCollectionEquality().hash(annualBill));
+      const DeepCollectionEquality().hash(typeKrName),
+      const DeepCollectionEquality().hash(typeEngName),
+      const DeepCollectionEquality().hash(monthPowerUsage));
 
   @JsonKey(ignore: true)
   @override
@@ -233,25 +240,28 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
 abstract class _BillSimulationProductModel
     implements BillSimulationProductModel {
   factory _BillSimulationProductModel(
-      {required final int order,
+      {final int? id,
       required final String productName,
       required final String modelName,
-      required final ProductTypeModel productType,
-      required final double annualBill}) = _$_BillSimulationProductModel;
+      required final String typeKrName,
+      required final String typeEngName,
+      required final double monthPowerUsage}) = _$_BillSimulationProductModel;
 
   factory _BillSimulationProductModel.fromJson(Map<String, dynamic> json) =
       _$_BillSimulationProductModel.fromJson;
 
   @override
-  int get order;
+  int? get id;
   @override
   String get productName;
   @override
   String get modelName;
   @override
-  ProductTypeModel get productType;
+  String get typeKrName;
   @override
-  double get annualBill;
+  String get typeEngName;
+  @override
+  double get monthPowerUsage;
   @override
   @JsonKey(ignore: true)
   _$$_BillSimulationProductModelCopyWith<_$_BillSimulationProductModel>

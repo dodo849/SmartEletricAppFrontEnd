@@ -65,7 +65,7 @@ class BillSimulationCard extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
-                      color: colorTheme.secondaryContainer),
+                      color: colorTheme.onBackground),
                   children: <TextSpan>[
                     TextSpan(
                       text: ' 원',
@@ -79,18 +79,32 @@ class BillSimulationCard extends StatelessWidget {
                 ),
               ),
 
-              // 증가된 요금 계산
-              // Text(
-              //   "182,239원 증가 ▲",
-              //   style: TextStyle(
-              //     fontSize: 14,
-              //     fontWeight: FontWeight.w500,
-              //     color: colorTheme.onSurface,
-              //   ),
-              // ),
+              SizedBox(height: 5),
+              // 누진구간표시
+              Row(
+                children: [
+                  Container(
+                    width: 7,
+                    height: 7,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                        color: BillSimulationViewModel
+                            .to.progressiveSection.value.color),
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "${BillSimulationViewModel.to.progressiveSection.value.krString} 누진구간 적용",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: colorTheme.onSurface,
+                    ),
+                  ),
+                ],
+              ),
 
               if (BillSimulationViewModel.to.isCardOpen.isTrue) ...[
-                SizedBox(height: 10),
+                SizedBox(height: 5),
                 Divider(),
                 SizedBox(height: 10),
 

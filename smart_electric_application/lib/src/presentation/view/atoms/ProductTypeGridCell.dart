@@ -42,11 +42,13 @@ class ProductTypeGridCell extends StatelessWidget {
     Key? key,
     required this.productType,
     this.color,
+    this.textColor,
     this.onTap,
   }) : super(key: key);
 
   final ProductTypeModel productType;
   final Color? color;
+  final Color? textColor;
   final void Function()? onTap;
 
   @override
@@ -96,7 +98,7 @@ class ProductTypeGridCell extends StatelessWidget {
                   SvgPicture.asset(
                     "assets/icons/product_${productType.engName}.svg",
                     color: viewModel.isSelected.value
-                        ? color
+                        ? textColor
                         : colorTheme.onSurface,
                     width: 50,
                     height: 50,
@@ -110,7 +112,7 @@ class ProductTypeGridCell extends StatelessWidget {
                       fontFamily: "Pretendard",
                       fontWeight: FontWeight.normal,
                       color: viewModel.isSelected.value
-                          ? color
+                          ? textColor
                           : colorTheme.onSurfaceVariant,
                       fontSize: 12),
                 ),

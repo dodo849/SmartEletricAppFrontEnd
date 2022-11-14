@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smart_electric_application/src/presentation/view/page/AiReport.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/HomeViewModel.dart';
 
 class PredictBillCard extends StatelessWidget {
@@ -10,10 +9,6 @@ class PredictBillCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 데이터
-
-    var bodyValue = "325 kWh";
-    var bodyDetailValue = "12";
 
     // Theme
     var colorTheme = context.theme.colorScheme;

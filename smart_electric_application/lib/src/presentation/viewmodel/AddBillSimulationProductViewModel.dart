@@ -42,6 +42,7 @@ class AddBillSimulationProductViewModel extends GetxController {
         await getBillSimulationProductsUsecase.execute();
 
     if (getSimulationProductsResult.status == ResultStatus.error) {
+      print("getSimulationProductsResult.error ${getSimulationProductsResult.error}");
       return;
     }
 
@@ -54,11 +55,11 @@ class AddBillSimulationProductViewModel extends GetxController {
     }
 
     await addSimulationProductUsecase.execute(BillSimulationProductModel(
-        order: order,
         productName: productName.value,
         modelName: modelName.value,
-        productType: ProductTypeData.productTypes[selectedProductIndex.value],
-        annualBill: double.parse(monthPowerUsage.value)));
+        typeKrName: ProductTypeData.productTypes[selectedProductIndex.value].krName,
+        typeEngName: ProductTypeData.productTypes[selectedProductIndex.value].engName,
+        monthPowerUsage: double.parse(monthPowerUsage.value)));
 
     // 요금 시뮬레이션 메인 탭 리로드되도록 product 다시 받아오기
     BillSimulationViewModel.to.getBillSimulationProducts();

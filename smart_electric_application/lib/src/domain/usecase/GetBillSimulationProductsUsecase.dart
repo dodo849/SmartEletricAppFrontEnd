@@ -12,25 +12,10 @@ class GetBillSimulationProductsUsecase {
 
   Future<Result<List<BillSimulationProductModel>, String>> execute() async {
     // 1. Get product list
-    Result<String, String> getBillSimulationProductResult =
+    Result<List<BillSimulationProductModel>, String>
+        getBillSimulationProductResult =
         await billSimulationRepository.getBillSimulationProduct();
 
-    if (getBillSimulationProductResult.status == ResultStatus.error) {
-      return Result.failure(getBillSimulationProductResult.error.toString());
-    } else if (getBillSimulationProductResult.value == null) {
-      return const Result.success(null);
-    }
-
-    // 2. Decode product list
-    List<dynamic> billSimulationProducts =
-        json.decode(getBillSimulationProductResult.value!);
-
-    // 3. Convert json to model
-    List<BillSimulationProductModel> convertedBillSimulationProducts =
-        billSimulationProducts
-            .map((item) => BillSimulationProductModel.fromJson(item))
-            .toList();
-
-    return Result.success(convertedBillSimulationProducts);
+    return getBillSimulationProductResult;
   }
 }

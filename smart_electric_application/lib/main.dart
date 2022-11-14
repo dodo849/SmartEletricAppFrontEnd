@@ -1,3 +1,6 @@
+import 'package:smart_electric_application/src/presentation/view/page/ContactUs.dart';
+import 'package:smart_electric_application/src/presentation/view/page/NotificationSettings.dart';
+import 'package:smart_electric_application/src/presentation/view/page/PersonalInfo.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 
 import 'firebase_options.dart';
@@ -25,6 +28,7 @@ void main() async {
 
   // Default Setting
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -46,7 +50,6 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      
       getPages: [
         GetPage(
             name: "/AIReport",
@@ -58,6 +61,18 @@ class MyApp extends StatelessWidget {
             name: "/FirstAccess",
             page: () => const FirstAccess(),
             transition: Transition.fade),
+        GetPage(
+            name: "/PersonalInfo",
+            page: () => const PersonalInfo(),
+            transition: Transition.native),
+        GetPage(
+            name: "/NotificationSettings",
+            page: () => const NotificationSettings(),
+            transition: Transition.native),
+        GetPage(
+            name: "/ContactUs",
+            page: () => const ContactUs(),
+            transition: Transition.native),
       ],
     );
   }

@@ -52,7 +52,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                         labelText: "제품명",
                         placeholder: "제품명을 입력해 주세요.",
                         textInputStyle: TextInputStyle.bordered,
-                        focusColor: colorTheme.secondaryContainer,
+                        focusColor: colorTheme.primary,
                         isRequiredInput: true,
                         innerValue: viewModel.productName.value.length != 0
                             ? viewModel.productName.value
@@ -67,7 +67,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                         labelText: "모델명",
                         placeholder: "제품 모델명을 입력해 주세요.(선택)",
                         textInputStyle: TextInputStyle.bordered,
-                        focusColor: colorTheme.secondaryContainer,
+                        focusColor: colorTheme.primary,
                         innerValue: viewModel.modelName.value.length != 0
                             ? viewModel.modelName.value
                             : null,
@@ -160,11 +160,11 @@ class AddBillSimulationProduct extends StatelessWidget {
                     // Input - 월간 소비 전력량
                     SizedBox(height: 30),
                     CustomTextInput(
-                        labelText: "연간 소비 전력 요금",
-                        placeholder: "연간 소비 전력 요금을 입력해주세요.",
+                        labelText: "월간 소비 전력",
+                        placeholder: "월간 소비 전력을 입력해주세요.",
                         textInputStyle: TextInputStyle.bordered,
-                        focusColor: colorTheme.secondaryContainer,
-                        suffixText: "원",
+                        focusColor: colorTheme.primary,
+                        suffixText: "kWh",
                         textInputType: TextInputType.number, 
                         isRequiredInput: true,
                         innerValue: viewModel.monthPowerUsage.value.length != 0
@@ -209,10 +209,10 @@ class AddBillSimulationProduct extends StatelessWidget {
                     RoundedButton(
                         text: "추가하기",
                         bgColor: viewModel.submitButtonEnabled.value
-                            ? colorTheme.secondaryContainer
+                            ? colorTheme.primary
                             : colorTheme.surface,
                         textColor: viewModel.submitButtonEnabled.value
-                            ? colorTheme.onPrimary
+                            ? colorTheme.onBackground
                             : colorTheme.onSurface,
                         size: ButtonSize.large,
                         action: () {

@@ -38,14 +38,14 @@ class BillSimulationProductListCell extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 width: 1,
-                color: _getBorderColor(context, viewModel),
+                color: viewModel.isSelected.isTrue ? colorTheme.primaryContainer : colorTheme.outline,
               ),
             ),
             child: Row(
               children: [
                 SvgPicture.asset(
-                  "assets/icons/product_${simulationProduct.productType.engName}.svg",
-                  color: context.theme.colorScheme.secondaryContainer,
+                  "assets/icons/product_${simulationProduct.typeEngName}.svg",
+                  color: viewModel.isSelected.isTrue ? colorTheme.primaryContainer : colorTheme.onSurface,
                   width: 50,
                   height: 50,
                 ),
@@ -71,18 +71,5 @@ class BillSimulationProductListCell extends StatelessWidget {
             )),
       );
     });
-  }
-
-  Color _getBorderColor(
-      BuildContext context, BillSimulationProductCellViewModel viewModel) {
-    Color color = Colors.black;
-
-    if (viewModel.isSelected.isTrue) {
-      color = context.theme.colorScheme.secondaryContainer;
-    } else {
-      color = context.theme.colorScheme.outline;
-    }
-
-    return color;
   }
 }

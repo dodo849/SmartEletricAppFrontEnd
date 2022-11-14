@@ -43,7 +43,7 @@ class BillSimulationProductRemoveDialog extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () async {
-                    await BillSimulationViewModel.to.removeBillSimulationProducts();
+                    await BillSimulationViewModel.to.deleteBillSimulationProducts();
                     Navigator.of(context).pop();
                     await BillSimulationViewModel.to.getBillSimulationProducts();
                   },    

@@ -72,7 +72,8 @@ class SelectProductTypeModal extends StatelessWidget {
                           },
                           // isSelected: controller.selectedProduct[index],
                           productType: productTypes[index],
-                          color: colorTheme.secondaryContainer);
+                          color: colorTheme.primary,
+                          textColor: colorTheme.primaryContainer,);
                     },
                   ),
                 ),
