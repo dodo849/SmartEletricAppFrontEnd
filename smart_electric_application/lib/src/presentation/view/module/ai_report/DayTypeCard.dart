@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/AiReportViewModel.dart';
 
 class DayTypeCard extends StatelessWidget {
   const DayTypeCard({super.key});
@@ -44,7 +45,7 @@ class DayTypeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "소마님의 ",
+                  "${AiReportViewModel.to.user.value.name}님의 ",
                   style: titleStyle,
                 ),
                 SizedBox(height: 5),
@@ -55,7 +56,7 @@ class DayTypeCard extends StatelessWidget {
                 SizedBox(height: 10),
                 RichText(
                   text: TextSpan(
-                    text: '밤 사용량',
+                    text: '낮 사용량',
                     style: TextStyle(
                         color: colorTheme.secondary,
                         fontSize: 14,
@@ -69,7 +70,10 @@ class DayTypeCard extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: '전체 사용량의 32%',
+                        text:
+                            '전체 사용량의 ${(AiReportViewModel.to.aiReport.value.dayTimePowerUsage / 
+                            (AiReportViewModel.to.aiReport.value.dayTimePowerUsage + 
+                            AiReportViewModel.to.aiReport.value.nightTimePowerUsage) * 100).toStringAsFixed(0)}%',
                       ),
                       TextSpan(
                         text: '입니다!',
@@ -82,17 +86,17 @@ class DayTypeCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5),
-                Text(
-                  "머라고 써야할까욤욤욤욤",
-                  style: bodyStyle,
-                ),
-                SizedBox(height: 20),
-                RoundedButton(
-                    text: "대기전력 의심 제품 알아보기",
-                    bgColor: Color(0xFF63A1FF),
-                    textColor: Colors.white,
-                    size: ButtonSize.large,
-                    action: () {}),
+                // Text(
+                //   "머라고 써야할까욤욤욤욤",
+                //   style: bodyStyle,
+                // ),
+                SizedBox(height: 10),
+                // RoundedButton(
+                //     text: "대기전력 의심 제품 알아보기",
+                //     bgColor: Color(0xFF63A1FF),
+                //     textColor: Colors.white,
+                //     size: ButtonSize.large,
+                //     action: () {}),
               ],
             ),
           ],

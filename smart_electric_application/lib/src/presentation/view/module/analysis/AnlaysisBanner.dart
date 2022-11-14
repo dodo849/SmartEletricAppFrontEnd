@@ -7,7 +7,7 @@ class AnlaysisBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Obx(()=>Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,6 +48,6 @@ class AnlaysisBanner extends StatelessWidget {
         ),
         Spacer(),
       ],
-    ));
+    )));
   }
 }

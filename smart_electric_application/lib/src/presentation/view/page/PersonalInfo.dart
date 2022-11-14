@@ -57,7 +57,7 @@ class PersonalInfo extends GetView<PersonalInfoViewModel> {
         titleTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
             color: colorTheme.onBackground,
-            fontSize: 20,
+            fontSize: 18,
             fontFamily: "Pretendard"),
         foregroundColor: colorTheme.onBackground,
         shadowColor: Colors.transparent,

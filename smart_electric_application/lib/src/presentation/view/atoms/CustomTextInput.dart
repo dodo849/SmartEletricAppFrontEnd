@@ -10,7 +10,7 @@ class CustomTextInput extends StatelessWidget {
     this.labelText,
     this.placeholder,
     this.suffixText,
-    this.textInputStyle,
+    required this.textInputStyle,
     this.focusColor,
     this.textInputType,
     this.maxLength,
@@ -26,7 +26,7 @@ class CustomTextInput extends StatelessWidget {
   final String? labelText;
   final String? placeholder;
   final String? suffixText;
-  final TextInputStyle? textInputStyle;
+  final TextInputStyle textInputStyle;
   final Color? focusColor;
   final TextInputType? textInputType;
   final int? maxLength;
@@ -141,7 +141,7 @@ class CustomTextInput extends StatelessWidget {
     var textField = TextField(
       controller: controller,
       style: textStyle,
-      keyboardType: textInputType ?? TextInputType.none,
+      keyboardType: textInputType ?? TextInputType.text,
       maxLength: maxLength,
       autofocus: isFocus ?? false,
       obscureText: isObscureText ?? false,

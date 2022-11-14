@@ -25,7 +25,7 @@ class EnterUserName extends StatelessWidget {
         Text("가입하시는 분의 성함을 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
         CustomTextInput(
-          focusColor: colorTheme.secondaryContainer,
+          focusColor: colorTheme.primary,
           textInputType: TextInputType.name,
           textInputStyle: TextInputStyle.underline,
           isFocus: true,

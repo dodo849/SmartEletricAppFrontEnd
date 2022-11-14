@@ -6,13 +6,15 @@ class ImagedButton extends StatelessWidget {
       {Key? key,
       required this.imagePath,
       required this.text,
-      required this.color,
+      required this.bgColor,
+      required this.fgColor,
       required this.action})
       : super(key: key);
 
   final String imagePath;
   final String text;
-  final Color color;
+  final Color bgColor;
+  final Color fgColor;
   final Function action;
 
   @override
@@ -24,7 +26,7 @@ class ImagedButton extends StatelessWidget {
         children: [
         Container(
           decoration: BoxDecoration(
-            color: color.withOpacity(0.2),
+            color: bgColor.withOpacity(0.2),
             borderRadius: BorderRadius.circular(20),
           ),
           width: double.infinity,
@@ -34,10 +36,10 @@ class ImagedButton extends StatelessWidget {
               Spacer(flex:3),
               Text(
                 text,
-                style: TextStyle(color: color),
+                style: TextStyle(color: fgColor, fontSize: 14, fontWeight: FontWeight.w500),
               ),
               Spacer(),
-              SvgPicture.asset('assets/icons/arrow_right.svg', color: color),
+              SvgPicture.asset('assets/icons/arrow_right.svg', color: fgColor),
               Spacer(),
             ],
           ),

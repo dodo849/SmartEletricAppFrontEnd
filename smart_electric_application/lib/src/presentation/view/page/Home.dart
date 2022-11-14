@@ -44,18 +44,18 @@ class Home extends StatelessWidget {
       child: Column(children: [
         const SizedBox(height: 20),
 
-        ElevatedButton(
-            onPressed: () async {
-              // 어제 날짜 가져오기
-              var yesterday = DateTime.now().subtract(const Duration(hours: 5));
+        // ElevatedButton(
+        //     onPressed: () async {
+        //       // 어제 날짜 가져오기
+        //       var yesterday = DateTime.now().subtract(const Duration(hours: 5));
 
-              // 날짜 형식 변경
-              DateFormat formatter = DateFormat('yyyyMMHH');
-              var formattedYesterday = formatter.format(yesterday);
+        //       // 날짜 형식 변경
+        //       DateFormat formatter = DateFormat('yyyyMMHH');
+        //       var formattedYesterday = formatter.format(yesterday);
 
-              print("formattedYesterday $formattedYesterday");
-            },
-            child: Text("Test Button")),
+        //       print("formattedYesterday $formattedYesterday");
+        //     },
+        //     child: Text("Test Button")),
 
         // 스마트 전기앱 로고
         Padding(

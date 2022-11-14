@@ -36,7 +36,7 @@ class BillSimulationViewModel extends GetxController {
   var caculateBillSimulationUsecase = CaculateBillSimulationUsecase();
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
 
     // - Listener
@@ -47,13 +47,11 @@ class BillSimulationViewModel extends GetxController {
     // - Initialize
     getBillSimulationProducts();
 
-    fetchBillOfThisMonth();
+    await fetchBillOfThisMonth();
+
+    totalBill(fomattingWon(originalBill));
 
     super.onInit();
-  }
-
-  void toggleIsCardOpen() {
-    isCardOpen.isTrue ? isCardOpen(false) : isCardOpen(true);
   }
 
   /// Fetch bill simulation product from storage
@@ -78,25 +76,26 @@ class BillSimulationViewModel extends GetxController {
             .execute(selectedProductsIndex);
 
     return;
-    // 에러처리 아직 안함.
   }
 
+  /// Show remove warning
   void showRemoveWarningDialog(context) {
     showDialog(
         context: context,
         builder: (context) => BillSimulationProductRemoveDialog());
   }
 
-  void fetchBillOfThisMonth() async {
+  Future<void> fetchBillOfThisMonth() async {
     Result<double, String> getBillOfThisMonthResult =
         await getBillOfThisMonthUsecase.excute();
 
     if (getBillOfThisMonthResult.status == ResultStatus.error) {
-      return;
     } else {
       billOfThisMonth(fomattingWon(getBillOfThisMonthResult.value!));
       originalBill = getBillOfThisMonthResult.value!;
     }
+
+    return;
   }
 
   void caculateAdditionalBill() {
@@ -113,12 +112,18 @@ class BillSimulationViewModel extends GetxController {
     setTotalBill(bill);
   }
 
+  // - Data setter
   void setAdditionalBill(double bill) {
     additionalBill(fomattingWon(bill));
   }
 
   void setTotalBill(double bill) {
     totalBill(fomattingWon(bill + originalBill));
+  }
+
+  // - Presentation Funtion
+  void toggleIsCardOpen() {
+    isCardOpen.isTrue ? isCardOpen(false) : isCardOpen(true);
   }
 
   // - Formatter Function

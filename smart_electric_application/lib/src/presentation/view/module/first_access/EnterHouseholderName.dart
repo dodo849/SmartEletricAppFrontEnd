@@ -25,7 +25,7 @@ class EnterHouseholderName extends StatelessWidget {
         Text("세대주 성함을 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
         CustomTextInput(
-          focusColor: colorTheme.secondaryContainer,
+          focusColor: colorTheme.primary,
           textInputType: TextInputType.name,
           textInputStyle: TextInputStyle.underline,
           isFocus: true,

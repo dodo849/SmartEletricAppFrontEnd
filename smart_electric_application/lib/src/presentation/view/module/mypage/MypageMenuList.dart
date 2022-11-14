@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MypageMenuListCell.dart';
 
-class MypageMunuListController extends GetxController {
+class MypageMenuListController extends GetxController {
   final mypageMenuList = <String>["개인정보", "알림 설정", "고객번호 관리", "문의하기"];
   final mypageMenuPageName = <String>[
     "PersonalInfo",
@@ -14,10 +14,10 @@ class MypageMunuListController extends GetxController {
   ];
 }
 
-class MypageMunuList extends GetView<MypageMunuListController> {
+class MypageMenuList extends GetView<MypageMenuListController> {
   @override
   Widget build(BuildContext context) {
-    Get.put(MypageMunuListController());
+    Get.put(MypageMenuListController());
 
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),

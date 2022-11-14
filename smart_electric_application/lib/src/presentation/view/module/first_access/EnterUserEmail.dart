@@ -28,7 +28,7 @@ class EnterUserEmail extends StatelessWidget {
             Text("이메일을 입력해주세요", style: textTheme.headline1),
             const SizedBox(height: 20),
             CustomTextInput(
-                focusColor: colorTheme.secondaryContainer,
+                focusColor: colorTheme.primary,
                 textInputStyle: TextInputStyle.underline,
                 textInputType: TextInputType.emailAddress,
                 placeholder: "smart@smarteletric.co.kr",

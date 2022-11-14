@@ -21,9 +21,13 @@ class PreviousUsage extends GetView<PreviousUsageViewModel> {
       backgroundColor: colorTheme.background,
       appBar: AppBar(
         title: const Text(
-          '이전 사용량',
-          style: TextStyle(fontSize: 18),
+          '이전 사용량'
         ),
+        titleTextStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: colorTheme.onBackground,
+            fontSize: 18,
+            fontFamily: "Pretendard"),
         foregroundColor: colorTheme.onBackground,
         shadowColor: Colors.transparent,
         backgroundColor: colorTheme.background,

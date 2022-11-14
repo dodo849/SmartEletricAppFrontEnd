@@ -25,7 +25,11 @@ class NotificationSettings extends GetView<NotificationSettingsViewModel> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('알림 설정'),
-                titleTextStyle: TextStyle(fontWeight: FontWeight.w600, color: colorTheme.onBackground, fontSize: 20, fontFamily: "Pretendard"),
+        titleTextStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: colorTheme.onBackground,
+            fontSize: 18,
+            fontFamily: "Pretendard"),
         foregroundColor: colorTheme.onBackground,
         shadowColor: Colors.transparent,
       ),

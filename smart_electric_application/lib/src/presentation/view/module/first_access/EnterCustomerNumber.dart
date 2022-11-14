@@ -28,7 +28,7 @@ class EnterCustomerNumber extends StatelessWidget {
         Text("고객번호를 입력해주세요", style: textTheme.headline1),
         SizedBox(height: 20),
         CustomTextInput(
-            focusColor: colorTheme.secondaryContainer,
+            focusColor: colorTheme.primary,
             textInputStyle: TextInputStyle.underline,
             textInputType: TextInputType.number,
             placeholder: "10자리 고객번호 입력",

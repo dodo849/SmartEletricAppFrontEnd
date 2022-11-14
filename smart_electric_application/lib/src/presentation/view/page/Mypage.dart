@@ -33,7 +33,7 @@ class Mypage extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            MypageMunuList(),
+            MypageMenuList(),
             Spacer(),
             Row(
               children: [

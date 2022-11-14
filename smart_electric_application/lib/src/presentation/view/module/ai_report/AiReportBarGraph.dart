@@ -46,10 +46,8 @@ class AiReportBarGraphViewModel extends GetxController {
   }
 
   Future<void> fetchPowerUsageOfYesterday() async {
-    print("어제 시간별 사용량 불러오기");
     Result<List<GraphPointModel>, String> getResentPowerUsageByHourResult =
         await getResentPowerUsageByHourUsecase.excute();
-    print("완료");
     yesterdayUsage = getResentPowerUsageByHourResult.value!;
 
     return;

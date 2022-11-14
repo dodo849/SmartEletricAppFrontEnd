@@ -8,6 +8,7 @@ import 'package:smart_electric_application/src/presentation/view/module/first_ac
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserName.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserPassword.dart';
 import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerNumber.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 
 import 'dart:convert';
@@ -72,11 +73,11 @@ class EnterCustomerInfo extends StatelessWidget {
                     child: RoundedButton(
                         text: "다음으로",
                         bgColor: EnterUserInfoViewModel.to.isButtonEnable.value
-                            ? colorTheme.secondaryContainer
+                            ? colorTheme.primary
                             : colorTheme.surface,
                         textColor:
                             EnterUserInfoViewModel.to.isButtonEnable.value
-                                ? colorTheme.onPrimary
+                                ? CommonColors.brown
                                 : colorTheme.onSurface,
                         size: ButtonSize.large,
                         action: () => EnterUserInfoViewModel.to.nextButtonAction()),

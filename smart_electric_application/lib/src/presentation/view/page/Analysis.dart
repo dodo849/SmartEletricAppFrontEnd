@@ -61,7 +61,8 @@ class Analysis extends StatelessWidget {
                   // AI 추천 절약 방법 버튼
                   ImagedButton(
                       imagePath: "assets/images/avatar_woman_phone.png",
-                      color: context.theme.colorScheme.primary,
+                      bgColor: context.theme.colorScheme.primary,
+                      fgColor: context.theme.colorScheme.primaryContainer,
                       text: "AI 추천 절약 방법 보기",
                       action: () {
                         print("image button tap");
@@ -70,6 +71,7 @@ class Analysis extends StatelessWidget {
 
                   // 절약 팁 분류 목록
                   SavingTipProductTypeGrid(),
+                  SizedBox(height: 20),
                 ],
               )),
         ],

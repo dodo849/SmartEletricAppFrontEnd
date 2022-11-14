@@ -1,22 +1,32 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/AiReportModel.dart';
+import 'package:smart_electric_application/src/domain/model/UserModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/CreateAiReportUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetUserUsecase.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/ProgressiveSectionType.dart';
 
 class AiReportViewModel extends GetxController {
+  AiReportViewModel({required this.context});
   static AiReportViewModel get to => Get.find();
 
-  // Presentation variables
+  late final BuildContext context;
+
+  // - Presentation variables
   RxBool loading = true.obs;
 
-  // Data variables
+  // - Data variables
   RxDouble todayUsagePrediction = 0.0.obs;
   RxDouble todayUsagePredictionBill = 0.0.obs;
 
   Rx<ProgressiveSectionType> predictionSectionType =
       ProgressiveSectionType.undefined.obs;
+
+  Rx<UserModel> user =
+      UserModel(name: "-", email: "-", customerNumber: "-").obs;
 
   Rx<AiReportModel> aiReport = AiReportModel(
           timePeriodIndex: [0],
@@ -38,14 +48,17 @@ class AiReportViewModel extends GetxController {
           predictionSection: 0)
       .obs;
 
-  // Usecase
+  // - Usecase
   var createAiReportUsecase = CreateAiReportUsecase();
+  var getUserUsecase = GetUserUsecase();
 
   @override
   void onInit() async {
     // TODO: implement onInit
 
-    // 데이터 가져오기
+    // 유저 가져오기
+    await fetchUser();
+    // 리포트 데이터 가져오기
     await fetchAiReport();
     // 로딩 끝
     loading(false);
@@ -56,13 +69,33 @@ class AiReportViewModel extends GetxController {
     super.onInit();
   }
 
+  // - Data Function
+  Future<void> fetchUser() async {
+    // 예측 값 받아오기
+    Result<UserModel, String> userResult = await getUserUsecase.execute();
+
+    if (userResult.status == ResultStatus.error) {
+      return;
+    }
+
+    user(userResult.value!);
+
+    return;
+  }
+
   Future<void> fetchAiReport() async {
     // 예측 값 받아오기
     var createAiReportResult = await createAiReportUsecase.excute();
 
     if (createAiReportResult.status == ResultStatus.error) {
-      print("createCreateAiReportResult ${createAiReportResult.error}");
-      // ### 실패 오류 처리하기...
+      print("createCreateAiReportResult.error ${createAiReportResult.error}");
+      showDialog(
+          context: context,
+          builder: (context) => CustomDialog(
+                title: "",
+                content: "네트워크 오류가 발생했습니다. \n잠시 후 다시 시도해주세요.",
+                actionButtons: [],
+              ));
       return;
     }
 
@@ -70,11 +103,9 @@ class AiReportViewModel extends GetxController {
     return;
   }
 
-
-  // Formatter Function
+  // - Formatter Function
   String fomattingWon(double won) {
     var formatter = NumberFormat('###,###,###,###');
     return formatter.format(won);
   }
-
 }

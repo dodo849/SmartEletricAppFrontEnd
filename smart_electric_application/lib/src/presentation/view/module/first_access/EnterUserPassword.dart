@@ -25,7 +25,7 @@ class EnterUserPassword extends StatelessWidget {
             Text("비밀번호를 입력해주세요", style: textTheme.headline1),
             SizedBox(height: 20),
             CustomTextInput(
-              focusColor: colorTheme.secondaryContainer,
+              focusColor: colorTheme.primary,
               textInputType: TextInputType.visiblePassword,
               textInputStyle: TextInputStyle.underline,
               isFocus: true,

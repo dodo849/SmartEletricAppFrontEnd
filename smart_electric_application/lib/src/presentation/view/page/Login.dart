@@ -4,6 +4,7 @@ import 'package:smart_electric_application/src/presentation/view/atoms/CustomTex
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/page/first_access/EnterCustomerInfo.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 
 class Login extends StatelessWidget {
@@ -62,8 +63,8 @@ class Login extends StatelessWidget {
                 RoundedButton(
                     text: "회원가입하기",
                     bgColor:
-                        context.theme.colorScheme.secondaryContainer.withOpacity(0.2),
-                    textColor: context.theme.colorScheme.secondaryContainer,
+                        context.theme.colorScheme.primary,
+                    textColor: CommonColors.brown,
                     size: ButtonSize.large,
                     action: () {
                       Get.to(EnterCustomerInfo());

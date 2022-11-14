@@ -28,6 +28,8 @@ class AddBillSimulationProduct extends StatelessWidget {
           backgroundColor: colorTheme.background,
         ),
         body: SingleChildScrollView(
+          
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: GetX<AddBillSimulationProductViewModel>(builder: (viewModel) {
             return Container(
                 decoration: BoxDecoration(
