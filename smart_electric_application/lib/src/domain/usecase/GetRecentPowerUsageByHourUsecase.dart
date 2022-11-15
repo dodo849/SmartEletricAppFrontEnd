@@ -9,7 +9,7 @@ class GetRecentPowerUsageByHourUsecase {
   final powerUsageRepository = GetIt.I.get<PowerUsageRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<List<GraphPointModel>, String>> excute() async {
+  Future<Result<List<GraphPointModel>, String>> execute() async {
     // 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();
@@ -21,17 +21,17 @@ class GetRecentPowerUsageByHourUsecase {
     }
 
     // 네트워크
-    Result<List<PowerUsageDTO>, String> isPowerUsageResult =
+    Result<List<PowerUsageDTO>, String> getRecentPowerUsageByHourResult =
         await powerUsageRepository.getRecentPowerUsageByHour(
             customerNumber: getCustomerNumberResult.value!);
 
     // 예외 처리
-    if (isPowerUsageResult.status == ResultStatus.error) {
-      return Result.failure(isPowerUsageResult.error);
+    if (getRecentPowerUsageByHourResult.status == ResultStatus.error) {
+      return Result.failure(getRecentPowerUsageByHourResult.error);
     }
 
     // Presentation Model로 바꾸기
-    List<PowerUsageDTO> powerUsageByDayDTOList = isPowerUsageResult.value!;
+    List<PowerUsageDTO> powerUsageByDayDTOList = getRecentPowerUsageByHourResult.value!;
     List<GraphPointModel> graphPointModelList = <GraphPointModel>[];
 
     for (var i = 0; i < powerUsageByDayDTOList.length; i++) {

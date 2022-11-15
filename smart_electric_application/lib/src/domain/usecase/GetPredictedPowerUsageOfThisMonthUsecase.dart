@@ -15,7 +15,7 @@ class GetPredictedPowerUsageOfThisMonthUsecase {
   final getAiPredictionUsecase = GetAiPredictionUsecase();
   final calculatedBillUsecase = CalculateBillUsecase();
 
-  Future<Result<double, String>> excute() async {
+  Future<Result<double, String>> execute() async {
     // Get customer number from device
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();
@@ -28,7 +28,7 @@ class GetPredictedPowerUsageOfThisMonthUsecase {
 
     // Get ai prediction from server
     Result<dynamic, String> getAiPredictionResult =
-        await getAiPredictionUsecase.excute();
+        await getAiPredictionUsecase.execute();
 
     if (getAiPredictionResult.status == ResultStatus.error) {
       return Result.failure(getAiPredictionResult.error);

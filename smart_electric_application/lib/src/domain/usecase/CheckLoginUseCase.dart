@@ -6,7 +6,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 class CheckLoginUsecase {
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<bool, String>> excute() async {
+  Future<Result<bool, String>> execute() async {
     var getJwtResult =
         await authRepository.getJwt();
 

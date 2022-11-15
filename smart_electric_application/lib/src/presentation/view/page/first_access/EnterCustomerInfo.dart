@@ -77,7 +77,7 @@ class EnterCustomerInfo extends StatelessWidget {
                             : colorTheme.surface,
                         textColor:
                             EnterUserInfoViewModel.to.isButtonEnable.value
-                                ? CommonColors.brown
+                                ? colorTheme.onBackground
                                 : colorTheme.onSurface,
                         size: ButtonSize.large,
                         action: () => EnterUserInfoViewModel.to.nextButtonAction()),

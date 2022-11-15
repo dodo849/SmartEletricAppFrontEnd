@@ -16,6 +16,9 @@ class Analysis extends StatelessWidget {
 
     // ViewModel DI
     Get.put(AnalysisViewModel());
+
+    // Theme
+    var textTheme = context.theme.textTheme;
   
 
     return SingleChildScrollView(
@@ -30,11 +33,13 @@ class Analysis extends StatelessWidget {
                 // 전력분석 배너 (title + image)
                 SizedBox(height: 35),
                 AnlaysisBanner(),
-                SizedBox(height: 55),
+                SizedBox(height: 35),
 
                 // 어제 사용량 그래프
+                Text("어제 사용량", style: textTheme.headline3,),
+                SizedBox(height: 30),
                 Container(
-                  width: double.infinity, height: 300,
+                  width: double.infinity, height: 220,
                   child: YesterdayUsageBarGraph()),
                 SizedBox(height: 30),
 

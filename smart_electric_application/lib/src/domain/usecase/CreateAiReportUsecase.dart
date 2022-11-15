@@ -15,7 +15,7 @@ class CreateAiReportUsecase {
 
   var getTodayUsagePredictionUsecase = GetTodayUsagePredictionUsecase();
 
-  Future<Result<AiReportModel, String>> excute() async {
+  Future<Result<AiReportModel, String>> execute() async {
     // 기기에 저장된 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();
@@ -44,7 +44,7 @@ class CreateAiReportUsecase {
 
     // 오늘 에측 사용량 가져오기
     Result<DailyPrediction, String> getTodayUsagePredictionResult =
-        getTodayUsagePredictionUsecase.excute(requestAiPredictionResult.value!);
+        getTodayUsagePredictionUsecase.execute(requestAiPredictionResult.value!);
 
     if (getTodayUsagePredictionResult.status == ResultStatus.error) {
       return Result.failure(requestAiPredictionResult.error);

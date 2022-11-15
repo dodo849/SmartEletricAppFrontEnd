@@ -133,7 +133,7 @@ class Home extends StatelessWidget {
                     style: context.theme.textTheme.headline3),
               ),
               SizedBox(height: 45),
-              Container(height: 300, child: PredictLineGraph()),
+              Container(height: 300, child: const PredictLineGraph()),
 
               SizedBox(height: 80),
             ],

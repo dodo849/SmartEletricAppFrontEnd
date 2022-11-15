@@ -58,7 +58,7 @@ class LoginViewModel extends GetxController {
   }
 
   void checkLogin() async {
-    Result<bool, String> checkLoginResult = await checkLoginUseCase.excute();
+    Result<bool, String> checkLoginResult = await checkLoginUseCase.execute();
 
     if (checkLoginResult.value == true) {
       isLogin(true);

@@ -54,7 +54,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                         textInputStyle: TextInputStyle.bordered,
                         focusColor: colorTheme.primary,
                         isRequiredInput: true,
-                        maxLength: 20,
+                        maxLength: 50,
                         innerValue: viewModel.productName.value.length != 0
                             ? viewModel.productName.value
                             : null,
@@ -72,7 +72,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                         innerValue: viewModel.modelName.value.length != 0
                             ? viewModel.modelName.value
                             : null,
-                        maxLength: 20,
+                        maxLength: 50,
                         onChanged: (value) {
                           viewModel.modelName(value);
                         }),

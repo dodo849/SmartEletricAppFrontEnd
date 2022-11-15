@@ -54,7 +54,7 @@ class CreateThisMonthDataUsecase {
     // Get bill, progressive section ... of this month
     Result<BillCalculationDTO, String> getCalculatedBillResult =
         await getCalculatedBillUsecase
-            .excute(getRecentPowerUsageByMonthResult.value!.powerUsageQuantity);
+            .execute(getRecentPowerUsageByMonthResult.value!.powerUsageQuantity);
 
     if (getCalculatedBillResult.status == ResultStatus.error) {
       return Result.failure(getCalculatedBillResult.error);
@@ -77,7 +77,7 @@ class CreateThisMonthDataUsecase {
 
     // Calculate the power usage prediction
     Result<BillCalculationDTO, String> getCalculatedPredictedBillResult =
-        await getCalculatedBillUsecase.excute(pridictedPowerUsageOfThisMonth);
+        await getCalculatedBillUsecase.execute(pridictedPowerUsageOfThisMonth);
 
     if (getCalculatedPredictedBillResult.status == ResultStatus.error) {
       return Result.failure(getCalculatedPredictedBillResult.error);

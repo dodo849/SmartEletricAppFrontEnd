@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
+import 'package:smart_electric_application/src/data/dto/RecentPowerUsageByDayDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUsecase.dart';
 
 part 'PowerUsageRetrofit.g.dart';
@@ -41,6 +42,11 @@ abstract class PowerUsageRetrofit {
 
   @GET('/specific-user/period/hour/most-recent')
   Future<List<PowerUsageDTO>> getRecentPowerUsageByHour(
+    @Query('custNo') String customerNumber,
+  );
+
+    @GET('/specific-user/period/day/most-recent')
+  Future<RecentPowerUsageByDayDTO> getRecentPowerUsageByDay(
     @Query('custNo') String customerNumber,
   );
 }

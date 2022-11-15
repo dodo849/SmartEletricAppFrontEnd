@@ -85,7 +85,7 @@ class AiReportViewModel extends GetxController {
 
   Future<void> fetchAiReport() async {
     // 예측 값 받아오기
-    var createAiReportResult = await createAiReportUsecase.excute();
+    var createAiReportResult = await createAiReportUsecase.execute();
 
     if (createAiReportResult.status == ResultStatus.error) {
       print("createCreateAiReportResult.error ${createAiReportResult.error}");

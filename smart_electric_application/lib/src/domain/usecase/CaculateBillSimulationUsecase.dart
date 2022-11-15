@@ -14,7 +14,7 @@ class CaculateBillSimulationUsecase {
   // Usecase
   final getPowerUsageOfThisMonthUsecase = GetPowerUsageOfSpecificMonthUsecase();
 
-  double excute(
+  double execute(
       List<BillSimulationProductModel> products) {
     // Sum product bill
     double totalBill = 0.0;

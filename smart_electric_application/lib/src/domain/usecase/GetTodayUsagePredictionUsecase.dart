@@ -10,7 +10,7 @@ class GetTodayUsagePredictionUsecase {
   final aiRepository = GetIt.I.get<AiRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Result<DailyPrediction, String> excute(AiPredictionDTO aiPredictionDTO) {
+  Result<DailyPrediction, String> execute(AiPredictionDTO aiPredictionDTO) {
 
     // 오늘 날짜 받아오기
     DateTime now = DateTime.now();

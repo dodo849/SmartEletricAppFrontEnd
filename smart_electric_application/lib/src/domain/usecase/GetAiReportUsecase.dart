@@ -9,7 +9,7 @@ class GetAiReportUsecase {
   final aiRepository = GetIt.I.get<AiRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<AiReportDTO, String>> excute() async {
+  Future<Result<AiReportDTO, String>> execute() async {
     // 기기에 저장된 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();

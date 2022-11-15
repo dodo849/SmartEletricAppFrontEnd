@@ -1,5 +1,6 @@
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
+import 'package:smart_electric_application/src/data/dto/RecentPowerUsageByDayDTO.dart';
 
 /// Firebase Authentication Repository Interface
 abstract class PowerUsageRepositoryInterface {
@@ -23,4 +24,6 @@ abstract class PowerUsageRepositoryInterface {
       {required String customerNumber});
   Future<Result<List<PowerUsageDTO>, String>> getRecentPowerUsageByHour(
       {required String customerNumber});
+  Future<Result<RecentPowerUsageByDayDTO, String>>
+      getRecentPowerUsageByDay({required String customerNumber});
 }

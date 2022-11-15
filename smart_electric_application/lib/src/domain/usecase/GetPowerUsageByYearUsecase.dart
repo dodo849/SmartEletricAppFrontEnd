@@ -9,7 +9,7 @@ class GetPowerUsageByYearUsecase {
   final powerUsageRepository = GetIt.I.get<PowerUsageRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<List<GraphPointModel>, String>> excute(
+  Future<Result<List<GraphPointModel>, String>> execute(
       startDate, endDate) async {
 
     // 고객번호 가져오기

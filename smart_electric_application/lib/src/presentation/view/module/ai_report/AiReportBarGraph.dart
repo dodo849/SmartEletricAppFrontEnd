@@ -47,7 +47,7 @@ class AiReportBarGraphViewModel extends GetxController {
 
   Future<void> fetchPowerUsageOfYesterday() async {
     Result<List<GraphPointModel>, String> getResentPowerUsageByHourResult =
-        await getResentPowerUsageByHourUsecase.excute();
+        await getResentPowerUsageByHourUsecase.execute();
     yesterdayUsage = getResentPowerUsageByHourResult.value!;
 
     return;

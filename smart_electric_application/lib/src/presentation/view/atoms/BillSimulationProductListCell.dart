@@ -38,7 +38,7 @@ class BillSimulationProductListCell extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 width: 1,
-                color: viewModel.isSelected.isTrue ? colorTheme.primaryContainer : colorTheme.outline,
+                color: viewModel.isSelected.isTrue ? colorTheme.primary : colorTheme.outline,
               ),
             ),
             child: Row(

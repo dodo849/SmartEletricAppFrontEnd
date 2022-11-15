@@ -64,7 +64,7 @@ class Login extends StatelessWidget {
                     text: "회원가입하기",
                     bgColor:
                         context.theme.colorScheme.primary,
-                    textColor: CommonColors.brown,
+                    textColor: context.theme.colorScheme.onBackground,
                     size: ButtonSize.large,
                     action: () {
                       Get.to(EnterCustomerInfo());

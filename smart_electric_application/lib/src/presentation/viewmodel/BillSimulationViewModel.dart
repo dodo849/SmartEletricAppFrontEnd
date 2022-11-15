@@ -108,7 +108,7 @@ class BillSimulationViewModel extends GetxController {
 
   Future<double> fetchPowerUsageOfThisMonth() async {
     Result<double, String> getPredictedPowerUsageOfThisMonthResult =
-        await getPredictedPowerUsageOfThisMonthUsecase.excute();
+        await getPredictedPowerUsageOfThisMonthUsecase.execute();
 
     if (getPredictedPowerUsageOfThisMonthResult.status == ResultStatus.error) {
       return 0.0;
@@ -119,7 +119,7 @@ class BillSimulationViewModel extends GetxController {
 
   Future<double> fetchBillOfThisMonth() async {
     Result<BillCalculationDTO, String> calculateBillResult =
-        await calculateBillUsecase.excute(originalPowerUsage);
+        await calculateBillUsecase.execute(originalPowerUsage);
 
     if (calculateBillResult.status == ResultStatus.error &&
         calculateBillResult.value != null) {
@@ -134,7 +134,7 @@ class BillSimulationViewModel extends GetxController {
         (previousValue, element) => previousValue + element.monthPowerUsage);
 
     Result<BillCalculationDTO, String> calculateBillResult =
-        await calculateBillUsecase.excute(totalPowerUsage + originalPowerUsage);
+        await calculateBillUsecase.execute(totalPowerUsage + originalPowerUsage);
 
     setAdditionalBill(calculateBillResult.value!.result);
     setTotalBill(calculateBillResult.value!.result);

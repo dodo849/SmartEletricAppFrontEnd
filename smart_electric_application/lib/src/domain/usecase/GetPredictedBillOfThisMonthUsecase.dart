@@ -15,7 +15,7 @@ class GetPredictedBillOfThisMonthUsecase {
   final getAiPredictionUsecase = GetAiPredictionUsecase();
   final calculatedBillUsecase = CalculateBillUsecase();
 
-  Future<Result<double, String>> excute() async {
+  Future<Result<double, String>> execute() async {
     // Get customer number from device
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();
@@ -28,7 +28,7 @@ class GetPredictedBillOfThisMonthUsecase {
 
     // Get ai prediction from server
     Result<dynamic, String> getAiPredictionResult =
-        await getAiPredictionUsecase.excute();
+        await getAiPredictionUsecase.execute();
 
     if (getAiPredictionResult.status == ResultStatus.error) {
       return Result.failure(getAiPredictionResult.error);
@@ -42,7 +42,7 @@ class GetPredictedBillOfThisMonthUsecase {
 
     // Calcualte prediction bill
     Result<BillCalculationDTO, String> calculatedBillResult =
-        await calculatedBillUsecase.excute(pridictedPowerUsageOfThisMonth);
+        await calculatedBillUsecase.execute(pridictedPowerUsageOfThisMonth);
 
     if (calculatedBillResult.status == ResultStatus.error) {
       return Result.failure(getAiPredictionResult.error);

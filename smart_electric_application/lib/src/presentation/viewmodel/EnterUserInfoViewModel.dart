@@ -142,7 +142,7 @@ class EnterUserInfoViewModel extends GetxController {
   void checkIsSmartMeter() async {
 
     Result<SmartMeterDTO, String> checkIsSmartMeterResult =
-        await checkIsSmartMeterUseCase.excute(customerNumber.value);
+        await checkIsSmartMeterUseCase.execute(customerNumber.value);
 
     // 계량기 종류 확인 true: 스마트 계량기, false: 일반 계량기
     if (checkIsSmartMeterResult.status == ResultStatus.success) {

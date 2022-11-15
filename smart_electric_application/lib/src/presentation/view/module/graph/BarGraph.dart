@@ -37,7 +37,7 @@ class BarGraphViewModel extends GetxController {
       setMaxBarHeight();
     });
 
-    var getPowerUsageByDayResult = await getPowerUsageByDayUseCase.excute(
+    var getPowerUsageByDayResult = await getPowerUsageByDayUseCase.execute(
         "0130392270", "20220801");
 
     if (getPowerUsageByDayResult.status == ResultStatus.success) {

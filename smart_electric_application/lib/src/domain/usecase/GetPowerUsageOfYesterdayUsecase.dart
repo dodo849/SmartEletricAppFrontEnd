@@ -10,7 +10,7 @@ class GetPowerUsageOfYesterdayUsecase {
   final powerUsageRepository = GetIt.I.get<PowerUsageRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Future<Result<List<GraphPointModel>, String>> excute() async {
+  Future<Result<List<GraphPointModel>, String>> execute() async {
     // 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =
         await authRepository.getCustomerNumber();

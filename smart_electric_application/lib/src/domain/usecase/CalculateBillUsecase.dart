@@ -15,7 +15,7 @@ class CalculateBillUsecase {
   // Usecase
   final getPowerUsageOfThisMonthUsecase = GetPowerUsageOfSpecificMonthUsecase();
 
-  Future<Result<BillCalculationDTO, String>> excute(
+  Future<Result<BillCalculationDTO, String>> execute(
       double powerUsageQuantity) async {
     // 고객번호 가져오기
     Result<String, String> getCustomerNumberResult =

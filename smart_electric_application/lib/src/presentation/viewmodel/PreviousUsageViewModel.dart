@@ -238,7 +238,7 @@ class PreviousUsageViewModel extends GetxController {
       DateFormat formatter = DateFormat('yyyyMMddHH');
       // 네트워킹
       Result<List<GraphPointModel>, String> getPowerUsageResult =
-          await getPowerUsageByHourUsecase.excute(
+          await getPowerUsageByHourUsecase.execute(
               formatter.format(startDate), formatter.format(endDate));
 
       if (getPowerUsageResult.status == ResultStatus.error) {
@@ -259,7 +259,7 @@ class PreviousUsageViewModel extends GetxController {
       DateFormat formatter = DateFormat('yyyyMMdd');
       // 네트워킹
       Result<List<GraphPointModel>, String> getPowerUsageResult =
-          await getPowerUsageByDayUsecase.excute(
+          await getPowerUsageByDayUsecase.execute(
               formatter.format(startDate), formatter.format(endDate));
 
       if (getPowerUsageResult.status == ResultStatus.error) {
@@ -279,7 +279,7 @@ class PreviousUsageViewModel extends GetxController {
       DateFormat formatter = DateFormat('yyyyMM');
       // 네트워킹
       Result<List<GraphPointModel>, String> getPowerUsageResult =
-          await getPowerUsageByMonthUsecase.excute(
+          await getPowerUsageByMonthUsecase.execute(
               formatter.format(startDate), formatter.format(endDate));
 
       if (getPowerUsageResult.status == ResultStatus.error) {
