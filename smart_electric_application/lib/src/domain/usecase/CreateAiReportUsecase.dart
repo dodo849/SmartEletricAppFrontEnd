@@ -80,7 +80,7 @@ class CreateAiReportUsecase {
         dayPowerUsageMean: aiReport.dayPowerUsageMean,
         dayPowerUsageMeanInWon: aiReport.dayPowerUsageMeanInWon,
         dayPowerUsageMin: aiReport.dayPowerUsageMin,
-        dayPowerUsageMinInWon: aiReport.dayPowerUsageMax,
+        dayPowerUsageMinInWon: aiReport.dayPowerUsageMinInWon,
         dayPowerUsageMax: aiReport.dayPowerUsageMax,
         dayPowerUsageMaxInWon: aiReport.dayPowerUsageMaxInWon,
         predictionBill: billCalculation.result,

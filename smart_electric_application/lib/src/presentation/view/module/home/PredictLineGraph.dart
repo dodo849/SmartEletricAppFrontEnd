@@ -2,115 +2,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
-import 'package:smart_electric_application/src/data/dto/RecentPowerUsageByDayDTO.dart';
-import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetAiPredictionForGraphUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetRecentPowerUsageByDayUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/PredictLineGraphViewModel.dart';
 
-class PredictLineGraphViewModel extends GetxController {
-  // - Graph setting
-  RxDouble minX = 1.0.obs;
-  RxDouble maxX = 30.0.obs;
 
-  RxDouble minY = 0.0.obs;
-  RxDouble maxY = 100.0.obs;
-
-  // - Data variables
-  Map<int, GraphPointModel> lastMonthUsage = {0: GraphPointModel('0', 0)};
-  List<FlSpot> thisMonthUsage = [
-    FlSpot(1, 0),
-    FlSpot(2, 40),
-    FlSpot(3, 50),
-    FlSpot(4, 51),
-    FlSpot(5, 58),
-    FlSpot(6, 62),
-    FlSpot(7, 65),
-  ];
-  List<FlSpot> predictUsage = [
-    FlSpot(1, 0),
-  ];
-
-  // - Presentation variables
-  RxBool loading = true.obs;
-
-  // - Usecase
-  var getAiPredictionForGraphUsecase = GetAiPredictionForGraphUsecase();
-  var getRecentPowerUsageByDayUsecase = GetRecentPowerUsageByDayUsecase();
-
-  @override
-  void onInit() async {
-    await fetchRecentPowerUsageByDay();
-
-    // maxX(lastMonthUsage.length.toDouble());
-    maxX(31);
-
-    loading(false);
-    super.onInit();
-  }
-
-  // - Fetch function
-
-  /// 지난달 데이터 및 이번달 오늘까지 데이터 불러오기
-  Future<void> fetchRecentPowerUsageByDay() async {
-    // 네트워킹
-    Result<RecentPowerUsageByDayDTO, String> getRecentPowerUsageByDayResult =
-        await getRecentPowerUsageByDayUsecase.execute();
-
-    if (getRecentPowerUsageByDayResult.status == ResultStatus.error) {
-      return;
-    }
-
-    // 지난달 데이터 누적 값 계산
-    List<PowerUsageDTO> lastMonthUsageDTO =
-        getRecentPowerUsageByDayResult.value!.secondLastMonth;
-    List<GraphPointModel> lastMonthGraphPoints = lastMonthUsageDTO
-        .map((element) =>
-            GraphPointModel(element.dateTimeKr, element.powerUsageQuantity))
-        .toList();
-    // 누적값으로 변환
-    lastMonthGraphPoints = cumulativeCalculation(lastMonthGraphPoints);
-    // map으로 변환
-    lastMonthUsage = lastMonthGraphPoints.asMap();
-
-    return;
-  }
-
-  /// 예측 사용량 데이터 가져오기
-  void fetchPredictedPowerUsageOfThisMonth() async {
-    // 네트워킹
-    Result<List<GraphPointModel>, String> getAiPredictionForGraphResult =
-        await getAiPredictionForGraphUsecase.execute();
-
-    if (getAiPredictionForGraphResult.status == ResultStatus.error) {
-      return;
-    }
-
-    List<GraphPointModel> predictedPowerUsage =
-        getAiPredictionForGraphResult.value!;
-  }
-
-  // - Formatting function
-  String formattingDate(String targetDate) {
-    DateTime targetDateString = DateTime.parse(targetDate);
-    DateFormat formatter = DateFormat('d');
-    return formatter.format(targetDateString);
-  }
-
-  List<GraphPointModel> cumulativeCalculation(List<GraphPointModel> points) {
-    double accumulate = 0.0;
-
-    for (var i = 0; i < points.length; i++) {
-      accumulate += points[i].yValue;
-      points[i].yValue = accumulate;
-    }
-
-    return points;
-  }
-}
 
 class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
   const PredictLineGraph({super.key});
@@ -232,17 +127,22 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                       ),
                       // data 2
                       LineChartBarData(
-                          dotData: FlDotData(
-                            show: false,
-                          ),
-                          aboveBarData: BarAreaData(show: false),
-                          barWidth: 1,
-                          color: colorTheme.primary,
-                          belowBarData: BarAreaData(
-                            show: true,
-                            color: colorTheme.primary.withOpacity(0.2),
-                          ),
-                          spots: controller.thisMonthUsage),
+                        dotData: FlDotData(
+                          show: false,
+                        ),
+                        aboveBarData: BarAreaData(show: false),
+                        barWidth: 1,
+                        color: colorTheme.primary,
+                        belowBarData: BarAreaData(
+                          show: true,
+                          color: colorTheme.primary.withOpacity(0.2),
+                        ),
+                        spots: controller.thisMonthUsage.entries.map((element) {
+                          // print(element.key);
+                          return FlSpot(
+                              element.key.toDouble(), element.value.yValue);
+                        }).toList(),
+                      ),
 
                       // data 3
                       LineChartBarData(
@@ -256,7 +156,11 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                             show: true,
                             color: colorTheme.primary.withOpacity(0.2),
                           ),
-                          spots: controller.predictUsage),
+                          spots: controller.predictedUsage.entries.map((element) {
+                          // print(element.key);
+                          return FlSpot(
+                              element.key.toDouble(), element.value.yValue);
+                        }).toList()),
                     ]),
                 swapAnimationDuration:
                     const Duration(milliseconds: 150), // Optional
@@ -267,6 +171,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
   }
 
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
+    print("_bottomTitleWidgets call ${value}");
     const style = TextStyle(
       color: Color(0xff68737d),
       fontWeight: FontWeight.normal,
@@ -362,11 +267,11 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
 
       Color spotIndicatorColor;
       // 어떤 선인지 y값으로 확인
-      if (spotIndex < controller.predictUsage.length &&
-          spot.y == controller.predictUsage[spotIndex].y) {
+      if (spotIndex < controller.predictedUsage.length &&
+          spot.y == controller.predictedUsage[spotIndex]!.yValue) {
         spotIndicatorColor = LightColors.purple;
       } else if (spotIndex < controller.thisMonthUsage.length &&
-          spot.y == controller.thisMonthUsage[spotIndex].y) {
+          spot.y == controller.thisMonthUsage[spotIndex]!.yValue) {
         spotIndicatorColor = LightColors.yellow1;
       } else {
         spotIndicatorColor = Colors.grey[400]!;

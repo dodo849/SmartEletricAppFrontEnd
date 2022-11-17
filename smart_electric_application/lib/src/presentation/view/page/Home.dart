@@ -7,7 +7,7 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDataUsecase.dart';
-import 'package:smart_electric_application/src/presentation/view/module/graph/PredictLineGraph.dart';
+import 'package:smart_electric_application/src/presentation/view/module/home/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';

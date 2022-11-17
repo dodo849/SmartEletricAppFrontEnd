@@ -99,6 +99,8 @@ class AiReportViewModel extends GetxController {
       return;
     }
 
+    print("ai report ${createAiReportResult.value!}");
+
     aiReport(createAiReportResult.value!);
     return;
   }

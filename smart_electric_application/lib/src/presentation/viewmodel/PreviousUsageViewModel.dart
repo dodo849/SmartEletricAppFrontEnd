@@ -71,7 +71,6 @@ class PreviousUsageViewModel extends GetxController {
       // 기간 범위 체크
       bool isOver = checkPeriodOverNow();
       setRightButtonDisabled(isOver);
-
       // 로딩 시작
       loading(true);
       // 데이터 가져오기
@@ -96,6 +95,7 @@ class PreviousUsageViewModel extends GetxController {
     super.onInit();
   }
 
+  // - Presentation function
   void setSelectedDate(int index) {
     String xValue = graphPoints[index].xValue;
 
@@ -116,42 +116,8 @@ class PreviousUsageViewModel extends GetxController {
     selectedDate(formatter.format(xDate));
   }
 
-  void setSelectedPowerUsage(int index) {
-    selectedPowerUsage(graphPoints[index].yValue.toStringAsFixed(2));
-  }
-
-// ###
-  void setIsBeforeFiveOclock() {
-    isBeforeFiveOclock(checkBeforeFiveOclock());
-  }
-
   bool checkBeforeFiveOclock() {
     return DateTime.now().hour < 5;
-  }
-
-  void setGraphSetting(List<GraphPointModel> graphPoints) {
-    barNumber(graphPoints.length);
-    maxY(findYMax(graphPoints) * 1.2);
-    update();
-  }
-
-  // 날짜 바 변경
-  void setPeriodBarText() {
-    late DateFormat formatter;
-    if (dateUnitButtonIndex.value == 0) {
-      // 일단위
-      formatter = DateFormat('yyyy년 M월 d일');
-    } else if (dateUnitButtonIndex.value == 1) {
-      // 월단위
-      formatter = DateFormat('yyyy년 M월');
-    } else if (dateUnitButtonIndex.value == 2) {
-      // 연단위
-      formatter = DateFormat('yyyy년');
-    }
-
-    // 날짜 텍스트 변경
-    displayPeriodBarText(
-        formatter.format(periodBarDate[dateUnitButtonIndex.value]));
   }
 
   void subtractDate() {
@@ -220,10 +186,45 @@ class PreviousUsageViewModel extends GetxController {
     return isOver;
   }
 
+  // - Setter function
+  void setSelectedPowerUsage(int index) {
+    selectedPowerUsage(graphPoints[index].yValue.toStringAsFixed(2));
+  }
+
+  void setIsBeforeFiveOclock() {
+    isBeforeFiveOclock(checkBeforeFiveOclock());
+  }
+
+  void setGraphSetting(List<GraphPointModel> graphPoints) {
+    barNumber(graphPoints.length);
+    maxY(findYMax(graphPoints) * 1.2);
+    update();
+  }
+
+  // 날짜 바 변경
+  void setPeriodBarText() {
+    late DateFormat formatter;
+    if (dateUnitButtonIndex.value == 0) {
+      // 일단위
+      formatter = DateFormat('yyyy년 M월 d일');
+    } else if (dateUnitButtonIndex.value == 1) {
+      // 월단위
+      formatter = DateFormat('yyyy년 M월');
+    } else if (dateUnitButtonIndex.value == 2) {
+      // 연단위
+      formatter = DateFormat('yyyy년');
+    }
+
+    // 날짜 텍스트 변경
+    displayPeriodBarText(
+        formatter.format(periodBarDate[dateUnitButtonIndex.value]));
+  }
+
   void setRightButtonDisabled(bool disabled) {
     rightButtonDisabled(disabled);
   }
 
+  // - Data function (Fetch)
   Future<void> fetchPowerUsage() async {
     DateTime targetDate =
         PreviousUsageViewModel.to.periodBarDate[dateUnitButtonIndex.value];
@@ -273,7 +274,7 @@ class PreviousUsageViewModel extends GetxController {
     else if (PreviousUsageViewModel.to.dateUnitButtonIndex.value == 2) {
       // 연 설정
       DateTime startDate = DateTime(targetDate.year, 1);
-      // 다음달에서 하루 빼서 딜 마지막 날로 설정
+      // 다음달에서 하루 빼서 달 마지막 날로 설정
       DateTime endDate = DateTime(targetDate.year, 12);
       // 형식 조정
       DateFormat formatter = DateFormat('yyyyMM');
