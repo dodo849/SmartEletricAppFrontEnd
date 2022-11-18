@@ -67,22 +67,9 @@ class PreviousUsageViewModel extends GetxController {
       setPeriodBarText();
     });
 
-    ever(displayPeriodBarText, (_) async {
-      // 기간 범위 체크
-      bool isOver = checkPeriodOverNow();
-      setRightButtonDisabled(isOver);
-      // 로딩 시작
-      loading(true);
-      // 데이터 가져오기
-      await fetchPowerUsage();
-      // 그래프 세팅
-      setGraphSetting(graphPoints);
-      // 로딩 완료
-      loading(false);
-    });
 
     // Initialize
-
+    print("init이 여러번 호출되나?");
     // 첫 로딩 시 텍스트 설정
     setPeriodBarText();
     // 값 불러오기
@@ -96,6 +83,20 @@ class PreviousUsageViewModel extends GetxController {
   }
 
   // - Presentation function
+  void changePeriod() async {
+    // 기간 범위 체크
+    bool isOver = checkPeriodOverNow();
+    setRightButtonDisabled(isOver);
+    // 로딩 시작
+    loading(true);
+    // 데이터 가져오기
+    await fetchPowerUsage();
+    // 그래프 세팅
+    setGraphSetting(graphPoints);
+    // 로딩 완료
+    loading(false);
+  }
+
   void setSelectedDate(int index) {
     String xValue = graphPoints[index].xValue;
 

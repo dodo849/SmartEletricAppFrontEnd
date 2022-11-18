@@ -16,6 +16,7 @@ class SelectPeriodBar extends GetView<PreviousUsageViewModel> {
             GestureDetector(
               onTap: () {
                 controller.subtractDate();
+                controller.changePeriod();
               },
               child: Container(
                 width: 15,
@@ -38,6 +39,7 @@ class SelectPeriodBar extends GetView<PreviousUsageViewModel> {
                   ? null
                   : () {
                       controller.addDate();
+                      controller.changePeriod();
                     },
               child: Container(
                 width: 15,
