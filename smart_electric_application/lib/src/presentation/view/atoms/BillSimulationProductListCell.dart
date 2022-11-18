@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationProductCellViewModel.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class BillSimulationProductListCell extends StatelessWidget {
   const BillSimulationProductListCell(
-      {Key? key,
-      required BillSimulationProductModel this.simulationProduct,
-      required this.index})
+      {Key? key, required this.simulationProduct, required this.index})
       : super(key: key);
 
   final BillSimulationProductModel simulationProduct;
@@ -21,13 +16,15 @@ class BillSimulationProductListCell extends StatelessWidget {
   Widget build(BuildContext context) {
     // ViewModel DI
     var simulationProductCellViewModel =
-        Get.create(() => BillSimulationProductCellViewModel());
+        Get.create(() => BillSimulationProductCellViewModel(), permanent: true);
 
     // Theme define
     var colorTheme = context.theme.colorScheme;
     var textTheme = context.theme.textTheme;
 
     return GetX<BillSimulationProductCellViewModel>(builder: (viewModel) {
+      // 페이지 전환해도 체크 유지되도록 리로드될때마다 인덱스 체크 여부 확인해서 변수 변경
+      viewModel.checkIsSelected(index);
       return GestureDetector(
         onTap: () {
           viewModel.onTapProductCell(index);
@@ -38,14 +35,18 @@ class BillSimulationProductListCell extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 width: 1,
-                color: viewModel.isSelected.isTrue ? colorTheme.primary : colorTheme.outline,
+                color: viewModel.isSelected.isTrue
+                    ? colorTheme.primary
+                    : colorTheme.outline,
               ),
             ),
             child: Row(
               children: [
                 SvgPicture.asset(
                   "assets/icons/product_${simulationProduct.typeEngName}.svg",
-                  color: viewModel.isSelected.isTrue ? colorTheme.primaryContainer : colorTheme.onSurface,
+                  color: viewModel.isSelected.isTrue
+                      ? colorTheme.primaryContainer
+                      : colorTheme.onSurface,
                   width: 50,
                   height: 50,
                 ),
@@ -62,8 +63,8 @@ class BillSimulationProductListCell extends StatelessWidget {
                     SizedBox(height: 5),
                     Text(
                       "${simulationProduct.modelName}",
-                      style: TextStyle(
-                          color: colorTheme.onSurface, fontSize: 14),
+                      style:
+                          TextStyle(color: colorTheme.onSurface, fontSize: 14),
                     ),
                   ],
                 )

@@ -14,7 +14,7 @@ class BillSimulation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // VeiwModel DI
-    Get.put(BillSimulationViewModel());
+    Get.put(BillSimulationViewModel(), permanent: true);
 
     // Theme
     var colorTheme = context.theme.colorScheme;

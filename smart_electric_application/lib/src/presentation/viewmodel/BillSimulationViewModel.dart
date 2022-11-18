@@ -74,6 +74,10 @@ class BillSimulationViewModel extends GetxController {
     super.onInit();
   }
 
+  void onUpdate(){
+    update();
+  }
+
   /// Fetch bill simulation product from storage
   Future<void> getBillSimulationProducts() async {
     Result<dynamic, String> getSimulationProductsResult =
