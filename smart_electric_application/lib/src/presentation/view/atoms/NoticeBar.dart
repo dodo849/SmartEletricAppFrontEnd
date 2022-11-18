@@ -14,7 +14,7 @@ class NoticeBar extends StatelessWidget {
 
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
       Container(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        padding: EdgeInsets.fromLTRB(30, 15, 30, 20),
         decoration: BoxDecoration(
             color: colorTheme.surface, borderRadius: BorderRadius.circular(10)),
         child: ConstrainedBox(
