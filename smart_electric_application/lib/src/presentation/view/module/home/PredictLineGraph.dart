@@ -1,11 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/PredictLineGraphViewModel.dart';
-
-
 
 class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
   const PredictLineGraph({super.key});
@@ -20,158 +19,182 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
 
     return Obx(() => controller.loading.isTrue
         ? Container()
-        : Listener(
-            onPointerSignal: (signal) {
-              if (signal is PointerScrollEvent) {
-                if (signal.scrollDelta.dy.isNegative) {
-                  controller.minX(
-                      controller.maxX.value + controller.maxX.value * 0.05);
-                  controller.maxX(
-                      controller.maxX.value - controller.maxX.value * 0.05);
-                } else {
-                  controller.minX(
-                      controller.minX.value - controller.maxX.value * 0.05);
-                  controller.maxX(
-                      controller.maxX.value + controller.maxX.value * 0.05);
-                }
-              }
-            },
-            child: GestureDetector(
-              onDoubleTap: () {
-                controller.minX(1);
-                controller.maxX(controller.lastMonthUsage.length.toDouble());
-              },
-              onHorizontalDragUpdate: (dragUpdDet) {
-                double primDelta = dragUpdDet.primaryDelta ?? 0.0;
-
-                var nextRightMinX =
-                    controller.minX.value + controller.maxX.value * 0.01;
-                var nextRightMaxX =
-                    controller.maxX.value + controller.maxX.value * 0.01;
-                var nextLeftMinX =
-                    controller.minX.value - controller.maxX.value * 0.01;
-                var nextLeftMaxX =
-                    controller.maxX.value - controller.maxX.value * 0.01;
-
-                if (primDelta != 0) {
-                  if (primDelta.isNegative) {
-                    if (nextRightMinX > 1 && nextRightMaxX < 100) {
-                      controller.minX(nextRightMinX);
-                      controller.maxX(nextRightMaxX);
-                    }
-                  } else {
-                    if (nextLeftMinX > 1 && nextLeftMaxX < 100) {
-                      controller.minX(nextLeftMinX);
-                      controller.maxX(nextLeftMaxX);
-                    }
-                  }
-                }
-              },
-              child: LineChart(
-                LineChartData(
-                    minX: controller.minX.value,
-                    maxX: controller.maxX.value,
-                    maxY: controller.maxY.value,
-                    showingTooltipIndicators: [],
-                    titlesData: FlTitlesData(
-                      topTitles:
-                          AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      rightTitles:
-                          AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      bottomTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          reservedSize: 20,
-                          interval: 1,
-                          getTitlesWidget: _bottomTitleWidgets,
-                        ),
+        : Stack(
+            children: [
+              // y축 & 그리드
+              LineChart(LineChartData(
+                  minX: controller.minX.value,
+                  maxX: controller.maxX.value,
+                  maxY: controller.maxY.value,
+                  showingTooltipIndicators: [],
+                  titlesData: FlTitlesData(
+                    topTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 20,
+                        interval: 1,
+                        // x축 빈자리 만들기 위해 빈 Text 위젯 설정
+                        getTitlesWidget: (double, TitleMeta) => const Text(""),
                       ),
                     ),
-                    borderData: FlBorderData(
-                        border: Border(
-                            top: BorderSide(color: colorTheme.outline),
-                            bottom: BorderSide(
-                                color: colorTheme.outline, width: 2))),
-                    gridData: FlGridData(
-                        drawVerticalLine: false,
-                        getDrawingHorizontalLine: (value) => FlLine(
-                            color: colorTheme.outline,
-                            strokeWidth: 1,
-                            dashArray: [1, 0])),
-                    clipData: FlClipData.all(),
-                    // Set tooltip
-                    lineTouchData: LineTouchData(
-                        getTouchedSpotIndicator: _getTouchedSpotIndicator,
-                        touchTooltipData: LineTouchTooltipData(
-                            getTooltipItems: _getTooltipItems,
-                            tooltipBgColor: const Color(0xFF2D2D2D),
-                            tooltipRoundedRadius: 15,
-                            tooltipPadding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
-                            tooltipBorder: null)),
-                    // read about it in the LineChartData section
-                    lineBarsData: [
-                      // data 1
-                      LineChartBarData(
-                        dotData: FlDotData(
-                          show: false,
-                        ),
-                        aboveBarData: BarAreaData(show: false),
-                        barWidth: 1,
-                        color: Colors.grey[400],
-                        spots: controller.lastMonthUsage.entries.map((element) {
-                          // print(element.key);
-                          return FlSpot(
-                              element.key.toDouble(), element.value.yValue);
-                        }).toList(),
-                      ),
-                      // data 2
-                      LineChartBarData(
-                        dotData: FlDotData(
-                          show: false,
-                        ),
-                        aboveBarData: BarAreaData(show: false),
-                        barWidth: 1,
-                        color: colorTheme.primary,
-                        belowBarData: BarAreaData(
-                          show: true,
-                          color: colorTheme.primary.withOpacity(0.2),
-                        ),
-                        spots: controller.thisMonthUsage.entries.map((element) {
-                          // print(element.key);
-                          return FlSpot(
-                              element.key.toDouble(), element.value.yValue);
-                        }).toList(),
-                      ),
+                  ),
+                  borderData: FlBorderData(
+                      border: const Border(
+                          top: BorderSide(width: 0),
+                          bottom: BorderSide(width: 0))),
+                  gridData: FlGridData(
+                      drawVerticalLine: false,
+                      getDrawingHorizontalLine: (value) => FlLine(
+                          color: colorTheme.outline,
+                          strokeWidth: 1,
+                          dashArray: [1, 0])),
 
-                      // data 3
-                      LineChartBarData(
-                          dotData: FlDotData(
-                            show: false,
+                  // Set tooltip
+                  lineTouchData: LineTouchData(
+                      getTouchedSpotIndicator: _getTouchedSpotIndicator,
+                      touchTooltipData: LineTouchTooltipData(
+                          getTooltipItems: _getTooltipItems,
+                          tooltipBgColor: const Color(0xFF2D2D2D),
+                          tooltipRoundedRadius: 15,
+                          tooltipPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
+                          tooltipBorder: null)),
+                  lineBarsData: [
+                    // data 1
+                    LineChartBarData(
+                      dotData: FlDotData(
+                        show: false,
+                      ),
+                      spots: [FlSpot(0, 0)],
+                    ),
+                  ])),
+
+              // 실 데이터
+              Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      // minWidth: 200,
+                      maxWidth: 1000,
+                    ),
+                    child: LineChart(
+                      LineChartData(
+                          minX: controller.minX.value,
+                          maxX: controller.maxX.value,
+                          maxY: controller.maxY.value,
+                          showingTooltipIndicators: [],
+                          titlesData: FlTitlesData(
+                            topTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            rightTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            leftTitles: AxisTitles(
+                                sideTitles: SideTitles(showTitles: false)),
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                reservedSize: 20,
+                                interval: 1,
+                                getTitlesWidget: _bottomTitleWidgets,
+                              ),
+                            ),
                           ),
-                          aboveBarData: BarAreaData(show: false),
-                          barWidth: 1,
-                          color: colorTheme.secondaryContainer,
-                          belowBarData: BarAreaData(
-                            show: true,
-                            color: colorTheme.primary.withOpacity(0.2),
+                          borderData: FlBorderData(
+                              border: Border(
+                                  top: BorderSide(color: colorTheme.outline),
+                                  bottom: BorderSide(
+                                      color: colorTheme.outline, width: 2))),
+                          gridData: FlGridData(
+                            drawVerticalLine: false,
+                            drawHorizontalLine: false,
                           ),
-                          spots: controller.predictedUsage.entries.map((element) {
-                          // print(element.key);
-                          return FlSpot(
-                              element.key.toDouble(), element.value.yValue);
-                        }).toList()),
-                    ]),
-                swapAnimationDuration:
-                    const Duration(milliseconds: 150), // Optional
-                swapAnimationCurve: Curves.linear, // Optional
+                          // clipData: FlClipData.all(),
+
+                          // Set tooltip
+                          lineTouchData: LineTouchData(
+                              getTouchedSpotIndicator: _getTouchedSpotIndicator,
+                              touchTooltipData: LineTouchTooltipData(
+                                  getTooltipItems: _getTooltipItems,
+                                  tooltipBgColor: const Color(0xFF2D2D2D),
+                                  tooltipRoundedRadius: 15,
+                                  tooltipPadding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 15),
+                                  tooltipBorder: null)),
+
+                          // read about it in the LineChartData section
+                          lineBarsData: [
+                            // data 1
+                            LineChartBarData(
+                              dotData: FlDotData(
+                                show: false,
+                              ),
+                              aboveBarData: BarAreaData(show: false),
+                              barWidth: 1,
+                              color: Colors.grey[400],
+                              spots: controller.lastMonthUsage.entries
+                                  .map((element) {
+                                // print(element.key);
+                                return FlSpot(element.key.toDouble(),
+                                    element.value.yValue);
+                              }).toList(),
+                            ),
+                            // data 2
+                            LineChartBarData(
+                              dotData: FlDotData(
+                                show: false,
+                              ),
+                              aboveBarData: BarAreaData(show: false),
+                              barWidth: 1,
+                              color: colorTheme.primary,
+                              belowBarData: BarAreaData(
+                                show: true,
+                                color: colorTheme.primary.withOpacity(0.2),
+                              ),
+                              spots: controller.thisMonthUsage.entries
+                                  .map((element) {
+                                // print(element.key);
+                                return FlSpot(element.key.toDouble(),
+                                    element.value.yValue);
+                              }).toList(),
+                            ),
+
+                            // data 3
+                            LineChartBarData(
+                                dotData: FlDotData(
+                                  show: false,
+                                ),
+                                aboveBarData: BarAreaData(show: false),
+                                barWidth: 1,
+                                color: colorTheme.secondaryContainer,
+                                belowBarData: BarAreaData(
+                                  show: true,
+                                  color: colorTheme.primary.withOpacity(0.2),
+                                ),
+                                spots: controller.predictedUsage.entries
+                                    .map((element) {
+                                  // print(element.key);
+                                  return FlSpot(element.key.toDouble(),
+                                      element.value.yValue);
+                                }).toList()),
+                          ]),
+                      swapAnimationDuration:
+                          const Duration(milliseconds: 150), // Optional
+                      swapAnimationCurve: Curves.linear, // Optional
+                    ),
+                  ),
+                ),
               ),
-            ),
+            ],
           ));
   }
 
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
-    print("_bottomTitleWidgets call ${value}");
     const style = TextStyle(
       color: Color(0xff68737d),
       fontWeight: FontWeight.normal,
@@ -244,7 +267,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
             ),
           ),
           TextSpan(
-            text: flSpot.y.toString(),
+            text: flSpot.y.toStringAsFixed(1),
             style: usageTextStyle,
           ),
           const TextSpan(

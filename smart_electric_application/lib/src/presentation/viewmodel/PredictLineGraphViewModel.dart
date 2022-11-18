@@ -13,7 +13,7 @@ class PredictLineGraphViewModel extends GetxController {
   RxDouble maxX = 30.0.obs;
 
   RxDouble minY = 0.0.obs;
-  RxDouble maxY = 100.0.obs;
+  RxDouble maxY = 150.0.obs;
 
   // - Data variables
   Map<int, GraphPointModel> lastMonthUsage = {0: GraphPointModel('0', 0)};
@@ -41,8 +41,8 @@ class PredictLineGraphViewModel extends GetxController {
     setPredictedUsage(
         thisMonthUsage.entries.map((e) => e.value).toList(), predictedPoints!);
 
-    // maxX(lastMonthUsage.length.toDouble());
-    maxX(31);
+    maxX(lastMonthUsage.length.toDouble());
+    // maxX(31);
 
     loading(false);
     super.onInit();
@@ -102,10 +102,12 @@ class PredictLineGraphViewModel extends GetxController {
 
   void setPredictedUsage(List<GraphPointModel> thisMonthUsage,
       List<GraphPointModel> predictedGraphPoints) {
+    // 오늘 이전까지 값 자르기
+    predictedGraphPoints = predictedGraphPoints.sublist(thisMonthUsage.length);
     // 누적값으로 변환
     predictedGraphPoints = cumulativeCalculation(predictedGraphPoints);
     // 이번달 실 사용량에서 마지막 값 구하기 (오늘 값)
-    double lastUsage = thisMonthUsage[thisMonthUsage.length - 1]!.yValue;
+    double lastUsage = thisMonthUsage[thisMonthUsage.length - 1].yValue;
     // 그래프 연결되도록 오늘 값 지정
     predictedUsage[thisMonthUsage.length - 1] =
         GraphPointModel(predictedGraphPoints[0].xValue, lastUsage);
