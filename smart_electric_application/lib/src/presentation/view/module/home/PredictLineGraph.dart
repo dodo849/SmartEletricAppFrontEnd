@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/PredictLineGraphViewModel.dart';
 
@@ -23,8 +24,8 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
             children: [
               // y축 & 그리드
               LineChart(LineChartData(
-                  minX: controller.minX.value,
-                  maxX: controller.maxX.value,
+                  minX: controller.maxY.value,
+                  maxX: 0,
                   maxY: controller.maxY.value,
                   showingTooltipIndicators: [],
                   titlesData: FlTitlesData(
@@ -32,6 +33,9 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                         AxisTitles(sideTitles: SideTitles(showTitles: false)),
                     rightTitles:
                         AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    // leftTitles: AxisTitles(
+                    //     sideTitles: SideTitles(
+                    //         showTitles: true, interval: 20, reservedSize: 30,)),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
@@ -42,6 +46,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                       ),
                     ),
                   ),
+                  backgroundColor: Colors.transparent,
                   borderData: FlBorderData(
                       border: const Border(
                           top: BorderSide(width: 0),
@@ -74,9 +79,10 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                   ])),
 
               // 실 데이터
-              Padding(
-                padding: const EdgeInsets.only(left: 50),
+              Container(
+                margin: const EdgeInsets.only(left: 50),
                 child: SingleChildScrollView(
+                  clipBehavior: Clip.none,
                   scrollDirection: Axis.horizontal,
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(
@@ -86,7 +92,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                     child: LineChart(
                       LineChartData(
                           minX: controller.minX.value,
-                          maxX: controller.maxX.value,
+                          maxX: controller.maxX.value + 1,
                           maxY: controller.maxY.value,
                           showingTooltipIndicators: [],
                           titlesData: FlTitlesData(
@@ -107,14 +113,15 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                           ),
                           borderData: FlBorderData(
                               border: Border(
-                                  top: BorderSide(color: colorTheme.outline),
+                                  top: BorderSide(
+                                      width: 0, color: colorTheme.surface),
                                   bottom: BorderSide(
                                       color: colorTheme.outline, width: 2))),
                           gridData: FlGridData(
                             drawVerticalLine: false,
                             drawHorizontalLine: false,
                           ),
-                          // clipData: FlClipData.all(),
+                          clipData: FlClipData.all(),
 
                           // Set tooltip
                           lineTouchData: LineTouchData(
@@ -139,7 +146,6 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                               color: Colors.grey[400],
                               spots: controller.lastMonthUsage.entries
                                   .map((element) {
-                                // print(element.key);
                                 return FlSpot(element.key.toDouble(),
                                     element.value.yValue);
                               }).toList(),
@@ -158,7 +164,6 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                               ),
                               spots: controller.thisMonthUsage.entries
                                   .map((element) {
-                                // print(element.key);
                                 return FlSpot(element.key.toDouble(),
                                     element.value.yValue);
                               }).toList(),
@@ -178,7 +183,6 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                                 ),
                                 spots: controller.predictedUsage.entries
                                     .map((element) {
-                                  // print(element.key);
                                   return FlSpot(element.key.toDouble(),
                                       element.value.yValue);
                                 }).toList()),
@@ -195,13 +199,21 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
   }
 
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
+    if (value <= 0 || value > 31) {
+      return const Text("");
+    }
+
     const style = TextStyle(
       color: Color(0xff68737d),
       fontWeight: FontWeight.normal,
       fontSize: 12,
     );
+
+    DateFormat formatterByDay = DateFormat('d일');
+    DateTime date =
+        DateTime.parse(controller.lastMonthUsage[value.toInt()]!.xValue);
     Widget text;
-    text = Text('${value.toInt()}일', style: style);
+    text = Text('${formatterByDay.format(date)}', style: style);
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -215,7 +227,6 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
       final flSpot = barSpot;
 
       // 이번달이랑 예측에서 겹치는 부분이면 이번달 사용량 그래프의 tooltip null
-      print("barSpot ${barSpot.spotIndex}");
       if (barSpot.spotIndex == 6 && barSpot.barIndex == 1) {
         print("return null");
         return null;
@@ -236,19 +247,23 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
 
       TextStyle usageTextStyle;
       if (barSpot.barIndex == 0) {
-        usageTextStyle = TextStyle(
-            color: Colors.white, fontSize: 14, fontWeight: FontWeight.normal);
+        usageTextStyle = const TextStyle(
+          color: Colors.white,
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        );
       } else if (barSpot.barIndex == 1) {
-        usageTextStyle = TextStyle(
-            color: LightColors.yellow1,
-            fontSize: 18,
-            fontWeight: FontWeight.bold);
+        usageTextStyle = const TextStyle(
+          color: LightColors.yellow1,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        );
       } else {
-        dataLabelText = '예상 사용량 \n';
-        usageTextStyle = TextStyle(
-            color: Color.fromARGB(255, 154, 154, 255),
-            fontSize: 18,
-            fontWeight: FontWeight.bold);
+        usageTextStyle = const TextStyle(
+          color: Color.fromARGB(255, 154, 154, 255),
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        );
       }
 
       return LineTooltipItem(
@@ -261,8 +276,8 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
         children: [
           TextSpan(
             text: dataLabelText,
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
+            style: const TextStyle(
+              fontStyle: FontStyle.normal,
               fontWeight: FontWeight.normal,
             ),
           ),
@@ -290,12 +305,17 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
 
       Color spotIndicatorColor;
       // 어떤 선인지 y값으로 확인
-      if (spotIndex < controller.predictedUsage.length &&
-          spot.y == controller.predictedUsage[spotIndex]!.yValue) {
-        spotIndicatorColor = LightColors.purple;
-      } else if (spotIndex < controller.thisMonthUsage.length &&
+      if (controller.thisMonthUsage.keys.contains(spotIndex) &&
           spot.y == controller.thisMonthUsage[spotIndex]!.yValue) {
         spotIndicatorColor = LightColors.yellow1;
+      } else if (controller.predictedUsage.keys
+              .contains(spotIndex + controller.thisMonthUsage.keys.length) &&
+          spot.y ==
+              controller
+                  .predictedUsage[
+                      spotIndex + controller.thisMonthUsage.keys.length]!
+                  .yValue) {
+        spotIndicatorColor = LightColors.purple;
       } else {
         spotIndicatorColor = Colors.grey[400]!;
       }

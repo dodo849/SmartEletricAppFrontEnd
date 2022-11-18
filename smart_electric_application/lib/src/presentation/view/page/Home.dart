@@ -10,6 +10,7 @@ import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDat
 import 'package:smart_electric_application/src/presentation/view/module/home/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
+import 'package:smart_electric_application/src/presentation/view/module/home/PredictionLineGraphDescription.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/HomeViewModel.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
@@ -124,7 +125,7 @@ class Home extends StatelessWidget {
                 child: PredictBillCard(),
               ),
 
-              SizedBox(height: 80),
+              SizedBox(height: 40),
 
               // 그래프
               Padding(
@@ -134,8 +135,10 @@ class Home extends StatelessWidget {
               ),
               SizedBox(height: 45),
               Container(height: 300, child: const PredictLineGraph()),
+              SizedBox(height: 15),
+              PredictionLineGraphDescription(),
 
-              SizedBox(height: 80),
+              SizedBox(height: 40),
             ],
           ),
         ),

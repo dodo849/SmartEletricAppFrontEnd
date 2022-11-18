@@ -9,15 +9,15 @@ import 'package:smart_electric_application/src/domain/usecase/GetRecentPowerUsag
 
 class PredictLineGraphViewModel extends GetxController {
   // - Graph setting
-  RxDouble minX = 1.0.obs;
-  RxDouble maxX = 30.0.obs;
+  RxDouble minX = 0.0.obs;
+  RxDouble maxX = 32.0.obs;
 
   RxDouble minY = 0.0.obs;
-  RxDouble maxY = 150.0.obs;
+  RxDouble maxY = 100.0.obs;
 
   // - Data variables
-  Map<int, GraphPointModel> lastMonthUsage = {0: GraphPointModel('0', 0)};
-  Map<int, GraphPointModel> thisMonthUsage = {0: GraphPointModel('0', 0)};
+  Map<int, GraphPointModel> lastMonthUsage = {};
+  Map<int, GraphPointModel> thisMonthUsage = {};
   Map<int, GraphPointModel> predictedUsage = {};
 
   // - Presentation variables
@@ -41,8 +41,10 @@ class PredictLineGraphViewModel extends GetxController {
     setPredictedUsage(
         thisMonthUsage.entries.map((e) => e.value).toList(), predictedPoints!);
 
-    maxX(lastMonthUsage.length.toDouble());
-    // maxX(31);
+    maxY(
+        findMaxY(lastMonthUsage: lastMonthUsage, predictedUsage: predictedUsage)
+                .toInt() +
+            20);
 
     loading(false);
     super.onInit();
@@ -85,7 +87,9 @@ class PredictLineGraphViewModel extends GetxController {
     // 누적값으로 변환
     lastMonthGraphPoints = cumulativeCalculation(lastMonthGraphPoints);
     // map으로 변환해서 클래스변수에 대입
-    lastMonthUsage = lastMonthGraphPoints.asMap();
+    lastMonthUsage = Map.fromIterables(
+        lastMonthGraphPoints.asMap().keys.map((e) => e + 1),
+        lastMonthGraphPoints.asMap().values);
   }
 
   void setThisMonthUsage(List<PowerUsageDTO> thisMonthPowerUsage) {
@@ -96,8 +100,10 @@ class PredictLineGraphViewModel extends GetxController {
         .toList();
     // 누적값으로 변환
     thisMonthGraphPoints = cumulativeCalculation(thisMonthGraphPoints);
-    // map으로 변환해서 클래스변수에 대입
-    thisMonthUsage = thisMonthGraphPoints.asMap();
+    // map으로 변환해서 클래스변수에 대입, 1부터 시작하도록 key 1부터 시작
+    thisMonthUsage = Map.fromIterables(
+        thisMonthGraphPoints.asMap().keys.map((e) => e + 1),
+        thisMonthGraphPoints.asMap().values);
   }
 
   void setPredictedUsage(List<GraphPointModel> thisMonthUsage,
@@ -109,12 +115,12 @@ class PredictLineGraphViewModel extends GetxController {
     // 이번달 실 사용량에서 마지막 값 구하기 (오늘 값)
     double lastUsage = thisMonthUsage[thisMonthUsage.length - 1].yValue;
     // 그래프 연결되도록 오늘 값 지정
-    predictedUsage[thisMonthUsage.length - 1] =
+    predictedUsage[thisMonthUsage.length] =
         GraphPointModel(predictedGraphPoints[0].xValue, lastUsage);
-    // 마지막 값 더해서 map으로 변환
+    // 마지막 값 더해서 map으로 변환 (map이 1부터 시작하므로 키값에 +1)
     for (var i = 0; i < predictedGraphPoints.length; i++) {
       double thisAccumulateUsage = predictedGraphPoints[i].yValue + lastUsage;
-      predictedUsage[i + thisMonthUsage.length] =
+      predictedUsage[i + thisMonthUsage.length + 1] =
           GraphPointModel(predictedGraphPoints[i].xValue, thisAccumulateUsage);
     }
   }
@@ -137,11 +143,31 @@ class PredictLineGraphViewModel extends GetxController {
     return points;
   }
 
+  // void 
+
   // - Graph setting
   double findMaxY(
       {required Map<int, GraphPointModel> lastMonthUsage,
-      required Map<int, GraphPointModel> thisMonthUsage,
-      required Map<int, GraphPointModel> predictedMonthUsage}) {
-    return 0.0;
+      required Map<int, GraphPointModel> predictedUsage}) {
+    // 지난달 최대값 찾기
+    double lastMonthUsageMax = 0.0;
+    lastMonthUsage.forEach((k, v) {
+      if (v.yValue > lastMonthUsageMax) {
+        lastMonthUsageMax = v.yValue;
+      }
+    });
+
+    // 예측값 최댓값 찾기
+    double predictedUsageMax = 0.0;
+    predictedUsage.forEach((k, v) {
+      if (v.yValue > predictedUsageMax) {
+        predictedUsageMax = v.yValue;
+      }
+    });
+
+    // 비교해서 큰거 return
+    return lastMonthUsageMax > predictedUsageMax
+        ? lastMonthUsageMax
+        : predictedUsageMax;
   }
 }
