@@ -39,7 +39,7 @@ class EnterCustomerNumber extends StatelessWidget {
               validate(value);
             }),
         SizedBox(height: 30),
-        Text("고객번호는 전기요금고지서, 혹은 한전 전화문의로 확인하실 수 있습니다.",
+        Text("고객번호는 전기요금고지서나 한전 전화문의를 통해 확인하실 수 있습니다.",
             style: textTheme.bodyText2),
       ],
     ));
