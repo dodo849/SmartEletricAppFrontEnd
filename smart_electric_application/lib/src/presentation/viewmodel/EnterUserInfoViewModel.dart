@@ -39,8 +39,6 @@ class EnterUserInfoViewModel extends GetxController {
   // Error message variables
   RxBool inputError = false.obs;
   RxString errorMessage = "".obs;
-  RxBool isEmailVerificationError = false.obs;
-  RxString emailVerificationErrorMessage = "".obs;
 
   // Usecase instance
   final signupUseCase = SignupUsecase();
@@ -79,8 +77,6 @@ class EnterUserInfoViewModel extends GetxController {
     ever(idx, (_) {
       inputError(false);
       errorMessage("");
-      isEmailVerificationError(false);
-      emailVerificationErrorMessage("");
     });
 
     // 이메일 변경하면 에러메세지 초기화
@@ -147,17 +143,18 @@ class EnterUserInfoViewModel extends GetxController {
 
   void backButtonAction() {
     // 2번째 문항부터는 백버튼 클릭 시 이전 문항으로 돌아감
-    switch (EnterUserInfoViewModel.to.idx.value) {
+    switch (idx.value) {
       case 0:
         // 첫번째 문항에선 처음화면으로 back
         Get.back();
         break;
       case 2:
-        EnterUserInfoViewModel.to.tempIdx(0);
+        tempIdx(0);
         break;
       default:
-        assert(EnterUserInfoViewModel.to.idx.value > 0, "page index error");
-        EnterUserInfoViewModel.to.tempIdx--;
+        if (tempIdx > 0) {
+          tempIdx--;
+        }
     }
   }
 
@@ -175,6 +172,11 @@ class EnterUserInfoViewModel extends GetxController {
       // 계량기 종류 설정
       isSmartMeter(smartMeterDTO.custNumValidation);
 
+      // 일반 계량기 사용자는 가입못하도록
+      if (smartMeterDTO.custNumValidation == false) {
+        isButtonEnable(false);
+      }
+
       // 로딩 완료 설정
       isSmartMeterLoad(true);
     }
@@ -188,8 +190,6 @@ class EnterUserInfoViewModel extends GetxController {
   void checkEmailDuplicate() async {
     Result<AccountEmailValidationDTO, String> checkEmailDuplicateResult =
         await checkEmailDuplicateUseCase.execute(email.value);
-
-    print("checkEmailDuplicateResult ${checkEmailDuplicateResult.error}");
 
     // 네트워크 에러
     if (checkEmailDuplicateResult.status == ResultStatus.error) {

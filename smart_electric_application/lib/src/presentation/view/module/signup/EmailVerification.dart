@@ -12,7 +12,7 @@ class EmailVerification extends StatelessWidget {
     var textTheme = context.theme.textTheme;
     var colorTheme = context.theme.colorScheme;
 
-    return Obx(() => Container(
+    return Container(
       width: double.infinity,
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,6 +42,6 @@ class EmailVerification extends StatelessWidget {
               height: 15,
             ),
           ],
-        )));
+        ));
   }
 }

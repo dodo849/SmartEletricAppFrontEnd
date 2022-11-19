@@ -50,23 +50,28 @@ class BillSimulationProductListCell extends StatelessWidget {
                   width: 50,
                   height: 50,
                 ),
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${simulationProduct.productName}",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: colorTheme.onBackground, fontSize: 16),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      "${simulationProduct.modelName}",
-                      style:
-                          TextStyle(color: colorTheme.onSurface, fontSize: 14),
-                    ),
-                  ],
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${simulationProduct.productName}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: colorTheme.onBackground, fontSize: 16),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        "${simulationProduct.modelName}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style:
+                            TextStyle(color: colorTheme.onSurface, fontSize: 14),
+                      ),
+                    ],
+                  ),
                 )
               ],
             )),

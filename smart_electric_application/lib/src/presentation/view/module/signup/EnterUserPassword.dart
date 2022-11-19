@@ -39,7 +39,7 @@ class EnterUserPassword extends StatelessWidget {
               },
             ),
             SizedBox(height: 30),
-            Text("비밀번호는 특수문자를 하나 이상 포함해야하고 8자리 이상이어야합니다.",
+            Text("비밀번호는 8자리 이상이며, 특수문자를 포함해야합니다.",
                 style: textTheme.bodyText2),
           ],
         )));
