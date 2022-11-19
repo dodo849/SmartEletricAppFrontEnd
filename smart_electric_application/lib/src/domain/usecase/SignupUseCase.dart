@@ -63,7 +63,10 @@ class SignupUsecase {
 
     // 유저 정보 내부 DB에 저장
     Result<bool, String> saveUserResult = await authRepository.saveUser(
-        customerNumber: customerNumber, name: name, email: email);
+        customerNumber: customerNumber,
+        name: name,
+        email: email,
+        isSmartMeter: isSmartMeter);
 
     if (saveUserResult.status == ResultStatus.error) {
       return saveUserResult;

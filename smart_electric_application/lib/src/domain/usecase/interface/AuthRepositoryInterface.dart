@@ -12,10 +12,12 @@ abstract class AuthRepositoryInterface {
   Future<Result<bool, String>> saveUser(
       {required String customerNumber,
       required String name,
-      required String email});
+      required String email,
+      required bool isSmartMeter});
   Future<Result<String, String>> getCustomerNumber();
   Future<Result<bool, String>> removeEmail(email);
   Future<Result<String, String>> getEmail();
   Future<Result<bool, String>> removeUser();
   Future<Result<String, String>> getUserName();
+  Future<Result<bool, String>> getIsSmartMeter();
 }

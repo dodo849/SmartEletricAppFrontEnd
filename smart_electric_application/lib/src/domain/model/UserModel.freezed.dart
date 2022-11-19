@@ -23,6 +23,7 @@ mixin _$UserModel {
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get customerNumber => throw _privateConstructorUsedError;
+  bool get isSmartMeter => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,8 @@ mixin _$UserModel {
 abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res>;
-  $Res call({String name, String email, String customerNumber});
+  $Res call(
+      {String name, String email, String customerNumber, bool isSmartMeter});
 }
 
 /// @nodoc
@@ -50,6 +52,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? name = freezed,
     Object? email = freezed,
     Object? customerNumber = freezed,
+    Object? isSmartMeter = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -64,6 +67,10 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      isSmartMeter: isSmartMeter == freezed
+          ? _value.isSmartMeter
+          : isSmartMeter // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -74,7 +81,8 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
           _$_UserModel value, $Res Function(_$_UserModel) then) =
       __$$_UserModelCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String email, String customerNumber});
+  $Res call(
+      {String name, String email, String customerNumber, bool isSmartMeter});
 }
 
 /// @nodoc
@@ -92,6 +100,7 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? email = freezed,
     Object? customerNumber = freezed,
+    Object? isSmartMeter = freezed,
   }) {
     return _then(_$_UserModel(
       name: name == freezed
@@ -106,6 +115,10 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      isSmartMeter: isSmartMeter == freezed
+          ? _value.isSmartMeter
+          : isSmartMeter // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -114,7 +127,10 @@ class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel implements _UserModel {
   _$_UserModel(
-      {required this.name, required this.email, required this.customerNumber});
+      {required this.name,
+      required this.email,
+      required this.customerNumber,
+      required this.isSmartMeter});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
@@ -125,10 +141,12 @@ class _$_UserModel implements _UserModel {
   final String email;
   @override
   final String customerNumber;
+  @override
+  final bool isSmartMeter;
 
   @override
   String toString() {
-    return 'UserModel(name: $name, email: $email, customerNumber: $customerNumber)';
+    return 'UserModel(name: $name, email: $email, customerNumber: $customerNumber, isSmartMeter: $isSmartMeter)';
   }
 
   @override
@@ -139,7 +157,9 @@ class _$_UserModel implements _UserModel {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality()
-                .equals(other.customerNumber, customerNumber));
+                .equals(other.customerNumber, customerNumber) &&
+            const DeepCollectionEquality()
+                .equals(other.isSmartMeter, isSmartMeter));
   }
 
   @JsonKey(ignore: true)
@@ -148,7 +168,8 @@ class _$_UserModel implements _UserModel {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(customerNumber));
+      const DeepCollectionEquality().hash(customerNumber),
+      const DeepCollectionEquality().hash(isSmartMeter));
 
   @JsonKey(ignore: true)
   @override
@@ -167,7 +188,8 @@ abstract class _UserModel implements UserModel {
   factory _UserModel(
       {required final String name,
       required final String email,
-      required final String customerNumber}) = _$_UserModel;
+      required final String customerNumber,
+      required final bool isSmartMeter}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
@@ -178,6 +200,8 @@ abstract class _UserModel implements UserModel {
   String get email;
   @override
   String get customerNumber;
+  @override
+  bool get isSmartMeter;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

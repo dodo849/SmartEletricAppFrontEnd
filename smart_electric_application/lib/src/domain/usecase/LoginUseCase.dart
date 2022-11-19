@@ -61,7 +61,8 @@ class LoginUsecase {
     Result<bool, String> saveUserResult = await authRepository.saveUser(
         customerNumber: requestAccountResult.value!.customerNumber,
         email: requestAccountResult.value!.email,
-        name: requestAccountResult.value!.name);
+        name: requestAccountResult.value!.name,
+        isSmartMeter: requestAccountResult.value!.isSmartMeter);
 
     if (requestAccountResult.status == ResultStatus.error) {
       return Result.failure(requestAccountResult.error);

@@ -10,6 +10,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       name: json['name'] as String,
       email: json['email'] as String,
       customerNumber: json['customerNumber'] as String,
+      isSmartMeter: json['isSmartMeter'] as bool,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'name': instance.name,
       'email': instance.email,
       'customerNumber': instance.customerNumber,
+      'isSmartMeter': instance.isSmartMeter,
     };

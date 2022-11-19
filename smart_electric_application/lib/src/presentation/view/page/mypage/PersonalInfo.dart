@@ -10,6 +10,7 @@ class PersonalInfoViewModel extends GetxController {
   RxString userName = "".obs;
   RxString userEmail = "".obs;
   RxString customerNumber = "".obs;
+  RxBool isSmartMeter = true.obs;
 
   // - Usecase
   var getUserUsecase = GetUserUsecase();
@@ -64,8 +65,8 @@ class PersonalInfo extends GetView<PersonalInfoViewModel> {
         shadowColor: Colors.transparent,
       ),
       body: Obx(() => SingleChildScrollView(
-        physics : const ClampingScrollPhysics(),
-        child: Container(
+            physics: const ClampingScrollPhysics(),
+            child: Container(
               padding: EdgeInsets.all(30),
               child: Column(children: [
                 // User name
@@ -111,13 +112,29 @@ class PersonalInfo extends GetView<PersonalInfoViewModel> {
                 ),
                 SizedBox(height: 15),
                 Divider(),
-      
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    Text(
+                      "계량기 종류",
+                      style: titleStyle,
+                    ),
+                    Spacer(),
+                    Text(controller.isSmartMeter.isTrue ? "스마트 계량기" : "일반 계량기",
+                        style: contentStyle)
+                  ],
+                ),
+                SizedBox(height: 15),
+                Divider(),
+
                 // 개인정보 수집 및 이용 약관
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 PrivacyTermsConditions(),
               ]),
             ),
-      )),
+          )),
     );
   }
 }

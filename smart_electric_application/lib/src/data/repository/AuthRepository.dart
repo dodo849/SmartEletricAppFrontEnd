@@ -9,8 +9,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 class AuthRepository implements AuthRepositoryInterface {
   /// firebase id token을 이용해 서버에서 access/refresh 토큰 발급받기
   @override
-  Future<Result<JwtTokenDTO, String>> requestJwt(
-      String firebaseIdToken) async {
+  Future<Result<JwtTokenDTO, String>> requestJwt(String firebaseIdToken) async {
     try {
       final dio = Dio();
       final authRetrofit = AuthRetrofit(dio);
@@ -120,12 +119,14 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<Result<bool, String>> saveUser(
       {required String customerNumber,
       required String name,
-      required String email}) async {
+      required String email,
+      required bool isSmartMeter}) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('customerNumber', customerNumber);
       await prefs.setString('name', name);
       await prefs.setString('email', email);
+      await prefs.setBool('isSmartMeter', isSmartMeter);
 
       return const Result.success(true);
     } catch (err) {
@@ -179,6 +180,7 @@ class AuthRepository implements AuthRepositoryInterface {
       await prefs.remove('customerNumber');
       await prefs.remove('name');
       await prefs.remove('email');
+      await prefs.remove('isSmartMeter');
 
       return const Result.success(true);
     } catch (err) {
@@ -186,17 +188,33 @@ class AuthRepository implements AuthRepositoryInterface {
     }
   }
 
-    @override
+  @override
   Future<Result<String, String>> getUserName() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       var userName = await prefs.getString('name');
 
-      if (userName == null){
+      if (userName == null) {
         return const Result.failure("The name is null");
       }
 
       return Result.success(userName);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> getIsSmartMeter() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var isSmartMeter = await prefs.getBool('isSmartMeter');
+
+      if (isSmartMeter == null) {
+        return const Result.failure("The isSmartMeter is null");
+      }
+
+      return Result.success(isSmartMeter);
     } catch (err) {
       return Result.failure(err.toString());
     }

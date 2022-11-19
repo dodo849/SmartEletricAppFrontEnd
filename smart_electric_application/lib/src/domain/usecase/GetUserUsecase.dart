@@ -14,10 +14,13 @@ class GetUserUsecase {
     Result<String, String> email = await authRepository.getEmail();
     Result<String, String> customerNumber =
         await authRepository.getCustomerNumber();
+    Result<bool, String> isSmartMeter =
+        await authRepository.getIsSmartMeter();
 
     return Result.success(UserModel(
         name: name.value!,
         email: email.value!,
-        customerNumber: customerNumber.value!));
+        customerNumber: customerNumber.value!,
+        isSmartMeter: isSmartMeter.value!));
   }
 }
