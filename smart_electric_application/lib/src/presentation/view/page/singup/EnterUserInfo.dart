@@ -13,19 +13,8 @@ import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserI
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/EnterUserInfoPage.dart';
 
 /// 고객정보 입력 페이지
-class EnterCustomerInfo extends StatelessWidget {
-  const EnterCustomerInfo({Key? key}) : super(key: key);
-
-  // 고객정보 입력 하위 페이지들
-  // static final EnterPages = <Widget>[
-  //   const EnterCustomerNumber(),
-  //   const CheckIsSmartMeter(),
-  //   const EnterUserName(),
-  //   const EnterUserEmail(),
-  //   const EnterUserPassword(),
-  //   const CheckPassword(),
-  //   const EmailVerification(),
-  // ];
+class EnterUserInfo extends StatelessWidget {
+  const EnterUserInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,33 +44,47 @@ class EnterCustomerInfo extends StatelessWidget {
             body: SafeArea(
               child: Container(
                 decoration: BoxDecoration(color: colorTheme.background),
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                child: Column(children: [
+                padding: EnterUserInfoViewModel.to.isWebView.isTrue
+                    ? const EdgeInsets.symmetric(horizontal: 0)
+                    : const EdgeInsets.symmetric(horizontal: 30),
+                child: Stack(children: [
                   // 하위 페이지 + 애니메이션
-                  AnimatedOpacity(
-                      opacity: EnterUserInfoViewModel.to.viewOpacity.value,
-                      duration: const Duration(milliseconds: 200),
-                      child: EnterUserInfoPage
-                          .values[EnterUserInfoViewModel.to.idx.value].page),
-
-                  Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AnimatedOpacity(
+                          opacity: EnterUserInfoViewModel.to.viewOpacity.value,
+                          duration: const Duration(milliseconds: 200),
+                          child: EnterUserInfoPage
+                              .values[EnterUserInfoViewModel.to.idx.value]
+                              .page),
+                      const Spacer(),
+                    ],
+                  ),
 
                   // 키보드 위에 다음으로 floating 버튼
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom + 20),
-                    child: RoundedButton(
-                        text: "다음으로",
-                        bgColor: EnterUserInfoViewModel.to.isButtonEnable.value
-                            ? colorTheme.primary
-                            : colorTheme.surface,
-                        textColor:
-                            EnterUserInfoViewModel.to.isButtonEnable.value
-                                ? colorTheme.onBackground
-                                : colorTheme.onSurface,
-                        size: ButtonSize.large,
-                        action: () =>
-                            EnterUserInfoViewModel.to.nextButtonAction()),
+                  Column(
+                    children: [
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom:
+                                MediaQuery.of(context).viewInsets.bottom + 20),
+                        child: RoundedButton(
+                            text: "다음으로",
+                            bgColor:
+                                EnterUserInfoViewModel.to.isButtonEnable.value
+                                    ? colorTheme.primary
+                                    : colorTheme.surface,
+                            textColor:
+                                EnterUserInfoViewModel.to.isButtonEnable.value
+                                    ? colorTheme.onBackground
+                                    : colorTheme.onSurface,
+                            size: ButtonSize.large,
+                            action: () =>
+                                EnterUserInfoViewModel.to.nextButtonAction(context)),
+                      ),
+                    ],
                   ),
                 ]),
               ),

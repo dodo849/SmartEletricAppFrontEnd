@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/AccountEmailValidationDTO.dart';
 import 'package:smart_electric_application/src/data/dto/SmartMeterDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckInfoAgreementUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailDuplicateUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupUsecase.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/DialogActionButton.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/EnterUserInfoPage.dart';
 
@@ -20,6 +22,7 @@ class EnterUserInfoViewModel extends GetxController {
   RxInt tempIdx = 0.obs; // fadein&out위한 임시 인덱스
   RxBool isButtonEnable = false.obs;
   RxDouble viewOpacity = 1.0.obs;
+  RxBool isWebView = false.obs;
 
   // Text input variables
   RxString customerNumber = "".obs; // 고객 번호(한전)
@@ -41,11 +44,11 @@ class EnterUserInfoViewModel extends GetxController {
 
   // Usecase instance
   final signupUseCase = SignupUsecase();
-  final checkCustomerValidationUseCase = CheckInfoAgreementUsecase();
   final sendEmailVerifiedUseCase = SendEmailVerificationUsecase();
   final checkEmailVerifiedUseCase = CheckEmailVerificationUsecase();
   final checkIsSmartMeterUseCase = CheckIsSmartMeterUsecase();
   final checkEmailDuplicateUseCase = CheckEmailDuplicateUsecase();
+  final checkInfoAgreementUsecase = CheckInfoAgreementUsecase();
 
   // Constructor
   @override
@@ -53,7 +56,14 @@ class EnterUserInfoViewModel extends GetxController {
     super.onInit();
 
     // 페이지 인덱스 변경되되면 fade out
-    ever(tempIdx, (_) => viewOpacity(0.0));
+    ever(tempIdx, (_) {
+      viewOpacity(0.0);
+      // 웹뷰 인지 확인
+      EnterUserInfoPage.values[tempIdx.value] ==
+              EnterUserInfoPage.kepcoSingupMenual
+          ? isWebView(true)
+          : isWebView(false);
+    });
 
     // 몇초 뒤 다시 fade in
     debounce(viewOpacity, (_) {
@@ -82,11 +92,18 @@ class EnterUserInfoViewModel extends GetxController {
     ever(password, (_) {
       inputError(false);
     });
+
+    // - Initalize
+    // 웹뷰 인지 확인
+    EnterUserInfoPage.values[tempIdx.value] ==
+            EnterUserInfoPage.kepcoSingupMenual
+        ? isWebView(true)
+        : isWebView(false);
   }
 
   // - Button Action Function
 
-  void nextButtonAction() async {
+  void nextButtonAction(BuildContext context) async {
     if (isButtonEnable.value == true) {
       switch (EnterUserInfoPage.values[tempIdx.value]) {
         // 고객번호&세대주 입력 시 스마트 계량기인지 확인
@@ -110,7 +127,13 @@ class EnterUserInfoViewModel extends GetxController {
           return;
         // 비밀번호 입력 페이지에서 다음 버튼 클릭 시 이메일 인증 전송
         case EnterUserInfoPage.emailVerification:
-          checkEmailVerification();
+          checkEmailVerification(context);
+          return;
+        case EnterUserInfoPage.explanationOfInfoAgreement:
+          isButtonEnable(true);
+          break;
+        case EnterUserInfoPage.kepcoSingupMenual:
+          checkInfoAgreement(context);
           return;
         default:
           // 버튼 disabled
@@ -217,18 +240,45 @@ class EnterUserInfoViewModel extends GetxController {
   }
 
   /// 이메일 인증 완료 확인
-  void checkEmailVerification() async {
+  void checkEmailVerification(BuildContext context) async {
     var isVerification =
         await checkEmailVerifiedUseCase.execute(email.value, password.value);
 
     if (!isVerification) {
-      isEmailVerificationError(true);
-      emailVerificationErrorMessage("이메일 인증에 실패했습니다. 다시 시도해주세요.");
+      // isEmailVerificationError(true);
+      // emailVerificationErrorMessage("이메일 인증에 실패했습니다. 다시 시도해주세요.");
+      showDialog(
+          context: context,
+          builder: (context) => CustomDialog(
+                title: "이메일 인증 실패",
+                content: "이메일 인증이 완료되지 않았습니다.\n다시 시도해주세요.",
+                actionButtons: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      DialogActionButton(
+                        text: "다시 보내기",
+                        onTap: () {
+                          sendEmailVerified();
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      SizedBox(width: 5),
+                      DialogActionButton(
+                        text: "확인",
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  )
+                ],
+              ));
       return;
     }
 
     // 회원가입 로직 완료 메인화면으로.
-    Get.offAll(RootScaffold());
+    // Get.offAll(RootScaffold());
   }
 
   /// 비밀번호 8자리 이상 특수문자 포함했는지 확인
@@ -254,5 +304,34 @@ class EnterUserInfoViewModel extends GetxController {
       tempIdx++;
       return true;
     }
+  }
+
+  void checkInfoAgreement(BuildContext context) async {
+    try {
+      bool isAgree = await checkInfoAgreementUsecase.execute();
+      if (!isAgree) {
+        showDialog(
+            context: context,
+            builder: (context) => CustomDialog(
+                  title: "",
+                  content: "정보제공동의가 완료되지 않았습니다.\n다시 시도해주세요.",
+                  actionButtons: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        DialogActionButton(
+                          text: "확인",
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    )
+                  ],
+                ));
+      } else {
+        tempIdx++;
+      }
+    } catch (err) {}
   }
 }

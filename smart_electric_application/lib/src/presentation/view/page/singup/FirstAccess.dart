@@ -5,7 +5,7 @@ import 'package:smart_electric_application/src/presentation/view/atoms/CustomTex
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Home.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
-import 'package:smart_electric_application/src/presentation/view/page/singup/EnterCustomerInfo.dart';
+import 'package:smart_electric_application/src/presentation/view/page/singup/EnterUserInfo.dart';
 
 class FirstAccess extends StatelessWidget {
   const FirstAccess({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class FirstAccess extends StatelessWidget {
                       textColor: colorTheme.secondaryContainer,
                       size: ButtonSize.large,
                       action: () {
-                        Get.to(() => EnterCustomerInfo(),
+                        Get.to(() => EnterUserInfo(),
                             transition: Transition.rightToLeftWithFade);
                       }),
                   SizedBox(height: 40),

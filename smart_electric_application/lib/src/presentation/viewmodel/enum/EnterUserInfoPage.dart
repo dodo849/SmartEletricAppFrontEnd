@@ -6,6 +6,8 @@ import 'package:smart_electric_application/src/presentation/view/module/signup/E
 import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserEmail.dart';
 import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserName.dart';
 import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserPassword.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/ExplanationOfInfoAgreement.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/KepcoSingupMenual.dart';
 
 /// #### 회원가입 하위 페이지 -> 정의된 순서대로 페이지 전환
 enum EnterUserInfoPage {
@@ -15,7 +17,9 @@ enum EnterUserInfoPage {
   enterUserEmail(EnterUserEmail()),
   enterUserPassword(EnterUserPassword()),
   checkPassword(CheckPassword()),
-  emailVerification(EmailVerification());
+  emailVerification(EmailVerification()),
+  explanationOfInfoAgreement(ExplanationOfInfoAgreement()),
+  kepcoSingupMenual(KepcoSingupMenual());
 
   // final int index;
   final Widget page;

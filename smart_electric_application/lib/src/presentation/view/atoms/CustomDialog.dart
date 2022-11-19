@@ -42,6 +42,6 @@ class CustomDialog extends StatelessWidget {
     return TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.normal,
-        color: context.theme.colorScheme.onSurface);
+        color: context.theme.colorScheme.onSurface, height: 1.5);
   }
 }

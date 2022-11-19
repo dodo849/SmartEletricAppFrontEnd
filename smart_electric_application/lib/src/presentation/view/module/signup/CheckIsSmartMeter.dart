@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 
-
 /// ### 리팩토링 하고싶다.. 조건문 이상해...
 class CheckIsSmartMeter extends StatelessWidget {
   const CheckIsSmartMeter({Key? key}) : super(key: key);
@@ -16,7 +15,8 @@ class CheckIsSmartMeter extends StatelessWidget {
     var colorTheme = context.theme.colorScheme;
 
     return Obx(() => Container(
-            child: Column(
+        width: double.infinity,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -32,6 +32,7 @@ class CheckIsSmartMeter extends StatelessWidget {
     if (EnterUserInfoViewModel.to.isSmartMeterLoad.value == false) {
       return Container(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text("이용 가능 고객인지 확인중 입니다.", style: textTheme.bodyText1),
           // 로딩 애니메이션 로티
@@ -54,7 +55,7 @@ class CheckIsSmartMeter extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SvgPicture.asset('assets/icons/check_circle.svg'),
-                          SizedBox(height: 30),
+              SizedBox(height: 30),
               Text("스마트 계량기 이용 고객이십니다",
                   style: TextStyle(
                       fontSize: 18,
@@ -62,14 +63,14 @@ class CheckIsSmartMeter extends StatelessWidget {
                       color: colorTheme.onBackground)),
               SizedBox(height: 10),
               Text(
-              "다음으로 버튼을 눌러주세요",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                  color: colorTheme.onBackground,
-                  height: 1.5),
-              textAlign: TextAlign.center,
-            ),
+                "다음으로 버튼을 눌러주세요",
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: colorTheme.onBackground,
+                    height: 1.5),
+                textAlign: TextAlign.center,
+              ),
               SizedBox(height: 30),
               _getDescriptionUse(colorTheme),
             ]);
@@ -125,11 +126,15 @@ class CheckIsSmartMeter extends StatelessWidget {
         SizedBox(height: 5),
         Text("· 전력 사용량 예측 기능 사용 가능",
             style: textStyle.copyWith(fontWeight: FontWeight.normal)),
+        Text("· 요금 시뮬레이션 기능 사용 가능",
+            style: textStyle.copyWith(fontWeight: FontWeight.normal)),
         SizedBox(height: 5),
         SizedBox(height: 10),
         Text("일반 계량기 이용 고객", style: textStyle),
         SizedBox(height: 5),
         Text("· 한달 단위 납부정보 확인 가능",
+            style: textStyle.copyWith(fontWeight: FontWeight.normal)),
+        Text("· 요금 시뮬레이션 기능 사용 가능",
             style: textStyle.copyWith(fontWeight: FontWeight.normal)),
       ]),
     );
