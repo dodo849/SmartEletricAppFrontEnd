@@ -127,7 +127,7 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                       // Remove both side border
                       borderData: FlBorderData(
                           border: Border(
-                              top: BorderSide(color: colorTheme.outline),
+                              top: BorderSide(color: Colors.transparent, width: 0),
                               bottom: BorderSide(
                                   color: colorTheme.outline, width: 0))),
                       // Remove vertical line
@@ -150,6 +150,7 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
                       child: SingleChildScrollView(
+                        clipBehavior: Clip.none,
                         scrollDirection: Axis.horizontal,
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(

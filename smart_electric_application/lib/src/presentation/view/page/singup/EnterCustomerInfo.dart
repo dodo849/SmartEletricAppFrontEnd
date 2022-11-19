@@ -2,31 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
-import 'package:smart_electric_application/src/presentation/view/module/signup/CheckedIsSmartMeter.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/CheckPassword.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/CheckIsSmartMeter.dart';
 import 'package:smart_electric_application/src/presentation/view/module/signup/EmailVerification.dart';
 import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserEmail.dart';
 import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserName.dart';
 import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserPassword.dart';
 import 'package:smart_electric_application/src/presentation/view/module/signup/EnterCustomerNumber.dart';
-import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
-
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:smart_electric_application/src/presentation/viewmodel/enum/EnterUserInfoPage.dart';
 
 /// 고객정보 입력 페이지
 class EnterCustomerInfo extends StatelessWidget {
   const EnterCustomerInfo({Key? key}) : super(key: key);
 
   // 고객정보 입력 하위 페이지들
-  static final EnterPages = <Widget>[
-    const EnterCustomerNumber(),
-    CheckedIsSmartMeter(),
-    const EnterUserName(),
-    const EnterUserEmail(),
-    const EnterUserPassword(),
-    const EmailVerification(),
-  ];
+  // static final EnterPages = <Widget>[
+  //   const EnterCustomerNumber(),
+  //   const CheckIsSmartMeter(),
+  //   const EnterUserName(),
+  //   const EnterUserEmail(),
+  //   const EnterUserPassword(),
+  //   const CheckPassword(),
+  //   const EmailVerification(),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,8 @@ class EnterCustomerInfo extends StatelessWidget {
                   AnimatedOpacity(
                       opacity: EnterUserInfoViewModel.to.viewOpacity.value,
                       duration: const Duration(milliseconds: 200),
-                      child: EnterPages[EnterUserInfoViewModel.to.idx.value]),
+                      child: EnterUserInfoPage
+                          .values[EnterUserInfoViewModel.to.idx.value].page),
 
                   Spacer(),
 
@@ -80,7 +80,8 @@ class EnterCustomerInfo extends StatelessWidget {
                                 ? colorTheme.onBackground
                                 : colorTheme.onSurface,
                         size: ButtonSize.large,
-                        action: () => EnterUserInfoViewModel.to.nextButtonAction()),
+                        action: () =>
+                            EnterUserInfoViewModel.to.nextButtonAction()),
                   ),
                 ]),
               ),
@@ -88,5 +89,4 @@ class EnterCustomerInfo extends StatelessWidget {
           ),
         ));
   }
-
 }

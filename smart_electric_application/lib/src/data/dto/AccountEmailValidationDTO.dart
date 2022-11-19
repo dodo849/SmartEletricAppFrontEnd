@@ -5,7 +5,7 @@ part 'AccountEmailValidationDTO.g.dart';
 
 @freezed
 class AccountEmailValidationDTO with _$AccountEmailValidationDTO {
-  factory AccountEmailValidationDTO({required String result}) =
+  factory AccountEmailValidationDTO({required bool result}) =
       _AccountEmailValidationDTO;
   factory AccountEmailValidationDTO.fromJson(Map<String, dynamic> json) =>
       _$AccountEmailValidationDTOFromJson(json);

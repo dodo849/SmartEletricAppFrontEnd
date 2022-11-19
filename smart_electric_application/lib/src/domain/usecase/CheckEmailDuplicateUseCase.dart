@@ -1,15 +1,17 @@
-
-
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
+import 'package:smart_electric_application/src/data/dto/AccountEmailValidationDTO.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/AccountRepositoryInterface.dart';
 
 /// 이메일 중복 확인 UseCase
 class CheckEmailDuplicateUsecase {
-  final authRepository = GetIt.I.get<AuthRepositoryInterface>();
+  final accountRepository = GetIt.I.get<AccountRepositoryInterface>();
 
-  Future<Result<bool, String>> execute(String email) async {
-    var result = await authRepository.checkEmailDuplicate(email);
-    return result;
+  Future<Result<AccountEmailValidationDTO, String>> execute(
+      String email) async {
+    Result<AccountEmailValidationDTO, String> requestEmailValidationResult =
+        await accountRepository.requestEmailValidation(email: email);
+
+    return requestEmailValidationResult;
   }
 }

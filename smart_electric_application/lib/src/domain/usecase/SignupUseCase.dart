@@ -35,14 +35,6 @@ class SignupUsecase {
       return signupResult;
     }
 
-    // 이메일 정보 서버에 저장
-    Result<bool, String> saveEmailResult =
-        await authRepository.saveEmail(email);
-
-    if (saveEmailResult.status == ResultStatus.error) {
-      return saveEmailResult;
-    }
-
     // Account 서버에 유저 생성
     var firebaseUidResult = await firebaseRepository.getUid();
     if (firebaseUidResult.status == ResultStatus.error) {

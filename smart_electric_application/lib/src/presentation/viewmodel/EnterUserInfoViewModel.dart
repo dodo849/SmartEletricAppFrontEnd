@@ -1,16 +1,20 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
+import 'package:smart_electric_application/src/data/dto/AccountEmailValidationDTO.dart';
 import 'package:smart_electric_application/src/data/dto/SmartMeterDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailDuplicateUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/enum/EnterUserInfoPage.dart';
 
 class EnterUserInfoViewModel extends GetxController {
   static EnterUserInfoViewModel get to => Get.find();
+
   // Pagination Presentation variables
   RxInt idx = 0.obs; // 실제 페이지 인덱스
   RxInt tempIdx = 0.obs; // fadein&out위한 임시 인덱스
@@ -23,22 +27,15 @@ class EnterUserInfoViewModel extends GetxController {
   RxString name = "".obs; // 가입 고객 이름
   RxString email = "".obs; // 사용자 이메일
   RxString password = "".obs; // 사용자 비밀번호
-
-  // Text input error variables
-  // RxString emailError = "".obs;
-  // RxString passwordError = "".obs;
+  RxString checkPassword = "".obs; // 사용자 비밀번호
 
   // API result variables
   RxBool isSmartMeterLoad = false.obs; // 계량기 종류 확인 통신 상태
   RxBool isSmartMeter = false.obs; // 계량기 종류 결과 값
 
   // Error message variables
-  RxBool isSingupError = false.obs;
-  RxString signupErrorMessage = "".obs;
-  RxBool isEmailError = false.obs;
-  RxString emailErrorMessage = "".obs;
-  RxBool isPasswordError = false.obs;
-  RxString passwordErrorMessage = "".obs;
+  RxBool inputError = false.obs;
+  RxString errorMessage = "".obs;
   RxBool isEmailVerificationError = false.obs;
   RxString emailVerificationErrorMessage = "".obs;
 
@@ -70,53 +67,58 @@ class EnterUserInfoViewModel extends GetxController {
 
     // 페이지 인덱스 변경될 때마다 에러 메세지 초기화
     ever(idx, (_) {
-      isSingupError(false);
-      signupErrorMessage("");
-      isEmailError(false);
-      emailErrorMessage("");
+      inputError(false);
+      errorMessage("");
       isEmailVerificationError(false);
       emailVerificationErrorMessage("");
     });
 
     // 이메일 변경하면 에러메세지 초기화
     ever(email, (_) {
-      isEmailError(false);
+      inputError(false);
     });
 
     // 이메일 변경하면 에러메세지 초기화
     ever(password, (_) {
-      isPasswordError(false);
+      inputError(false);
     });
   }
 
-  // Button Action Function
+  // - Button Action Function
 
   void nextButtonAction() async {
-    if (EnterUserInfoViewModel.to.isButtonEnable.value == true) {
-      switch (EnterUserInfoViewModel.to.tempIdx.value) {
+    if (isButtonEnable.value == true) {
+      switch (EnterUserInfoPage.values[tempIdx.value]) {
         // 고객번호&세대주 입력 시 스마트 계량기인지 확인
-        case 0:
-          EnterUserInfoViewModel.to.checkIsSmartMeter();
+        case EnterUserInfoPage.enterCustomerNumber:
+          checkIsSmartMeter();
           break;
-        case 3:
-          EnterUserInfoViewModel.to.checkEmailDuplicate();
+        case EnterUserInfoPage.enterUserEmail:
+          isButtonEnable(true);
+          checkEmailDuplicate();
           // checkEmailDuplicate 함수에서 성공 여부 확인하고 idx++
           return;
-        // 비밀번호 입력 페이지에서 다음 버튼 클릭 시 이메일 인증 전송
-        case 4:
-          EnterUserInfoViewModel.to.signup();
-          // singup 함수에서 성공 여부 확인하고 idx++
+        case EnterUserInfoPage.enterUserPassword:
+          passwordValidation();
+          isButtonEnable(true);
           return;
-        case 5:
-          EnterUserInfoViewModel.to.checkEmailVerification();
+        // singup 함수에서 성공 여부 확인하고 idx++
+        case EnterUserInfoPage.checkPassword:
+          if (checkingPassword()) {
+            signup();
+          }
+          return;
+        // 비밀번호 입력 페이지에서 다음 버튼 클릭 시 이메일 인증 전송
+        case EnterUserInfoPage.emailVerification:
+          checkEmailVerification();
           return;
         default:
           // 버튼 disabled
-          EnterUserInfoViewModel.to.isButtonEnable(false);
+          isButtonEnable(false);
       }
 
       // 페이지 이동
-      EnterUserInfoViewModel.to.tempIdx++;
+      tempIdx++;
     }
   }
 
@@ -136,11 +138,10 @@ class EnterUserInfoViewModel extends GetxController {
     }
   }
 
-  // Business Logic Function
+  // - Business Logic Function
 
   /// 스마트 계량기인지 고객번호로 확인
   void checkIsSmartMeter() async {
-
     Result<SmartMeterDTO, String> checkIsSmartMeterResult =
         await checkIsSmartMeterUseCase.execute(customerNumber.value);
 
@@ -162,24 +163,26 @@ class EnterUserInfoViewModel extends GetxController {
 
   /// 이메일 중복 확인
   void checkEmailDuplicate() async {
-    Result<bool, String> checkEmailDuplicateResult =
+    Result<AccountEmailValidationDTO, String> checkEmailDuplicateResult =
         await checkEmailDuplicateUseCase.execute(email.value);
+
+    print("checkEmailDuplicateResult ${checkEmailDuplicateResult.error}");
 
     // 네트워크 에러
     if (checkEmailDuplicateResult.status == ResultStatus.error) {
-      emailErrorMessage("네트워크 에러가 발생했습니다. 다시 시도해주세요.");
+      errorMessage("네트워크 에러가 발생했습니다. 다시 시도해주세요.");
       return;
     }
 
     // 중복되지 않은 이메일
-    if (checkEmailDuplicateResult.value == false) {
+    if (checkEmailDuplicateResult.value!.result == false) {
       // 중복 아닐때만 다음페이지로
       tempIdx++;
     }
     // 중복된 이메일
     else {
-      emailErrorMessage("이미 가입된 이메일입니다.");
-      isEmailError(true);
+      errorMessage("이미 가입된 이메일입니다.");
+      inputError(true);
     }
   }
 
@@ -194,8 +197,8 @@ class EnterUserInfoViewModel extends GetxController {
 
     // 에러 발생 시 메세지 view에 띄우기
     if (isSignupResult.status == ResultStatus.error) {
-      isSingupError(true);
-      signupErrorMessage(isSignupResult.error);
+      inputError(true);
+      errorMessage(isSignupResult.error);
 
       assert(false, isSignupResult.error);
       return;
@@ -203,7 +206,7 @@ class EnterUserInfoViewModel extends GetxController {
 
     // 성공시에만 다음 페이지로
     tempIdx++;
-    
+
     // 회원가입 성공시 이메일로 인증링크 보내기
     sendEmailVerified();
   }
@@ -226,5 +229,30 @@ class EnterUserInfoViewModel extends GetxController {
 
     // 회원가입 로직 완료 메인화면으로.
     Get.offAll(RootScaffold());
+  }
+
+  /// 비밀번호 8자리 이상 특수문자 포함했는지 확인
+  void passwordValidation() {
+    if (password.value.length < 8) {
+      inputError(true);
+      errorMessage("8자리 이상 입력해주세요");
+    } else if (!password.value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      inputError(true);
+      errorMessage("비밀번호는 특수문자를 한개 이상 포함해야합니다");
+    } else {
+      tempIdx++;
+    }
+  }
+
+  /// 비밀번호 재확인
+  bool checkingPassword() {
+    if (password.value != checkPassword.value) {
+      inputError(true);
+      errorMessage("비밀번호가 일치하지 않습니다");
+      return false;
+    } else {
+      tempIdx++;
+      return true;
+    }
   }
 }
