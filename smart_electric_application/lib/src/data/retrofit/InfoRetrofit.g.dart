@@ -21,7 +21,7 @@ class _InfoRetrofit implements InfoRetrofit {
   String? baseUrl;
 
   @override
-  Future<JwtTokenDTO> checkInfoValidation(customerNumber) async {
+  Future<UserValidationDTO> checkInfoValidation(customerNumber) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'custNo': customerNumber.toJson()
@@ -29,7 +29,7 @@ class _InfoRetrofit implements InfoRetrofit {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<JwtTokenDTO>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<UserValidationDTO>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -41,7 +41,7 @@ class _InfoRetrofit implements InfoRetrofit {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = JwtTokenDTO.fromJson(_result.data!);
+    final value = UserValidationDTO.fromJson(_result.data!);
     return value;
   }
 
