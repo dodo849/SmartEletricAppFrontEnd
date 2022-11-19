@@ -1,6 +1,6 @@
-import 'package:smart_electric_application/src/presentation/view/page/ContactUs.dart';
-import 'package:smart_electric_application/src/presentation/view/page/NotificationSettings.dart';
-import 'package:smart_electric_application/src/presentation/view/page/PersonalInfo.dart';
+import 'package:smart_electric_application/src/presentation/view/page/mypage/ContactUs.dart';
+import 'package:smart_electric_application/src/presentation/view/page/mypage/NotificationSettings.dart';
+import 'package:smart_electric_application/src/presentation/view/page/mypage/PersonalInfo.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 
 import 'firebase_options.dart';
