@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MyBackButtonIcon.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/CheckedIsSmartMeter.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/EmailVerification.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserEmail.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserName.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterUserPassword.dart';
-import 'package:smart_electric_application/src/presentation/view/module/first_access/EnterCustomerNumber.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/CheckedIsSmartMeter.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/EmailVerification.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserEmail.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserName.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/EnterUserPassword.dart';
+import 'package:smart_electric_application/src/presentation/view/module/signup/EnterCustomerNumber.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/EnterUserInfoViewModel.dart';
 

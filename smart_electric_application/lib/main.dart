@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:smart_electric_application/src/presentation/view/page/AiReport.dart';
-import 'package:smart_electric_application/src/presentation/view/page/first_access/FirstAccess.dart';
+import 'package:smart_electric_application/src/presentation/view/page/singup/FirstAccess.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Login.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
-import 'package:smart_electric_application/src/presentation/view/page/first_access/EnterCustomerInfo.dart';
+import 'package:smart_electric_application/src/presentation/view/page/singup/EnterCustomerInfo.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 

@@ -5,7 +5,7 @@ import 'package:smart_electric_application/src/presentation/view/atoms/CustomTex
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Home.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
-import 'package:smart_electric_application/src/presentation/view/page/first_access/EnterCustomerInfo.dart';
+import 'package:smart_electric_application/src/presentation/view/page/singup/EnterCustomerInfo.dart';
 
 class FirstAccess extends StatelessWidget {
   const FirstAccess({Key? key}) : super(key: key);
