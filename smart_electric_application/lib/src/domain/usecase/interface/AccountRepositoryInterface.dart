@@ -9,4 +9,6 @@ abstract class AccountRepositoryInterface {
       {required String email});
   Future<Result<AccountEmailValidationDTO, String>> requestEmailValidation(
       {required String email});
+  Future<Result<AccountEmailValidationDTO, String>> requestActivateUser(
+      {required String email});
 }

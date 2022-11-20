@@ -9,6 +9,6 @@ abstract class InfoRetrofit {
   factory InfoRetrofit(Dio dio, {String baseUrl}) = _InfoRetrofit;
 
   // 정보제공 동의 확인
-  @POST('/specific-user/validation')
-  Future<UserValidationDTO> checkInfoValidation(@Query('custNo') customerNumber);
+  @GET('/specific-user/validation')
+  Future<UserValidationDTO> checkInfoValidation(@Query('custNo') String customerNumber);
 }

@@ -23,7 +23,7 @@ class BillSimulationViewModel extends GetxController {
 
   RxString billOfThisMonth = "0".obs;
   RxString additionalBill = "0".obs;
-  RxString totalBill = "0".obs;
+  RxString totalBill = "계산중".obs;
   Rx<ProgressiveSectionType> progressiveSection =
       ProgressiveSectionType.undefined.obs;
 

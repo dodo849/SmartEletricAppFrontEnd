@@ -109,7 +109,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                 children: <TextSpan>[
                                   TextSpan(
                                     text:
-                                        '${controller.aiReport.value.timePeriodIndex[0] * 4}시~${controller.aiReport.value.timePeriodIndex[0] * 4 + 3}시',
+                                        '${controller.aiReport.value.timePeriodIndex[0] * 4}시~${controller.aiReport.value.timePeriodIndex[0] * 4 + 4}시',
                                     // text: '1시~4시 사이',
                                     style: TextStyle(
                                         color: colorTheme.primaryContainer),

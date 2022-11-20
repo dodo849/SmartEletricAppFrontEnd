@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/AccountEmailValidationDTO.dart';
@@ -18,6 +20,8 @@ class AccountRepository implements AccountRepositoryInterface {
       await accountRetrofit.registerNewAcoount(accountRegistrationDTO);
 
       return const Result.success(true);
+    } on DioError catch (error){
+      return Result.failure("${error.response?.statusCode}");
     } catch (err) {
       return Result.failure(err.toString());
     }
@@ -52,6 +56,22 @@ class AccountRepository implements AccountRepositoryInterface {
       return Result.success(accountEmailValidationDTO);
     } catch (err) {
       return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<AccountEmailValidationDTO, String>> requestActivateUser(
+      {required String email}) async {
+    try {
+      final dio = Dio();
+      final accountRetrofit = AccountRetrofit(dio);
+
+      AccountEmailValidationDTO accountEmailValidationDTO =
+          await accountRetrofit.activateUser(email);
+
+      return Result.success(accountEmailValidationDTO);
+    } catch (error) {
+      return Result.failure("${error.toString()}");
     }
   }
 }

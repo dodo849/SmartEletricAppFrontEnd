@@ -7,8 +7,10 @@ import 'package:smart_electric_application/src/domain/usecase/CheckInfoAgreement
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailDuplicateUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/CheckIsSmartMeterUseCase.dart';
+import 'package:smart_electric_application/src/domain/usecase/LogoutUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificationUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/SignupUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/SignupInFirebaseUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/SignupInServerUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/DialogActionButton.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
@@ -23,6 +25,8 @@ class EnterUserInfoViewModel extends GetxController {
   RxBool isButtonEnable = false.obs;
   RxDouble viewOpacity = 1.0.obs;
   RxBool isWebView = false.obs;
+  RxBool isTermAgree = false.obs;
+  RxString buttonText = "다음으로".obs;
 
   // Text input variables
   RxString customerNumber = "".obs; // 고객 번호(한전)
@@ -30,7 +34,7 @@ class EnterUserInfoViewModel extends GetxController {
   RxString name = "".obs; // 가입 고객 이름
   RxString email = "".obs; // 사용자 이메일
   RxString password = "".obs; // 사용자 비밀번호
-  RxString checkPassword = "".obs; // 사용자 비밀번호
+  RxString checkPassword = "".obs; // 비밀번호 확인
 
   // API result variables
   RxBool isSmartMeterLoad = false.obs; // 계량기 종류 확인 통신 상태
@@ -41,12 +45,14 @@ class EnterUserInfoViewModel extends GetxController {
   RxString errorMessage = "".obs;
 
   // Usecase instance
-  final signupUseCase = SignupUsecase();
+  final signupInFirebaseUseCase = SignupInFirebaseUsecase();
+  final signupInServerUseCase = SignupInServerUsecase();
   final sendEmailVerifiedUseCase = SendEmailVerificationUsecase();
   final checkEmailVerifiedUseCase = CheckEmailVerificationUsecase();
   final checkIsSmartMeterUseCase = CheckIsSmartMeterUsecase();
   final checkEmailDuplicateUseCase = CheckEmailDuplicateUsecase();
   final checkInfoAgreementUsecase = CheckInfoAgreementUsecase();
+  final logoutUsecase = LogoutUsecase();
 
   // Constructor
   @override
@@ -84,9 +90,14 @@ class EnterUserInfoViewModel extends GetxController {
       inputError(false);
     });
 
-    // 이메일 변경하면 에러메세지 초기화
+    // 패스워드 변경하면 에러메세지 초기화
     ever(password, (_) {
       inputError(false);
+    });
+
+    // 개인정보이용약관 동의확인
+    ever(isTermAgree, (_) {
+      checkAgree();
     });
 
     // - Initalize
@@ -118,7 +129,7 @@ class EnterUserInfoViewModel extends GetxController {
         // singup 함수에서 성공 여부 확인하고 idx++
         case EnterUserInfoPage.checkPassword:
           if (checkingPassword()) {
-            signup();
+            await signupInFirebase();
           }
           return;
         // 비밀번호 입력 페이지에서 다음 버튼 클릭 시 이메일 인증 전송
@@ -129,7 +140,18 @@ class EnterUserInfoViewModel extends GetxController {
           isButtonEnable(true);
           break;
         case EnterUserInfoPage.kepcoSingupMenual:
+          // 정보제공 동의 했는지 확인
           checkInfoAgreement(context);
+          // 다음이 마지막 문항이므로 완료하기로 변경
+          buttonText("완료하기");
+          // 동의합니다 초기화
+          isTermAgree(false);
+          // 동의전 -> 버튼 disabled
+          isButtonEnable(false);
+          return;
+        case EnterUserInfoPage.signupPrivacyTermsConditions:
+          // 모두 완료 시 메인으로
+          Get.to(const RootScaffold(), transition: Transition.upToDown);
           return;
         default:
           // 버튼 disabled
@@ -141,17 +163,21 @@ class EnterUserInfoViewModel extends GetxController {
     }
   }
 
-  void backButtonAction() {
+  void backButtonAction() async {
     // 2번째 문항부터는 백버튼 클릭 시 이전 문항으로 돌아감
-    switch (idx.value) {
-      case 0:
+    switch (EnterUserInfoPage.values[tempIdx.value]) {
+      case EnterUserInfoPage.enterCustomerNumber:
         // 첫번째 문항에선 처음화면으로 back
+        await logoutUsecase.execute();
         Get.back();
         break;
-      case 2:
+      // 이름 입력 전 페이지가 스마트미터 페이지라 패스하고 맨 처음으로
+      case EnterUserInfoPage.enterUserName:
         tempIdx(0);
         break;
       default:
+        isButtonEnable(true);
+        buttonText("다음으로");
         if (tempIdx > 0) {
           tempIdx--;
         }
@@ -209,29 +235,45 @@ class EnterUserInfoViewModel extends GetxController {
     }
   }
 
-  /// 파이어베이스 및 서버 signup
-  void signup() async {
-    Result<bool, String> isSignupResult = await signupUseCase.execute(
+  /// 파이어베이스 회원가입
+  Future<void> signupInFirebase() async {
+    Result<bool, String> isSignupResult = await signupInFirebaseUseCase.execute(
         customerNumber: customerNumber.value,
         name: name.value,
         email: email.value,
         password: password.value,
         isSmartMeter: isSmartMeter.value);
 
-    // 에러 발생 시 메세지 view에 띄우기
+    // ### 에러 발생 시 메세지 view에 띄우기
     if (isSignupResult.status == ResultStatus.error) {
-      inputError(true);
-      errorMessage(isSignupResult.error);
+      print("isSignupResult ${isSignupResult.error}");
+      return;
+    } else {
+      // 성공시에만 다음 페이지로
+      tempIdx++;
 
-      assert(false, isSignupResult.error);
+      // 회원가입 성공시 이메일로 인증링크 보내기
+      sendEmailVerified();
       return;
     }
+  }
 
-    // 성공시에만 다음 페이지로
-    tempIdx++;
+  /// 서버 회원가입 (이메일 인증 성공시에 실행)
+  Future<void> signupInServer() async {
+    Result<bool, String> isSignupResult = await signupInServerUseCase.execute(
+        customerNumber: customerNumber.value,
+        name: name.value,
+        email: email.value,
+        password: password.value,
+        isSmartMeter: isSmartMeter.value);
 
-    // 회원가입 성공시 이메일로 인증링크 보내기
-    sendEmailVerified();
+    // ### 에러 발생 시 메세지 view에 띄우기
+    if (isSignupResult.status == ResultStatus.error) {
+      print("isSignupResult ${isSignupResult.error}");
+      return;
+    } else {
+      return;
+    }
   }
 
   /// 이메일 인증 보내기
@@ -244,9 +286,8 @@ class EnterUserInfoViewModel extends GetxController {
     var isVerification =
         await checkEmailVerifiedUseCase.execute(email.value, password.value);
 
+    // 인증 실패
     if (!isVerification) {
-      // isEmailVerificationError(true);
-      // emailVerificationErrorMessage("이메일 인증에 실패했습니다. 다시 시도해주세요.");
       showDialog(
           context: context,
           builder: (context) => CustomDialog(
@@ -275,10 +316,11 @@ class EnterUserInfoViewModel extends GetxController {
                 ],
               ));
       return;
+      // 인증 성공
+    } else {
+      tempIdx++;
+      signupInServer();
     }
-
-    // 회원가입 로직 완료 메인화면으로.
-    // Get.offAll(RootScaffold());
   }
 
   /// 비밀번호 8자리 이상 특수문자 포함했는지 확인
@@ -301,12 +343,12 @@ class EnterUserInfoViewModel extends GetxController {
       errorMessage("비밀번호가 일치하지 않습니다");
       return false;
     } else {
-      tempIdx++;
       return true;
     }
   }
 
   void checkInfoAgreement(BuildContext context) async {
+    print("정보제공동의 확인");
     try {
       bool isAgree = await checkInfoAgreementUsecase.execute();
       if (!isAgree) {
@@ -332,6 +374,16 @@ class EnterUserInfoViewModel extends GetxController {
       } else {
         tempIdx++;
       }
-    } catch (err) {}
+    } catch (error, stacktrace) {
+      print("정보제공동의 확인 ${error}, ${stacktrace}");
+    }
+  }
+
+  void checkAgree() {
+    if (isTermAgree.isTrue) {
+      isButtonEnable(true);
+    } else {
+      isButtonEnable(false);
+    }
   }
 }

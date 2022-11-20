@@ -9,7 +9,7 @@ import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepo
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
 ///
-class SignupUsecase {
+class SignupInFirebaseUsecase {
   // DI
   final FirebaseRepositoryInterface firebaseRepository =
       GetIt.I.get<FirebaseRepositoryInterface>();
@@ -35,46 +35,27 @@ class SignupUsecase {
       return signupResult;
     }
 
-    // Account 서버에 유저 생성
-    var firebaseUidResult = await firebaseRepository.getUid();
-    if (firebaseUidResult.status == ResultStatus.error) {
-      return Result.failure(firebaseUidResult.error.toString());
+    // 파이어베이스 uid 가져오기
+    var getIdTokenResult = await firebaseRepository.getIdToken();
+    if (getIdTokenResult.status == ResultStatus.error) {
+      return Result.failure(getIdTokenResult.error.toString());
     }
 
-    // ### firebase message token으로 바꿔야함
-    var firebaseIdTokenResult = await firebaseRepository.getIdToken();
-    if (firebaseUidResult.status == ResultStatus.error) {
-      return Result.failure(firebaseUidResult.error.toString());
+    // auth 서버에서 JWT 발급받기
+    Result<JwtTokenDTO, String> getJwtResult =
+        await authRepository.requestJwt(getIdTokenResult.value!);
+
+    if (getJwtResult.status == ResultStatus.error) {
+      return Result.failure(getJwtResult.error.toString());
     }
 
-    Result<bool, String> requestRegisterAccountResult =
-        await accountRepository.requestRegisterAccount(
-            accountRegistrationDTO: AccountRegistrationDTO(
-                customerNumber: customerNumber,
-                email: email,
-                firebaseMessageToken: firebaseIdTokenResult.value!,
-                firebaseUid: firebaseUidResult.value!,
-                isSmartMeter: isSmartMeter,
-                name: name));
+    // 내부 저장소에 JWT 저장해서 인증 권한 받기
+    Result<bool, String> saveJwtResult =
+        await authRepository.saveJwt(getJwtResult.value!);
 
-    if (requestRegisterAccountResult.status == ResultStatus.error) {
-      return Result.failure(requestRegisterAccountResult.error.toString());
+    if (saveJwtResult.status == ResultStatus.error) {
+      return Result.failure(saveJwtResult.error.toString());
     }
-
-    // 유저 정보 내부 DB에 저장
-    Result<bool, String> saveUserResult = await authRepository.saveUser(
-        customerNumber: customerNumber,
-        name: name,
-        email: email,
-        isSmartMeter: isSmartMeter);
-
-    if (saveUserResult.status == ResultStatus.error) {
-      return saveUserResult;
-    }
-
-    // 회원가입 성공시 로그인
-    loginUseCase.execute(email, password);
-
     // 모든 과정 성공 시 true Result 반환
     return const Result.success(true);
   }

@@ -8,10 +8,12 @@ class KepcoSingupMenual extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height - 200,
+      height: MediaQuery.of(context).size.height -
+          AppBar().preferredSize.height -
+          100,
       child: const WebView(
         initialUrl:
-            'https://graceful-buffalo-e2e.notion.site/ca0daae9eb8b429cb7bfbfe0df8cfc5b',
+            'https://graceful-buffalo-e2e.notion.site/64171524347244a9b6b8c8f8e3b34ff7',
         javascriptMode: JavascriptMode.unrestricted,
       ),
     );

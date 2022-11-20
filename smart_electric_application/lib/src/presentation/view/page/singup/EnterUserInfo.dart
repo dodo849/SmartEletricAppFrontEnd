@@ -61,7 +61,7 @@ class EnterUserInfo extends StatelessWidget {
                       const Spacer(),
                     ],
                   ),
-
+                        
                   // 키보드 위에 다음으로 floating 버튼
                   Column(
                     children: [
@@ -69,9 +69,15 @@ class EnterUserInfo extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(
                             bottom:
-                                MediaQuery.of(context).viewInsets.bottom + 20),
+                                MediaQuery.of(context).viewInsets.bottom + 20,
+                            left: EnterUserInfoViewModel.to.isWebView.isTrue
+                                ? 30
+                                : 0,
+                            right: EnterUserInfoViewModel.to.isWebView.isTrue
+                                ? 30
+                                : 0),
                         child: RoundedButton(
-                            text: "다음으로",
+                            text: EnterUserInfoViewModel.to.buttonText.value,
                             bgColor:
                                 EnterUserInfoViewModel.to.isButtonEnable.value
                                     ? colorTheme.primary
@@ -81,8 +87,8 @@ class EnterUserInfo extends StatelessWidget {
                                     ? colorTheme.onBackground
                                     : colorTheme.onSurface,
                             size: ButtonSize.large,
-                            action: () =>
-                                EnterUserInfoViewModel.to.nextButtonAction(context)),
+                            action: () => EnterUserInfoViewModel.to
+                                .nextButtonAction(context)),
                       ),
                     ],
                   ),

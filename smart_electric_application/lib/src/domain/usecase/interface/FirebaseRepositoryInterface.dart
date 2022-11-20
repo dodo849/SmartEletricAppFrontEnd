@@ -10,4 +10,5 @@ abstract class FirebaseRepositoryInterface {
   User? getUser();
   Future<Result<String, String>> getIdToken();
   Future<Result<String, String>> getUid();
+  Future<String> getMessageToken();
 }

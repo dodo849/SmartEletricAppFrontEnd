@@ -1,5 +1,6 @@
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
+import 'package:smart_electric_application/src/domain/model/UserModel.dart';
 
 /// Server Authentication Repository Interface
 abstract class AuthRepositoryInterface {
@@ -14,6 +15,7 @@ abstract class AuthRepositoryInterface {
       required String name,
       required String email,
       required bool isSmartMeter});
+  Future<UserModel> getUser();
   Future<Result<String, String>> getCustomerNumber();
   Future<Result<bool, String>> removeEmail(email);
   Future<Result<String, String>> getEmail();

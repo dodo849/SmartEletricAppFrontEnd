@@ -20,4 +20,8 @@ abstract class AccountRetrofit {
   @GET("/email/validation")
   Future<AccountEmailValidationDTO> getEmailValidation(
       @Query("email") String email);
+
+    @GET("/user/activate")
+  Future<AccountEmailValidationDTO> activateUser(
+      @Query("email") String email);
 }

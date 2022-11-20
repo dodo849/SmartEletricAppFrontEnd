@@ -29,8 +29,6 @@ class LoginViewModel extends GetxController {
     Result<dynamic, String> loginResult =
         await loginUseCase.execute(email.value, password.value);
 
-    print("loginResult $loginResult");
-
     if (loginResult.status == ResultStatus.success) {
       Get.to(() => const RootScaffold(), transition: Transition.fadeIn);
     } else {

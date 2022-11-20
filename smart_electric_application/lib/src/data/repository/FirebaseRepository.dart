@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
@@ -81,7 +82,7 @@ class FirebaseRepository implements FirebaseRepositoryInterface {
     }
   }
 
-    @override
+  @override
   Future<Result<String, String>> getUid() async {
     User? user = FirebaseAuth.instance.currentUser;
 
@@ -93,6 +94,18 @@ class FirebaseRepository implements FirebaseRepositoryInterface {
     }
   }
 
-
-
+  @override
+  Future<String> getMessageToken() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      String? messageToken = await FirebaseMessaging.instance.getToken();
+      if (messageToken == null) {
+        return "fail";
+      } else {
+        return messageToken;
+      }
+    } catch (err) {
+      rethrow;
+    }
+  }
 }

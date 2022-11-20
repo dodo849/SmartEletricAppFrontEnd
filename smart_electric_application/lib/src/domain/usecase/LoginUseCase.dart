@@ -64,7 +64,7 @@ class LoginUsecase {
         name: requestAccountResult.value!.name,
         isSmartMeter: requestAccountResult.value!.isSmartMeter);
 
-    if (requestAccountResult.status == ResultStatus.error) {
+    if (saveUserResult.status == ResultStatus.error) {
       return Result.failure(requestAccountResult.error);
     }
 

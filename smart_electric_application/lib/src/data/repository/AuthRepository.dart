@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/AuthRetrofit.dart';
+import 'package:smart_electric_application/src/domain/model/UserModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 
 class AuthRepository implements AuthRepositoryInterface {
@@ -131,6 +132,25 @@ class AuthRepository implements AuthRepositoryInterface {
       return const Result.success(true);
     } catch (err) {
       return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> getUser() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? customerNumber = prefs.getString('customerNumber');
+      String? name = prefs.getString('name');
+      String? email = prefs.getString('email');
+      bool? isSmartMeter = prefs.getBool('isSmartMeter');
+
+      if (customerNumber == null && name == null && email == null && isSmartMeter == null){
+        throw Exception("found null");
+      }
+
+      return UserModel(customerNumber: customerNumber!, name: name!, email: email!, isSmartMeter: isSmartMeter!);
+    } catch (_) {
+      rethrow;
     }
   }
 
