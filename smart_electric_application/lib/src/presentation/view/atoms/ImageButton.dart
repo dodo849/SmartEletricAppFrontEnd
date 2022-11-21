@@ -47,7 +47,7 @@ class ImagedButton extends StatelessWidget {
         Row(
           children: [
             SizedBox(width:10),
-            Image.asset(imagePath, width: 100, height: 100),
+            Image.asset(imagePath, width: 100, height: 100, fit: BoxFit.cover,),
           ],
         ),
       ]),
