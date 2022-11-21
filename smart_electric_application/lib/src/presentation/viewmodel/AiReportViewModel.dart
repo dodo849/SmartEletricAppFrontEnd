@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
+import 'package:smart_electric_application/src/data/dto/AiReportDTO.dart';
 import 'package:smart_electric_application/src/domain/model/AiReportModel.dart';
 import 'package:smart_electric_application/src/domain/model/UserModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/CreateAiReportUsecase.dart';
@@ -21,14 +22,16 @@ class AiReportViewModel extends GetxController {
   // - Data variables
   RxDouble todayUsagePrediction = 0.0.obs;
   RxDouble todayUsagePredictionBill = 0.0.obs;
+  RxBool isWeekdayMore = false.obs;
 
   Rx<ProgressiveSectionType> predictionSectionType =
       ProgressiveSectionType.undefined.obs;
 
   Rx<UserModel> user =
-      UserModel(name: "-", email: "-", customerNumber: "-", isSmartMeter: true).obs;
+      UserModel(name: "-", email: "-", customerNumber: "-", isSmartMeter: true)
+          .obs;
 
-  Rx<AiReportModel> aiReport = AiReportModel(
+  late Rx<AiReportModel> aiReport = AiReportModel(
           timePeriodIndex: [0],
           timePeriodPowerUsage: [],
           standbyPower: 0.0,
@@ -60,6 +63,9 @@ class AiReportViewModel extends GetxController {
     await fetchUser();
     // 리포트 데이터 가져오기
     await fetchAiReport();
+
+    isWeekdayMore(checkIsWeekdayMore(aiReport.value));
+
     // 로딩 끝
     loading(false);
     // 예측구간 enum 형 지정
@@ -69,9 +75,8 @@ class AiReportViewModel extends GetxController {
     super.onInit();
   }
 
-  // - Data Function
+  // - Data Fetch Function
   Future<void> fetchUser() async {
-    // 예측 값 받아오기
     Result<UserModel, String> userResult = await getUserUsecase.execute();
 
     if (userResult.status == ResultStatus.error) {
@@ -85,7 +90,8 @@ class AiReportViewModel extends GetxController {
 
   Future<void> fetchAiReport() async {
     // 예측 값 받아오기
-    var createAiReportResult = await createAiReportUsecase.execute();
+    Result<AiReportModel, String> createAiReportResult =
+        await createAiReportUsecase.execute();
 
     if (createAiReportResult.status == ResultStatus.error) {
       print("createCreateAiReportResult.error ${createAiReportResult.error}");
@@ -103,6 +109,24 @@ class AiReportViewModel extends GetxController {
 
     aiReport(createAiReportResult.value!);
     return;
+  }
+
+  // - Business Logic Function
+  bool checkIsWeekdayMore(AiReportModel aiReport) {
+    // Sum weekday power usage
+    double weekdayPowerUsage = aiReport.weekdayPowerUsage.sublist(0, 5).fold(
+        0.0, (double previousValue, double element) => previousValue + element);
+
+    // Sum weekend power usage
+    double weekendPowerUsage = aiReport.weekdayPowerUsage.sublist(5).fold(
+        0.0, (double previousValue, double element) => previousValue + element);
+
+    // Compare
+    if (weekdayPowerUsage > weekendPowerUsage) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // - Formatter Function

@@ -73,16 +73,19 @@ class AiReport extends GetView<AiReportViewModel> {
                     children: [
                       // 이미지
                       Container(
-                        width: double.infinity,
-                        height: 230,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Image.asset('assets/images/avata_woman_paper.png', width: 125, fit: BoxFit.cover),
-                            SizedBox(width: 10,)
-                          ],
-                        )),
+                          width: double.infinity,
+                          height: 230,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Image.asset('assets/images/avata_woman_paper.png',
+                                  width: 125, fit: BoxFit.cover),
+                              SizedBox(
+                                width: 10,
+                              )
+                            ],
+                          )),
                       // 리포트 소개 문구
                       Padding(
                         padding: const EdgeInsets.fromLTRB(35, 30, 0, 30),
@@ -93,7 +96,8 @@ class AiReport extends GetView<AiReportViewModel> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              Text("내 전기 사용을 한눈에!", style: bannerTitleTextStyle),
+                              Text("내 전기 사용을 한눈에!",
+                                  style: bannerTitleTextStyle),
                               const SizedBox(height: 15),
                               Text("매일 새벽 5시", style: bannerBodyTextStyle),
                               const SizedBox(height: 10),
@@ -104,18 +108,18 @@ class AiReport extends GetView<AiReportViewModel> {
                                   style: bannerBodyTextStyle),
                             ]),
                       ),
-                      
                     ],
                   ),
                 ),
-
-                
 
                 SizedBox(height: 30),
 
                 // Ai content
                 controller.loading.isTrue
-                    ? NoticeBar(content: "로딩중입니다")
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: NoticeBar(content: "로딩중입니다"),
+                      )
                     : Container(
                         width: double.infinity,
                         height: 2400 - 350,
@@ -504,7 +508,14 @@ class AiReport extends GetView<AiReportViewModel> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.asset('assets/images/weekday.png'),
+                                Image.asset(
+                                  AiReportViewModel.to.isWeekdayMore.isTrue
+                                      ? 'assets/images/weekday.png'
+                                      : 'assets/images/weekend.png',
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  fit: BoxFit.cover,
+                                ),
                               ],
                             ),
                           ],
