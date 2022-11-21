@@ -13,17 +13,21 @@ class NoticeBar extends StatelessWidget {
     var colorTheme = context.theme.colorScheme;
 
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Container(
-        padding: EdgeInsets.fromLTRB(30, 15, 30, 20),
-        decoration: BoxDecoration(
-            color: colorTheme.surface, borderRadius: BorderRadius.circular(10)),
-        child: ConstrainedBox(
-          constraints:
-              BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 100),
-          child: Text(
-            content,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, height: 1.8),
+      Expanded(
+        child: Container(
+          padding: EdgeInsets.fromLTRB(30, 15, 30, 20),
+          decoration: BoxDecoration(
+              color: colorTheme.surface,
+              borderRadius: BorderRadius.circular(10)),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width - 110),
+            child: Text(
+              content,
+              textAlign: TextAlign.center,
+              softWrap: true,
+              style: TextStyle(fontSize: 14, height: 1.8),
+            ),
           ),
         ),
       ),
