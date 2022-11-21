@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/RemoveOverScrollBehavior.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/NoticeBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/ai_report/AiReportBarGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/ai_report/DayTypeCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/ai_report/NightTypeCard.dart';
@@ -26,8 +27,8 @@ class AiReport extends GetView<AiReportViewModel> {
         fontWeight: FontWeight.bold);
     var bannerBodyTextStyle = TextStyle(
         color: colorTheme.onBackground,
-        fontSize: 14,
-        fontWeight: FontWeight.normal);
+        fontSize: 13,
+        fontWeight: FontWeight.w500);
 
     var contentTitleTextStyle = TextStyle(
         fontFamily: 'Pretendard',
@@ -55,45 +56,66 @@ class AiReport extends GetView<AiReportViewModel> {
         backgroundColor: colorTheme.primary,
       ),
       body: SingleChildScrollView(
-        physics : ClampingScrollPhysics(),
+          physics: ClampingScrollPhysics(),
           child: Obx(
             () => Container(
               width: double.infinity,
               height: 2400,
               child: Column(children: [
+                // Banner
                 Container(
                   width: double.infinity,
-                  height: 250,
+                  height: 230,
                   decoration: BoxDecoration(
                     color: colorTheme.primary,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(35, 30, 0, 30),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("AI가 분석한 리포트로", style: bannerTitleTextStyle),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text("내 전기 사용을 한눈에!", style: bannerTitleTextStyle),
-                          const SizedBox(height: 15),
-                          Text("매일 새벽 5시", style: bannerBodyTextStyle),
-                          const SizedBox(height: 10),
-                          Text("새로운 전력 데이터를 ai가 학습하고 있어요",
-                              style: bannerBodyTextStyle),
-                          const SizedBox(height: 10),
-                          Text("점점 더 정확하게 분석해드릴게요 :)",
-                              style: bannerBodyTextStyle),
-                        ]),
+                  child: Stack(
+                    children: [
+                      // 이미지
+                      Container(
+                        width: double.infinity,
+                        height: 230,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Image.asset('assets/images/avata_woman_paper.png', width: 125, fit: BoxFit.cover),
+                            SizedBox(width: 10,)
+                          ],
+                        )),
+                      // 리포트 소개 문구
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(35, 30, 0, 30),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("AI가 분석한 리포트로", style: bannerTitleTextStyle),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text("내 전기 사용을 한눈에!", style: bannerTitleTextStyle),
+                              const SizedBox(height: 15),
+                              Text("매일 새벽 5시", style: bannerBodyTextStyle),
+                              const SizedBox(height: 10),
+                              Text("새로운 데이터를 ai가 학습하고 있어요",
+                                  style: bannerBodyTextStyle),
+                              const SizedBox(height: 10),
+                              Text("점점 더 정확하게 분석해드릴게요 :)",
+                                  style: bannerBodyTextStyle),
+                            ]),
+                      ),
+                      
+                    ],
                   ),
                 ),
+
+                
 
                 SizedBox(height: 30),
 
                 // Ai content
                 controller.loading.isTrue
-                    ? Text("로딩중입니다")
+                    ? NoticeBar(content: "로딩중입니다")
                     : Container(
                         width: double.infinity,
                         height: 2400 - 350,
@@ -140,8 +162,7 @@ class AiReport extends GetView<AiReportViewModel> {
 
                             // Content 2
                             SizedBox(height: contentGap),
-                            Text("어제까지를 기반으로 예측한",
-                                style: contentBodyTextStyle),
+                            Text("어제까지를 기반으로 예측한", style: contentBodyTextStyle),
                             SizedBox(height: 7),
                             Text("오늘 예측 사용량은", style: contentTitleTextStyle),
                             SizedBox(height: 20),
@@ -181,8 +202,7 @@ class AiReport extends GetView<AiReportViewModel> {
 
                             // Content 3
                             SizedBox(height: contentGap),
-                            Text("지금까지로 보자면 이번달엔",
-                                style: contentBodyTextStyle),
+                            Text("지금까지로 보자면 이번달엔", style: contentBodyTextStyle),
                             SizedBox(height: 7),
                             Text(
                                 "${controller.predictionSectionType.value.krString} 누진구간이 적용됩니다.",
@@ -232,8 +252,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                       padding: EdgeInsets.all(15),
                                       height: 130,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         color: colorTheme.surface,
                                       ),
                                       child: Column(
@@ -244,8 +263,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                         children: [
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text("최대"),
                                               SvgPicture.asset(
@@ -259,8 +277,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                             text: TextSpan(
                                               text: '￦ ',
                                               style: TextStyle(
-                                                  fontWeight:
-                                                      FontWeight.normal,
+                                                  fontWeight: FontWeight.normal,
                                                   fontSize: 14,
                                                   color: colorTheme.error),
                                               children: <TextSpan>[
@@ -271,8 +288,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       fontSize: 18,
-                                                      color:
-                                                          colorTheme.error),
+                                                      color: colorTheme.error),
                                                 ),
                                               ],
                                             ),
@@ -286,8 +302,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                       padding: EdgeInsets.all(15),
                                       height: 130,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         color: colorTheme.surface,
                                       ),
                                       child: Column(
@@ -298,8 +313,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                         children: [
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text("최소"),
                                               SvgPicture.asset(
@@ -313,8 +327,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                             text: TextSpan(
                                               text: '￦ ',
                                               style: TextStyle(
-                                                  fontWeight:
-                                                      FontWeight.normal,
+                                                  fontWeight: FontWeight.normal,
                                                   fontSize: 14,
                                                   color: colorTheme
                                                       .tertiaryContainer),
@@ -323,8 +336,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                                   text:
                                                       '${controller.fomattingWon(controller.aiReport.value.dayPowerUsageMinInWon)}',
                                                   style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     fontSize: 18,
                                                   ),
                                                 ),
@@ -340,8 +352,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                       padding: EdgeInsets.all(15),
                                       height: 130,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         color: colorTheme.surface,
                                       ),
                                       child: Column(
@@ -352,8 +363,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                         children: [
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text("평균"),
                                               SvgPicture.asset(
@@ -367,8 +377,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                             text: TextSpan(
                                               text: '￦ ',
                                               style: TextStyle(
-                                                  fontWeight:
-                                                      FontWeight.normal,
+                                                  fontWeight: FontWeight.normal,
                                                   fontSize: 14,
                                                   color: colorTheme
                                                       .primaryContainer),
@@ -377,8 +386,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                                   text:
                                                       '${controller.fomattingWon(controller.aiReport.value.dayPowerUsageMeanInWon)}',
                                                   style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     fontSize: 18,
                                                   ),
                                                 ),
@@ -395,7 +403,8 @@ class AiReport extends GetView<AiReportViewModel> {
                             SizedBox(height: contentGap),
                             RichText(
                               text: TextSpan(
-                                text: '${AiReportViewModel.to.user.value.name}님의 ',
+                                text:
+                                    '${AiReportViewModel.to.user.value.name}님의 ',
                                 style: contentBodyTextStyle,
                                 children: <TextSpan>[
                                   TextSpan(
@@ -415,7 +424,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                 ? DayTypeCard()
                                 : NightTypeCard(),
 
-                            // Content 6
+                            // Content 6 - 요일별 사용량
                             SizedBox(height: contentGap),
                             Text("평일보다 주말 사용량이 많아요!",
                                 style: contentBodyTextStyle),
@@ -425,20 +434,68 @@ class AiReport extends GetView<AiReportViewModel> {
                                 text: '월',
                                 style: TextStyle(
                                     fontFamily: 'Pretendard',
-                                    color: colorTheme.surfaceVariant,
+                                    color: AiReportViewModel.to.aiReport.value
+                                                .weekdayIndex[0] ==
+                                            0
+                                        ? colorTheme.primaryContainer
+                                        : colorTheme.onSurface,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                                 children: <TextSpan>[
                                   TextSpan(
                                     text: '화',
                                     style: TextStyle(
-                                        color: colorTheme.primaryContainer),
+                                        color: AiReportViewModel.to.aiReport
+                                                    .value.weekdayIndex[0] ==
+                                                1
+                                            ? colorTheme.primaryContainer
+                                            : colorTheme.onSurface),
                                   ),
-                                  TextSpan(text: "수"),
-                                  TextSpan(text: "목"),
-                                  TextSpan(text: "금"),
-                                  TextSpan(text: "토"),
-                                  TextSpan(text: "일"),
+                                  TextSpan(
+                                    text: "수",
+                                    style: TextStyle(
+                                        color: AiReportViewModel.to.aiReport
+                                                    .value.weekdayIndex[0] ==
+                                                2
+                                            ? colorTheme.primaryContainer
+                                            : colorTheme.onSurface),
+                                  ),
+                                  TextSpan(
+                                    text: "목",
+                                    style: TextStyle(
+                                        color: AiReportViewModel.to.aiReport
+                                                    .value.weekdayIndex[0] ==
+                                                3
+                                            ? colorTheme.primaryContainer
+                                            : colorTheme.onSurface),
+                                  ),
+                                  TextSpan(
+                                    text: "금",
+                                    style: TextStyle(
+                                        color: AiReportViewModel.to.aiReport
+                                                    .value.weekdayIndex[0] ==
+                                                4
+                                            ? colorTheme.primaryContainer
+                                            : colorTheme.onSurface),
+                                  ),
+                                  TextSpan(
+                                    text: "토",
+                                    style: TextStyle(
+                                        color: AiReportViewModel.to.aiReport
+                                                    .value.weekdayIndex[0] ==
+                                                5
+                                            ? colorTheme.primaryContainer
+                                            : colorTheme.onSurface),
+                                  ),
+                                  TextSpan(
+                                    text: "일",
+                                    style: TextStyle(
+                                        color: AiReportViewModel.to.aiReport
+                                                    .value.weekdayIndex[0] ==
+                                                6
+                                            ? colorTheme.primaryContainer
+                                            : colorTheme.onSurface),
+                                  ),
                                 ],
                               ),
                             ),
