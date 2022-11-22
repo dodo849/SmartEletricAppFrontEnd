@@ -18,6 +18,8 @@ class AiReportViewModel extends GetxController {
 
   // - Presentation variables
   RxBool loading = true.obs;
+  ScrollController scrollController = ScrollController();
+  late Rx<Color> navigationBarColor = context.theme.colorScheme.primary.obs;
 
   // - Data variables
   RxDouble todayUsagePrediction = 0.0.obs;
@@ -58,6 +60,16 @@ class AiReportViewModel extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
+
+    // 스크롤 따라 네비게이션 바 색 바뀌도록 스크롤 이벤트 등록
+    scrollController.addListener(() {
+      if(scrollController.offset > 230){
+        navigationBarColor(context.theme.colorScheme.background);
+      } else {
+        navigationBarColor(context.theme.colorScheme.primary);
+      }
+      print('offset = ${scrollController.offset}');
+    });
 
     // 유저 가져오기
     await fetchUser();
@@ -115,11 +127,11 @@ class AiReportViewModel extends GetxController {
   bool checkIsWeekdayMore(AiReportModel aiReport) {
     // Sum weekday power usage
     double weekdayPowerUsage = aiReport.weekdayPowerUsage.sublist(0, 5).fold(
-        0.0, (double previousValue, double element) => previousValue + element);
+        0.0, (double previousValue, double element) => previousValue + element) / 5;
 
     // Sum weekend power usage
     double weekendPowerUsage = aiReport.weekdayPowerUsage.sublist(5).fold(
-        0.0, (double previousValue, double element) => previousValue + element);
+        0.0, (double previousValue, double element) => previousValue + element) / 2;
 
     // Compare
     if (weekdayPowerUsage > weekendPowerUsage) {

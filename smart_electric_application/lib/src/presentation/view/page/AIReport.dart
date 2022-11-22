@@ -43,7 +43,7 @@ class AiReport extends GetView<AiReportViewModel> {
 
     double contentGap = 100;
 
-    return Scaffold(
+    return Obx(()=>Scaffold(
       appBar: AppBar(
         title: const Text('AI 분석'),
         titleTextStyle: TextStyle(
@@ -53,9 +53,10 @@ class AiReport extends GetView<AiReportViewModel> {
             fontFamily: "Pretendard"),
         foregroundColor: colorTheme.onBackground,
         shadowColor: Colors.transparent,
-        backgroundColor: colorTheme.primary,
+        backgroundColor: controller.navigationBarColor.value,
       ),
       body: SingleChildScrollView(
+        controller: controller.scrollController,
           physics: ClampingScrollPhysics(),
           child: Obx(
             () => Container(
@@ -88,7 +89,7 @@ class AiReport extends GetView<AiReportViewModel> {
                           )),
                       // 리포트 소개 문구
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(35, 30, 0, 30),
+                        padding: const EdgeInsets.fromLTRB(35, 25, 0, 30),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -430,8 +431,10 @@ class AiReport extends GetView<AiReportViewModel> {
 
                             // Content 6 - 요일별 사용량
                             SizedBox(height: contentGap),
-                            Text("평일보다 주말 사용량이 많아요!",
-                                style: contentBodyTextStyle),
+                            AiReportViewModel.to.isWeekdayMore.isTrue
+                                ? Text("주말보다 평일 사용량이 많아요!")
+                                : Text("평일보다 주말 사용량이 많아요!",
+                                    style: contentBodyTextStyle),
                             SizedBox(height: 7),
                             RichText(
                               text: TextSpan(
@@ -525,6 +528,6 @@ class AiReport extends GetView<AiReportViewModel> {
             ),
           )),
       // bottomNavigationBar: MyBottomNavgationBar(),
-    );
+    ));
   }
 }
