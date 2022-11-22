@@ -34,5 +34,6 @@ class ProductTypeData {
     ProductTypeModel(krName: "선풍기", engName: "fan"),
     ProductTypeModel(krName: "제습기", engName: "dehumidifier"),
     ProductTypeModel(krName: "건조기", engName: "dry"),
+    ProductTypeModel(krName: "기타", engName: "etc"),
   ];
 }
