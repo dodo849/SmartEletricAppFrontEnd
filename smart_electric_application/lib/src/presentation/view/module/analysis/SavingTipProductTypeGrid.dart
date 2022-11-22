@@ -14,6 +14,22 @@ class SavingTipProductTypeGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     ProductTypeData.productTypes;
 
+    var primaryProducts = [
+      "에어컨",
+      "냉장고",
+      "정수기",
+      "컴퓨터",
+      "세탁기",
+      "TV",
+      "청소기",
+      "전자레인지",
+      "전기밥솥"
+    ];
+
+    var productTypes = ProductTypeData.productTypes.where(
+      (element) => primaryProducts.contains(element.krName),
+    ).toList();
+
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -22,11 +38,11 @@ class SavingTipProductTypeGrid extends StatelessWidget {
         crossAxisSpacing: 10,
       ),
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: ProductTypeData.productTypes.length,
+      itemCount: productTypes.length,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
         return ProductTypeGridCell(
-            productType: ProductTypeData.productTypes[index]);
+            productType: productTypes[index]);
       },
     );
   }
