@@ -150,7 +150,7 @@ class EnterUserInfoViewModel extends GetxController {
           isButtonEnable(false);
           return;
         case EnterUserInfoPage.signupPrivacyTermsConditions:
-          // 모두 완료 시 메인으로
+          // 회원가입 로직 모두 완료 시 메인으로
           Get.to(const RootScaffold(), transition: Transition.upToDown);
           return;
         default:
@@ -375,10 +375,11 @@ class EnterUserInfoViewModel extends GetxController {
         tempIdx++;
       }
     } catch (error, stacktrace) {
-      print("정보제공동의 확인 ${error}, ${stacktrace}");
+      print("한전 정보제공동의 확인 ${error}, ${stacktrace}");
     }
   }
 
+  // 개인정보이용약관 동의했는지 확인
   void checkAgree() {
     if (isTermAgree.isTrue) {
       isButtonEnable(true);
