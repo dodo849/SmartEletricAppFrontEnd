@@ -76,7 +76,7 @@ class Analysis extends StatelessWidget {
 
                   // 절약 팁 분류 목록
                   SavingTipProductTypeGrid(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 50),
                 ],
               )),
         ],
