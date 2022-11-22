@@ -7,6 +7,7 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDataUsecase.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/DialogActionButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
@@ -130,8 +131,17 @@ class Home extends StatelessWidget {
               // 그래프
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Text("이번달 예측 사용량",
-                    style: context.theme.textTheme.headline3),
+                child: Row(
+                  children: [
+                    Text("예측 사용량", style: context.theme.textTheme.headline3),
+                    const SizedBox(width: 7),
+                    GestureDetector(
+                      onTap: () => _showGraphDescription(context),
+                      child: SvgPicture.asset('assets/icons/noti.svg',
+                          width: 20, color: colorTheme.onSurface),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 45),
               Container(height: 300, child: const PredictLineGraph()),
@@ -190,6 +200,57 @@ class Home extends StatelessWidget {
         //     false.obs,
         // ),
       ]),
+    );
+  }
+
+  void _showGraphDescription(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        // <-- SEE HERE
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          height: 190,
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('그래프 설명',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: context.theme.colorScheme.onBackground,
+                      fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              Text('그래프는 청구일 기준으로 1일입니다.',
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: context.theme.colorScheme.onSurface)),
+              const SizedBox(height: 15),
+              Row(
+                children: [
+                  DialogActionButton(
+                    text: "확인",
+                    onTap: () => Navigator.pop(context),
+                    bgColor: context.theme.colorScheme.outline,
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

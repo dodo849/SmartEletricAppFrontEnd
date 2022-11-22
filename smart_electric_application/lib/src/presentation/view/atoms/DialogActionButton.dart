@@ -27,7 +27,8 @@ class DialogActionButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                color: textColor ?? context.theme.colorScheme.onBackground),
+                color: textColor ?? context.theme.colorScheme.onBackground,
+                fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
           ),
         ),
