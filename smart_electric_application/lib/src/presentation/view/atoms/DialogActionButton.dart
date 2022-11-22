@@ -20,15 +20,14 @@ class DialogActionButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
               color: bgColor ?? context.theme.colorScheme.surface,
               borderRadius: BorderRadius.circular(100)),
           child: Text(
             text,
             style: TextStyle(
-                color: textColor ?? context.theme.colorScheme.onBackground,
-                fontWeight: FontWeight.w600),
+                color: textColor ?? context.theme.colorScheme.onBackground, fontWeight: FontWeight.w600),
             textAlign: TextAlign.center,
           ),
         ),
