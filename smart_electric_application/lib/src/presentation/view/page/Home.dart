@@ -214,7 +214,7 @@ class Home extends StatelessWidget {
       ),
       builder: (BuildContext context) {
         return Container(
-          height: 190,
+          height:200,
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(

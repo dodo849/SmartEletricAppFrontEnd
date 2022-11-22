@@ -84,7 +84,6 @@ class HomeViewModel extends GetxController {
       return;
     } else {
       user(userResult.value!);
-      print("userResult ${userResult.value!}");
       return;
     }
   }
