@@ -40,8 +40,6 @@ class GetRecentPowerUsageByHourUsecase {
           powerUsageByDayDTOList[i].powerUsageQuantity));
     }
 
-    print(graphPointModelList);
-
     return Result.success(graphPointModelList);
   }
 }
