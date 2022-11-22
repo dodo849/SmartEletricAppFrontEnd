@@ -47,6 +47,9 @@ class PredictLineGraphViewModel extends GetxController {
             20);
 
     loading(false);
+
+    print("### predictUsage ${predictedUsage}");
+    print("### predictUsage ${thisMonthUsage.length}");
     super.onInit();
   }
 

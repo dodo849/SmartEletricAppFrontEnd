@@ -136,10 +136,13 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
 
                           // read about it in the LineChartData section
                           lineBarsData: [
-                            // data 1
+                            // data 1 - 지난달 데이터
                             LineChartBarData(
                               dotData: FlDotData(
-                                show: false,
+                                show: true,
+                                // getDotPainter: (FlSpot p0, double p1, LineChartBarData p2, int p3) {
+                                //   return FlDotPainter();
+                                // },
                               ),
                               aboveBarData: BarAreaData(show: false),
                               barWidth: 1,
@@ -150,7 +153,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                                     element.value.yValue);
                               }).toList(),
                             ),
-                            // data 2
+                            // data 2 - 이번달 데이터
                             LineChartBarData(
                               dotData: FlDotData(
                                 show: false,
@@ -169,7 +172,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                               }).toList(),
                             ),
 
-                            // data 3
+                            // data 3 - 예측 사용량
                             LineChartBarData(
                                 dotData: FlDotData(
                                   show: false,
@@ -210,10 +213,14 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
     );
 
     DateFormat formatterByDay = DateFormat('d일');
-    DateTime date =
-        DateTime.parse(controller.lastMonthUsage[value.toInt()]!.xValue);
+    // date 파싱해서 결정하는 ver
+    // DateTime date =
+    //     DateTime.parse(controller.lastMonthUsage[value.toInt()]!.xValue);
+    // Widget text;
+    // text = Text('${formatterByDay.format(date)}', style: style);
+    // 청구일 기준으로 그냥 1일씩 세는 ver
     Widget text;
-    text = Text('${formatterByDay.format(date)}', style: style);
+    text = Text('${value.toInt()}일', style: style);
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -227,8 +234,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
       final flSpot = barSpot;
 
       // 이번달이랑 예측에서 겹치는 부분이면 이번달 사용량 그래프의 tooltip null
-      if (barSpot.spotIndex == 6 && barSpot.barIndex == 1) {
-        print("return null");
+      if (barSpot.spotIndex == 0 && barSpot.barIndex == 2) {
         return null;
       }
 
@@ -236,21 +242,42 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
       TextAlign textAlign = TextAlign.left;
 
       // 데이터 종류 라벨 텍스트 설정
-      String dataLabelText;
+      String dataLabelText = "사용량\n";
+      // if (barSpot.barIndex == 0) {
+      //   dataLabelText = '지난달 사용량 \n';
+      // } else if (barSpot.barIndex == 1) {
+      //   dataLabelText = '이번달 사용량 \n';
+      // } else {
+      //   dataLabelText = '예측 사용량 \n';
+      // }
+
+      // 날짜 텍스트 설정
+      DateTime date;
+      DateFormat formatter = DateFormat("M월 dd일");
       if (barSpot.barIndex == 0) {
-        dataLabelText = '지난달 사용량 \n';
+        // 지난달 사용량
+        date = DateTime.parse(
+            controller.lastMonthUsage[barSpot.spotIndex]!.xValue);
       } else if (barSpot.barIndex == 1) {
-        dataLabelText = '이번달 사용량 \n';
+        // 이번달 사용량
+        date = DateTime.parse(controller
+            .thisMonthUsage[
+                barSpot.spotIndex]!
+            .xValue);
       } else {
-        dataLabelText = '예상 사용량 \n';
+        // 예측 사용량
+        print("barIndex ${barSpot.spotIndex}");
+        date = DateTime.parse(
+            controller.predictedUsage[barSpot.spotIndex + controller.thisMonthUsage.length]!.xValue);
       }
+      String dateText = '${formatter.format(date)}';
 
       TextStyle usageTextStyle;
       if (barSpot.barIndex == 0) {
         usageTextStyle = const TextStyle(
           color: Colors.white,
           fontSize: 14,
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.bold,
         );
       } else if (barSpot.barIndex == 1) {
         usageTextStyle = const TextStyle(
@@ -267,11 +294,11 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
       }
 
       return LineTooltipItem(
-        '',
+        '${dateText} ',
         // '${flSpot.x.toInt()}일 \n',
-        const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+        TextStyle(
+          color: Colors.white.withOpacity(0.8),
+          fontWeight: FontWeight.normal,
         ),
         children: [
           TextSpan(
