@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
-import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDataUsecase.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/DialogActionButton.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomActionButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/PredictionLineGraphDescription.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/HomeViewModel.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -214,18 +207,19 @@ class Home extends StatelessWidget {
       ),
       builder: (BuildContext context) {
         return Container(
-          height:200,
+          // height: 200,
           padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
               topRight: Radius.circular(30),
             ),
+            color: context.theme.colorScheme.background,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisSize: MainAxisSize.min,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text('그래프 설명',
                   style: TextStyle(
@@ -240,7 +234,7 @@ class Home extends StatelessWidget {
               const SizedBox(height: 20),
               Row(
                 children: [
-                  DialogActionButton(
+                  CustomActionButton(
                     text: "확인",
                     onTap: () => Navigator.pop(context),
                     bgColor: context.theme.colorScheme.outline,

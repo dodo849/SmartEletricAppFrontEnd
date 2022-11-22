@@ -223,7 +223,7 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<Result<String, String>> getUserName() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      var userName = await prefs.getString('name');
+      var userName = prefs.getString('name');
 
       if (userName == null) {
         return const Result.failure("The name is null");
@@ -239,13 +239,37 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<Result<bool, String>> getIsSmartMeter() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      var isSmartMeter = await prefs.getBool('isSmartMeter');
+      var isSmartMeter = prefs.getBool('isSmartMeter');
 
       if (isSmartMeter == null) {
         return const Result.failure("The isSmartMeter is null");
       }
 
       return Result.success(isSmartMeter);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> saveAddress(String address) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('address', address);
+
+      return Result.success(true);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<String?, String>> getAddress() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var address = prefs.getString('address');
+
+      return Result.success(address);
     } catch (err) {
       return Result.failure(err.toString());
     }

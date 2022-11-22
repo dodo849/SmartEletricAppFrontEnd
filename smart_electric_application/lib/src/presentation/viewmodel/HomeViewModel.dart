@@ -4,7 +4,9 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
 import 'package:smart_electric_application/src/domain/model/UserModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDataUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetAddressUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/GetUserUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/SaveAddressUsecase.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/ProgressiveSectionType.dart';
 
 class HomeViewModel extends GetxController {
@@ -38,10 +40,16 @@ class HomeViewModel extends GetxController {
           isSmartMeter: false,
           billDate: "")
       .obs;
+  RxString address = "".obs;
+
+  // Input
+  String addressInput = "";
 
   // Usecase
   var getThisMonthDataUsecase = CreateThisMonthDataUsecase();
   var getUserUsecase = GetUserUsecase();
+  var getAdressUsecase = GetAddressUsecase();
+  var saveAddressUsecase = SaveAddressUsecase();
 
   @override
   void onInit() async {
@@ -49,6 +57,7 @@ class HomeViewModel extends GetxController {
 
     await fetchThisMonthData();
     await fetchUser();
+    await fetchAddress();
 
     // Setting view variables
     setUserName(thisMonthData.userName);
@@ -64,7 +73,7 @@ class HomeViewModel extends GetxController {
     setPredictedProgressiveSection(thisMonthData.predictionProgressiveSection);
   }
 
-  // - Data fetch function
+  // - Data fetch and save function
   Future<void> fetchThisMonthData() async {
     Result<ThisMonthModel, String> thisMonthDataResult =
         await getThisMonthDataUsecase.execute();
@@ -86,6 +95,26 @@ class HomeViewModel extends GetxController {
       user(userResult.value!);
       return;
     }
+  }
+
+  Future<void> fetchAddress() async {
+    Result<String?, String> addressResult = await getAdressUsecase.execute();
+
+    if (addressResult.value == null) {
+      address("터치해서 주소를 설정해주세요");
+    } else {
+      address(addressResult.value!);
+    }
+
+    return;
+  }
+
+  void saveAddress(String address) async {
+    // 저장하고
+    await saveAddressUsecase.execute(address);
+
+    // 화면 바뀌도록 다시 fetch
+    fetchAddress();
   }
 
   // Function - Setter

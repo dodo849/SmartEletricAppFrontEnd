@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DialogActionButton extends StatelessWidget {
-  const DialogActionButton(
+class CustomActionButton extends StatelessWidget {
+  const CustomActionButton(
       {required this.text,
       this.onTap,
       this.bgColor,

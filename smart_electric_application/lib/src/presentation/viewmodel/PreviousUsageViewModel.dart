@@ -51,7 +51,7 @@ class PreviousUsageViewModel extends GetxController {
   var getPowerUsageByMonthUsecase = GetPowerUsageByMonthUsecase();
 
   @override
-  void onInit() async {
+  void onInit() {
     // TODO: implement onInit
 
     // Listener
@@ -67,17 +67,13 @@ class PreviousUsageViewModel extends GetxController {
       setPeriodBarText();
     });
 
-
     // Initialize
     print("init이 여러번 호출되나?");
     // 첫 로딩 시 텍스트 설정
     setPeriodBarText();
     // 값 불러오기
-    await fetchPowerUsage();
+    fetchPowerUsage();
     // 그래프 세팅
-    setGraphSetting(graphPoints);
-    // 그래프 로딩완료
-    loading(false);
 
     super.onInit();
   }
@@ -249,6 +245,10 @@ class PreviousUsageViewModel extends GetxController {
       }
 
       graphPoints = getPowerUsageResult.value!;
+
+      setGraphSetting(graphPoints);
+      // 그래프 로딩완료
+      loading(false);
     }
     // 월단위
     else if (PreviousUsageViewModel.to.dateUnitButtonIndex.value == 1) {

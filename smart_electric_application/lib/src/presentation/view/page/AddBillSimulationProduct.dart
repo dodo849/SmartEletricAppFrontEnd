@@ -202,6 +202,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                             width: 1,
                             color: colorTheme.outline,
                           ),
+                          color: Colors.white,
                         ),
                         child: Image.asset(
                             'assets/images/power_consumption_information.png')),

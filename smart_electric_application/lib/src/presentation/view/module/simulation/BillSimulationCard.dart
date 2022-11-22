@@ -18,7 +18,7 @@ class BillSimulationCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          color: colorTheme.onSecondary,
+          color: colorTheme.background,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),

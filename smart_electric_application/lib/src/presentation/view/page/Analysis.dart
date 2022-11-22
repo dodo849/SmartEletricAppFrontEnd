@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomActionButton.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/ImageButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/AnlaysisBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/analysis/SavingTipProductTypeGrid.dart';
@@ -13,13 +15,11 @@ class Analysis extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // ViewModel DI
     Get.put(AnalysisViewModel());
 
     // Theme
     var textTheme = context.theme.textTheme;
-  
 
     return SingleChildScrollView(
       child: Column(
@@ -36,19 +36,23 @@ class Analysis extends StatelessWidget {
                 SizedBox(height: 35),
 
                 // 어제 사용량 그래프
-                Text("어제 사용량", style: textTheme.headline3,),
+                Text(
+                  "어제 사용량",
+                  style: textTheme.headline3,
+                ),
                 SizedBox(height: 30),
                 Container(
-                  width: double.infinity, height: 220,
-                  child: YesterdayUsageBarGraph()),
+                    width: double.infinity,
+                    height: 220,
+                    child: YesterdayUsageBarGraph()),
                 SizedBox(height: 30),
 
                 // 이전 사용량 보기 버튼
                 GestureDetector(
-                  onTap: (){
-                    Get.to(PreviousUsage());
-                  },
-                  child: ShowPreviousUsageCard()),
+                    onTap: () {
+                      Get.to(PreviousUsage());
+                    },
+                    child: ShowPreviousUsageCard()),
               ],
             ),
           ),
@@ -70,7 +74,26 @@ class Analysis extends StatelessWidget {
                       fgColor: context.theme.colorScheme.primaryContainer,
                       text: "AI 추천 절약 방법 보기",
                       action: () {
-                        print("image button tap");
+                        showDialog(
+                            context: context,
+                            builder: (context) => CustomDialog(
+                                  title: "준비중",
+                                  content: "컨텐츠 준비중입니다. \n다음 업데이트를 기대해주세요:)",
+                                  actionButtons: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CustomActionButton(
+                                          text: "확인",
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ));
                       }),
                   SizedBox(height: 30),
 

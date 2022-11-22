@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/HomeViewModel.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomActionButton.dart';
 
 class NowBillBanner extends StatelessWidget {
   const NowBillBanner({Key? key}) : super(key: key);
@@ -18,16 +20,21 @@ class NowBillBanner extends StatelessWidget {
     return Obx(() => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "월드컵북로 501, 00동 0000호",
-              style: TextStyle(
-                fontFamily: 'Pretendard',
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: context.theme.colorScheme.onSurface,
+            GestureDetector(
+              onTap: () {
+                _openSetAdressModal(context);
+              },
+              child: Text(
+                "${HomeViewModel.to.address.value}",
+                style: TextStyle(
+                  fontFamily: 'Pretendard',
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  color: context.theme.colorScheme.onSurface,
+                ),
               ),
             ),
-            SizedBox(height: 7),
+            SizedBox(height: 3),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -167,6 +174,73 @@ class NowBillBanner extends StatelessWidget {
       iconName,
       width: 12,
       height: 12,
+    );
+  }
+
+  void _openSetAdressModal(BuildContext context) {
+    print("tap");
+    showModalBottomSheet<void>(
+      context: context,
+      // 시트안에 스크롤 요소가 있을 경우 시트를 확장해서 스크롤할 수 있는 옵션인데,
+      // false인 상태에서는 시트가 화면 절반까지만 차지할 수 있습니다.
+      // 따라서 이 속성을 true로 바꿔 화면 절반을 넘어갈 수 있게 설정해줍니다.
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding:
+              // 키보드 올라가면 모달 올라가도록
+              EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom + 20),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+              color: context.theme.colorScheme.background,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text('주소를 입력해주세요',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: context.theme.colorScheme.onBackground,
+                        fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                CustomTextInput(
+                  textInputStyle: TextInputStyle.bordered,
+                  placeholder: "서울시 강남구 테헤란로 ...",
+                  onChanged: (text) {
+                    HomeViewModel.to.addressInput = text;
+                  },
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    CustomActionButton(
+                      text: "확인",
+                      onTap: () {
+                        Navigator.pop(context);
+                        HomeViewModel.to.saveAddress(HomeViewModel.to.addressInput);
+                      },
+                      bgColor: context.theme.colorScheme.outline,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

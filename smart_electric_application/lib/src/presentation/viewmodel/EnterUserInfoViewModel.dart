@@ -12,7 +12,7 @@ import 'package:smart_electric_application/src/domain/usecase/SendEmailVerificat
 import 'package:smart_electric_application/src/domain/usecase/SignupInFirebaseUsecase.dart';
 import 'package:smart_electric_application/src/domain/usecase/SignupInServerUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/DialogActionButton.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomActionButton.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/EnterUserInfoPage.dart';
 
@@ -297,7 +297,7 @@ class EnterUserInfoViewModel extends GetxController {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      DialogActionButton(
+                      CustomActionButton(
                         text: "다시 보내기",
                         onTap: () {
                           sendEmailVerified();
@@ -305,7 +305,7 @@ class EnterUserInfoViewModel extends GetxController {
                         },
                       ),
                       SizedBox(width: 5),
-                      DialogActionButton(
+                      CustomActionButton(
                         text: "확인",
                         onTap: () {
                           Navigator.of(context).pop();
@@ -361,7 +361,7 @@ class EnterUserInfoViewModel extends GetxController {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        DialogActionButton(
+                        CustomActionButton(
                           text: "확인",
                           onTap: () {
                             Navigator.of(context).pop();

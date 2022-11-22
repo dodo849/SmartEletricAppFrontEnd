@@ -15,12 +15,12 @@ class ImagedButton extends StatelessWidget {
   final String text;
   final Color bgColor;
   final Color fgColor;
-  final Function action;
+  final Function()? action;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: action(),
+      onTap: action,
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
