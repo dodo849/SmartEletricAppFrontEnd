@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/data/repository/AccountRepository.dart';
 import 'package:smart_electric_application/src/data/repository/AiRepository.dart';
 import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
+import 'package:smart_electric_application/src/data/repository/BillRepository.dart';
 import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
 import 'package:smart_electric_application/src/data/repository/DefaultRepository.dart';
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
@@ -11,6 +12,7 @@ import 'package:smart_electric_application/src/data/repository/PowerUsageReposit
 import 'package:smart_electric_application/src/domain/usecase/interface/AccountRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/BillRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/BillSimulationRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/DefaultRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
@@ -28,4 +30,5 @@ void setupDI() {
       BillSimulationRepository());
   GetIt.I.registerSingleton<AccountRepositoryInterface>(AccountRepository());
   GetIt.I.registerSingleton<InfoRepositoryInterface>(InfoRepository());
+  GetIt.I.registerSingleton<BillRepositoryInterface>(BillRepository());
 }

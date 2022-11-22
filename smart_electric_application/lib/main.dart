@@ -44,6 +44,13 @@ class MyApp extends StatelessWidget {
     LoginViewModel.to.checkLogin();
 
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          child: child!,
+        );
+      },
       home: Obx(() => LoginViewModel.to.isLogin.value == false
           ? const Login()
           : const RootScaffold()),

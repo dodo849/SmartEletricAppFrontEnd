@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
+import 'package:smart_electric_application/src/domain/model/UserModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDataUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/GetUserUsecase.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/ProgressiveSectionType.dart';
 
 class HomeViewModel extends GetxController {
@@ -29,15 +31,24 @@ class HomeViewModel extends GetxController {
   RxInt predictionProgressiveSection = 0.obs;
   Rx<ProgressiveSectionType> predictionProgressiveSectionType =
       ProgressiveSectionType.undefined.obs;
+  Rx<UserModel> user = UserModel(
+          name: "",
+          customerNumber: "",
+          email: "",
+          isSmartMeter: false,
+          billDate: "")
+      .obs;
 
   // Usecase
   var getThisMonthDataUsecase = CreateThisMonthDataUsecase();
+  var getUserUsecase = GetUserUsecase();
 
   @override
   void onInit() async {
     // TODO: implement onInit
 
     await fetchThisMonthData();
+    await fetchUser();
 
     // Setting view variables
     setUserName(thisMonthData.userName);
@@ -53,6 +64,7 @@ class HomeViewModel extends GetxController {
     setPredictedProgressiveSection(thisMonthData.predictionProgressiveSection);
   }
 
+  // - Data fetch function
   Future<void> fetchThisMonthData() async {
     Result<ThisMonthModel, String> thisMonthDataResult =
         await getThisMonthDataUsecase.execute();
@@ -63,6 +75,18 @@ class HomeViewModel extends GetxController {
     }
 
     thisMonthData = thisMonthDataResult.value!;
+  }
+
+  Future<void> fetchUser() async {
+    Result<UserModel, String> userResult = await getUserUsecase.execute();
+
+    if (userResult.status == ResultStatus.error) {
+      return;
+    } else {
+      user(userResult.value!);
+      print("userResult ${userResult.value!}");
+      return;
+    }
   }
 
   // Function - Setter

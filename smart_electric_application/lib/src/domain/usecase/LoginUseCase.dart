@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/AccountRegistrationDTO.dart';
+import 'package:smart_electric_application/src/data/dto/BillDateDTO.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AccountRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/BillRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
 /// 로그인시 firebase login -> 서버에서 access/refresh token 발급 -> 내부 DB 저장 순으로 진행
@@ -15,6 +17,7 @@ class LoginUsecase {
       GetIt.I.get<AuthRepositoryInterface>();
   final AccountRepositoryInterface accountRepository =
       GetIt.I.get<AccountRepositoryInterface>();
+  final billRepository = GetIt.I.get<BillRepositoryInterface>();
 
   Future<Result<bool, String>> execute(email, password) async {
     // firebase 로그인
@@ -57,12 +60,22 @@ class LoginUsecase {
       return Result.failure(requestAccountResult.error);
     }
 
+    // 청구정보 받아오기
+    BillDateDTO billDateDTO;
+    try {
+      billDateDTO = await billRepository
+          .requestBillDate(requestAccountResult.value!.customerNumber);
+    } catch (error) {
+      return Result.failure(error.toString());
+    }
+
     // user 정보 내부 storage에 저장
     Result<bool, String> saveUserResult = await authRepository.saveUser(
         customerNumber: requestAccountResult.value!.customerNumber,
         email: requestAccountResult.value!.email,
         name: requestAccountResult.value!.name,
-        isSmartMeter: requestAccountResult.value!.isSmartMeter);
+        isSmartMeter: requestAccountResult.value!.isSmartMeter,
+        billDate: billDateDTO.result);
 
     if (saveUserResult.status == ResultStatus.error) {
       return Result.failure(requestAccountResult.error);

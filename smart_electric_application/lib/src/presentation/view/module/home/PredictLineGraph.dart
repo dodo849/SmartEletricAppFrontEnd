@@ -139,7 +139,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                             // data 1 - 지난달 데이터
                             LineChartBarData(
                               dotData: FlDotData(
-                                show: true,
+                                show: false,
                                 // getDotPainter: (FlSpot p0, double p1, LineChartBarData p2, int p3) {
                                 //   return FlDotPainter();
                                 // },

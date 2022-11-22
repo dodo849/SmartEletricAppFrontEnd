@@ -21,7 +21,8 @@ class UserModel with _$UserModel {
       {required String name,
       required String email,
       required String customerNumber,
-      required bool isSmartMeter}) = _UserModel;
+      required bool isSmartMeter,
+      required String billDate}) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

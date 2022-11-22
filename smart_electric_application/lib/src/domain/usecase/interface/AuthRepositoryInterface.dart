@@ -14,7 +14,8 @@ abstract class AuthRepositoryInterface {
       {required String customerNumber,
       required String name,
       required String email,
-      required bool isSmartMeter});
+      required bool isSmartMeter,
+      required String billDate});
   Future<UserModel> getUser();
   Future<Result<String, String>> getCustomerNumber();
   Future<Result<bool, String>> removeEmail(email);

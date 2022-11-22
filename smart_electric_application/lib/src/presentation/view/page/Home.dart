@@ -237,7 +237,7 @@ class Home extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       color: context.theme.colorScheme.onSurface)),
-              const SizedBox(height: 15),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   DialogActionButton(

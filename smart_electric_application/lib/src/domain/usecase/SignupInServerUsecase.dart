@@ -2,10 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/AccountRegistrationDTO.dart';
-import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
+import 'package:smart_electric_application/src/data/dto/BillDateDTO.dart';
 import 'package:smart_electric_application/src/domain/usecase/LoginUseCase.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AccountRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/usecase/interface/BillRepositoryInterface.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
 ///
@@ -17,6 +18,7 @@ class SignupInServerUsecase {
       GetIt.I.get<AuthRepositoryInterface>();
   final AccountRepositoryInterface accountRepository =
       GetIt.I.get<AccountRepositoryInterface>();
+  final billRepository = GetIt.I.get<BillRepositoryInterface>();
 
   // Usecase
   final loginUseCase = LoginUsecase();
@@ -27,7 +29,6 @@ class SignupInServerUsecase {
       required String email,
       required String password,
       required bool isSmartMeter}) async {
-
     // 파이어베이스 uid 가져오기
     var firebaseUidResult = await firebaseRepository.getUid();
     if (firebaseUidResult.status == ResultStatus.error) {
@@ -62,12 +63,21 @@ class SignupInServerUsecase {
       }
     }
 
+    // 청구정보 받아오기
+    BillDateDTO billDateDTO;
+    try {
+      billDateDTO = await billRepository.requestBillDate(customerNumber);
+    } catch (error) {
+      return Result.failure(error.toString());
+    }
+
     // 유저 정보 내부 DB에 저장
     Result<bool, String> saveUserResult = await authRepository.saveUser(
         customerNumber: customerNumber,
         name: name,
         email: email,
-        isSmartMeter: isSmartMeter);
+        isSmartMeter: isSmartMeter,
+        billDate: billDateDTO.result);
 
     if (saveUserResult.status == ResultStatus.error) {
       return saveUserResult;

@@ -121,13 +121,15 @@ class AuthRepository implements AuthRepositoryInterface {
       {required String customerNumber,
       required String name,
       required String email,
-      required bool isSmartMeter}) async {
+      required bool isSmartMeter,
+      required String billDate}) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('customerNumber', customerNumber);
       await prefs.setString('name', name);
       await prefs.setString('email', email);
       await prefs.setBool('isSmartMeter', isSmartMeter);
+      await prefs.setString('billDate', billDate);
 
       return const Result.success(true);
     } catch (err) {
@@ -143,12 +145,21 @@ class AuthRepository implements AuthRepositoryInterface {
       String? name = prefs.getString('name');
       String? email = prefs.getString('email');
       bool? isSmartMeter = prefs.getBool('isSmartMeter');
+      String? billDate = prefs.getString('billDate');
 
-      if (customerNumber == null && name == null && email == null && isSmartMeter == null){
+      if (customerNumber == null &&
+          name == null &&
+          email == null &&
+          isSmartMeter == null) {
         throw Exception("found null");
       }
 
-      return UserModel(customerNumber: customerNumber!, name: name!, email: email!, isSmartMeter: isSmartMeter!);
+      return UserModel(
+          customerNumber: customerNumber!,
+          name: name!,
+          email: email!,
+          isSmartMeter: isSmartMeter!,
+          billDate: billDate!);
     } catch (_) {
       rethrow;
     }

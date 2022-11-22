@@ -28,7 +28,7 @@ class AiReportViewModel extends GetxController {
       ProgressiveSectionType.undefined.obs;
 
   Rx<UserModel> user =
-      UserModel(name: "-", email: "-", customerNumber: "-", isSmartMeter: true)
+      UserModel(name: "-", email: "-", customerNumber: "-", isSmartMeter: true, billDate: '-')
           .obs;
 
   late Rx<AiReportModel> aiReport = AiReportModel(

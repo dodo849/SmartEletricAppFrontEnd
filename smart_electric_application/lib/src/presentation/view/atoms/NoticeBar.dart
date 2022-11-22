@@ -18,7 +18,7 @@ class NoticeBar extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(30, 15, 30, 20),
           decoration: BoxDecoration(
               color: colorTheme.surface,
-              borderRadius: BorderRadius.circular(10)),
+              borderRadius: BorderRadius.circular(20)),
           child: ConstrainedBox(
             constraints: BoxConstraints(
                 maxWidth: MediaQuery.of(context).size.width - 110),

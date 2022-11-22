@@ -28,14 +28,41 @@ class NowBillBanner extends StatelessWidget {
               ),
             ),
             SizedBox(height: 7),
-            Text(
-              "${HomeViewModel.to.userName.value}님의 현재 요금",
-              style: TextStyle(
-                fontFamily: 'Pretendard',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: context.theme.colorScheme.onSurfaceVariant,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "${HomeViewModel.to.userName.value}님의 현재 요금",
+                  style: TextStyle(
+                    fontFamily: 'Pretendard',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: context.theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                // 납부정보
+                HomeViewModel.to.user.value.billDate.length == 0
+                    ? Container()
+                    : Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 13, vertical: 5),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1,
+                              color: colorTheme.onSurface,
+                            ),
+                            borderRadius: BorderRadius.circular(100),
+                            color: colorTheme.background),
+                        child: Text(
+                          "매월 ${HomeViewModel.to.user.value.billDate}일 납부",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                              color: colorTheme.onSurface),
+                        ),
+                        // HomeViewModel.to.user.value.billDate
+                      )
+              ],
             ),
             SizedBox(height: 5),
             Row(

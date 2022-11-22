@@ -5,11 +5,14 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/MypageMenuListCell.dart';
 
 class MypageMenuListController extends GetxController {
-  final mypageMenuList = <String>["개인정보", "알림 설정", "고객번호 관리", "문의하기"];
+  final mypageMenuList = <String>["개인정보", 
+  // "알림 설정", 
+  // "고객번호 관리", 
+  "문의하기"];
   final mypageMenuPageName = <String>[
     "PersonalInfo",
-    "NotificationSettings",
-    "ManageCustomerNumber",
+    // "NotificationSettings",
+    // "ManageCustomerNumber",
     "ContactUs"
   ];
 }

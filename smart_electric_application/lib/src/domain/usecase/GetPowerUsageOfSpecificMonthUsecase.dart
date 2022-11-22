@@ -22,7 +22,7 @@ class GetPowerUsageOfSpecificMonthUsecase {
     if (getCustomerNumberResult.status == ResultStatus.error) {
       return Result.failure(getCustomerNumberResult.error);
     } else if (getCustomerNumberResult.value == null) {
-      return const Result.failure("Failed to get customer number");
+      return Result.failure(getCustomerNumberResult.error);
     }
 
     // 날짜 형식 변경
