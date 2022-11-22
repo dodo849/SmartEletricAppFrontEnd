@@ -36,7 +36,7 @@ class DayTypeCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Image.asset("assets/images/day.png", width: 70),
+                Image.asset("assets/images/day.png", width: 60),
               ],
             ),
 
@@ -90,7 +90,7 @@ class DayTypeCard extends StatelessWidget {
                 //   "머라고 써야할까욤욤욤욤",
                 //   style: bodyStyle,
                 // ),
-                SizedBox(height: 10),
+                // SizedBox(height: 10),
                 // RoundedButton(
                 //     text: "대기전력 의심 제품 알아보기",
                 //     bgColor: Color(0xFF63A1FF),
