@@ -36,7 +36,7 @@ class NightTypeCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Image.asset("assets/images/night.png", width: 70),
+                Image.asset("assets/images/night.png", width: 60),
               ],
             ),
 
