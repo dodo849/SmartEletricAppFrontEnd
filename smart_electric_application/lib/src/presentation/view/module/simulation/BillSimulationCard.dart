@@ -59,24 +59,45 @@ class BillSimulationCard extends StatelessWidget {
               SizedBox(height: 5),
 
               // 총 예상 요금
-              RichText(
-                text: TextSpan(
-                  text: '${BillSimulationViewModel.to.totalBill.value}',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                      color: colorTheme.onBackground),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: ' 원',
+              Row(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: '${BillSimulationViewModel.to.totalBill.value}',
                       style: TextStyle(
-                        color: colorTheme.onSurface,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: colorTheme.onBackground),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: ' 원',
+                          style: TextStyle(
+                            color: colorTheme.onSurface,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  // 선택된 가전 개수 표시
+                  SizedBox(width: 10),
+                  Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 13, vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: colorTheme.outline),
+                        child: Text(
+                          "${BillSimulationViewModel.to.selectedProductsIndex.length}개 선택",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: colorTheme.onSurface),
+                        ),
+                        // HomeViewModel.to.user.value.billDate
+                      )
+                ],
               ),
 
               SizedBox(height: 5),
