@@ -100,7 +100,7 @@ class HomeViewModel extends GetxController {
   Future<void> fetchAddress() async {
     Result<String?, String> addressResult = await getAdressUsecase.execute();
 
-    if (addressResult.value == null) {
+    if (addressResult.value == null || addressResult.value!.length == 0) {
       address("터치해서 주소를 설정해주세요");
     } else {
       address(addressResult.value!);
