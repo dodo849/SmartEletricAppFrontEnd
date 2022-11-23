@@ -42,7 +42,7 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
                               sideTitles: SideTitles(
                             getTitlesWidget: _leftTitleWidgets,
                             showTitles: true,
-                            reservedSize: 40,
+                            reservedSize: controller.maxY.value > 1.9 ? 20 : 40,
                           )),
                           bottomTitles: AxisTitles(
                             sideTitles: SideTitles(
@@ -194,7 +194,7 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
 
     DateFormat formatterByDay = DateFormat('d일');
     Widget text;
-    if (controller.maxY.value > 1) {
+    if (controller.maxY.value > 1.9) {
       text = Text('${value.toStringAsFixed(0)}', style: style);
     } else {
       text = Text('${value.toStringAsFixed(2)}', style: style);
@@ -202,7 +202,7 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      space: 16.0,
+      space: 10.0,
       child: text,
     );
   }

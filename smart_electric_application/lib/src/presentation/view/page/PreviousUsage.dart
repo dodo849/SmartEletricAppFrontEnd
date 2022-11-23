@@ -48,7 +48,7 @@ class PreviousUsage extends GetView<PreviousUsageViewModel> {
             ),
             SizedBox(height: 50),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: controller.maxY.value > 1 ? 10 : 20),
+              padding: EdgeInsets.symmetric(horizontal: controller.maxY.value > 1.9 ? 20 : 20),
               child: PreviousUsageBarGraph()),
           ],
         ),
