@@ -152,7 +152,7 @@ class AiReport extends GetView<AiReportViewModel> {
                                 style: contentTitleTextStyle),
                             SizedBox(height: 7),
                             Text(
-                                "그 외에 ${controller.aiReport.value.timePeriodIndex[1] * 4}시~${controller.aiReport.value.timePeriodIndex[1] * 4 + 3}시 사이에도 높은 사용량을 보였습니다.",
+                                "그 외에 ${controller.aiReport.value.timePeriodIndex[1] * 4}시~${controller.aiReport.value.timePeriodIndex[1] * 4 + 4}시 사이에도 높은 사용량을 보였습니다.",
                                 style: contentBodyTextStyle),
                             SizedBox(height: 20),
                             // Content 1 Card

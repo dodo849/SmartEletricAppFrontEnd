@@ -68,7 +68,6 @@ class AiReportViewModel extends GetxController {
       } else {
         navigationBarColor(context.theme.colorScheme.primary);
       }
-      print('offset = ${scrollController.offset}');
     });
 
     // 유저 가져오기

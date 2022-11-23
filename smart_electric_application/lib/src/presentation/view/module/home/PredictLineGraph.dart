@@ -33,9 +33,11 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                         AxisTitles(sideTitles: SideTitles(showTitles: false)),
                     rightTitles:
                         AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    // leftTitles: AxisTitles(
-                    //     sideTitles: SideTitles(
-                    //         showTitles: true, interval: 20, reservedSize: 30,)),
+                    leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          getTitlesWidget: _leftTitleWidgets,
+                            showTitles: true, reservedSize: 40,)
+                            ),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
@@ -201,10 +203,35 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
           ));
   }
 
+
+
+
+  Widget _leftTitleWidgets(double value, TitleMeta meta) {
+    if(value == 0 || value == controller.maxY.value){
+      return const Text("");
+    }
+
+    const style = TextStyle(
+      color: Color(0xff68737d),
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+    );
+
+    DateFormat formatterByDay = DateFormat('d일');
+    Widget text = Text('${value.toInt()}', style: style);
+
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 8.0,
+      child: text,
+    );
+  }
+
   Widget _bottomTitleWidgets(double value, TitleMeta meta) {
     if (value <= 0 || value > 31) {
       return const Text("");
     }
+
 
     const style = TextStyle(
       color: Color(0xff68737d),

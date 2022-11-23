@@ -17,12 +17,10 @@ class PreviousUsage extends GetView<PreviousUsageViewModel> {
     // Define theme
     var colorTheme = context.theme.colorScheme;
 
-    return Scaffold(
+    return Obx(()=>Scaffold(
       backgroundColor: colorTheme.background,
       appBar: AppBar(
-        title: const Text(
-          '이전 사용량'
-        ),
+        title: const Text('이전 사용량'),
         titleTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
             color: colorTheme.onBackground,
@@ -33,18 +31,28 @@ class PreviousUsage extends GetView<PreviousUsageViewModel> {
         backgroundColor: colorTheme.background,
       ),
       body: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 30),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          UsageUnitsSelectButtons(),
-          SizedBox(height: 20),
-          SelectPeriodBar(),
-          SizedBox(height: 30),
-          PreviousUsageSummaryCard(),
-          SizedBox(height: 50),
-          PreviousUsageBarGraph(),
-        ]),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    UsageUnitsSelectButtons(),
+                    SizedBox(height: 20),
+                    SelectPeriodBar(),
+                    SizedBox(height: 30),
+                    PreviousUsageSummaryCard(),
+                  ]),
+            ),
+            SizedBox(height: 50),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: controller.maxY.value > 1 ? 10 : 20),
+              child: PreviousUsageBarGraph()),
+          ],
+        ),
       ),
-    );
+    ));
   }
 }

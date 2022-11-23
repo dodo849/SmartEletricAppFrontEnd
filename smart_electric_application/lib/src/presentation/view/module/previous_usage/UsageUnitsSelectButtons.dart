@@ -23,7 +23,8 @@ class UsageUnitsSelectButtons extends GetView<PreviousUsageViewModel> {
                       for (int i = 0;
                           i < controller.dateUnitToggleButtons.length;
                           i++) {
-                        controller.dateUnitToggleButtons[i] = i == element.key;
+                            
+                        controller.dateUnitButtonIndex(element.key);
                       }
                     },
                     child: Container(

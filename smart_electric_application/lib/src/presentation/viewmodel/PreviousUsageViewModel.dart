@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
@@ -51,29 +50,40 @@ class PreviousUsageViewModel extends GetxController {
   var getPowerUsageByMonthUsecase = GetPowerUsageByMonthUsecase();
 
   @override
-  void onInit() {
+  void onInit() async {
     // TODO: implement onInit
 
     // Listener
     // 토글버튼 바뀔때마다 인덱스 관리
-    ever(dateUnitToggleButtons, (_) {
-      var selectedIndex = dateUnitToggleButtons.indexWhere((value) => value);
-      if (selectedIndex != -1) {
-        dateUnitButtonIndex(selectedIndex);
+    ever(dateUnitButtonIndex, (_) async {
+      loading(true);
+      for (var i = 0; i < 3; i++) {
+        if (i == dateUnitButtonIndex.value) {
+          dateUnitToggleButtons[i] = true;
+        } else {
+          dateUnitToggleButtons[i] = false;
+        }
       }
+      // var selectedIndex = dateUnitToggleButtons.indexWhere((value) => value);
+      // dateUnitButtonIndex(selectedIndex);
+      setPeriodBarText();
+      await fetchPowerUsage();
+      setGraphSetting(graphPoints);
+      loading(false);
     });
 
-    ever(dateUnitButtonIndex, (_) {
-      setPeriodBarText();
-    });
+    // ever(dateUnitButtonIndex, (_) {
+    //   setPeriodBarText();
+    // });
 
     // Initialize
     print("init이 여러번 호출되나?");
     // 첫 로딩 시 텍스트 설정
     setPeriodBarText();
     // 값 불러오기
-    fetchPowerUsage();
+    await fetchPowerUsage();
     // 그래프 세팅
+    loading(false);
 
     super.onInit();
   }
@@ -101,7 +111,7 @@ class PreviousUsageViewModel extends GetxController {
     DateFormat formatter = DateFormat('');
     if (dateUnitButtonIndex.value == 0) {
       // 일단위
-      formatter = DateFormat('yy년 M월 d일 h시');
+      formatter = DateFormat('yy년 M월 d일 H시');
     } else if (dateUnitButtonIndex.value == 1) {
       // 월단위
       formatter = DateFormat('yy년 M월 d일');
@@ -223,8 +233,7 @@ class PreviousUsageViewModel extends GetxController {
 
   // - Data function (Fetch)
   Future<void> fetchPowerUsage() async {
-    DateTime targetDate =
-        PreviousUsageViewModel.to.periodBarDate[dateUnitButtonIndex.value];
+    DateTime targetDate = periodBarDate[dateUnitButtonIndex.value];
     // 일단위
     if (dateUnitButtonIndex.value == 0) {
       // 0시 설정
@@ -247,8 +256,8 @@ class PreviousUsageViewModel extends GetxController {
       graphPoints = getPowerUsageResult.value!;
 
       setGraphSetting(graphPoints);
-      // 그래프 로딩완료
-      loading(false);
+
+      return;
     }
     // 월단위
     else if (PreviousUsageViewModel.to.dateUnitButtonIndex.value == 1) {

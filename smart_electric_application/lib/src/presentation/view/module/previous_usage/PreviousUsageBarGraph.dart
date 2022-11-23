@@ -40,13 +40,9 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
                               sideTitles: SideTitles(showTitles: false)),
                           leftTitles: AxisTitles(
                               sideTitles: SideTitles(
+                            getTitlesWidget: _leftTitleWidgets,
                             showTitles: true,
-                            reservedSize: 30,
-                            getTitlesWidget: (value, meta) => Text(
-                              "${value.toStringAsFixed(2)}",
-                              style: TextStyle(
-                                  fontSize: 11, color: colorTheme.onSurface),
-                            ),
+                            reservedSize: 40,
                           )),
                           bottomTitles: AxisTitles(
                             sideTitles: SideTitles(
@@ -62,9 +58,10 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
                         // Remove both side border
                         borderData: FlBorderData(
                             border: Border(
-                                top: BorderSide(color: colorTheme.outline),
+                                top: const BorderSide(
+                                    width: 0, color: Colors.transparent),
                                 bottom: BorderSide(
-                                    color: colorTheme.outline, width: 0))),
+                                    color: colorTheme.outline, width: 1))),
                         // Remove vertical line
                         gridData: FlGridData(
                             drawVerticalLine: false,
@@ -123,8 +120,7 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
                                 ),
                                 borderData: FlBorderData(
                                     border: Border(
-                                        top: BorderSide(
-                                            color: colorTheme.outline),
+                                        top: BorderSide(width: 0),
                                         bottom: BorderSide(
                                             color: colorTheme.outline,
                                             width: 0))),
@@ -138,9 +134,11 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
                                     touchCallback: (p0, p1) {
                                       if (p1 != null && p1.spot != null) {
                                         // 선택 날짜 사용량 텍스트 변경
-                                        controller.setSelectedPowerUsage(p1.spot!.touchedBarGroupIndex);
+                                        controller.setSelectedPowerUsage(
+                                            p1.spot!.touchedBarGroupIndex);
                                         // 선택 날짜 텍스트 변경
-                                        controller.setSelectedDate(p1.spot!.touchedBarGroupIndex);
+                                        controller.setSelectedDate(
+                                            p1.spot!.touchedBarGroupIndex);
                                       }
                                     },
                                     touchTooltipData: BarTouchTooltipData(
@@ -180,6 +178,32 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
                     ],
                   ),
                 )),
+    );
+  }
+
+  Widget _leftTitleWidgets(double value, TitleMeta meta) {
+    if (value == controller.maxY.value) {
+      return const Text("");
+    }
+
+    const style = TextStyle(
+      color: Color(0xff68737d),
+      fontWeight: FontWeight.normal,
+      fontSize: 12,
+    );
+
+    DateFormat formatterByDay = DateFormat('d일');
+    Widget text;
+    if (controller.maxY.value > 1) {
+      text = Text('${value.toStringAsFixed(0)}', style: style);
+    } else {
+      text = Text('${value.toStringAsFixed(2)}', style: style);
+    }
+
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 16.0,
+      child: text,
     );
   }
 
