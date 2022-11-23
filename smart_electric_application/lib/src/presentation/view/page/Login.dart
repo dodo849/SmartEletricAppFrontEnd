@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
-import 'package:smart_electric_application/src/presentation/view/atoms/BorderedTextInput.dart';
-import 'package:smart_electric_application/src/presentation/view/module/Common/EmptyAppBar.dart';
-import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
-import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
+import 'package:smart_electric_application/src/presentation/view/page/singup/EnterUserInfo.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 
 class Login extends StatelessWidget {
@@ -65,16 +63,25 @@ class Login extends StatelessWidget {
                 // signup button
                 RoundedButton(
                     text: "회원가입하기",
-                    bgColor:
-                        context.theme.colorScheme.secondaryContainer.withOpacity(0.2),
-                    textColor: context.theme.colorScheme.secondaryContainer,
+                    bgColor: context.theme.colorScheme.primary,
+                    textColor: CommonColors.onBlack,
                     size: ButtonSize.large,
                     action: () {
-                      // Get.to(Signup());
+                      Get.to(EnterUserInfo());
                     }),
 
                 Spacer(flex: 1),
               ],
             )));
+  }
+
+  void _openLoginStartDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => CustomDialog(
+              title: "로그인 중입니다",
+              content: "",
+              actionButtons: [],
+            ));
   }
 }

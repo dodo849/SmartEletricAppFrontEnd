@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/AiPredictionDTO.dart';
 import 'package:smart_electric_application/src/data/dto/AiReportDTO.dart';
+import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
 
 part 'AiRetrofit.g.dart';
 
@@ -15,4 +16,9 @@ abstract class AiRetrofit {
   @GET("/prediction")
   Future<AiPredictionDTO> requestAiPrediction(
       @Query("custNo") String customerNumber);
+
+  @GET("/calculator")
+  Future<BillCalculationDTO> requestCalculateBill(
+      @Query("custNo") String customerNumber,
+      @Query("powerUsageQuantity") double powerUsageQuantity);
 }

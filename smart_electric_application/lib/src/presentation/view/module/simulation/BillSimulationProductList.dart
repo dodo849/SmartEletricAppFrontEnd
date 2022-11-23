@@ -8,6 +8,7 @@ class BillSimulationProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     // Get.put(BillSimulationProductListViewModel());
 
     // ViewModel DI

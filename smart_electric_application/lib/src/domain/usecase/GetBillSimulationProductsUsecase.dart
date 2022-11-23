@@ -10,25 +10,12 @@ class GetBillSimulationProductsUsecase {
   final billSimulationRepository =
       GetIt.I.get<BillSimulationRepositoryInterface>();
 
-  Future<Result<dynamic, String>> execute() async {
+  Future<Result<List<BillSimulationProductModel>, String>> execute() async {
     // 1. Get product list
-    Result<String, String> getBillSimulationProductResult =
+    Result<List<BillSimulationProductModel>, String>
+        getBillSimulationProductResult =
         await billSimulationRepository.getBillSimulationProduct();
 
-    if (getBillSimulationProductResult.status == ResultStatus.error ||
-        getBillSimulationProductResult.value == null) {
-      return getBillSimulationProductResult;
-    }
-
-    // 2. Decode product list
-    var billSimulationProducts =
-        json.decode(getBillSimulationProductResult.value!);
-
-    // 3. Convert json to model
-    billSimulationProducts = billSimulationProducts
-        .map((item) => BillSimulationProductModel.fromJson(item))
-        .toList();
-
-    return Result.success(billSimulationProducts);
+    return getBillSimulationProductResult;
   }
 }

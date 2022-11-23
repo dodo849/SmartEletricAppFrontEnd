@@ -152,6 +152,78 @@ class _PowerUsageRetrofit implements PowerUsageRetrofit {
     return value;
   }
 
+  @override
+  Future<PowerUsageDTO> getRecentPowerUsageByMonth(customerNumber) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'custNo': customerNumber};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<PowerUsageDTO>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/specific-user/period/month/most-recent',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PowerUsageDTO.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<PowerUsageDTO>> getRecentPowerUsageByHour(customerNumber) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'custNo': customerNumber};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<PowerUsageDTO>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/specific-user/period/hour/most-recent',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => PowerUsageDTO.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<RecentPowerUsageByDayDTO> getRecentPowerUsageByDay(
+      customerNumber) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'custNo': customerNumber};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<RecentPowerUsageByDayDTO>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/specific-user/period/day/most-recent',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RecentPowerUsageByDayDTO.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

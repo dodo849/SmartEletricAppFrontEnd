@@ -6,25 +6,27 @@ class ImagedButton extends StatelessWidget {
       {Key? key,
       required this.imagePath,
       required this.text,
-      required this.color,
+      required this.bgColor,
+      required this.fgColor,
       required this.action})
       : super(key: key);
 
   final String imagePath;
   final String text;
-  final Color color;
-  final Function action;
+  final Color bgColor;
+  final Color fgColor;
+  final Function()? action;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: action(),
+      onTap: action,
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: [
         Container(
           decoration: BoxDecoration(
-            color: color.withOpacity(0.2),
+            color: bgColor.withOpacity(0.2),
             borderRadius: BorderRadius.circular(20),
           ),
           width: double.infinity,
@@ -34,10 +36,10 @@ class ImagedButton extends StatelessWidget {
               Spacer(flex:3),
               Text(
                 text,
-                style: TextStyle(color: color),
+                style: TextStyle(color: fgColor, fontSize: 14, fontWeight: FontWeight.w500),
               ),
               Spacer(),
-              SvgPicture.asset('assets/icons/arrow_right.svg', color: color),
+              SvgPicture.asset('assets/icons/arrow_right.svg', color: fgColor),
               Spacer(),
             ],
           ),
@@ -45,7 +47,7 @@ class ImagedButton extends StatelessWidget {
         Row(
           children: [
             SizedBox(width:10),
-            Image.asset(imagePath, width: 100, height: 100),
+            Image.asset(imagePath, width: 100, height: 100, fit: BoxFit.cover,),
           ],
         ),
       ]),

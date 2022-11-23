@@ -6,6 +6,8 @@ part 'PowerUsageDTO.g.dart';
 @freezed
 class PowerUsageDTO with _$PowerUsageDTO {
   factory PowerUsageDTO({
+    String? startDateKr,
+    String? endDateKr,
     required String dateTimeKr,
     required double powerUsageQuantity,
   }) = _PowerUsageDTO;

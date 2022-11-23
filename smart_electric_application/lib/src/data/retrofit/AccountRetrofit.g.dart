@@ -34,7 +34,7 @@ class _AccountRetrofit implements AccountRetrofit {
     )
         .compose(
           _dio.options,
-          '/user',
+          '/user/signup',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -57,7 +57,7 @@ class _AccountRetrofit implements AccountRetrofit {
     )
             .compose(
               _dio.options,
-              '/user',
+              '/user/search',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -81,6 +81,29 @@ class _AccountRetrofit implements AccountRetrofit {
             .compose(
               _dio.options,
               '/email/validation',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AccountEmailValidationDTO.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AccountEmailValidationDTO> activateUser(email) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'email': email};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AccountEmailValidationDTO>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/user/activate',
               queryParameters: queryParameters,
               data: _data,
             )

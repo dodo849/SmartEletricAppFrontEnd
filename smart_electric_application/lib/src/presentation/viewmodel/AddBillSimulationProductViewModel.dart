@@ -37,10 +37,12 @@ class AddBillSimulationProductViewModel extends GetxController {
 
   /// 시뮬레이션 가전 내부 저장소에 저장하기
   void addBillSimulationProduct() async {
-    Result<dynamic, String> getSimulationProductsResult =
+    Result<List<BillSimulationProductModel>, String>
+        getSimulationProductsResult =
         await getBillSimulationProductsUsecase.execute();
 
     if (getSimulationProductsResult.status == ResultStatus.error) {
+      print("getSimulationProductsResult.error ${getSimulationProductsResult.error}");
       return;
     }
 
@@ -49,14 +51,14 @@ class AddBillSimulationProductViewModel extends GetxController {
     if (getSimulationProductsResult.value == null) {
       order = 1; // 아무것도 저장 안되어 있으면 1번째
     } else {
-      order = getSimulationProductsResult.value.length;
+      order = getSimulationProductsResult.value!.length;
     }
 
     await addSimulationProductUsecase.execute(BillSimulationProductModel(
-        order: order, // 임시 순서
         productName: productName.value,
         modelName: modelName.value,
-        productType: ProductTypeData.productTypes[selectedProductIndex.value],
+        typeKrName: ProductTypeData.productTypes[selectedProductIndex.value].krName,
+        typeEngName: ProductTypeData.productTypes[selectedProductIndex.value].engName,
         monthPowerUsage: double.parse(monthPowerUsage.value)));
 
     // 요금 시뮬레이션 메인 탭 리로드되도록 product 다시 받아오기

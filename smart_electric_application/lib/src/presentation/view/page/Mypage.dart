@@ -33,7 +33,7 @@ class Mypage extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
-            MypageMunuList(),
+            MypageMenuList(),
             Spacer(),
             Row(
               children: [
@@ -54,19 +54,19 @@ class Mypage extends StatelessWidget {
                 ),
 
                 // 첫화면 이동 임시 버튼
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      Get.toNamed("/FirstAccess");
-                    },
-                    child: Text(
-                      "다운로드 첫화면",
-                      style:
-                          TextStyle(color: context.theme.colorScheme.onSurface),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.all(15.0),
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Get.toNamed("/FirstAccess");
+                //     },
+                //     child: Text(
+                //       "다운로드 첫화면",
+                //       style:
+                //           TextStyle(color: context.theme.colorScheme.onSurface),
+                //     ),
+                //   ),
+                // ),
                 Spacer(),
               ],
             ),

@@ -19,7 +19,7 @@ class AiReportDTO with _$AiReportDTO {
       required double dayPowerUsageMin,
       required double dayPowerUsageMinInWon,
       required double dayPowerUsageMax,
-      required double dayPowerUsageInWon}) = _AiReportDTO;
+      required double dayPowerUsageMaxInWon}) = _AiReportDTO;
   factory AiReportDTO.fromJson(Map<String, dynamic> json) =>
       _$AiReportDTOFromJson(json);
 }

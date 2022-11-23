@@ -8,10 +8,11 @@ part 'BillSimulationProductModel.g.dart';
 @freezed
 class BillSimulationProductModel with _$BillSimulationProductModel {
   factory BillSimulationProductModel(
-      {required int order,
+      {int? id,
       required String productName,
       required String modelName,
-      required ProductTypeModel productType,
+      required String typeKrName,
+      required String typeEngName,
       required double monthPowerUsage}) = _BillSimulationProductModel;
 
   factory BillSimulationProductModel.fromJson(Map<String, dynamic> json) =>

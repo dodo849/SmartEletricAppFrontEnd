@@ -66,13 +66,22 @@ class SelectProductTypeModal extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return ProductTypeGridCell(
                         // 선택 시 상위 페이지 뷰모델 변경
-                          onTap: () {
-                            AddBillSimulationProductViewModel.to
-                                .selectedProductIndex(index);
-                          },
-                          // isSelected: controller.selectedProduct[index],
-                          productType: productTypes[index],
-                          color: colorTheme.secondaryContainer);
+                        onTap: () {
+                          AddBillSimulationProductViewModel.to
+                              .selectedProductIndex(index);
+
+                          // 이전 뷰에 표시되도록 이전 뷰모델 설정
+                          AddBillSimulationProductViewModel.to
+                              .selectedProductIndex();
+
+                          // 모달 pop
+                          Navigator.of(context).pop();
+                        },
+                        // isSelected: controller.selectedProduct[index],
+                        productType: productTypes[index],
+                        color: colorTheme.primary,
+                        textColor: colorTheme.primaryContainer,
+                      );
                     },
                   ),
                 ),

@@ -12,11 +12,13 @@ class BillSimulationCard extends StatelessWidget {
     var dataValue = "13,030";
     var bodyValue = "125 kWh";
 
+    var colorTheme = context.theme.colorScheme;
+
     return Obx(() => Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          color: context.theme.colorScheme.onSecondary,
+          color: colorTheme.background,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -36,11 +38,11 @@ class BillSimulationCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "선택한 제품 구매 시 1년 총 요금",
+                    "선택한 제품 구매 시 한달 예상 요금",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
-                      color: context.theme.colorScheme.onSurface,
+                      color: colorTheme.onSurface,
                     ),
                   ),
                   Spacer(),
@@ -57,29 +59,73 @@ class BillSimulationCard extends StatelessWidget {
               SizedBox(height: 5),
 
               // 총 예상 요금
-              Text(
-                "803,400",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: context.theme.colorScheme.secondaryContainer,
-                ),
+              Row(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: '${BillSimulationViewModel.to.totalBill.value}',
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: colorTheme.onBackground),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: ' 원',
+                          style: TextStyle(
+                            color: colorTheme.onSurface,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // 선택된 가전 개수 표시
+                  SizedBox(width: 10),
+                  Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 13, vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(100),
+                            color: colorTheme.outline),
+                        child: Text(
+                          "${BillSimulationViewModel.to.selectedProductsIndex.length}개 선택",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: colorTheme.onSurface),
+                        ),
+                        // HomeViewModel.to.user.value.billDate
+                      )
+                ],
               ),
 
               SizedBox(height: 5),
-
-              // 증가된 요금 계산
-              Text(
-                "182,239원 증가 ▲",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: context.theme.colorScheme.onSurface,
-                ),
+              // 누진구간표시
+              Row(
+                children: [
+                  Container(
+                    width: 7,
+                    height: 7,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                        color: BillSimulationViewModel
+                            .to.progressiveSection.value.color),
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "${BillSimulationViewModel.to.progressiveSection.value.krString} 누진구간 적용",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: colorTheme.onSurface,
+                    ),
+                  ),
+                ],
               ),
 
               if (BillSimulationViewModel.to.isCardOpen.isTrue) ...[
-                SizedBox(height: 10),
+                SizedBox(height: 5),
                 Divider(),
                 SizedBox(height: 10),
 
@@ -91,16 +137,16 @@ class BillSimulationCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: context.theme.colorScheme.onSurface,
+                        color: colorTheme.onSurface,
                       ),
                     ),
                     Spacer(),
                     Text(
-                      "53,120원",
+                      "${BillSimulationViewModel.to.billOfThisMonth}원",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: context.theme.colorScheme.onBackground,
+                        color: colorTheme.onBackground,
                       ),
                     ),
                   ],
@@ -113,44 +159,22 @@ class BillSimulationCard extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: context.theme.colorScheme.onSurface,
+                        color: colorTheme.onSurface,
                       ),
                     ),
                     Spacer(),
                     Text(
-                      "13,830원",
+                      "${BillSimulationViewModel.to.additionalBill.value}원",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: context.theme.colorScheme.onBackground,
+                        color: colorTheme.onBackground,
                       ),
                     ),
                   ],
                 ),
 
                 SizedBox(height: 10),
-                // 월 합계
-                Row(
-                  children: [
-                    Text(
-                      "합계",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: context.theme.colorScheme.onBackground,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      "66,950원",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: context.theme.colorScheme.secondaryContainer,
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ])));
   }

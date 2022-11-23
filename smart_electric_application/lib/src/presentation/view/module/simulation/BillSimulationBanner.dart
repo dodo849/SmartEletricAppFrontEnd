@@ -28,7 +28,7 @@ class BillSimulationBanner extends StatelessWidget {
                   fontWeight: FontWeight.bold, color: colorTheme.onBackground),
               children: <TextSpan>[
                 TextSpan(
-                    text: '을 통해 지금 고민하고 있는 제품의 전기요금을 구매하기 전에 확인해보세요',
+                    text: '을 통해 지금 고민하고 있는 제품을 \n구매하기 전에 전기요금을 확인해보세요',
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: colorTheme.onSurface)),

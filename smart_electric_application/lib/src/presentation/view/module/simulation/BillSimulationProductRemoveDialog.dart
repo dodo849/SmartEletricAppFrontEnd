@@ -42,10 +42,13 @@ class BillSimulationProductRemoveDialog extends StatelessWidget {
               SizedBox(width: 10),
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    BillSimulationViewModel.to.removeBillSimulationProducts();
-                    BillSimulationViewModel.to.getBillSimulationProducts();
+                  onTap: () async {
+                    await BillSimulationViewModel.to
+                        .deleteBillSimulationProducts();
                     Navigator.of(context).pop();
+                    await BillSimulationViewModel.to
+                        .getBillSimulationProducts();
+                    BillSimulationViewModel.to.selectedProductsIndex.clear();
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 15),

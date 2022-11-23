@@ -29,7 +29,7 @@ _$_AiReportDTO _$$_AiReportDTOFromJson(Map<String, dynamic> json) =>
       dayPowerUsageMin: (json['dayPowerUsageMin'] as num).toDouble(),
       dayPowerUsageMinInWon: (json['dayPowerUsageMinInWon'] as num).toDouble(),
       dayPowerUsageMax: (json['dayPowerUsageMax'] as num).toDouble(),
-      dayPowerUsageInWon: (json['dayPowerUsageInWon'] as num).toDouble(),
+      dayPowerUsageMaxInWon: (json['dayPowerUsageMaxInWon'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_AiReportDTOToJson(_$_AiReportDTO instance) =>
@@ -47,5 +47,5 @@ Map<String, dynamic> _$$_AiReportDTOToJson(_$_AiReportDTO instance) =>
       'dayPowerUsageMin': instance.dayPowerUsageMin,
       'dayPowerUsageMinInWon': instance.dayPowerUsageMinInWon,
       'dayPowerUsageMax': instance.dayPowerUsageMax,
-      'dayPowerUsageInWon': instance.dayPowerUsageInWon,
+      'dayPowerUsageMaxInWon': instance.dayPowerUsageMaxInWon,
     };

@@ -33,7 +33,7 @@ mixin _$AiReportDTO {
   double get dayPowerUsageMin => throw _privateConstructorUsedError;
   double get dayPowerUsageMinInWon => throw _privateConstructorUsedError;
   double get dayPowerUsageMax => throw _privateConstructorUsedError;
-  double get dayPowerUsageInWon => throw _privateConstructorUsedError;
+  double get dayPowerUsageMaxInWon => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,7 +60,7 @@ abstract class $AiReportDTOCopyWith<$Res> {
       double dayPowerUsageMin,
       double dayPowerUsageMinInWon,
       double dayPowerUsageMax,
-      double dayPowerUsageInWon});
+      double dayPowerUsageMaxInWon});
 }
 
 /// @nodoc
@@ -86,7 +86,7 @@ class _$AiReportDTOCopyWithImpl<$Res> implements $AiReportDTOCopyWith<$Res> {
     Object? dayPowerUsageMin = freezed,
     Object? dayPowerUsageMinInWon = freezed,
     Object? dayPowerUsageMax = freezed,
-    Object? dayPowerUsageInWon = freezed,
+    Object? dayPowerUsageMaxInWon = freezed,
   }) {
     return _then(_value.copyWith(
       timePeriodIndex: timePeriodIndex == freezed
@@ -141,9 +141,9 @@ class _$AiReportDTOCopyWithImpl<$Res> implements $AiReportDTOCopyWith<$Res> {
           ? _value.dayPowerUsageMax
           : dayPowerUsageMax // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageInWon: dayPowerUsageInWon == freezed
-          ? _value.dayPowerUsageInWon
-          : dayPowerUsageInWon // ignore: cast_nullable_to_non_nullable
+      dayPowerUsageMaxInWon: dayPowerUsageMaxInWon == freezed
+          ? _value.dayPowerUsageMaxInWon
+          : dayPowerUsageMaxInWon // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -170,7 +170,7 @@ abstract class _$$_AiReportDTOCopyWith<$Res>
       double dayPowerUsageMin,
       double dayPowerUsageMinInWon,
       double dayPowerUsageMax,
-      double dayPowerUsageInWon});
+      double dayPowerUsageMaxInWon});
 }
 
 /// @nodoc
@@ -198,7 +198,7 @@ class __$$_AiReportDTOCopyWithImpl<$Res> extends _$AiReportDTOCopyWithImpl<$Res>
     Object? dayPowerUsageMin = freezed,
     Object? dayPowerUsageMinInWon = freezed,
     Object? dayPowerUsageMax = freezed,
-    Object? dayPowerUsageInWon = freezed,
+    Object? dayPowerUsageMaxInWon = freezed,
   }) {
     return _then(_$_AiReportDTO(
       timePeriodIndex: timePeriodIndex == freezed
@@ -253,9 +253,9 @@ class __$$_AiReportDTOCopyWithImpl<$Res> extends _$AiReportDTOCopyWithImpl<$Res>
           ? _value.dayPowerUsageMax
           : dayPowerUsageMax // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageInWon: dayPowerUsageInWon == freezed
-          ? _value.dayPowerUsageInWon
-          : dayPowerUsageInWon // ignore: cast_nullable_to_non_nullable
+      dayPowerUsageMaxInWon: dayPowerUsageMaxInWon == freezed
+          ? _value.dayPowerUsageMaxInWon
+          : dayPowerUsageMaxInWon // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -278,7 +278,7 @@ class _$_AiReportDTO implements _AiReportDTO {
       required this.dayPowerUsageMin,
       required this.dayPowerUsageMinInWon,
       required this.dayPowerUsageMax,
-      required this.dayPowerUsageInWon})
+      required this.dayPowerUsageMaxInWon})
       : _timePeriodIndex = timePeriodIndex,
         _timePeriodPowerUsage = timePeriodPowerUsage,
         _weekdayIndex = weekdayIndex,
@@ -334,11 +334,11 @@ class _$_AiReportDTO implements _AiReportDTO {
   @override
   final double dayPowerUsageMax;
   @override
-  final double dayPowerUsageInWon;
+  final double dayPowerUsageMaxInWon;
 
   @override
   String toString() {
-    return 'AiReportDTO(timePeriodIndex: $timePeriodIndex, timePeriodPowerUsage: $timePeriodPowerUsage, standbyPower: $standbyPower, weekdayIndex: $weekdayIndex, weekdayPowerUsage: $weekdayPowerUsage, dayOrNight: $dayOrNight, dayTimePowerUsage: $dayTimePowerUsage, nightTimePowerUsage: $nightTimePowerUsage, dayPowerUsageMean: $dayPowerUsageMean, dayPowerUsageMeanInWon: $dayPowerUsageMeanInWon, dayPowerUsageMin: $dayPowerUsageMin, dayPowerUsageMinInWon: $dayPowerUsageMinInWon, dayPowerUsageMax: $dayPowerUsageMax, dayPowerUsageInWon: $dayPowerUsageInWon)';
+    return 'AiReportDTO(timePeriodIndex: $timePeriodIndex, timePeriodPowerUsage: $timePeriodPowerUsage, standbyPower: $standbyPower, weekdayIndex: $weekdayIndex, weekdayPowerUsage: $weekdayPowerUsage, dayOrNight: $dayOrNight, dayTimePowerUsage: $dayTimePowerUsage, nightTimePowerUsage: $nightTimePowerUsage, dayPowerUsageMean: $dayPowerUsageMean, dayPowerUsageMeanInWon: $dayPowerUsageMeanInWon, dayPowerUsageMin: $dayPowerUsageMin, dayPowerUsageMinInWon: $dayPowerUsageMinInWon, dayPowerUsageMax: $dayPowerUsageMax, dayPowerUsageMaxInWon: $dayPowerUsageMaxInWon)';
   }
 
   @override
@@ -373,7 +373,7 @@ class _$_AiReportDTO implements _AiReportDTO {
             const DeepCollectionEquality()
                 .equals(other.dayPowerUsageMax, dayPowerUsageMax) &&
             const DeepCollectionEquality()
-                .equals(other.dayPowerUsageInWon, dayPowerUsageInWon));
+                .equals(other.dayPowerUsageMaxInWon, dayPowerUsageMaxInWon));
   }
 
   @JsonKey(ignore: true)
@@ -393,7 +393,7 @@ class _$_AiReportDTO implements _AiReportDTO {
       const DeepCollectionEquality().hash(dayPowerUsageMin),
       const DeepCollectionEquality().hash(dayPowerUsageMinInWon),
       const DeepCollectionEquality().hash(dayPowerUsageMax),
-      const DeepCollectionEquality().hash(dayPowerUsageInWon));
+      const DeepCollectionEquality().hash(dayPowerUsageMaxInWon));
 
   @JsonKey(ignore: true)
   @override
@@ -423,7 +423,7 @@ abstract class _AiReportDTO implements AiReportDTO {
       required final double dayPowerUsageMin,
       required final double dayPowerUsageMinInWon,
       required final double dayPowerUsageMax,
-      required final double dayPowerUsageInWon}) = _$_AiReportDTO;
+      required final double dayPowerUsageMaxInWon}) = _$_AiReportDTO;
 
   factory _AiReportDTO.fromJson(Map<String, dynamic> json) =
       _$_AiReportDTO.fromJson;
@@ -455,7 +455,7 @@ abstract class _AiReportDTO implements AiReportDTO {
   @override
   double get dayPowerUsageMax;
   @override
-  double get dayPowerUsageInWon;
+  double get dayPowerUsageMaxInWon;
   @override
   @JsonKey(ignore: true)
   _$$_AiReportDTOCopyWith<_$_AiReportDTO> get copyWith =>

@@ -10,6 +10,7 @@ ThemeData lightTheme = ThemeData(
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     colorScheme: const ColorScheme(
+  
       onPrimary: CommonColors.onWhite,
       onSecondary: CommonColors.onWhite,
       primary: LightColors.yellow1, // point color1

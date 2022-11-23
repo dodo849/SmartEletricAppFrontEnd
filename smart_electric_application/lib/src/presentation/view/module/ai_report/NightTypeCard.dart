@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/AiReportViewModel.dart';
 
 class NightTypeCard extends StatelessWidget {
   const NightTypeCard({super.key});
@@ -35,7 +36,7 @@ class NightTypeCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Image.asset("assets/images/night.png", width: 70),
+                Image.asset("assets/images/night.png", width: 60),
               ],
             ),
 
@@ -44,7 +45,7 @@ class NightTypeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "소마님의 ",
+                  "${AiReportViewModel.to.user.value.name}님의 ",
                   style: titleStyle,
                 ),
                 SizedBox(height: 5),
@@ -69,7 +70,9 @@ class NightTypeCard extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: '전체 사용량의 32%',
+                        text: '전체 사용량의 ${(AiReportViewModel.to.aiReport.value.nightTimePowerUsage / 
+                            (AiReportViewModel.to.aiReport.value.dayTimePowerUsage + 
+                            AiReportViewModel.to.aiReport.value.nightTimePowerUsage) * 100).toStringAsFixed(0)}%',
                       ),
                       TextSpan(
                         text: '입니다!',
@@ -83,7 +86,7 @@ class NightTypeCard extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "머라고 써야할까욤욤욤욤",
+                  "대기전력 사용이 많",
                   style: bodyStyle,
                 ),
                 SizedBox(height: 20),

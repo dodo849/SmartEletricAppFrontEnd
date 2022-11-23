@@ -4,13 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/AuthRetrofit.dart';
+import 'package:smart_electric_application/src/domain/model/UserModel.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
 
 class AuthRepository implements AuthRepositoryInterface {
   /// firebase id token을 이용해 서버에서 access/refresh 토큰 발급받기
   @override
-  Future<Result<JwtTokenDTO, String>> requestJwt(
-      String firebaseIdToken) async {
+  Future<Result<JwtTokenDTO, String>> requestJwt(String firebaseIdToken) async {
     try {
       final dio = Dio();
       final authRetrofit = AuthRetrofit(dio);
@@ -120,16 +120,48 @@ class AuthRepository implements AuthRepositoryInterface {
   Future<Result<bool, String>> saveUser(
       {required String customerNumber,
       required String name,
-      required String email}) async {
+      required String email,
+      required bool isSmartMeter,
+      required String billDate}) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString('customerNumber', customerNumber);
       await prefs.setString('name', name);
       await prefs.setString('email', email);
+      await prefs.setBool('isSmartMeter', isSmartMeter);
+      await prefs.setString('billDate', billDate);
 
       return const Result.success(true);
     } catch (err) {
       return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<UserModel> getUser() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? customerNumber = prefs.getString('customerNumber');
+      String? name = prefs.getString('name');
+      String? email = prefs.getString('email');
+      bool? isSmartMeter = prefs.getBool('isSmartMeter');
+      String? billDate = prefs.getString('billDate');
+
+      if (customerNumber == null &&
+          name == null &&
+          email == null &&
+          isSmartMeter == null) {
+        throw Exception("found null");
+      }
+
+      return UserModel(
+          customerNumber: customerNumber!,
+          name: name!,
+          email: email!,
+          isSmartMeter: isSmartMeter!,
+          billDate: billDate!);
+    } catch (_) {
+      rethrow;
     }
   }
 
@@ -179,8 +211,93 @@ class AuthRepository implements AuthRepositoryInterface {
       await prefs.remove('customerNumber');
       await prefs.remove('name');
       await prefs.remove('email');
+      await prefs.remove('isSmartMeter');
 
       return const Result.success(true);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<String, String>> getUserName() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var userName = prefs.getString('name');
+
+      if (userName == null) {
+        return const Result.failure("The name is null");
+      }
+
+      return Result.success(userName);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> getIsSmartMeter() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var isSmartMeter = prefs.getBool('isSmartMeter');
+
+      if (isSmartMeter == null) {
+        return const Result.failure("The isSmartMeter is null");
+      }
+
+      return Result.success(isSmartMeter);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> saveAddress(String address) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('address', address);
+
+      return Result.success(true);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<String?, String>> getAddress() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var address = prefs.getString('address');
+
+      return Result.success(address);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> checkLogin() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var isLogin = prefs.getBool('isLogin');
+
+      if (isLogin == null || isLogin == false) {
+        return Result.success(false);
+      } else {
+        return Result.success(true);
+      }
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> setLogin() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLogin', true);
+
+      return Result.success(true);
     } catch (err) {
       return Result.failure(err.toString());
     }

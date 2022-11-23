@@ -21,7 +21,7 @@ AccountEmailValidationDTO _$AccountEmailValidationDTOFromJson(
 
 /// @nodoc
 mixin _$AccountEmailValidationDTO {
-  String get result => throw _privateConstructorUsedError;
+  bool get result => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $AccountEmailValidationDTOCopyWith<$Res> {
   factory $AccountEmailValidationDTOCopyWith(AccountEmailValidationDTO value,
           $Res Function(AccountEmailValidationDTO) then) =
       _$AccountEmailValidationDTOCopyWithImpl<$Res>;
-  $Res call({String result});
+  $Res call({bool result});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$AccountEmailValidationDTOCopyWithImpl<$Res>
       result: result == freezed
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
     ));
   }
 }
@@ -67,7 +67,7 @@ abstract class _$$_AccountEmailValidationDTOCopyWith<$Res>
           $Res Function(_$_AccountEmailValidationDTO) then) =
       __$$_AccountEmailValidationDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String result});
+  $Res call({bool result});
 }
 
 /// @nodoc
@@ -91,7 +91,7 @@ class __$$_AccountEmailValidationDTOCopyWithImpl<$Res>
       result: result == freezed
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
     ));
   }
 }
@@ -105,7 +105,7 @@ class _$_AccountEmailValidationDTO implements _AccountEmailValidationDTO {
       _$$_AccountEmailValidationDTOFromJson(json);
 
   @override
-  final String result;
+  final bool result;
 
   @override
   String toString() {
@@ -140,14 +140,14 @@ class _$_AccountEmailValidationDTO implements _AccountEmailValidationDTO {
 }
 
 abstract class _AccountEmailValidationDTO implements AccountEmailValidationDTO {
-  factory _AccountEmailValidationDTO({required final String result}) =
+  factory _AccountEmailValidationDTO({required final bool result}) =
       _$_AccountEmailValidationDTO;
 
   factory _AccountEmailValidationDTO.fromJson(Map<String, dynamic> json) =
       _$_AccountEmailValidationDTO.fromJson;
 
   @override
-  String get result;
+  bool get result;
   @override
   @JsonKey(ignore: true)
   _$$_AccountEmailValidationDTOCopyWith<_$_AccountEmailValidationDTO>

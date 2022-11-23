@@ -1,3 +1,6 @@
+import 'package:smart_electric_application/src/presentation/view/page/mypage/ContactUs.dart';
+import 'package:smart_electric_application/src/presentation/view/page/mypage/NotificationSettings.dart';
+import 'package:smart_electric_application/src/presentation/view/page/mypage/PersonalInfo.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/LoginViewModel.dart';
 
 import 'firebase_options.dart';
@@ -7,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:smart_electric_application/src/presentation/view/page/AiReport.dart';
-import 'package:smart_electric_application/src/presentation/view/page/first_access/FirstAccess.dart';
+import 'package:smart_electric_application/src/presentation/view/page/singup/FirstAccess.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Login.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 import 'package:smart_electric_application/src/presentation/view/theme/Themes.dart';
@@ -25,6 +28,7 @@ void main() async {
 
   // Default Setting
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -40,13 +44,19 @@ class MyApp extends StatelessWidget {
     LoginViewModel.to.checkLogin();
 
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+          child: child!,
+        );
+      },
       home: Obx(() => LoginViewModel.to.isLogin.value == false
           ? const Login()
           : const RootScaffold()),
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: ThemeMode.system,
-      
       getPages: [
         GetPage(
             name: "/AIReport",
@@ -58,6 +68,18 @@ class MyApp extends StatelessWidget {
             name: "/FirstAccess",
             page: () => const FirstAccess(),
             transition: Transition.fade),
+        GetPage(
+            name: "/PersonalInfo",
+            page: () => const PersonalInfo(),
+            transition: Transition.native),
+        GetPage(
+            name: "/NotificationSettings",
+            page: () => const NotificationSettings(),
+            transition: Transition.native),
+        GetPage(
+            name: "/ContactUs",
+            page: () => const ContactUs(),
+            transition: Transition.native),
       ],
     );
   }

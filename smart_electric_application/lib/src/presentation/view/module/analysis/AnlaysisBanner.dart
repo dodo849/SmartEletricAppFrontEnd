@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/AnalysisViewModel.dart';
 
 class AnlaysisBanner extends StatelessWidget {
   const AnlaysisBanner({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Obx(()=>Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -15,7 +16,7 @@ class AnlaysisBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "소마님은",
+              "${AnalysisViewModel.to.userName.value}님은",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -45,10 +46,8 @@ class AnlaysisBanner extends StatelessWidget {
             ),
           ],
         ),
-        Spacer(flex:2),
-        Image.asset("assets/images/light.png", width: 80, height: 80),
         Spacer(),
       ],
-    ));
+    )));
   }
 }

@@ -28,6 +28,8 @@ class AddBillSimulationProduct extends StatelessWidget {
           backgroundColor: colorTheme.background,
         ),
         body: SingleChildScrollView(
+          
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: GetX<AddBillSimulationProductViewModel>(builder: (viewModel) {
             return Container(
                 decoration: BoxDecoration(
@@ -50,8 +52,9 @@ class AddBillSimulationProduct extends StatelessWidget {
                         labelText: "제품명",
                         placeholder: "제품명을 입력해 주세요.",
                         textInputStyle: TextInputStyle.bordered,
-                        focusColor: colorTheme.secondaryContainer,
+                        focusColor: colorTheme.primary,
                         isRequiredInput: true,
+                        maxLength: 50,
                         innerValue: viewModel.productName.value.length != 0
                             ? viewModel.productName.value
                             : null,
@@ -60,21 +63,22 @@ class AddBillSimulationProduct extends StatelessWidget {
                         }),
 
                     // Input - 모델명
-                    SizedBox(height: 30),
+                    SizedBox(height: 15),
                     CustomTextInput(
                         labelText: "모델명",
                         placeholder: "제품 모델명을 입력해 주세요.(선택)",
                         textInputStyle: TextInputStyle.bordered,
-                        focusColor: colorTheme.secondaryContainer,
+                        focusColor: colorTheme.primary,
                         innerValue: viewModel.modelName.value.length != 0
                             ? viewModel.modelName.value
                             : null,
+                        maxLength: 50,
                         onChanged: (value) {
                           viewModel.modelName(value);
                         }),
 
                     // Input - 종류
-                    SizedBox(height: 30),
+                    SizedBox(height: 15),
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Row(
@@ -158,12 +162,12 @@ class AddBillSimulationProduct extends StatelessWidget {
                     // Input - 월간 소비 전력량
                     SizedBox(height: 30),
                     CustomTextInput(
-                        labelText: "월간 소비 전력량",
-                        placeholder: "월간 소비 전력량을 입력해주세요.",
+                        labelText: "월간 소비 전력",
+                        placeholder: "월간 소비 전력을 입력해주세요.",
                         textInputStyle: TextInputStyle.bordered,
-                        focusColor: colorTheme.secondaryContainer,
+                        focusColor: colorTheme.primary,
                         suffixText: "kWh",
-                        textInputType: TextInputType.number,
+                        textInputType: TextInputType.number, 
                         isRequiredInput: true,
                         innerValue: viewModel.monthPowerUsage.value.length != 0
                             ? viewModel.monthPowerUsage.value
@@ -198,6 +202,7 @@ class AddBillSimulationProduct extends StatelessWidget {
                             width: 1,
                             color: colorTheme.outline,
                           ),
+                          color: Colors.white,
                         ),
                         child: Image.asset(
                             'assets/images/power_consumption_information.png')),
@@ -207,10 +212,10 @@ class AddBillSimulationProduct extends StatelessWidget {
                     RoundedButton(
                         text: "추가하기",
                         bgColor: viewModel.submitButtonEnabled.value
-                            ? colorTheme.secondaryContainer
+                            ? colorTheme.primary
                             : colorTheme.surface,
                         textColor: viewModel.submitButtonEnabled.value
-                            ? colorTheme.onPrimary
+                            ? colorTheme.onBackground
                             : colorTheme.onSurface,
                         size: ButtonSize.large,
                         action: () {

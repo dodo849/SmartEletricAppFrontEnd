@@ -16,10 +16,12 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var textAlign = TextAlign.center;
+    var colorTheme = context.theme.colorScheme;
 
     double horizonPadding = 30;
 
     return AlertDialog(
+      backgroundColor: colorTheme.background,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0))),
       titlePadding: EdgeInsets.fromLTRB(horizonPadding, 40, horizonPadding, 0),
@@ -42,6 +44,6 @@ class CustomDialog extends StatelessWidget {
     return TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.normal,
-        color: context.theme.colorScheme.onSurface);
+        color: context.theme.colorScheme.onSurface, height: 1.5);
   }
 }

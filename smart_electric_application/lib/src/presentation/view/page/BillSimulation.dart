@@ -14,7 +14,7 @@ class BillSimulation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // VeiwModel DI
-    Get.put(BillSimulationViewModel());
+    Get.put(BillSimulationViewModel(), permanent: true);
 
     // Theme
     var colorTheme = context.theme.colorScheme;
@@ -29,8 +29,10 @@ class BillSimulation extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // 기능설명 배너
                     SizedBox(height: 25),
                     BillSimulationBanner(),
+                    // 가전 목록
                     SizedBox(height: 30),
                     Row(
                       children: [

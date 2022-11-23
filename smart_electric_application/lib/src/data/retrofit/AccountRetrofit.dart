@@ -9,15 +9,19 @@ part 'AccountRetrofit.g.dart';
 abstract class AccountRetrofit {
   factory AccountRetrofit(Dio dio, {String baseUrl}) = _AccountRetrofit;
 
-  @POST("/user")
+  @POST("/user/signup")
   Future<String> registerNewAcoount(
       @Body() AccountRegistrationDTO accountRegistrationDTO);
 
-  @GET("/user")
+  @GET("/user/search")
   Future<AccountRegistrationDTO> getAccountRegistration(
       @Query("email") String email);
 
   @GET("/email/validation")
   Future<AccountEmailValidationDTO> getEmailValidation(
+      @Query("email") String email);
+
+    @GET("/user/activate")
+  Future<AccountEmailValidationDTO> activateUser(
       @Query("email") String email);
 }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
 
@@ -77,12 +78,34 @@ class FirebaseRepository implements FirebaseRepositoryInterface {
       var idToken = await user?.getIdToken(true);
       return Result.success(idToken);
     } catch (err) {
-      return Result.failure('알 수 없는 오류가 발생했습니다. 다시 시도해주세요.');
+      return Result.failure('Fail to load id token. Try again.');
     }
   }
 
-  // Future<Result<String, Exception>> getAllUser(){
+  @override
+  Future<Result<String, String>> getUid() async {
+    User? user = FirebaseAuth.instance.currentUser;
 
+    try {
+      var uid = await user?.uid;
+      return Result.success(uid);
+    } catch (err) {
+      return Result.failure('Fail to load uid. Try again.');
+    }
+  }
 
-  // }
+  @override
+  Future<String> getMessageToken() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      String? messageToken = await FirebaseMessaging.instance.getToken();
+      if (messageToken == null) {
+        return "fail";
+      } else {
+        return messageToken;
+      }
+    } catch (err) {
+      rethrow;
+    }
+  }
 }

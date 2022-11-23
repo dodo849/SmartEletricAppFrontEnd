@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckCustomerValidationUsecase.dart';
+import 'package:smart_electric_application/src/data/dto/UserValidationDTO.dart';
 
 part 'InfoRetrofit.g.dart';
 
@@ -10,6 +9,6 @@ abstract class InfoRetrofit {
   factory InfoRetrofit(Dio dio, {String baseUrl}) = _InfoRetrofit;
 
   // 정보제공 동의 확인
-  @POST('/specific-user/validation')
-  Future<JwtTokenDTO> checkInfoValidation(@Query('custNo') customerNumber);
+  @GET('/specific-user/validation')
+  Future<UserValidationDTO> checkInfoValidation(@Query('custNo') String customerNumber);
 }

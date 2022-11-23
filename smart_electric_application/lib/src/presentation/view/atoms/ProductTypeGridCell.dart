@@ -42,11 +42,13 @@ class ProductTypeGridCell extends StatelessWidget {
     Key? key,
     required this.productType,
     this.color,
+    this.textColor,
     this.onTap,
   }) : super(key: key);
 
   final ProductTypeModel productType;
   final Color? color;
+  final Color? textColor;
   final void Function()? onTap;
 
   @override
@@ -64,13 +66,8 @@ class ProductTypeGridCell extends StatelessWidget {
           onTap!();
 
           // 셀 선택 상태로 UI 변경
-          viewModel.select();
+          // viewModel.select();
 
-          // 이전 뷰에 표시되도록 이전 뷰모델 설정
-          AddBillSimulationProductViewModel.to.selectedProductIndex();
-
-          // 모달 pop
-          Navigator.of(context).pop();
         },
         child: Container(
             decoration: BoxDecoration(
@@ -96,7 +93,7 @@ class ProductTypeGridCell extends StatelessWidget {
                   SvgPicture.asset(
                     "assets/icons/product_${productType.engName}.svg",
                     color: viewModel.isSelected.value
-                        ? color
+                        ? textColor
                         : colorTheme.onSurface,
                     width: 50,
                     height: 50,
@@ -110,7 +107,7 @@ class ProductTypeGridCell extends StatelessWidget {
                       fontFamily: "Pretendard",
                       fontWeight: FontWeight.normal,
                       color: viewModel.isSelected.value
-                          ? color
+                          ? textColor
                           : colorTheme.onSurfaceVariant,
                       fontSize: 12),
                 ),

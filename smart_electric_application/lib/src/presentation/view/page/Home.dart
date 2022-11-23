@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:smart_electric_application/src/data/repository/BillSimulationRepository.dart';
-import 'package:smart_electric_application/src/presentation/view/module/graph/PredictLineGraph.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomActionButton.dart';
+import 'package:smart_electric_application/src/presentation/view/module/home/PredictLineGraph.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/NowBillBanner.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/Predict%08BillCard.dart';
+import 'package:smart_electric_application/src/presentation/view/module/home/PredictionLineGraphDescription.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
-import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
+import 'package:smart_electric_application/src/presentation/viewmodel/HomeViewModel.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,6 +29,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // View model DI
+    Get.put(HomeViewModel());
+
     // Theme define
     var colorTheme = context.theme.colorScheme;
 
@@ -36,47 +39,18 @@ class Home extends StatelessWidget {
       child: Column(children: [
         const SizedBox(height: 20),
 
-        ElevatedButton(
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              prefs.remove("billSimulationProducts");
+        // ElevatedButton(
+        //     onPressed: () async {
+        //       // 어제 날짜 가져오기
+        //       var yesterday = DateTime.now().subtract(const Duration(hours: 5));
 
-              var result =
-                  await BillSimulationRepository().getBillSimulationProduct();
-              print("getBillSimulationProduct ${result.value}");
+        //       // 날짜 형식 변경
+        //       DateFormat formatter = DateFormat('yyyyMMHH');
+        //       var formattedYesterday = formatter.format(yesterday);
 
-              // var firebaseRepository = FirebaseRepository();
-              // var user = firebaseRepository.getUser();
-              // var idToken = await user?.getIdToken();
-              // print('user $user');
-
-              // // var authRepository = AuthRepository();
-              // // var jwtTokens = await authRepository.requestJwt(idToken!);
-              // // print(jwtTokens.value);
-
-              // var powerUsageRepository = PowerUsageRepository();
-              // var powerUsageRepositoryData =
-              //     await powerUsageRepository.getPowerUsageByDay(
-              //         customerNumber: "0130392270",
-              //         startDate: "20220801",
-              //         endDate: "20220831");
-              // print(powerUsageRepositoryData.status);
-              // print(powerUsageRepositoryData.error);
-              // print(powerUsageRepositoryData.value);
-
-              // var aiRepository = AiRepository();
-              // var predictionResult = await aiRepository.requestAiPrediction(
-              //     customerNumber: "0130392270");
-              // print("predictionResult: ${predictionResult.value}");
-              // var reportResult = await aiRepository.requestAiReport(
-              //     customerNumber: "0130392270");
-              // print("reportResult: ${reportResult.value}");
-
-              // print("###### 파이어베이스 토큰");
-              // final fcmToken = await FirebaseMessaging.instance.getToken();
-              // print(fcmToken);
-            },
-            child: Text("Test Button")),
+        //       print("formattedYesterday $formattedYesterday");
+        //     },
+        //     child: Text("Test Button")),
 
         // 스마트 전기앱 로고
         Padding(
@@ -108,29 +82,11 @@ class Home extends StatelessWidget {
         // 현재 요금 정보
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Row(
-            children: [
-              NowBillBanner(),
-              Spacer(),
-              Obx(
-                () => GestureDetector(
-                  onTap: () {
-                    ThemeViewModel.to.changeTheme();
-                  }, // Image tapped
-                  child: ThemeViewModel.to.isLightTheme.isTrue
-                      ? Image.asset("assets/images/day.png",
-                          width: 70, height: 70)
-                      : Image.asset("assets/images/night.png",
-                          width: 70, height: 70),
-                ),
-              ),
-              Spacer(flex: 2),
-            ],
-          ),
+          child: NowBillBanner(),
         ),
 
         // 누진 구간 바
-        SizedBox(height: 15),
+        SizedBox(height: 7),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 30),
           child: ProgressiveIntervalBar(
@@ -160,21 +116,32 @@ class Home extends StatelessWidget {
               SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: EstimatedBillCard(),
+                child: PredictBillCard(),
               ),
 
-              SizedBox(height: 80),
+              SizedBox(height: 40),
 
               // 그래프
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Text("이번달 예측 사용량",
-                    style: context.theme.textTheme.headline3),
+                child: Row(
+                  children: [
+                    Text("예측 사용량", style: context.theme.textTheme.headline3),
+                    const SizedBox(width: 7),
+                    GestureDetector(
+                      onTap: () => _showGraphDescription(context),
+                      child: SvgPicture.asset('assets/icons/noti.svg',
+                          width: 20, color: colorTheme.onSurface),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 45),
-              Container(height: 300, child: PredictLineGraph()),
+              Container(height: 300, child: const PredictLineGraph()),
+              SizedBox(height: 15),
+              PredictionLineGraphDescription(),
 
-              SizedBox(height: 80),
+              SizedBox(height: 40),
             ],
           ),
         ),
@@ -226,6 +193,57 @@ class Home extends StatelessWidget {
         //     false.obs,
         // ),
       ]),
+    );
+  }
+
+  void _showGraphDescription(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(32.0),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          // height: 200,
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+            color: context.theme.colorScheme.background,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('그래프 설명',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: context.theme.colorScheme.onBackground,
+                      fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
+              Text('그래프는 청구일 기준으로 1일입니다.',
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: context.theme.colorScheme.onSurface)),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  CustomActionButton(
+                    text: "확인",
+                    onTap: () => Navigator.pop(context),
+                    bgColor: context.theme.colorScheme.outline,
+                  ),
+                ],
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

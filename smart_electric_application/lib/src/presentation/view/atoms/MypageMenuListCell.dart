@@ -9,6 +9,7 @@ class MypageMenuListCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colorTheme = context.theme.colorScheme;
     return Container(
       child: Column(
         children: [
@@ -23,8 +24,11 @@ class MypageMenuListCell extends StatelessWidget {
                   color: context.theme.colorScheme.onBackground),
             ),
             Spacer(),
-            SvgPicture.asset("assets/icons/arrow_right.svg",
-                color: context.theme.colorScheme.onSurface),
+            Container(
+              color: colorTheme.background,
+              child: SvgPicture.asset("assets/icons/arrow_right.svg",
+                  color: context.theme.colorScheme.onSurface, width: 8),
+            ),
           ]),
           SizedBox(height: 10),
           Divider(),

@@ -53,6 +53,10 @@ dependencies:
   firebase_messaging: ^13.1.0
   dotted_line: ^3.1.0
   dotted_border: ^2.0.0+3
+  intl: ^0.17.0
+  path: ^1.8.2
+  sqflite: ^2.2.0+3
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

@@ -9,7 +9,7 @@ part of 'AccountEmailValidationDTO.dart';
 _$_AccountEmailValidationDTO _$$_AccountEmailValidationDTOFromJson(
         Map<String, dynamic> json) =>
     _$_AccountEmailValidationDTO(
-      result: json['result'] as String,
+      result: json['result'] as bool,
     );
 
 Map<String, dynamic> _$$_AccountEmailValidationDTOToJson(

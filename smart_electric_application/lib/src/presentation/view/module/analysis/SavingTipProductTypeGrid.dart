@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/domain/model/ProductTypeData.dart';
 import 'package:smart_electric_application/src/domain/model/ProductTypeModel.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomActionButton.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/ProductTypeGridCell.dart';
 
 // 클래스 변수 수정 로직
@@ -8,52 +11,64 @@ import 'package:smart_electric_application/src/presentation/view/atoms/ProductTy
 //   _payload.dataList.map((data) => History.fromJson(data)).toList());
 // ac.historyList.refresh();
 
-class SavingTipProductTypeGridController extends GetxController {
-  // 절약 팁 분류 종류 목록
-  final savingTipTypes = <ProductTypeModel>[
-    ProductTypeModel(krName: "에어컨", engName: "ac"),
-    ProductTypeModel(krName: "냉장고", engName: "fridge"),
-    ProductTypeModel(krName: "정수기", engName: "waterpurifier"),
-    ProductTypeModel(krName: "컴퓨터", engName: "pc"),
-    ProductTypeModel(krName: "세탁기", engName: "washingmachine"),
-    ProductTypeModel(krName: "전등", engName: "lamp"),
-    ProductTypeModel(krName: "공기청정기", engName: "airpurifier"),
-    ProductTypeModel(krName: "TV", engName: "tv"),
-    ProductTypeModel(krName: "청소기", engName: "cleaner"),
-    ProductTypeModel(krName: "드라이기", engName: "dryer"),
-    ProductTypeModel(krName: "전자레인지", engName: "microwave"),
-    ProductTypeModel(krName: "에어프라이기", engName: "airfryer"),
-    ProductTypeModel(krName: "전기밥솥", engName: "ricecooker"),
-    ProductTypeModel(krName: "식기세척기", engName: "dishwasher"),
-    ProductTypeModel(krName: "온열기", engName: "warmer"),
-    ProductTypeModel(krName: "선풍기", engName: "fan"),
-    ProductTypeModel(krName: "제습기", engName: "dehumidifier"),
-    ProductTypeModel(krName: "건조기", engName: "dry"),
-  ].obs;
-}
-
-class SavingTipProductTypeGrid extends GetView<SavingTipProductTypeGridController> {
+class SavingTipProductTypeGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ProductTypeData.productTypes;
 
-    Get.put(SavingTipProductTypeGridController());
+    var primaryProducts = [
+      "에어컨",
+      "냉장고",
+      "정수기",
+      "컴퓨터",
+      "세탁기",
+      "TV",
+      "청소기",
+      "전자레인지",
+      "전기밥솥"
+    ];
 
-    return Obx(
-      () => GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 0.9,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-        ),
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: controller.savingTipTypes.length,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          return ProductTypeGridCell(
-              productType: controller.savingTipTypes[index]);
-        },
+    var productTypes = ProductTypeData.productTypes
+        .where(
+          (element) => primaryProducts.contains(element.krName),
+        )
+        .toList();
+
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 0.87,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
       ),
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: productTypes.length,
+      shrinkWrap: true,
+      itemBuilder: (BuildContext context, int index) {
+        return ProductTypeGridCell(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) => CustomDialog(
+                        title: "준비중",
+                        content: "컨텐츠 준비중입니다. \n다음 업데이트를 기대해주세요:)",
+                        actionButtons: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomActionButton(
+                                text: "확인",
+                                onTap: () {
+                              Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          )
+                        ],
+                      ));
+            },
+            productType: productTypes[index]);
+      },
     );
   }
 }
