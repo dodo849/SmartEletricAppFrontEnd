@@ -274,4 +274,32 @@ class AuthRepository implements AuthRepositoryInterface {
       return Result.failure(err.toString());
     }
   }
+
+  @override
+  Future<Result<bool, String>> checkLogin() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var isLogin = prefs.getBool('isLogin');
+
+      if (isLogin == null || isLogin == false) {
+        return Result.success(false);
+      } else {
+        return Result.success(true);
+      }
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
+
+  @override
+  Future<Result<bool, String>> setLogin() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLogin', true);
+
+      return Result.success(true);
+    } catch (err) {
+      return Result.failure(err.toString());
+    }
+  }
 }

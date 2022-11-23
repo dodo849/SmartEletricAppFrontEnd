@@ -200,9 +200,8 @@ class Home extends StatelessWidget {
     showModalBottomSheet<void>(
       context: context,
       shape: const RoundedRectangleBorder(
-        // <-- SEE HERE
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.0),
+          top: Radius.circular(32.0),
         ),
       ),
       builder: (BuildContext context) {

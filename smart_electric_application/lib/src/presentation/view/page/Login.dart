@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomTextInput.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/RoundedButton.dart';
 import 'package:smart_electric_application/src/presentation/view/module/login/LoginBanner.dart';
@@ -62,9 +63,8 @@ class Login extends StatelessWidget {
                 // signup button
                 RoundedButton(
                     text: "회원가입하기",
-                    bgColor:
-                        context.theme.colorScheme.primary,
-                    textColor: context.theme.colorScheme.onBackground,
+                    bgColor: context.theme.colorScheme.primary,
+                    textColor: CommonColors.onBlack,
                     size: ButtonSize.large,
                     action: () {
                       Get.to(EnterUserInfo());
@@ -73,5 +73,15 @@ class Login extends StatelessWidget {
                 Spacer(flex: 1),
               ],
             )));
+  }
+
+  void _openLoginStartDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => CustomDialog(
+              title: "로그인 중입니다",
+              content: "",
+              actionButtons: [],
+            ));
   }
 }

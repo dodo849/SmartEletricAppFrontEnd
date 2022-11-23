@@ -42,7 +42,6 @@ class ShowPreviousUsageCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 7),
           
           ],
         ));

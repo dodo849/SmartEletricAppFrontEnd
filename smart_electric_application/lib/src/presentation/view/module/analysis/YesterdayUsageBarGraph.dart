@@ -87,7 +87,7 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
 
     return Obx(() => controller.isBeforeFiveOclock.isTrue
         ? const NoticeBar(
-            content: "새벽 0시부터 5시는 데이터 수집 시간입니다.\n조금만 기다려주세요 :)",
+            content: "새벽 0시부터 5시는 데이터 수집 시간입니다.\n조금만 기다려주세요!",
           )
         : controller.loading.isTrue
             ? const NoticeBar(content: "그래프 로딩중입니다")

@@ -9,6 +9,7 @@ import 'package:smart_electric_application/src/presentation/view/module/ai_repor
 import 'package:smart_electric_application/src/presentation/view/module/common/MyBottomNavigationBar.dart';
 import 'package:smart_electric_application/src/presentation/view/module/home/ProgressiveIntervalBar.dart';
 import 'package:smart_electric_application/src/presentation/view/page/Home.dart';
+import 'package:smart_electric_application/src/presentation/view/theme/Colors.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/AiReportViewModel.dart';
 
 class AiReport extends GetView<AiReportViewModel> {
@@ -22,11 +23,11 @@ class AiReport extends GetView<AiReportViewModel> {
     var colorTheme = context.theme.colorScheme;
 
     var bannerTitleTextStyle = TextStyle(
-        color: colorTheme.onBackground,
+        color: CommonColors.onBlack,
         fontSize: 22,
         fontWeight: FontWeight.bold);
     var bannerBodyTextStyle = TextStyle(
-        color: colorTheme.onBackground,
+        color: CommonColors.onBlack,
         fontSize: 13,
         fontWeight: FontWeight.w500);
 
@@ -44,14 +45,15 @@ class AiReport extends GetView<AiReportViewModel> {
     double contentGap = 100;
 
     return Obx(()=>Scaffold(
+      backgroundColor: colorTheme.background,
       appBar: AppBar(
         title: const Text('AI 분석'),
         titleTextStyle: TextStyle(
             fontWeight: FontWeight.w600,
-            color: colorTheme.onBackground,
+            color: CommonColors.onBlack,
             fontSize: 18,
             fontFamily: "Pretendard"),
-        foregroundColor: colorTheme.onBackground,
+        foregroundColor: CommonColors.onBlack,
         shadowColor: Colors.transparent,
         backgroundColor: controller.navigationBarColor.value,
       ),

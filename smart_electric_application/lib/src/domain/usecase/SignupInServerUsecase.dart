@@ -83,6 +83,9 @@ class SignupInServerUsecase {
       return saveUserResult;
     }
 
+    // 로그인 설정
+    await authRepository.setLogin();
+
     // 모든 과정 성공 시 true Result 반환
     return const Result.success(true);
   }

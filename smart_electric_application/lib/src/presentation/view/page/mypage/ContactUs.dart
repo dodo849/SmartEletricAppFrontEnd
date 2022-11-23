@@ -40,6 +40,7 @@ class ContactUs extends GetView<ContactUsViewModel> {
       body: Container(
         width: double.infinity,
         padding: EdgeInsets.all(20),
+        color: colorTheme.background,
         child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           const SizedBox(height: 10),
           Text("Team Kapple", style: titleStyle),

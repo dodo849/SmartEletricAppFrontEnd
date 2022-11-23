@@ -7,14 +7,12 @@ class CheckLoginUsecase {
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
   Future<Result<bool, String>> execute() async {
-    var getJwtResult =
-        await authRepository.getJwt();
+    Result<bool, String> isLogin = await authRepository.checkLogin();
 
-    if(getJwtResult.status == ResultStatus.error) {
+    if (isLogin.status == ResultStatus.error) {
       return const Result.success(false);
-    }
-    else {
-      return const Result.success(true);
+    } else {
+      return Result.success(isLogin.value!);
     }
   }
 }

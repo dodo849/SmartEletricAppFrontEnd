@@ -27,7 +27,7 @@ class SmartHomePreparingCard extends StatelessWidget {
             ),
             SizedBox(height: 5),
             Text(
-              "조금만 기다려주세요 :)",
+              "조금만 기다려주세요!",
               style: TextStyle(color: context.theme.colorScheme.onBackground),
             ),
             Image.asset("assets/images/avatar_woman.png",

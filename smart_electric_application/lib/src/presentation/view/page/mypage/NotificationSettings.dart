@@ -35,6 +35,7 @@ class NotificationSettings extends GetView<NotificationSettingsViewModel> {
       ),
       body: Container(
         padding: EdgeInsets.all(20),
+        color: colorTheme.background,
         child: Column(children: []),
       ),
     );

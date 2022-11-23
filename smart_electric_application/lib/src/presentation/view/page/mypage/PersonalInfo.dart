@@ -68,6 +68,7 @@ class PersonalInfo extends GetView<PersonalInfoViewModel> {
             physics: const ClampingScrollPhysics(),
             child: Container(
               padding: EdgeInsets.all(30),
+              color: colorTheme.background,
               child: Column(children: [
                 // User name
                 SizedBox(height: 10),

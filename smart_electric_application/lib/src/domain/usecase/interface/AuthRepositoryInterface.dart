@@ -25,4 +25,6 @@ abstract class AuthRepositoryInterface {
   Future<Result<bool, String>> getIsSmartMeter();
   Future<Result<String?, String>> getAddress();
   Future<Result<bool, String>> saveAddress(String address);
+  Future<Result<bool, String>> checkLogin();
+  Future<Result<bool, String>> setLogin();
 }

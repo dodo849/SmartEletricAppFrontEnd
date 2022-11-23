@@ -187,7 +187,7 @@ class NowBillBanner extends StatelessWidget {
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.0),
+          top: Radius.circular(32.0),
         ),
       ),
       builder: (BuildContext context) {
