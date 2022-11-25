@@ -109,7 +109,7 @@ class AiReportViewModel extends GetxController {
       showDialog(
           context: context,
           builder: (context) => CustomDialog(
-                title: "",
+                title: "네트워크 오류",
                 content: "네트워크 오류가 발생했습니다. \n잠시 후 다시 시도해주세요.",
                 actionButtons: [],
               ));
