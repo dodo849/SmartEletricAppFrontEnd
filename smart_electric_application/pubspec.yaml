@@ -57,6 +57,7 @@ dependencies:
   path: ^1.8.2
   sqflite: ^2.2.0+3
   webview_flutter: ^3.0.4
+  firebase_core_platform_interface: 4.5.1
 
 dev_dependencies:
   flutter_test:

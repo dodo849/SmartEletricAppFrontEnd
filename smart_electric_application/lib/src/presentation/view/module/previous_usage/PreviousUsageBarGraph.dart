@@ -42,7 +42,7 @@ class PreviousUsageBarGraph extends GetView<PreviousUsageViewModel> {
                               sideTitles: SideTitles(
                             getTitlesWidget: _leftTitleWidgets,
                             showTitles: true,
-                            reservedSize: controller.maxY.value > 1.9 ? 20 : 40,
+                            reservedSize: controller.maxY.value > 1.9 ? controller.maxY.value > 100 ? 30 : 20 : 40,
                           )),
                           bottomTitles: AxisTitles(
                             sideTitles: SideTitles(
