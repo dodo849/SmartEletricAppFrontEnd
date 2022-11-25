@@ -10,7 +10,7 @@ class GetTodayUsagePredictionUsecase {
   final aiRepository = GetIt.I.get<AiRepositoryInterface>();
   final authRepository = GetIt.I.get<AuthRepositoryInterface>();
 
-  Result<DailyPrediction, String> execute(AiPredictionDTO aiPredictionDTO) {
+  Result<DailyPrediction, String> execute(AiPredictionDTO aiPrediction) {
 
     // 오늘 날짜 받아오기
     DateTime now = DateTime.now();
@@ -18,12 +18,15 @@ class GetTodayUsagePredictionUsecase {
     var strToday = formatter.format(now);
 
     // 오늘 예측값 찾기
-    for (var dailyPrediction in aiPredictionDTO.prediction) {
+    for (var dailyPrediction in aiPrediction.prediction) {
       if (dailyPrediction.dateTimeKr == strToday){
         return Result.success(dailyPrediction);
       }
-    }
+    } 
 
-    return const Result.failure("Today's usage prediction was not found.");
+    // 만약 오늘 값 없으면 마지막 값 리턴
+    var lastPreiction = aiPrediction.prediction[aiPrediction.prediction.length-1];
+
+    return Result.success(lastPreiction);
   }
 }
