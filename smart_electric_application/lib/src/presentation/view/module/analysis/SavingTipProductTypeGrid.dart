@@ -35,9 +35,11 @@ class SavingTipProductTypeGrid extends StatelessWidget {
         .toList();
 
     return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
-        childAspectRatio: 0.87,
+        // childAspectRatio: MediaQuery.of(context).size.width /
+        //       (MediaQuery.of(context).size.height / 0.5),
+        mainAxisExtent: 130,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),

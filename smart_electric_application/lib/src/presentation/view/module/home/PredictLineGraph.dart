@@ -22,63 +22,6 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
         ? Container()
         : Stack(
             children: [
-              // y축 & 그리드
-              LineChart(LineChartData(
-                  minX: controller.maxY.value,
-                  maxX: 0,
-                  maxY: controller.maxY.value,
-                  showingTooltipIndicators: [],
-                  titlesData: FlTitlesData(
-                    topTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles:
-                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    leftTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          getTitlesWidget: _leftTitleWidgets,
-                            showTitles: true, reservedSize: 40,)
-                            ),
-                    bottomTitles: AxisTitles(
-                      sideTitles: SideTitles(
-                        showTitles: true,
-                        reservedSize: 20,
-                        interval: 1,
-                        // x축 빈자리 만들기 위해 빈 Text 위젯 설정
-                        getTitlesWidget: (double, TitleMeta) => const Text(""),
-                      ),
-                    ),
-                  ),
-                  backgroundColor: Colors.transparent,
-                  borderData: FlBorderData(
-                      border: const Border(
-                          top: BorderSide(width: 0),
-                          bottom: BorderSide(width: 0))),
-                  gridData: FlGridData(
-                      drawVerticalLine: false,
-                      getDrawingHorizontalLine: (value) => FlLine(
-                          color: colorTheme.outline,
-                          strokeWidth: 1,
-                          dashArray: [1, 0])),
-
-                  // Set tooltip
-                  lineTouchData: LineTouchData(
-                      getTouchedSpotIndicator: _getTouchedSpotIndicator,
-                      touchTooltipData: LineTouchTooltipData(
-                          getTooltipItems: _getTooltipItems,
-                          tooltipBgColor: const Color(0xFF2D2D2D),
-                          tooltipRoundedRadius: 15,
-                          tooltipPadding: EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 15),
-                          tooltipBorder: null)),
-                  lineBarsData: [
-                    // data 1
-                    LineChartBarData(
-                      dotData: FlDotData(
-                        show: false,
-                      ),
-                      spots: [FlSpot(0, 0)],
-                    ),
-                  ])),
 
               // 실 데이터
               Container(
@@ -199,6 +142,68 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                   ),
                 ),
               ),
+
+              Container(
+                width: 40,
+                color: colorTheme.surface),
+
+                            // - 그리드
+              LineChart(LineChartData(
+                  minX: controller.maxY.value,
+                  maxX: 0,
+                  maxY: controller.maxY.value,
+                  showingTooltipIndicators: [],
+                  titlesData: FlTitlesData(
+                    topTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                          getTitlesWidget: _leftTitleWidgets,
+                            showTitles: true, reservedSize: 40,)
+                            ),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 20,
+                        interval: 1,
+                        // x축 빈자리 만들기 위해 빈 Text 위젯 설정
+                        getTitlesWidget: (double, TitleMeta) => const Text(""),
+                      ),
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  borderData: FlBorderData(
+                      border: const Border(
+                          top: BorderSide(width: 0),
+                          bottom: BorderSide(width: 0))),
+                  gridData: FlGridData(
+                      drawVerticalLine: false,
+                      getDrawingHorizontalLine: (value) => FlLine(
+                          color: colorTheme.onBackground.withOpacity(0.05),
+                          strokeWidth: 1,
+                          dashArray: [1, 0])),
+
+                  // Set tooltip
+                  lineTouchData: LineTouchData(
+                      getTouchedSpotIndicator: _getTouchedSpotIndicator,
+                      touchTooltipData: LineTouchTooltipData(
+                          getTooltipItems: _getTooltipItems,
+                          tooltipBgColor: const Color(0xFF2D2D2D),
+                          tooltipRoundedRadius: 15,
+                          tooltipPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
+                          tooltipBorder: null)),
+                  lineBarsData: [
+                    // data 1
+                    LineChartBarData(
+                      dotData: FlDotData(
+                        show: false,
+                      ),
+                      spots: [FlSpot(0, 0)],
+                    ),
+                  ])),
             ],
           ));
   }

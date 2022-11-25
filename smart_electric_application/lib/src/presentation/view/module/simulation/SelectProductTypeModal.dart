@@ -27,7 +27,7 @@ class SelectProductTypeModal extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-            color: Colors.white,
+            color: colorTheme.background,
           ),
           child: Column(
             children: [

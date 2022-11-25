@@ -79,6 +79,7 @@ class ProductTypeGridCell extends StatelessWidget {
             ),
             padding: EdgeInsets.all(20),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
