@@ -225,16 +225,12 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                       ),
                     ),
 
-                    Positioned(
-                      width: 40,
-                      height: 220,
-                      left: -10,
-                      child: Container(
-                          width: 80, color: colorTheme.background),
-                    ),
+                    Container(
+                        width: 60, color: colorTheme.background),
 
                     Container(
-                      width: 40,
+                      width: 80,
+                      padding: EdgeInsets.only(left: 25),
                       child: BarChart(BarChartData(
                         maxY: controller.maxY.value,
                         titlesData: FlTitlesData(

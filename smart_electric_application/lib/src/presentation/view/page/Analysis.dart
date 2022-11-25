@@ -41,20 +41,22 @@ class Analysis extends StatelessWidget {
                   style: textTheme.headline3,
                 ),
                 SizedBox(height: 30),
-                Container(
-                    width: double.infinity,
-                    height: 220,
-                    child: YesterdayUsageBarGraph()),
-                SizedBox(height: 30),
-
-                // 이전 사용량 보기 버튼
-                GestureDetector(
-                    onTap: () {
-                      Get.to(PreviousUsage());
-                    },
-                    child: ShowPreviousUsageCard()),
               ],
             ),
+          ),
+          Container(
+              width: double.infinity,
+              height: 220,
+              child: YesterdayUsageBarGraph()),
+          SizedBox(height: 30),
+          // 이전 사용량 보기 버튼
+          Container(
+            margin: EdgeInsets.only(left: 30, right: 30),
+            child: GestureDetector(
+                onTap: () {
+                  Get.to(PreviousUsage());
+                },
+                child: ShowPreviousUsageCard()),
           ),
           SizedBox(height: 30),
           Divider(thickness: 10, color: context.theme.colorScheme.surface),
