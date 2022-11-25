@@ -39,7 +39,7 @@ class SavingTipProductTypeGrid extends StatelessWidget {
         crossAxisCount: 3,
         // childAspectRatio: MediaQuery.of(context).size.width /
         //       (MediaQuery.of(context).size.height / 0.5),
-        mainAxisExtent: 130,
+        mainAxisExtent: 120,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),

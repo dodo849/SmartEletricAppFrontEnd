@@ -56,7 +56,7 @@ class SelectProductTypeModal extends StatelessWidget {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      childAspectRatio: 0.9,
+                      mainAxisExtent: 120,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
                     ),
