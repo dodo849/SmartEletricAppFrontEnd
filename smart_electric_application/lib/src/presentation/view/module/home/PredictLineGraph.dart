@@ -22,132 +22,7 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
         ? Container()
         : Stack(
             children: [
-
-              // 실 데이터
-              Container(
-                margin: const EdgeInsets.only(left: 50),
-                child: SingleChildScrollView(
-                  clipBehavior: Clip.none,
-                  scrollDirection: Axis.horizontal,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      // minWidth: 200,
-                      maxWidth: 1000,
-                    ),
-                    child: LineChart(
-                      LineChartData(
-                          minX: controller.minX.value,
-                          maxX: controller.maxX.value + 1,
-                          maxY: controller.maxY.value,
-                          showingTooltipIndicators: [],
-                          titlesData: FlTitlesData(
-                            topTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            rightTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            leftTitles: AxisTitles(
-                                sideTitles: SideTitles(showTitles: false)),
-                            bottomTitles: AxisTitles(
-                              sideTitles: SideTitles(
-                                showTitles: true,
-                                reservedSize: 20,
-                                interval: 1,
-                                getTitlesWidget: _bottomTitleWidgets,
-                              ),
-                            ),
-                          ),
-                          borderData: FlBorderData(
-                              border: Border(
-                                  top: BorderSide(
-                                      width: 0, color: colorTheme.surface),
-                                  bottom: BorderSide(
-                                      color: colorTheme.outline, width: 2))),
-                          gridData: FlGridData(
-                            drawVerticalLine: false,
-                            drawHorizontalLine: false,
-                          ),
-                          clipData: FlClipData.all(),
-
-                          // Set tooltip
-                          lineTouchData: LineTouchData(
-                              getTouchedSpotIndicator: _getTouchedSpotIndicator,
-                              touchTooltipData: LineTouchTooltipData(
-                                  getTooltipItems: _getTooltipItems,
-                                  tooltipBgColor: const Color(0xFF2D2D2D),
-                                  tooltipRoundedRadius: 15,
-                                  tooltipPadding: EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 15),
-                                  tooltipBorder: null)),
-
-                          // read about it in the LineChartData section
-                          lineBarsData: [
-                            // data 1 - 지난달 데이터
-                            LineChartBarData(
-                              dotData: FlDotData(
-                                show: false,
-                                // getDotPainter: (FlSpot p0, double p1, LineChartBarData p2, int p3) {
-                                //   return FlDotPainter();
-                                // },
-                              ),
-                              aboveBarData: BarAreaData(show: false),
-                              barWidth: 1,
-                              color: Colors.grey[400],
-                              spots: controller.lastMonthUsage.entries
-                                  .map((element) {
-                                return FlSpot(element.key.toDouble(),
-                                    element.value.yValue);
-                              }).toList(),
-                            ),
-                            // data 2 - 이번달 데이터
-                            LineChartBarData(
-                              dotData: FlDotData(
-                                show: false,
-                              ),
-                              aboveBarData: BarAreaData(show: false),
-                              barWidth: 1,
-                              color: colorTheme.primary,
-                              belowBarData: BarAreaData(
-                                show: true,
-                                color: colorTheme.primary.withOpacity(0.2),
-                              ),
-                              spots: controller.thisMonthUsage.entries
-                                  .map((element) {
-                                return FlSpot(element.key.toDouble(),
-                                    element.value.yValue);
-                              }).toList(),
-                            ),
-
-                            // data 3 - 예측 사용량
-                            LineChartBarData(
-                                dotData: FlDotData(
-                                  show: false,
-                                ),
-                                aboveBarData: BarAreaData(show: false),
-                                barWidth: 1,
-                                color: colorTheme.secondaryContainer,
-                                belowBarData: BarAreaData(
-                                  show: true,
-                                  color: colorTheme.primary.withOpacity(0.2),
-                                ),
-                                spots: controller.predictedUsage.entries
-                                    .map((element) {
-                                  return FlSpot(element.key.toDouble(),
-                                      element.value.yValue);
-                                }).toList()),
-                          ]),
-                      swapAnimationDuration:
-                          const Duration(milliseconds: 150), // Optional
-                      swapAnimationCurve: Curves.linear, // Optional
-                    ),
-                  ),
-                ),
-              ),
-
-              Container(
-                width: 40,
-                color: colorTheme.surface),
-
-                            // - 그리드
+              // - 그리드
               LineChart(LineChartData(
                   minX: controller.maxY.value,
                   maxX: 0,
@@ -160,9 +35,8 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                         AxisTitles(sideTitles: SideTitles(showTitles: false)),
                     leftTitles: AxisTitles(
                         sideTitles: SideTitles(
-                          getTitlesWidget: _leftTitleWidgets,
-                            showTitles: true, reservedSize: 40,)
-                            ),
+                      showTitles: false,
+                    )),
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
@@ -204,15 +78,204 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
                       spots: [FlSpot(0, 0)],
                     ),
                   ])),
+
+              // - 실 데이터
+              Container(
+                margin: const EdgeInsets.only(left: 50),
+                // ###
+                child: GestureDetector(
+                  onTap: () {
+                    print("under layer tap");
+                  },
+                  child: SingleChildScrollView(
+                    clipBehavior: Clip.none,
+                    scrollDirection: Axis.horizontal,
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        // minWidth: 200,
+                        maxWidth: 1000,
+                      ),
+                      child: LineChart(
+                        LineChartData(
+                            minX: controller.minX.value,
+                            maxX: controller.maxX.value + 1,
+                            maxY: controller.maxY.value,
+                            showingTooltipIndicators: [],
+                            titlesData: FlTitlesData(
+                              topTitles: AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false)),
+                              rightTitles: AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false)),
+                              leftTitles: AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false)),
+                              bottomTitles: AxisTitles(
+                                sideTitles: SideTitles(
+                                  showTitles: true,
+                                  reservedSize: 20,
+                                  interval: 1,
+                                  getTitlesWidget: _bottomTitleWidgets,
+                                ),
+                              ),
+                            ),
+                            borderData: FlBorderData(
+                                border: Border(
+                                    top: BorderSide(
+                                        width: 0, color: colorTheme.surface),
+                                    bottom: BorderSide(
+                                        color: colorTheme.outline, width: 2))),
+                            gridData: FlGridData(
+                              drawVerticalLine: false,
+                              drawHorizontalLine: false,
+                            ),
+                            clipData: FlClipData.all(),
+
+                            // Set tooltip
+                            lineTouchData: LineTouchData(
+                                getTouchedSpotIndicator:
+                                    _getTouchedSpotIndicator,
+                                touchTooltipData: LineTouchTooltipData(
+                                    getTooltipItems: _getTooltipItems,
+                                    tooltipBgColor: const Color(0xFF2D2D2D),
+                                    tooltipRoundedRadius: 15,
+                                    tooltipPadding: EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 15),
+                                    tooltipBorder: null)),
+
+                            // read about it in the LineChartData section
+                            lineBarsData: [
+                              // data 1 - 지난달 데이터
+                              LineChartBarData(
+                                dotData: FlDotData(
+                                  show: false,
+                                  // getDotPainter: (FlSpot p0, double p1, LineChartBarData p2, int p3) {
+                                  //   return FlDotPainter();
+                                  // },
+                                ),
+                                aboveBarData: BarAreaData(show: false),
+                                barWidth: 1,
+                                color: Colors.grey[400],
+                                spots: controller.lastMonthUsage.entries
+                                    .map((element) {
+                                  return FlSpot(element.key.toDouble(),
+                                      element.value.yValue);
+                                }).toList(),
+                              ),
+                              // data 2 - 이번달 데이터
+                              LineChartBarData(
+                                dotData: FlDotData(
+                                  show: false,
+                                ),
+                                aboveBarData: BarAreaData(show: false),
+                                barWidth: 1,
+                                color: colorTheme.primary,
+                                belowBarData: BarAreaData(
+                                  show: true,
+                                  color: colorTheme.primary.withOpacity(0.2),
+                                ),
+                                spots: controller.thisMonthUsage.entries
+                                    .map((element) {
+                                  return FlSpot(element.key.toDouble(),
+                                      element.value.yValue);
+                                }).toList(),
+                              ),
+
+                              // data 3 - 예측 사용량
+                              LineChartBarData(
+                                  dotData: FlDotData(
+                                    show: false,
+                                  ),
+                                  aboveBarData: BarAreaData(show: false),
+                                  barWidth: 1,
+                                  color: colorTheme.secondaryContainer,
+                                  belowBarData: BarAreaData(
+                                    show: true,
+                                    color: colorTheme.primary.withOpacity(0.2),
+                                  ),
+                                  spots: controller.predictedUsage.entries
+                                      .map((element) {
+                                    return FlSpot(element.key.toDouble(),
+                                        element.value.yValue);
+                                  }).toList()),
+                            ]),
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 150), // Optional
+                        swapAnimationCurve: Curves.linear, // Optional
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              Container(width: 40, color: colorTheme.surface),
+
+              // - Y축
+              Container(
+                width: 40,
+                child: LineChart(LineChartData(
+                  minX: controller.maxY.value,
+                  maxX: 0,
+                  maxY: controller.maxY.value,
+                  showingTooltipIndicators: [],
+                  titlesData: FlTitlesData(
+                    topTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    rightTitles:
+                        AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    leftTitles: AxisTitles(
+                        sideTitles: SideTitles(
+                      getTitlesWidget: _leftTitleWidgets,
+                      showTitles: true,
+                      reservedSize: 40,
+                    )),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 20,
+                        interval: 1,
+                        // x축 빈자리 만들기 위해 빈 Text 위젯 설정
+                        getTitlesWidget: (double, TitleMeta) => const Text(""),
+                      ),
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  borderData: FlBorderData(
+                      border: const Border(
+                          top: BorderSide(width: 0),
+                          bottom: BorderSide(width: 0))),
+                  gridData: FlGridData(
+                    drawVerticalLine: false,
+                    drawHorizontalLine: false,
+                  ),
+
+                  // Set tooltip
+                  lineTouchData: LineTouchData(
+                      getTouchedSpotIndicator: _getTouchedSpotIndicator,
+                      touchTooltipData: LineTouchTooltipData(
+                          getTooltipItems: _getTooltipItems,
+                          tooltipBgColor: const Color(0xFF2D2D2D),
+                          tooltipRoundedRadius: 15,
+                          tooltipPadding: EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
+                          tooltipBorder: null)),
+
+                  // Set data
+                  // lineBarsData: [
+                  //   // data 1
+                  //   LineChartBarData(
+                  //     dotData: FlDotData(
+                  //       show: false,
+                  //     ),
+                  //     spots: [FlSpot(0, 0)],
+                  //   ),
+                  // ]
+                )),
+              ),
             ],
           ));
   }
 
-
-
-
   Widget _leftTitleWidgets(double value, TitleMeta meta) {
-    if(value == 0 || value == controller.maxY.value){
+    if (value == 0 || value == controller.maxY.value) {
       return const Text("");
     }
 
@@ -236,7 +299,6 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
     if (value <= 0 || value > 31) {
       return const Text("");
     }
-
 
     const style = TextStyle(
       color: Color(0xff68737d),
@@ -292,15 +354,15 @@ class PredictLineGraph extends GetView<PredictLineGraphViewModel> {
             controller.lastMonthUsage[barSpot.spotIndex]!.xValue);
       } else if (barSpot.barIndex == 1) {
         // 이번달 사용량
-        date = DateTime.parse(controller
-            .thisMonthUsage[
-                barSpot.spotIndex]!
-            .xValue);
+        date = DateTime.parse(
+            controller.thisMonthUsage[barSpot.spotIndex]!.xValue);
       } else {
         // 예측 사용량
         print("barIndex ${barSpot.spotIndex}");
-        date = DateTime.parse(
-            controller.predictedUsage[barSpot.spotIndex + controller.thisMonthUsage.length]!.xValue);
+        date = DateTime.parse(controller
+            .predictedUsage[
+                barSpot.spotIndex + controller.thisMonthUsage.length]!
+            .xValue);
       }
       String dateText = '${formatter.format(date)}';
 
