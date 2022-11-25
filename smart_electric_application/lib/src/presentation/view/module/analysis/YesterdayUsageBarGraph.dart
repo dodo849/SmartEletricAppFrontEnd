@@ -95,7 +95,7 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                 alignment: Alignment.bottomCenter,
                 child: Stack(
                   children: [
-                    // y축만 따로 그리는 레이어
+                    // - 그리드
                     BarChart(BarChartData(
                       maxY: controller.maxY.value,
                       titlesData: FlTitlesData(
@@ -105,13 +105,7 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                             sideTitles: SideTitles(showTitles: false)),
                         leftTitles: AxisTitles(
                             sideTitles: SideTitles(
-                          showTitles: true,
-                          reservedSize: 30,
-                          getTitlesWidget: (value, meta) => Text(
-                            "${value.toStringAsFixed(2)}",
-                            style: TextStyle(
-                                fontSize: 11, color: colorTheme.onSurface),
-                          ),
+                          showTitles: false,
                         )),
                         bottomTitles: AxisTitles(
                           sideTitles: SideTitles(
@@ -134,9 +128,9 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                       gridData: FlGridData(
                         drawVerticalLine: false,
                         getDrawingHorizontalLine: (value) => FlLine(
-                                      color: colorTheme.outline,
-                                      strokeWidth: 1,
-                                      dashArray: [1, 0]),
+                            color: colorTheme.outline,
+                            strokeWidth: 1,
+                            dashArray: [1, 0]),
                       ),
                       // Create invisible bar
                       barGroups: [
@@ -149,6 +143,8 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                         ])
                       ],
                     )),
+
+                    // - 실데이터
                     // padding으로 y축 공간 살짝 띄기
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
@@ -182,8 +178,8 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                               ),
                               borderData: FlBorderData(
                                   border: Border(
-                                      top:
-                                          BorderSide(color: Colors.transparent, width: 0),
+                                      top: BorderSide(
+                                          color: Colors.transparent, width: 0),
                                       bottom: BorderSide(
                                           color: Colors.transparent,
                                           width: 0))),
@@ -227,6 +223,68 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                           ),
                         ),
                       ),
+                    ),
+
+                    Positioned(
+                      width: 40,
+                      height: 220,
+                      left: -10,
+                      child: Container(
+                          width: 80, color: colorTheme.background),
+                    ),
+
+                    Container(
+                      width: 40,
+                      child: BarChart(BarChartData(
+                        maxY: controller.maxY.value,
+                        titlesData: FlTitlesData(
+                          topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          rightTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false)),
+                          leftTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                            showTitles: true,
+                            reservedSize: 30,
+                            getTitlesWidget: (value, meta) => Text(
+                              "${value.toStringAsFixed(2)}",
+                              style: TextStyle(
+                                  fontSize: 11, color: colorTheme.onSurface),
+                            ),
+                          )),
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 20,
+                              interval: 1,
+                              // x축 빈자리 만들기 위해 빈 Text 위젯 설정
+                              getTitlesWidget: (double, TitleMeta) =>
+                                  const Text(""),
+                            ),
+                          ),
+                        ),
+                        // Remove both side border
+                        borderData: FlBorderData(
+                            border: Border(
+                                top: BorderSide(color: colorTheme.outline),
+                                bottom: BorderSide(
+                                    color: colorTheme.outline, width: 1))),
+                        // Remove vertical line
+                        gridData: FlGridData(
+                          drawVerticalLine: false,
+                          drawHorizontalLine: false,
+                        ),
+                        // Create invisible bar
+                        barGroups: [
+                          BarChartGroupData(x: 0, barRods: [
+                            BarChartRodData(
+                              color: Colors.transparent,
+                              toY: 0,
+                              width: 0,
+                            )
+                          ])
+                        ],
+                      )),
                     ),
                   ],
                 ),

@@ -26,7 +26,7 @@ class Analysis extends StatelessWidget {
         children: [
           //section 1
           Container(
-            margin: EdgeInsets.only(left: 25, right: 25),
+            margin: EdgeInsets.only(left: 30, right: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
