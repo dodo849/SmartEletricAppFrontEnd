@@ -127,13 +127,16 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                       // Remove both side border
                       borderData: FlBorderData(
                           border: Border(
-                              top: BorderSide(color: Colors.transparent, width: 0),
+                              top: BorderSide(color: colorTheme.outline),
                               bottom: BorderSide(
-                                  color: colorTheme.outline, width: 0))),
+                                  color: colorTheme.outline, width: 1))),
                       // Remove vertical line
                       gridData: FlGridData(
                         drawVerticalLine: false,
-                        drawHorizontalLine: false,
+                        getDrawingHorizontalLine: (value) => FlLine(
+                                      color: colorTheme.outline,
+                                      strokeWidth: 1,
+                                      dashArray: [1, 0]),
                       ),
                       // Create invisible bar
                       barGroups: [
@@ -180,16 +183,13 @@ class YesterdayUsageBarGraph extends GetView<YesterdayUsageBarGraphViewModel> {
                               borderData: FlBorderData(
                                   border: Border(
                                       top:
-                                          BorderSide(color: colorTheme.outline),
+                                          BorderSide(color: Colors.transparent, width: 0),
                                       bottom: BorderSide(
-                                          color: colorTheme.outline,
+                                          color: Colors.transparent,
                                           width: 0))),
                               gridData: FlGridData(
                                   drawVerticalLine: false,
-                                  getDrawingHorizontalLine: (value) => FlLine(
-                                      color: colorTheme.outline,
-                                      strokeWidth: 1,
-                                      dashArray: [1, 0])),
+                                  drawHorizontalLine: false),
                               // Set tooltip
                               barTouchData: BarTouchData(
                                   // getTouchedSpotIndicator: _getTouchedSpotIndicator,
