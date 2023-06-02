@@ -12,18 +12,29 @@
 
 ## Design pattern
 
-##### UI: Atomic 디자인패턴을 변형하여 적용해 UI 컴포넌트를 atom, module, page로 구분했다.
+#### UI: Atomic 디자인패턴을 변형하여 적용해 UI 컴포넌트를 atom, module, page로 구분했다.
 
-- atom: 전 페이지에서 재사용가능한 최소 단위의 컴포넌트를 정의한다.
+- atom: 전 페이지에서 재사용가능한 최소 단위의 컴포넌트를 정의합니다.
+  - 주로 스타일링된 버튼과 사용자 Input 필드가 포함됩니다.
 
-- module: atom과 다른 module을 조합해 정보 집합을 만든다.
+- module: atom과 다른 module을 조합해 정보 집합을 만듭니다.
+  - 카드뷰, 리스트뷰가 포함됩니다.
 
-- page: atom과 module을 조합하고 레이아웃을 지정한다.
+- page: atom과 module을 조합하고 레이아웃을 지정합니다.
+  - moudule간의 여백을 조정도 담당합니다.
 
-##### Clean Architecture 적용
+#### Business Logic: Clean Architecture 적용
 
 - 3계층 구조: Data, Domain, Presentation
-1. Data: Repository 패턴을 이용하여 서버와 DB 접근을 추상화한다. 서버 스키마 매핑을 위한 DTO도 포함된다.
-2. Domain: 의존을 위한 Repository interface와 UseCase가 포함된다. UseCase는 Repository를 조합해 유저 시나리오에 따른 흐름을 구성한다.
-3. Presentation: View(UI)와 ViewModel으로 구성된다. View에서 ViewModel을 주입받고 ViewModel에서 UseCase를 호출하여 View에 바인딩된 변수를 변경한다.
+1. Data layer
+  - Repository 패턴을 이용하여 서버와 DB 접근을 추상화헀습니다. 
+  - 서버 스키마 매핑을 위한 DTO도 포함된다.
+3. Domain layer
+  -  의존을 위한 Repository interface와 UseCase가 포함됩니다. 
+  -  UseCase는 Repository를 조합해 유저 시나리오에 따른 흐름을 구성한다.
+5. Presentation layerㅂㅂㅂ
+  - View(UI)와 ViewModel으로 구성됩니다.
+  - View에서 ViewModel을 주입받고 ViewModel에서 UseCase를 호출하여 View에 바인딩된 변수를 변경합니다.
 
+## Library
+라이브러리명
