@@ -1,4 +1,4 @@
-## Git commit convention
+## 🌱 Git commit convention
 
 - [Feat] : 새로운 기능
 - [Fix] : 오류 수정
@@ -10,9 +10,9 @@
 
 - 두 줄 띄고 상세사항/남은사항 본문으로 작성
 
-## Design pattern
+## 💡 Design pattern
 
-#### UI: Atomic 디자인패턴을 변형하여 적용해 UI 컴포넌트를 atom, module, page로 구분했다.
+### UI: Atomic 디자인패턴을 변형하여 적용해 UI 컴포넌트를 atom, module, page로 구분
 
 - atom: 전 페이지에서 재사용가능한 최소 단위의 컴포넌트를 정의합니다.
   - 주로 스타일링된 버튼과 사용자 Input 필드가 포함됩니다.
@@ -23,7 +23,7 @@
 - page: atom과 module을 조합하고 레이아웃을 지정합니다.
   - moudule간의 여백을 조정도 담당합니다.
 
-#### Business Logic: Clean Architecture 적용
+### Business Logic: Clean Architecture+MVVM 적용
 
 - 3계층 구조: Data, Domain, Presentation
 1. Data layer
@@ -32,9 +32,17 @@
 3. Domain layer
   -  의존을 위한 Repository interface와 UseCase가 포함됩니다. 
   -  UseCase는 Repository를 조합해 유저 시나리오에 따른 흐름을 구성한다.
-5. Presentation layerㅂㅂㅂ
+5. Presentation layer(MVVM)
   - View(UI)와 ViewModel으로 구성됩니다.
   - View에서 ViewModel을 주입받고 ViewModel에서 UseCase를 호출하여 View에 바인딩된 변수를 변경합니다.
 
-## Library
-라이브러리명
+## 📘 Library
+라이브러리명 | 용도
+---|---
+GetX | 상태관리
+Dio | 네트워킹
+freezed | DTO 코드 제너레이터
+fl_chart | 그래프
+
+
+
