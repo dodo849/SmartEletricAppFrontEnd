@@ -36,13 +36,13 @@
 ### Business Logic: Clean Architecture+MVVM 적용
 
 - 3계층 구조: Data, Domain, Presentation
-**1. Data layer**
+1. **Data layer**
   - Repository 패턴을 이용하여 서버와 DB 접근을 추상화헀습니다. 
   - 서버 스키마 매핑을 위한 DTO도 포함된다.
-**3. Domain layer**
+2. **Domain layer**
   -  의존을 위한 Repository interface와 UseCase가 포함됩니다. 
   -  UseCase는 Repository를 조합해 유저 시나리오에 따른 흐름을 구성한다.
-**5. Presentation layer(MVVM)**
+3. **Presentation layer(MVVM)**
   - View(UI)와 ViewModel으로 구성됩니다.
   - View에서 ViewModel을 주입받고 ViewModel에서 UseCase를 호출하여 View에 바인딩된 변수를 변경합니다.
 
