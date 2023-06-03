@@ -21,7 +21,7 @@
 
 ## 💡 Design pattern
 
-### [UI] Atomic 디자인패턴을 변형하여 적용해 UI 컴포넌트를 atom, module, page로 구분
+### [UI] Atomic 디자인패턴을 변형하여 적용해 UI 컴포넌트를 atom, module, page로 구분했습니다.
 
 - **atom**: 전 페이지에서 재사용가능한 최소 단위의 컴포넌트를 정의합니다.
   - 주로 스타일링된 버튼과 사용자 Input 필드가 포함됩니다.
@@ -33,7 +33,7 @@
   - moudule간의 여백을 조정도 담당합니다.
 
 
-### [Business Logic] Clean Architecture+MVVM 적용
+### [Business Logic] Clean Architecture+MVVM을 적용했습니다.
 
 - 3계층 구조: Data, Domain, Presentation
 1. **Data layer**
