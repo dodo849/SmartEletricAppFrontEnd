@@ -37,7 +37,7 @@
 
 - 3계층 구조: Data, Domain, Presentation
 1. **Data layer**
-  - Repository 패턴을 이용하여 서버와 DB 접근을 추상화헀습니다. 
+  - Repository 패턴을 이용하여 서버와 DB 접근을 추상화합니다.
   - 서버 스키마 매핑을 위한 DTO도 포함됩니다.
 2. **Domain layer**
   -  의존을 위한 Repository interface와 UseCase가 포함됩니다. 
