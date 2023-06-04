@@ -63,6 +63,7 @@ GetX | 상태관리
 Dio | 네트워킹
 freezed | DTO 코드 제너레이터
 fl_chart | 그래프
+get_it | DI
 
 
 
