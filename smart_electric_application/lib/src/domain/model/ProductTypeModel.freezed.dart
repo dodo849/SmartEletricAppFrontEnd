@@ -33,34 +33,37 @@ mixin _$ProductTypeModel {
 abstract class $ProductTypeModelCopyWith<$Res> {
   factory $ProductTypeModelCopyWith(
           ProductTypeModel value, $Res Function(ProductTypeModel) then) =
-      _$ProductTypeModelCopyWithImpl<$Res>;
+      _$ProductTypeModelCopyWithImpl<$Res, ProductTypeModel>;
+  @useResult
   $Res call({String krName, String engName});
 }
 
 /// @nodoc
-class _$ProductTypeModelCopyWithImpl<$Res>
+class _$ProductTypeModelCopyWithImpl<$Res, $Val extends ProductTypeModel>
     implements $ProductTypeModelCopyWith<$Res> {
   _$ProductTypeModelCopyWithImpl(this._value, this._then);
 
-  final ProductTypeModel _value;
   // ignore: unused_field
-  final $Res Function(ProductTypeModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? krName = freezed,
-    Object? engName = freezed,
+    Object? krName = null,
+    Object? engName = null,
   }) {
     return _then(_value.copyWith(
-      krName: krName == freezed
+      krName: null == krName
           ? _value.krName
           : krName // ignore: cast_nullable_to_non_nullable
               as String,
-      engName: engName == freezed
+      engName: null == engName
           ? _value.engName
           : engName // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -71,31 +74,30 @@ abstract class _$$_ProductTypeModelCopyWith<$Res>
           _$_ProductTypeModel value, $Res Function(_$_ProductTypeModel) then) =
       __$$_ProductTypeModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String krName, String engName});
 }
 
 /// @nodoc
 class __$$_ProductTypeModelCopyWithImpl<$Res>
-    extends _$ProductTypeModelCopyWithImpl<$Res>
+    extends _$ProductTypeModelCopyWithImpl<$Res, _$_ProductTypeModel>
     implements _$$_ProductTypeModelCopyWith<$Res> {
   __$$_ProductTypeModelCopyWithImpl(
       _$_ProductTypeModel _value, $Res Function(_$_ProductTypeModel) _then)
-      : super(_value, (v) => _then(v as _$_ProductTypeModel));
+      : super(_value, _then);
 
-  @override
-  _$_ProductTypeModel get _value => super._value as _$_ProductTypeModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? krName = freezed,
-    Object? engName = freezed,
+    Object? krName = null,
+    Object? engName = null,
   }) {
     return _then(_$_ProductTypeModel(
-      krName: krName == freezed
+      krName: null == krName
           ? _value.krName
           : krName // ignore: cast_nullable_to_non_nullable
               as String,
-      engName: engName == freezed
+      engName: null == engName
           ? _value.engName
           : engName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -126,19 +128,17 @@ class _$_ProductTypeModel implements _ProductTypeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductTypeModel &&
-            const DeepCollectionEquality().equals(other.krName, krName) &&
-            const DeepCollectionEquality().equals(other.engName, engName));
+            (identical(other.krName, krName) || other.krName == krName) &&
+            (identical(other.engName, engName) || other.engName == engName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(krName),
-      const DeepCollectionEquality().hash(engName));
+  int get hashCode => Object.hash(runtimeType, krName, engName);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ProductTypeModelCopyWith<_$_ProductTypeModel> get copyWith =>
       __$$_ProductTypeModelCopyWithImpl<_$_ProductTypeModel>(this, _$identity);
 

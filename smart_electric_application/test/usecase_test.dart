@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/domain/usecase/SignupUsecase.dart';
+// import 'package:smart_electric_application/src/domain/usecase/SignupUsecase.dart';
 
 void testUseCase() {
   // Signup Use Case
   group('Signup UseCase', () {
     test('Signup UseCase all clear', () async {
-      final signupUseCase = SignupUsecase();
+      // final signupUseCase = SignupUsecase();
 
       // Result<bool, String> result = await signupUseCase.execute(
       //     customerNumber: '', email: '', name: '', password: '');

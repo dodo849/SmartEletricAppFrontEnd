@@ -33,29 +33,33 @@ mixin _$AccountEmailValidationDTO {
 abstract class $AccountEmailValidationDTOCopyWith<$Res> {
   factory $AccountEmailValidationDTOCopyWith(AccountEmailValidationDTO value,
           $Res Function(AccountEmailValidationDTO) then) =
-      _$AccountEmailValidationDTOCopyWithImpl<$Res>;
+      _$AccountEmailValidationDTOCopyWithImpl<$Res, AccountEmailValidationDTO>;
+  @useResult
   $Res call({bool result});
 }
 
 /// @nodoc
-class _$AccountEmailValidationDTOCopyWithImpl<$Res>
+class _$AccountEmailValidationDTOCopyWithImpl<$Res,
+        $Val extends AccountEmailValidationDTO>
     implements $AccountEmailValidationDTOCopyWith<$Res> {
   _$AccountEmailValidationDTOCopyWithImpl(this._value, this._then);
 
-  final AccountEmailValidationDTO _value;
   // ignore: unused_field
-  final $Res Function(AccountEmailValidationDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
+    Object? result = null,
   }) {
     return _then(_value.copyWith(
-      result: result == freezed
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -67,28 +71,27 @@ abstract class _$$_AccountEmailValidationDTOCopyWith<$Res>
           $Res Function(_$_AccountEmailValidationDTO) then) =
       __$$_AccountEmailValidationDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool result});
 }
 
 /// @nodoc
 class __$$_AccountEmailValidationDTOCopyWithImpl<$Res>
-    extends _$AccountEmailValidationDTOCopyWithImpl<$Res>
+    extends _$AccountEmailValidationDTOCopyWithImpl<$Res,
+        _$_AccountEmailValidationDTO>
     implements _$$_AccountEmailValidationDTOCopyWith<$Res> {
   __$$_AccountEmailValidationDTOCopyWithImpl(
       _$_AccountEmailValidationDTO _value,
       $Res Function(_$_AccountEmailValidationDTO) _then)
-      : super(_value, (v) => _then(v as _$_AccountEmailValidationDTO));
+      : super(_value, _then);
 
-  @override
-  _$_AccountEmailValidationDTO get _value =>
-      super._value as _$_AccountEmailValidationDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
+    Object? result = null,
   }) {
     return _then(_$_AccountEmailValidationDTO(
-      result: result == freezed
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -117,16 +120,16 @@ class _$_AccountEmailValidationDTO implements _AccountEmailValidationDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AccountEmailValidationDTO &&
-            const DeepCollectionEquality().equals(other.result, result));
+            (identical(other.result, result) || other.result == result));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(result));
+  int get hashCode => Object.hash(runtimeType, result);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AccountEmailValidationDTOCopyWith<_$_AccountEmailValidationDTO>
       get copyWith => __$$_AccountEmailValidationDTOCopyWithImpl<
           _$_AccountEmailValidationDTO>(this, _$identity);

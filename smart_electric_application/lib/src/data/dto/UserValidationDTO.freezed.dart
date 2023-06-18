@@ -37,7 +37,8 @@ mixin _$UserValidationDTO {
 abstract class $UserValidationDTOCopyWith<$Res> {
   factory $UserValidationDTOCopyWith(
           UserValidationDTO value, $Res Function(UserValidationDTO) then) =
-      _$UserValidationDTOCopyWithImpl<$Res>;
+      _$UserValidationDTOCopyWithImpl<$Res, UserValidationDTO>;
+  @useResult
   $Res call(
       {String joinYn,
       String infoYn,
@@ -46,39 +47,41 @@ abstract class $UserValidationDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserValidationDTOCopyWithImpl<$Res>
+class _$UserValidationDTOCopyWithImpl<$Res, $Val extends UserValidationDTO>
     implements $UserValidationDTOCopyWith<$Res> {
   _$UserValidationDTOCopyWithImpl(this._value, this._then);
 
-  final UserValidationDTO _value;
   // ignore: unused_field
-  final $Res Function(UserValidationDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? joinYn = freezed,
-    Object? infoYn = freezed,
-    Object? expAgreeDate = freezed,
-    Object? provideAgreeDate = freezed,
+    Object? joinYn = null,
+    Object? infoYn = null,
+    Object? expAgreeDate = null,
+    Object? provideAgreeDate = null,
   }) {
     return _then(_value.copyWith(
-      joinYn: joinYn == freezed
+      joinYn: null == joinYn
           ? _value.joinYn
           : joinYn // ignore: cast_nullable_to_non_nullable
               as String,
-      infoYn: infoYn == freezed
+      infoYn: null == infoYn
           ? _value.infoYn
           : infoYn // ignore: cast_nullable_to_non_nullable
               as String,
-      expAgreeDate: expAgreeDate == freezed
+      expAgreeDate: null == expAgreeDate
           ? _value.expAgreeDate
           : expAgreeDate // ignore: cast_nullable_to_non_nullable
               as String,
-      provideAgreeDate: provideAgreeDate == freezed
+      provideAgreeDate: null == provideAgreeDate
           ? _value.provideAgreeDate
           : provideAgreeDate // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -89,6 +92,7 @@ abstract class _$$_UserValidationDTOCopyWith<$Res>
           $Res Function(_$_UserValidationDTO) then) =
       __$$_UserValidationDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String joinYn,
       String infoYn,
@@ -98,36 +102,34 @@ abstract class _$$_UserValidationDTOCopyWith<$Res>
 
 /// @nodoc
 class __$$_UserValidationDTOCopyWithImpl<$Res>
-    extends _$UserValidationDTOCopyWithImpl<$Res>
+    extends _$UserValidationDTOCopyWithImpl<$Res, _$_UserValidationDTO>
     implements _$$_UserValidationDTOCopyWith<$Res> {
   __$$_UserValidationDTOCopyWithImpl(
       _$_UserValidationDTO _value, $Res Function(_$_UserValidationDTO) _then)
-      : super(_value, (v) => _then(v as _$_UserValidationDTO));
+      : super(_value, _then);
 
-  @override
-  _$_UserValidationDTO get _value => super._value as _$_UserValidationDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? joinYn = freezed,
-    Object? infoYn = freezed,
-    Object? expAgreeDate = freezed,
-    Object? provideAgreeDate = freezed,
+    Object? joinYn = null,
+    Object? infoYn = null,
+    Object? expAgreeDate = null,
+    Object? provideAgreeDate = null,
   }) {
     return _then(_$_UserValidationDTO(
-      joinYn: joinYn == freezed
+      joinYn: null == joinYn
           ? _value.joinYn
           : joinYn // ignore: cast_nullable_to_non_nullable
               as String,
-      infoYn: infoYn == freezed
+      infoYn: null == infoYn
           ? _value.infoYn
           : infoYn // ignore: cast_nullable_to_non_nullable
               as String,
-      expAgreeDate: expAgreeDate == freezed
+      expAgreeDate: null == expAgreeDate
           ? _value.expAgreeDate
           : expAgreeDate // ignore: cast_nullable_to_non_nullable
               as String,
-      provideAgreeDate: provideAgreeDate == freezed
+      provideAgreeDate: null == provideAgreeDate
           ? _value.provideAgreeDate
           : provideAgreeDate // ignore: cast_nullable_to_non_nullable
               as String,
@@ -168,25 +170,22 @@ class _$_UserValidationDTO implements _UserValidationDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserValidationDTO &&
-            const DeepCollectionEquality().equals(other.joinYn, joinYn) &&
-            const DeepCollectionEquality().equals(other.infoYn, infoYn) &&
-            const DeepCollectionEquality()
-                .equals(other.expAgreeDate, expAgreeDate) &&
-            const DeepCollectionEquality()
-                .equals(other.provideAgreeDate, provideAgreeDate));
+            (identical(other.joinYn, joinYn) || other.joinYn == joinYn) &&
+            (identical(other.infoYn, infoYn) || other.infoYn == infoYn) &&
+            (identical(other.expAgreeDate, expAgreeDate) ||
+                other.expAgreeDate == expAgreeDate) &&
+            (identical(other.provideAgreeDate, provideAgreeDate) ||
+                other.provideAgreeDate == provideAgreeDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(joinYn),
-      const DeepCollectionEquality().hash(infoYn),
-      const DeepCollectionEquality().hash(expAgreeDate),
-      const DeepCollectionEquality().hash(provideAgreeDate));
+  int get hashCode =>
+      Object.hash(runtimeType, joinYn, infoYn, expAgreeDate, provideAgreeDate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserValidationDTOCopyWith<_$_UserValidationDTO> get copyWith =>
       __$$_UserValidationDTOCopyWithImpl<_$_UserValidationDTO>(
           this, _$identity);

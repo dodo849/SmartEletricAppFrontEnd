@@ -38,7 +38,9 @@ mixin _$BillSimulationProductModel {
 abstract class $BillSimulationProductModelCopyWith<$Res> {
   factory $BillSimulationProductModelCopyWith(BillSimulationProductModel value,
           $Res Function(BillSimulationProductModel) then) =
-      _$BillSimulationProductModelCopyWithImpl<$Res>;
+      _$BillSimulationProductModelCopyWithImpl<$Res,
+          BillSimulationProductModel>;
+  @useResult
   $Res call(
       {int? id,
       String productName,
@@ -49,49 +51,52 @@ abstract class $BillSimulationProductModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$BillSimulationProductModelCopyWithImpl<$Res>
+class _$BillSimulationProductModelCopyWithImpl<$Res,
+        $Val extends BillSimulationProductModel>
     implements $BillSimulationProductModelCopyWith<$Res> {
   _$BillSimulationProductModelCopyWithImpl(this._value, this._then);
 
-  final BillSimulationProductModel _value;
   // ignore: unused_field
-  final $Res Function(BillSimulationProductModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? productName = freezed,
-    Object? modelName = freezed,
-    Object? typeKrName = freezed,
-    Object? typeEngName = freezed,
-    Object? monthPowerUsage = freezed,
+    Object? productName = null,
+    Object? modelName = null,
+    Object? typeKrName = null,
+    Object? typeEngName = null,
+    Object? monthPowerUsage = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      productName: productName == freezed
+      productName: null == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String,
-      modelName: modelName == freezed
+      modelName: null == modelName
           ? _value.modelName
           : modelName // ignore: cast_nullable_to_non_nullable
               as String,
-      typeKrName: typeKrName == freezed
+      typeKrName: null == typeKrName
           ? _value.typeKrName
           : typeKrName // ignore: cast_nullable_to_non_nullable
               as String,
-      typeEngName: typeEngName == freezed
+      typeEngName: null == typeEngName
           ? _value.typeEngName
           : typeEngName // ignore: cast_nullable_to_non_nullable
               as String,
-      monthPowerUsage: monthPowerUsage == freezed
+      monthPowerUsage: null == monthPowerUsage
           ? _value.monthPowerUsage
           : monthPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -103,6 +108,7 @@ abstract class _$$_BillSimulationProductModelCopyWith<$Res>
           $Res Function(_$_BillSimulationProductModel) then) =
       __$$_BillSimulationProductModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {int? id,
       String productName,
@@ -114,48 +120,46 @@ abstract class _$$_BillSimulationProductModelCopyWith<$Res>
 
 /// @nodoc
 class __$$_BillSimulationProductModelCopyWithImpl<$Res>
-    extends _$BillSimulationProductModelCopyWithImpl<$Res>
+    extends _$BillSimulationProductModelCopyWithImpl<$Res,
+        _$_BillSimulationProductModel>
     implements _$$_BillSimulationProductModelCopyWith<$Res> {
   __$$_BillSimulationProductModelCopyWithImpl(
       _$_BillSimulationProductModel _value,
       $Res Function(_$_BillSimulationProductModel) _then)
-      : super(_value, (v) => _then(v as _$_BillSimulationProductModel));
+      : super(_value, _then);
 
-  @override
-  _$_BillSimulationProductModel get _value =>
-      super._value as _$_BillSimulationProductModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? productName = freezed,
-    Object? modelName = freezed,
-    Object? typeKrName = freezed,
-    Object? typeEngName = freezed,
-    Object? monthPowerUsage = freezed,
+    Object? productName = null,
+    Object? modelName = null,
+    Object? typeKrName = null,
+    Object? typeEngName = null,
+    Object? monthPowerUsage = null,
   }) {
     return _then(_$_BillSimulationProductModel(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      productName: productName == freezed
+      productName: null == productName
           ? _value.productName
           : productName // ignore: cast_nullable_to_non_nullable
               as String,
-      modelName: modelName == freezed
+      modelName: null == modelName
           ? _value.modelName
           : modelName // ignore: cast_nullable_to_non_nullable
               as String,
-      typeKrName: typeKrName == freezed
+      typeKrName: null == typeKrName
           ? _value.typeKrName
           : typeKrName // ignore: cast_nullable_to_non_nullable
               as String,
-      typeEngName: typeEngName == freezed
+      typeEngName: null == typeEngName
           ? _value.typeEngName
           : typeEngName // ignore: cast_nullable_to_non_nullable
               as String,
-      monthPowerUsage: monthPowerUsage == freezed
+      monthPowerUsage: null == monthPowerUsage
           ? _value.monthPowerUsage
           : monthPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
@@ -200,31 +204,27 @@ class _$_BillSimulationProductModel implements _BillSimulationProductModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillSimulationProductModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.productName, productName) &&
-            const DeepCollectionEquality().equals(other.modelName, modelName) &&
-            const DeepCollectionEquality()
-                .equals(other.typeKrName, typeKrName) &&
-            const DeepCollectionEquality()
-                .equals(other.typeEngName, typeEngName) &&
-            const DeepCollectionEquality()
-                .equals(other.monthPowerUsage, monthPowerUsage));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.productName, productName) ||
+                other.productName == productName) &&
+            (identical(other.modelName, modelName) ||
+                other.modelName == modelName) &&
+            (identical(other.typeKrName, typeKrName) ||
+                other.typeKrName == typeKrName) &&
+            (identical(other.typeEngName, typeEngName) ||
+                other.typeEngName == typeEngName) &&
+            (identical(other.monthPowerUsage, monthPowerUsage) ||
+                other.monthPowerUsage == monthPowerUsage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(productName),
-      const DeepCollectionEquality().hash(modelName),
-      const DeepCollectionEquality().hash(typeKrName),
-      const DeepCollectionEquality().hash(typeEngName),
-      const DeepCollectionEquality().hash(monthPowerUsage));
+  int get hashCode => Object.hash(runtimeType, id, productName, modelName,
+      typeKrName, typeEngName, monthPowerUsage);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BillSimulationProductModelCopyWith<_$_BillSimulationProductModel>
       get copyWith => __$$_BillSimulationProductModelCopyWithImpl<
           _$_BillSimulationProductModel>(this, _$identity);

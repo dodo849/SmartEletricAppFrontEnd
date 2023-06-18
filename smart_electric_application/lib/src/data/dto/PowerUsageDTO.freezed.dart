@@ -35,7 +35,8 @@ mixin _$PowerUsageDTO {
 abstract class $PowerUsageDTOCopyWith<$Res> {
   factory $PowerUsageDTOCopyWith(
           PowerUsageDTO value, $Res Function(PowerUsageDTO) then) =
-      _$PowerUsageDTOCopyWithImpl<$Res>;
+      _$PowerUsageDTOCopyWithImpl<$Res, PowerUsageDTO>;
+  @useResult
   $Res call(
       {String? startDateKr,
       String? endDateKr,
@@ -44,39 +45,41 @@ abstract class $PowerUsageDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PowerUsageDTOCopyWithImpl<$Res>
+class _$PowerUsageDTOCopyWithImpl<$Res, $Val extends PowerUsageDTO>
     implements $PowerUsageDTOCopyWith<$Res> {
   _$PowerUsageDTOCopyWithImpl(this._value, this._then);
 
-  final PowerUsageDTO _value;
   // ignore: unused_field
-  final $Res Function(PowerUsageDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? startDateKr = freezed,
     Object? endDateKr = freezed,
-    Object? dateTimeKr = freezed,
-    Object? powerUsageQuantity = freezed,
+    Object? dateTimeKr = null,
+    Object? powerUsageQuantity = null,
   }) {
     return _then(_value.copyWith(
-      startDateKr: startDateKr == freezed
+      startDateKr: freezed == startDateKr
           ? _value.startDateKr
           : startDateKr // ignore: cast_nullable_to_non_nullable
               as String?,
-      endDateKr: endDateKr == freezed
+      endDateKr: freezed == endDateKr
           ? _value.endDateKr
           : endDateKr // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateTimeKr: dateTimeKr == freezed
+      dateTimeKr: null == dateTimeKr
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
               as String,
-      powerUsageQuantity: powerUsageQuantity == freezed
+      powerUsageQuantity: null == powerUsageQuantity
           ? _value.powerUsageQuantity
           : powerUsageQuantity // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -87,6 +90,7 @@ abstract class _$$_PowerUsageDTOCopyWith<$Res>
           _$_PowerUsageDTO value, $Res Function(_$_PowerUsageDTO) then) =
       __$$_PowerUsageDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? startDateKr,
       String? endDateKr,
@@ -96,36 +100,34 @@ abstract class _$$_PowerUsageDTOCopyWith<$Res>
 
 /// @nodoc
 class __$$_PowerUsageDTOCopyWithImpl<$Res>
-    extends _$PowerUsageDTOCopyWithImpl<$Res>
+    extends _$PowerUsageDTOCopyWithImpl<$Res, _$_PowerUsageDTO>
     implements _$$_PowerUsageDTOCopyWith<$Res> {
   __$$_PowerUsageDTOCopyWithImpl(
       _$_PowerUsageDTO _value, $Res Function(_$_PowerUsageDTO) _then)
-      : super(_value, (v) => _then(v as _$_PowerUsageDTO));
+      : super(_value, _then);
 
-  @override
-  _$_PowerUsageDTO get _value => super._value as _$_PowerUsageDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? startDateKr = freezed,
     Object? endDateKr = freezed,
-    Object? dateTimeKr = freezed,
-    Object? powerUsageQuantity = freezed,
+    Object? dateTimeKr = null,
+    Object? powerUsageQuantity = null,
   }) {
     return _then(_$_PowerUsageDTO(
-      startDateKr: startDateKr == freezed
+      startDateKr: freezed == startDateKr
           ? _value.startDateKr
           : startDateKr // ignore: cast_nullable_to_non_nullable
               as String?,
-      endDateKr: endDateKr == freezed
+      endDateKr: freezed == endDateKr
           ? _value.endDateKr
           : endDateKr // ignore: cast_nullable_to_non_nullable
               as String?,
-      dateTimeKr: dateTimeKr == freezed
+      dateTimeKr: null == dateTimeKr
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
               as String,
-      powerUsageQuantity: powerUsageQuantity == freezed
+      powerUsageQuantity: null == powerUsageQuantity
           ? _value.powerUsageQuantity
           : powerUsageQuantity // ignore: cast_nullable_to_non_nullable
               as double,
@@ -164,26 +166,24 @@ class _$_PowerUsageDTO implements _PowerUsageDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PowerUsageDTO &&
-            const DeepCollectionEquality()
-                .equals(other.startDateKr, startDateKr) &&
-            const DeepCollectionEquality().equals(other.endDateKr, endDateKr) &&
-            const DeepCollectionEquality()
-                .equals(other.dateTimeKr, dateTimeKr) &&
-            const DeepCollectionEquality()
-                .equals(other.powerUsageQuantity, powerUsageQuantity));
+            (identical(other.startDateKr, startDateKr) ||
+                other.startDateKr == startDateKr) &&
+            (identical(other.endDateKr, endDateKr) ||
+                other.endDateKr == endDateKr) &&
+            (identical(other.dateTimeKr, dateTimeKr) ||
+                other.dateTimeKr == dateTimeKr) &&
+            (identical(other.powerUsageQuantity, powerUsageQuantity) ||
+                other.powerUsageQuantity == powerUsageQuantity));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(startDateKr),
-      const DeepCollectionEquality().hash(endDateKr),
-      const DeepCollectionEquality().hash(dateTimeKr),
-      const DeepCollectionEquality().hash(powerUsageQuantity));
+      runtimeType, startDateKr, endDateKr, dateTimeKr, powerUsageQuantity);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PowerUsageDTOCopyWith<_$_PowerUsageDTO> get copyWith =>
       __$$_PowerUsageDTOCopyWithImpl<_$_PowerUsageDTO>(this, _$identity);
 

@@ -35,7 +35,8 @@ mixin _$UserModel {
 /// @nodoc
 abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
-      _$UserModelCopyWithImpl<$Res>;
+      _$UserModelCopyWithImpl<$Res, UserModel>;
+  @useResult
   $Res call(
       {String name,
       String email,
@@ -45,43 +46,46 @@ abstract class $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
+class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
+    implements $UserModelCopyWith<$Res> {
   _$UserModelCopyWithImpl(this._value, this._then);
 
-  final UserModel _value;
   // ignore: unused_field
-  final $Res Function(UserModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? customerNumber = freezed,
-    Object? isSmartMeter = freezed,
-    Object? billDate = freezed,
+    Object? name = null,
+    Object? email = null,
+    Object? customerNumber = null,
+    Object? isSmartMeter = null,
+    Object? billDate = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      customerNumber: customerNumber == freezed
+      customerNumber: null == customerNumber
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      isSmartMeter: isSmartMeter == freezed
+      isSmartMeter: null == isSmartMeter
           ? _value.isSmartMeter
           : isSmartMeter // ignore: cast_nullable_to_non_nullable
               as bool,
-      billDate: billDate == freezed
+      billDate: null == billDate
           ? _value.billDate
           : billDate // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -91,6 +95,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
           _$_UserModel value, $Res Function(_$_UserModel) then) =
       __$$_UserModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String name,
       String email,
@@ -100,41 +105,40 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
+class __$$_UserModelCopyWithImpl<$Res>
+    extends _$UserModelCopyWithImpl<$Res, _$_UserModel>
     implements _$$_UserModelCopyWith<$Res> {
   __$$_UserModelCopyWithImpl(
       _$_UserModel _value, $Res Function(_$_UserModel) _then)
-      : super(_value, (v) => _then(v as _$_UserModel));
+      : super(_value, _then);
 
-  @override
-  _$_UserModel get _value => super._value as _$_UserModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? customerNumber = freezed,
-    Object? isSmartMeter = freezed,
-    Object? billDate = freezed,
+    Object? name = null,
+    Object? email = null,
+    Object? customerNumber = null,
+    Object? isSmartMeter = null,
+    Object? billDate = null,
   }) {
     return _then(_$_UserModel(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      customerNumber: customerNumber == freezed
+      customerNumber: null == customerNumber
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      isSmartMeter: isSmartMeter == freezed
+      isSmartMeter: null == isSmartMeter
           ? _value.isSmartMeter
           : isSmartMeter // ignore: cast_nullable_to_non_nullable
               as bool,
-      billDate: billDate == freezed
+      billDate: null == billDate
           ? _value.billDate
           : billDate // ignore: cast_nullable_to_non_nullable
               as String,
@@ -176,27 +180,24 @@ class _$_UserModel implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality()
-                .equals(other.customerNumber, customerNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.isSmartMeter, isSmartMeter) &&
-            const DeepCollectionEquality().equals(other.billDate, billDate));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.customerNumber, customerNumber) ||
+                other.customerNumber == customerNumber) &&
+            (identical(other.isSmartMeter, isSmartMeter) ||
+                other.isSmartMeter == isSmartMeter) &&
+            (identical(other.billDate, billDate) ||
+                other.billDate == billDate));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(customerNumber),
-      const DeepCollectionEquality().hash(isSmartMeter),
-      const DeepCollectionEquality().hash(billDate));
+      runtimeType, name, email, customerNumber, isSmartMeter, billDate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
       __$$_UserModelCopyWithImpl<_$_UserModel>(this, _$identity);
 

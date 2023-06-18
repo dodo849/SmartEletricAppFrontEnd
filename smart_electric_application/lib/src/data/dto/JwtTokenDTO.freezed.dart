@@ -35,35 +35,39 @@ mixin _$JwtTokenDTO {
 abstract class $JwtTokenDTOCopyWith<$Res> {
   factory $JwtTokenDTOCopyWith(
           JwtTokenDTO value, $Res Function(JwtTokenDTO) then) =
-      _$JwtTokenDTOCopyWithImpl<$Res>;
+      _$JwtTokenDTOCopyWithImpl<$Res, JwtTokenDTO>;
+  @useResult
   $Res call(
       {@JsonKey(name: "access-token") String accessToken,
       @JsonKey(name: "refresh-token") String refreshToken});
 }
 
 /// @nodoc
-class _$JwtTokenDTOCopyWithImpl<$Res> implements $JwtTokenDTOCopyWith<$Res> {
+class _$JwtTokenDTOCopyWithImpl<$Res, $Val extends JwtTokenDTO>
+    implements $JwtTokenDTOCopyWith<$Res> {
   _$JwtTokenDTOCopyWithImpl(this._value, this._then);
 
-  final JwtTokenDTO _value;
   // ignore: unused_field
-  final $Res Function(JwtTokenDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accessToken = freezed,
-    Object? refreshToken = freezed,
+    Object? accessToken = null,
+    Object? refreshToken = null,
   }) {
     return _then(_value.copyWith(
-      accessToken: accessToken == freezed
+      accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
-      refreshToken: refreshToken == freezed
+      refreshToken: null == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -74,32 +78,32 @@ abstract class _$$_JwtTokenDTOCopyWith<$Res>
           _$_JwtTokenDTO value, $Res Function(_$_JwtTokenDTO) then) =
       __$$_JwtTokenDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: "access-token") String accessToken,
       @JsonKey(name: "refresh-token") String refreshToken});
 }
 
 /// @nodoc
-class __$$_JwtTokenDTOCopyWithImpl<$Res> extends _$JwtTokenDTOCopyWithImpl<$Res>
+class __$$_JwtTokenDTOCopyWithImpl<$Res>
+    extends _$JwtTokenDTOCopyWithImpl<$Res, _$_JwtTokenDTO>
     implements _$$_JwtTokenDTOCopyWith<$Res> {
   __$$_JwtTokenDTOCopyWithImpl(
       _$_JwtTokenDTO _value, $Res Function(_$_JwtTokenDTO) _then)
-      : super(_value, (v) => _then(v as _$_JwtTokenDTO));
+      : super(_value, _then);
 
-  @override
-  _$_JwtTokenDTO get _value => super._value as _$_JwtTokenDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? accessToken = freezed,
-    Object? refreshToken = freezed,
+    Object? accessToken = null,
+    Object? refreshToken = null,
   }) {
     return _then(_$_JwtTokenDTO(
-      accessToken: accessToken == freezed
+      accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
-      refreshToken: refreshToken == freezed
+      refreshToken: null == refreshToken
           ? _value.refreshToken
           : refreshToken // ignore: cast_nullable_to_non_nullable
               as String,
@@ -134,21 +138,19 @@ class _$_JwtTokenDTO implements _JwtTokenDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_JwtTokenDTO &&
-            const DeepCollectionEquality()
-                .equals(other.accessToken, accessToken) &&
-            const DeepCollectionEquality()
-                .equals(other.refreshToken, refreshToken));
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.refreshToken, refreshToken) ||
+                other.refreshToken == refreshToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(accessToken),
-      const DeepCollectionEquality().hash(refreshToken));
+  int get hashCode => Object.hash(runtimeType, accessToken, refreshToken);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_JwtTokenDTOCopyWith<_$_JwtTokenDTO> get copyWith =>
       __$$_JwtTokenDTOCopyWithImpl<_$_JwtTokenDTO>(this, _$identity);
 

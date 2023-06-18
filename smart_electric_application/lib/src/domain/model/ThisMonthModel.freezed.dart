@@ -41,7 +41,8 @@ mixin _$ThisMonthModel {
 abstract class $ThisMonthModelCopyWith<$Res> {
   factory $ThisMonthModelCopyWith(
           ThisMonthModel value, $Res Function(ThisMonthModel) then) =
-      _$ThisMonthModelCopyWithImpl<$Res>;
+      _$ThisMonthModelCopyWithImpl<$Res, ThisMonthModel>;
+  @useResult
   $Res call(
       {String userName,
       double powerUsage,
@@ -56,69 +57,71 @@ abstract class $ThisMonthModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ThisMonthModelCopyWithImpl<$Res>
+class _$ThisMonthModelCopyWithImpl<$Res, $Val extends ThisMonthModel>
     implements $ThisMonthModelCopyWith<$Res> {
   _$ThisMonthModelCopyWithImpl(this._value, this._then);
 
-  final ThisMonthModel _value;
   // ignore: unused_field
-  final $Res Function(ThisMonthModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = freezed,
-    Object? powerUsage = freezed,
-    Object? bill = freezed,
-    Object? progressiveSection = freezed,
-    Object? accumulateThresholdFirst = freezed,
-    Object? accumulateThresholdSecond = freezed,
-    Object? accumulateThresholdSuper = freezed,
-    Object? predictionPowerUsage = freezed,
-    Object? predictionBill = freezed,
-    Object? predictionProgressiveSection = freezed,
+    Object? userName = null,
+    Object? powerUsage = null,
+    Object? bill = null,
+    Object? progressiveSection = null,
+    Object? accumulateThresholdFirst = null,
+    Object? accumulateThresholdSecond = null,
+    Object? accumulateThresholdSuper = null,
+    Object? predictionPowerUsage = null,
+    Object? predictionBill = null,
+    Object? predictionProgressiveSection = null,
   }) {
     return _then(_value.copyWith(
-      userName: userName == freezed
+      userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      powerUsage: powerUsage == freezed
+      powerUsage: null == powerUsage
           ? _value.powerUsage
           : powerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      bill: bill == freezed
+      bill: null == bill
           ? _value.bill
           : bill // ignore: cast_nullable_to_non_nullable
               as double,
-      progressiveSection: progressiveSection == freezed
+      progressiveSection: null == progressiveSection
           ? _value.progressiveSection
           : progressiveSection // ignore: cast_nullable_to_non_nullable
               as int,
-      accumulateThresholdFirst: accumulateThresholdFirst == freezed
+      accumulateThresholdFirst: null == accumulateThresholdFirst
           ? _value.accumulateThresholdFirst
           : accumulateThresholdFirst // ignore: cast_nullable_to_non_nullable
               as int,
-      accumulateThresholdSecond: accumulateThresholdSecond == freezed
+      accumulateThresholdSecond: null == accumulateThresholdSecond
           ? _value.accumulateThresholdSecond
           : accumulateThresholdSecond // ignore: cast_nullable_to_non_nullable
               as int,
-      accumulateThresholdSuper: accumulateThresholdSuper == freezed
+      accumulateThresholdSuper: null == accumulateThresholdSuper
           ? _value.accumulateThresholdSuper
           : accumulateThresholdSuper // ignore: cast_nullable_to_non_nullable
               as int,
-      predictionPowerUsage: predictionPowerUsage == freezed
+      predictionPowerUsage: null == predictionPowerUsage
           ? _value.predictionPowerUsage
           : predictionPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionBill: predictionBill == freezed
+      predictionBill: null == predictionBill
           ? _value.predictionBill
           : predictionBill // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionProgressiveSection: predictionProgressiveSection == freezed
+      predictionProgressiveSection: null == predictionProgressiveSection
           ? _value.predictionProgressiveSection
           : predictionProgressiveSection // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -129,6 +132,7 @@ abstract class _$$_ThisMonthModelCopyWith<$Res>
           _$_ThisMonthModel value, $Res Function(_$_ThisMonthModel) then) =
       __$$_ThisMonthModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String userName,
       double powerUsage,
@@ -144,66 +148,64 @@ abstract class _$$_ThisMonthModelCopyWith<$Res>
 
 /// @nodoc
 class __$$_ThisMonthModelCopyWithImpl<$Res>
-    extends _$ThisMonthModelCopyWithImpl<$Res>
+    extends _$ThisMonthModelCopyWithImpl<$Res, _$_ThisMonthModel>
     implements _$$_ThisMonthModelCopyWith<$Res> {
   __$$_ThisMonthModelCopyWithImpl(
       _$_ThisMonthModel _value, $Res Function(_$_ThisMonthModel) _then)
-      : super(_value, (v) => _then(v as _$_ThisMonthModel));
+      : super(_value, _then);
 
-  @override
-  _$_ThisMonthModel get _value => super._value as _$_ThisMonthModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = freezed,
-    Object? powerUsage = freezed,
-    Object? bill = freezed,
-    Object? progressiveSection = freezed,
-    Object? accumulateThresholdFirst = freezed,
-    Object? accumulateThresholdSecond = freezed,
-    Object? accumulateThresholdSuper = freezed,
-    Object? predictionPowerUsage = freezed,
-    Object? predictionBill = freezed,
-    Object? predictionProgressiveSection = freezed,
+    Object? userName = null,
+    Object? powerUsage = null,
+    Object? bill = null,
+    Object? progressiveSection = null,
+    Object? accumulateThresholdFirst = null,
+    Object? accumulateThresholdSecond = null,
+    Object? accumulateThresholdSuper = null,
+    Object? predictionPowerUsage = null,
+    Object? predictionBill = null,
+    Object? predictionProgressiveSection = null,
   }) {
     return _then(_$_ThisMonthModel(
-      userName: userName == freezed
+      userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
-      powerUsage: powerUsage == freezed
+      powerUsage: null == powerUsage
           ? _value.powerUsage
           : powerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      bill: bill == freezed
+      bill: null == bill
           ? _value.bill
           : bill // ignore: cast_nullable_to_non_nullable
               as double,
-      progressiveSection: progressiveSection == freezed
+      progressiveSection: null == progressiveSection
           ? _value.progressiveSection
           : progressiveSection // ignore: cast_nullable_to_non_nullable
               as int,
-      accumulateThresholdFirst: accumulateThresholdFirst == freezed
+      accumulateThresholdFirst: null == accumulateThresholdFirst
           ? _value.accumulateThresholdFirst
           : accumulateThresholdFirst // ignore: cast_nullable_to_non_nullable
               as int,
-      accumulateThresholdSecond: accumulateThresholdSecond == freezed
+      accumulateThresholdSecond: null == accumulateThresholdSecond
           ? _value.accumulateThresholdSecond
           : accumulateThresholdSecond // ignore: cast_nullable_to_non_nullable
               as int,
-      accumulateThresholdSuper: accumulateThresholdSuper == freezed
+      accumulateThresholdSuper: null == accumulateThresholdSuper
           ? _value.accumulateThresholdSuper
           : accumulateThresholdSuper // ignore: cast_nullable_to_non_nullable
               as int,
-      predictionPowerUsage: predictionPowerUsage == freezed
+      predictionPowerUsage: null == predictionPowerUsage
           ? _value.predictionPowerUsage
           : predictionPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionBill: predictionBill == freezed
+      predictionBill: null == predictionBill
           ? _value.predictionBill
           : predictionBill // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionProgressiveSection: predictionProgressiveSection == freezed
+      predictionProgressiveSection: null == predictionProgressiveSection
           ? _value.predictionProgressiveSection
           : predictionProgressiveSection // ignore: cast_nullable_to_non_nullable
               as int,
@@ -260,44 +262,50 @@ class _$_ThisMonthModel implements _ThisMonthModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ThisMonthModel &&
-            const DeepCollectionEquality().equals(other.userName, userName) &&
-            const DeepCollectionEquality()
-                .equals(other.powerUsage, powerUsage) &&
-            const DeepCollectionEquality().equals(other.bill, bill) &&
-            const DeepCollectionEquality()
-                .equals(other.progressiveSection, progressiveSection) &&
-            const DeepCollectionEquality().equals(
-                other.accumulateThresholdFirst, accumulateThresholdFirst) &&
-            const DeepCollectionEquality().equals(
-                other.accumulateThresholdSecond, accumulateThresholdSecond) &&
-            const DeepCollectionEquality().equals(
-                other.accumulateThresholdSuper, accumulateThresholdSuper) &&
-            const DeepCollectionEquality()
-                .equals(other.predictionPowerUsage, predictionPowerUsage) &&
-            const DeepCollectionEquality()
-                .equals(other.predictionBill, predictionBill) &&
-            const DeepCollectionEquality().equals(
-                other.predictionProgressiveSection,
-                predictionProgressiveSection));
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
+            (identical(other.powerUsage, powerUsage) ||
+                other.powerUsage == powerUsage) &&
+            (identical(other.bill, bill) || other.bill == bill) &&
+            (identical(other.progressiveSection, progressiveSection) ||
+                other.progressiveSection == progressiveSection) &&
+            (identical(
+                    other.accumulateThresholdFirst, accumulateThresholdFirst) ||
+                other.accumulateThresholdFirst == accumulateThresholdFirst) &&
+            (identical(other.accumulateThresholdSecond,
+                    accumulateThresholdSecond) ||
+                other.accumulateThresholdSecond == accumulateThresholdSecond) &&
+            (identical(
+                    other.accumulateThresholdSuper, accumulateThresholdSuper) ||
+                other.accumulateThresholdSuper == accumulateThresholdSuper) &&
+            (identical(other.predictionPowerUsage, predictionPowerUsage) ||
+                other.predictionPowerUsage == predictionPowerUsage) &&
+            (identical(other.predictionBill, predictionBill) ||
+                other.predictionBill == predictionBill) &&
+            (identical(other.predictionProgressiveSection,
+                    predictionProgressiveSection) ||
+                other.predictionProgressiveSection ==
+                    predictionProgressiveSection));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(userName),
-      const DeepCollectionEquality().hash(powerUsage),
-      const DeepCollectionEquality().hash(bill),
-      const DeepCollectionEquality().hash(progressiveSection),
-      const DeepCollectionEquality().hash(accumulateThresholdFirst),
-      const DeepCollectionEquality().hash(accumulateThresholdSecond),
-      const DeepCollectionEquality().hash(accumulateThresholdSuper),
-      const DeepCollectionEquality().hash(predictionPowerUsage),
-      const DeepCollectionEquality().hash(predictionBill),
-      const DeepCollectionEquality().hash(predictionProgressiveSection));
+      userName,
+      powerUsage,
+      bill,
+      progressiveSection,
+      accumulateThresholdFirst,
+      accumulateThresholdSecond,
+      accumulateThresholdSuper,
+      predictionPowerUsage,
+      predictionBill,
+      predictionProgressiveSection);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ThisMonthModelCopyWith<_$_ThisMonthModel> get copyWith =>
       __$$_ThisMonthModelCopyWithImpl<_$_ThisMonthModel>(this, _$identity);
 

@@ -32,28 +32,32 @@ mixin _$SaveEmailDTO {
 abstract class $SaveEmailDTOCopyWith<$Res> {
   factory $SaveEmailDTOCopyWith(
           SaveEmailDTO value, $Res Function(SaveEmailDTO) then) =
-      _$SaveEmailDTOCopyWithImpl<$Res>;
+      _$SaveEmailDTOCopyWithImpl<$Res, SaveEmailDTO>;
+  @useResult
   $Res call({bool updated});
 }
 
 /// @nodoc
-class _$SaveEmailDTOCopyWithImpl<$Res> implements $SaveEmailDTOCopyWith<$Res> {
+class _$SaveEmailDTOCopyWithImpl<$Res, $Val extends SaveEmailDTO>
+    implements $SaveEmailDTOCopyWith<$Res> {
   _$SaveEmailDTOCopyWithImpl(this._value, this._then);
 
-  final SaveEmailDTO _value;
   // ignore: unused_field
-  final $Res Function(SaveEmailDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? updated = freezed,
+    Object? updated = null,
   }) {
     return _then(_value.copyWith(
-      updated: updated == freezed
+      updated: null == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -64,26 +68,25 @@ abstract class _$$_SaveEmailDTOCopyWith<$Res>
           _$_SaveEmailDTO value, $Res Function(_$_SaveEmailDTO) then) =
       __$$_SaveEmailDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool updated});
 }
 
 /// @nodoc
 class __$$_SaveEmailDTOCopyWithImpl<$Res>
-    extends _$SaveEmailDTOCopyWithImpl<$Res>
+    extends _$SaveEmailDTOCopyWithImpl<$Res, _$_SaveEmailDTO>
     implements _$$_SaveEmailDTOCopyWith<$Res> {
   __$$_SaveEmailDTOCopyWithImpl(
       _$_SaveEmailDTO _value, $Res Function(_$_SaveEmailDTO) _then)
-      : super(_value, (v) => _then(v as _$_SaveEmailDTO));
+      : super(_value, _then);
 
-  @override
-  _$_SaveEmailDTO get _value => super._value as _$_SaveEmailDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? updated = freezed,
+    Object? updated = null,
   }) {
     return _then(_$_SaveEmailDTO(
-      updated: updated == freezed
+      updated: null == updated
           ? _value.updated
           : updated // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -112,16 +115,16 @@ class _$_SaveEmailDTO implements _SaveEmailDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SaveEmailDTO &&
-            const DeepCollectionEquality().equals(other.updated, updated));
+            (identical(other.updated, updated) || other.updated == updated));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(updated));
+  int get hashCode => Object.hash(runtimeType, updated);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SaveEmailDTOCopyWith<_$_SaveEmailDTO> get copyWith =>
       __$$_SaveEmailDTOCopyWithImpl<_$_SaveEmailDTO>(this, _$identity);
 
