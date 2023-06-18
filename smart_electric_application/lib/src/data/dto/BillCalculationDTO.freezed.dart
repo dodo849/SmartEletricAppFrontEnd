@@ -34,47 +34,51 @@ mixin _$BillCalculationDTO {
 abstract class $BillCalculationDTOCopyWith<$Res> {
   factory $BillCalculationDTOCopyWith(
           BillCalculationDTO value, $Res Function(BillCalculationDTO) then) =
-      _$BillCalculationDTOCopyWithImpl<$Res>;
+      _$BillCalculationDTOCopyWithImpl<$Res, BillCalculationDTO>;
+  @useResult
   $Res call({double result, int accumulate, PowerBillInfoDTO powerBillInfo});
 
   $PowerBillInfoDTOCopyWith<$Res> get powerBillInfo;
 }
 
 /// @nodoc
-class _$BillCalculationDTOCopyWithImpl<$Res>
+class _$BillCalculationDTOCopyWithImpl<$Res, $Val extends BillCalculationDTO>
     implements $BillCalculationDTOCopyWith<$Res> {
   _$BillCalculationDTOCopyWithImpl(this._value, this._then);
 
-  final BillCalculationDTO _value;
   // ignore: unused_field
-  final $Res Function(BillCalculationDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
-    Object? accumulate = freezed,
-    Object? powerBillInfo = freezed,
+    Object? result = null,
+    Object? accumulate = null,
+    Object? powerBillInfo = null,
   }) {
     return _then(_value.copyWith(
-      result: result == freezed
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as double,
-      accumulate: accumulate == freezed
+      accumulate: null == accumulate
           ? _value.accumulate
           : accumulate // ignore: cast_nullable_to_non_nullable
               as int,
-      powerBillInfo: powerBillInfo == freezed
+      powerBillInfo: null == powerBillInfo
           ? _value.powerBillInfo
           : powerBillInfo // ignore: cast_nullable_to_non_nullable
               as PowerBillInfoDTO,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $PowerBillInfoDTOCopyWith<$Res> get powerBillInfo {
     return $PowerBillInfoDTOCopyWith<$Res>(_value.powerBillInfo, (value) {
-      return _then(_value.copyWith(powerBillInfo: value));
+      return _then(_value.copyWith(powerBillInfo: value) as $Val);
     });
   }
 }
@@ -86,6 +90,7 @@ abstract class _$$_BillCalculationDTOCopyWith<$Res>
           $Res Function(_$_BillCalculationDTO) then) =
       __$$_BillCalculationDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({double result, int accumulate, PowerBillInfoDTO powerBillInfo});
 
   @override
@@ -94,31 +99,29 @@ abstract class _$$_BillCalculationDTOCopyWith<$Res>
 
 /// @nodoc
 class __$$_BillCalculationDTOCopyWithImpl<$Res>
-    extends _$BillCalculationDTOCopyWithImpl<$Res>
+    extends _$BillCalculationDTOCopyWithImpl<$Res, _$_BillCalculationDTO>
     implements _$$_BillCalculationDTOCopyWith<$Res> {
   __$$_BillCalculationDTOCopyWithImpl(
       _$_BillCalculationDTO _value, $Res Function(_$_BillCalculationDTO) _then)
-      : super(_value, (v) => _then(v as _$_BillCalculationDTO));
+      : super(_value, _then);
 
-  @override
-  _$_BillCalculationDTO get _value => super._value as _$_BillCalculationDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
-    Object? accumulate = freezed,
-    Object? powerBillInfo = freezed,
+    Object? result = null,
+    Object? accumulate = null,
+    Object? powerBillInfo = null,
   }) {
     return _then(_$_BillCalculationDTO(
-      result: result == freezed
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as double,
-      accumulate: accumulate == freezed
+      accumulate: null == accumulate
           ? _value.accumulate
           : accumulate // ignore: cast_nullable_to_non_nullable
               as int,
-      powerBillInfo: powerBillInfo == freezed
+      powerBillInfo: null == powerBillInfo
           ? _value.powerBillInfo
           : powerBillInfo // ignore: cast_nullable_to_non_nullable
               as PowerBillInfoDTO,
@@ -154,23 +157,21 @@ class _$_BillCalculationDTO implements _BillCalculationDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillCalculationDTO &&
-            const DeepCollectionEquality().equals(other.result, result) &&
-            const DeepCollectionEquality()
-                .equals(other.accumulate, accumulate) &&
-            const DeepCollectionEquality()
-                .equals(other.powerBillInfo, powerBillInfo));
+            (identical(other.result, result) || other.result == result) &&
+            (identical(other.accumulate, accumulate) ||
+                other.accumulate == accumulate) &&
+            (identical(other.powerBillInfo, powerBillInfo) ||
+                other.powerBillInfo == powerBillInfo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(result),
-      const DeepCollectionEquality().hash(accumulate),
-      const DeepCollectionEquality().hash(powerBillInfo));
+  int get hashCode =>
+      Object.hash(runtimeType, result, accumulate, powerBillInfo);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BillCalculationDTOCopyWith<_$_BillCalculationDTO> get copyWith =>
       __$$_BillCalculationDTOCopyWithImpl<_$_BillCalculationDTO>(
           this, _$identity);
@@ -241,7 +242,8 @@ mixin _$PowerBillInfoDTO {
 abstract class $PowerBillInfoDTOCopyWith<$Res> {
   factory $PowerBillInfoDTOCopyWith(
           PowerBillInfoDTO value, $Res Function(PowerBillInfoDTO) then) =
-      _$PowerBillInfoDTOCopyWithImpl<$Res>;
+      _$PowerBillInfoDTOCopyWithImpl<$Res, PowerBillInfoDTO>;
+  @useResult
   $Res call(
       {@JsonKey(name: "power_accumulate_threshold_first")
           int powerAccumulateThresholdFirst,
@@ -266,69 +268,71 @@ abstract class $PowerBillInfoDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PowerBillInfoDTOCopyWithImpl<$Res>
+class _$PowerBillInfoDTOCopyWithImpl<$Res, $Val extends PowerBillInfoDTO>
     implements $PowerBillInfoDTOCopyWith<$Res> {
   _$PowerBillInfoDTOCopyWithImpl(this._value, this._then);
 
-  final PowerBillInfoDTO _value;
   // ignore: unused_field
-  final $Res Function(PowerBillInfoDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? powerAccumulateThresholdFirst = freezed,
-    Object? powerAccumulateThresholdSecond = freezed,
-    Object? powerAccumulateThresholdSuper = freezed,
-    Object? baseBillFirst = freezed,
-    Object? baseBillSecond = freezed,
-    Object? baseBillThired = freezed,
-    Object? powerBillFrist = freezed,
-    Object? powerBillSecond = freezed,
-    Object? powerBillThird = freezed,
-    Object? powerBillSuper = freezed,
+    Object? powerAccumulateThresholdFirst = null,
+    Object? powerAccumulateThresholdSecond = null,
+    Object? powerAccumulateThresholdSuper = null,
+    Object? baseBillFirst = null,
+    Object? baseBillSecond = null,
+    Object? baseBillThired = null,
+    Object? powerBillFrist = null,
+    Object? powerBillSecond = null,
+    Object? powerBillThird = null,
+    Object? powerBillSuper = null,
   }) {
     return _then(_value.copyWith(
-      powerAccumulateThresholdFirst: powerAccumulateThresholdFirst == freezed
+      powerAccumulateThresholdFirst: null == powerAccumulateThresholdFirst
           ? _value.powerAccumulateThresholdFirst
           : powerAccumulateThresholdFirst // ignore: cast_nullable_to_non_nullable
               as int,
-      powerAccumulateThresholdSecond: powerAccumulateThresholdSecond == freezed
+      powerAccumulateThresholdSecond: null == powerAccumulateThresholdSecond
           ? _value.powerAccumulateThresholdSecond
           : powerAccumulateThresholdSecond // ignore: cast_nullable_to_non_nullable
               as int,
-      powerAccumulateThresholdSuper: powerAccumulateThresholdSuper == freezed
+      powerAccumulateThresholdSuper: null == powerAccumulateThresholdSuper
           ? _value.powerAccumulateThresholdSuper
           : powerAccumulateThresholdSuper // ignore: cast_nullable_to_non_nullable
               as int,
-      baseBillFirst: baseBillFirst == freezed
+      baseBillFirst: null == baseBillFirst
           ? _value.baseBillFirst
           : baseBillFirst // ignore: cast_nullable_to_non_nullable
               as int,
-      baseBillSecond: baseBillSecond == freezed
+      baseBillSecond: null == baseBillSecond
           ? _value.baseBillSecond
           : baseBillSecond // ignore: cast_nullable_to_non_nullable
               as int,
-      baseBillThired: baseBillThired == freezed
+      baseBillThired: null == baseBillThired
           ? _value.baseBillThired
           : baseBillThired // ignore: cast_nullable_to_non_nullable
               as int,
-      powerBillFrist: powerBillFrist == freezed
+      powerBillFrist: null == powerBillFrist
           ? _value.powerBillFrist
           : powerBillFrist // ignore: cast_nullable_to_non_nullable
               as double,
-      powerBillSecond: powerBillSecond == freezed
+      powerBillSecond: null == powerBillSecond
           ? _value.powerBillSecond
           : powerBillSecond // ignore: cast_nullable_to_non_nullable
               as double,
-      powerBillThird: powerBillThird == freezed
+      powerBillThird: null == powerBillThird
           ? _value.powerBillThird
           : powerBillThird // ignore: cast_nullable_to_non_nullable
               as double,
-      powerBillSuper: powerBillSuper == freezed
+      powerBillSuper: null == powerBillSuper
           ? _value.powerBillSuper
           : powerBillSuper // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -339,6 +343,7 @@ abstract class _$$_PowerBillInfoDTOCopyWith<$Res>
           _$_PowerBillInfoDTO value, $Res Function(_$_PowerBillInfoDTO) then) =
       __$$_PowerBillInfoDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {@JsonKey(name: "power_accumulate_threshold_first")
           int powerAccumulateThresholdFirst,
@@ -364,66 +369,64 @@ abstract class _$$_PowerBillInfoDTOCopyWith<$Res>
 
 /// @nodoc
 class __$$_PowerBillInfoDTOCopyWithImpl<$Res>
-    extends _$PowerBillInfoDTOCopyWithImpl<$Res>
+    extends _$PowerBillInfoDTOCopyWithImpl<$Res, _$_PowerBillInfoDTO>
     implements _$$_PowerBillInfoDTOCopyWith<$Res> {
   __$$_PowerBillInfoDTOCopyWithImpl(
       _$_PowerBillInfoDTO _value, $Res Function(_$_PowerBillInfoDTO) _then)
-      : super(_value, (v) => _then(v as _$_PowerBillInfoDTO));
+      : super(_value, _then);
 
-  @override
-  _$_PowerBillInfoDTO get _value => super._value as _$_PowerBillInfoDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? powerAccumulateThresholdFirst = freezed,
-    Object? powerAccumulateThresholdSecond = freezed,
-    Object? powerAccumulateThresholdSuper = freezed,
-    Object? baseBillFirst = freezed,
-    Object? baseBillSecond = freezed,
-    Object? baseBillThired = freezed,
-    Object? powerBillFrist = freezed,
-    Object? powerBillSecond = freezed,
-    Object? powerBillThird = freezed,
-    Object? powerBillSuper = freezed,
+    Object? powerAccumulateThresholdFirst = null,
+    Object? powerAccumulateThresholdSecond = null,
+    Object? powerAccumulateThresholdSuper = null,
+    Object? baseBillFirst = null,
+    Object? baseBillSecond = null,
+    Object? baseBillThired = null,
+    Object? powerBillFrist = null,
+    Object? powerBillSecond = null,
+    Object? powerBillThird = null,
+    Object? powerBillSuper = null,
   }) {
     return _then(_$_PowerBillInfoDTO(
-      powerAccumulateThresholdFirst: powerAccumulateThresholdFirst == freezed
+      powerAccumulateThresholdFirst: null == powerAccumulateThresholdFirst
           ? _value.powerAccumulateThresholdFirst
           : powerAccumulateThresholdFirst // ignore: cast_nullable_to_non_nullable
               as int,
-      powerAccumulateThresholdSecond: powerAccumulateThresholdSecond == freezed
+      powerAccumulateThresholdSecond: null == powerAccumulateThresholdSecond
           ? _value.powerAccumulateThresholdSecond
           : powerAccumulateThresholdSecond // ignore: cast_nullable_to_non_nullable
               as int,
-      powerAccumulateThresholdSuper: powerAccumulateThresholdSuper == freezed
+      powerAccumulateThresholdSuper: null == powerAccumulateThresholdSuper
           ? _value.powerAccumulateThresholdSuper
           : powerAccumulateThresholdSuper // ignore: cast_nullable_to_non_nullable
               as int,
-      baseBillFirst: baseBillFirst == freezed
+      baseBillFirst: null == baseBillFirst
           ? _value.baseBillFirst
           : baseBillFirst // ignore: cast_nullable_to_non_nullable
               as int,
-      baseBillSecond: baseBillSecond == freezed
+      baseBillSecond: null == baseBillSecond
           ? _value.baseBillSecond
           : baseBillSecond // ignore: cast_nullable_to_non_nullable
               as int,
-      baseBillThired: baseBillThired == freezed
+      baseBillThired: null == baseBillThired
           ? _value.baseBillThired
           : baseBillThired // ignore: cast_nullable_to_non_nullable
               as int,
-      powerBillFrist: powerBillFrist == freezed
+      powerBillFrist: null == powerBillFrist
           ? _value.powerBillFrist
           : powerBillFrist // ignore: cast_nullable_to_non_nullable
               as double,
-      powerBillSecond: powerBillSecond == freezed
+      powerBillSecond: null == powerBillSecond
           ? _value.powerBillSecond
           : powerBillSecond // ignore: cast_nullable_to_non_nullable
               as double,
-      powerBillThird: powerBillThird == freezed
+      powerBillThird: null == powerBillThird
           ? _value.powerBillThird
           : powerBillThird // ignore: cast_nullable_to_non_nullable
               as double,
-      powerBillSuper: powerBillSuper == freezed
+      powerBillSuper: null == powerBillSuper
           ? _value.powerBillSuper
           : powerBillSuper // ignore: cast_nullable_to_non_nullable
               as double,
@@ -500,48 +503,52 @@ class _$_PowerBillInfoDTO implements _PowerBillInfoDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PowerBillInfoDTO &&
-            const DeepCollectionEquality().equals(
-                other.powerAccumulateThresholdFirst,
-                powerAccumulateThresholdFirst) &&
-            const DeepCollectionEquality().equals(
-                other.powerAccumulateThresholdSecond,
-                powerAccumulateThresholdSecond) &&
-            const DeepCollectionEquality().equals(
-                other.powerAccumulateThresholdSuper,
-                powerAccumulateThresholdSuper) &&
-            const DeepCollectionEquality()
-                .equals(other.baseBillFirst, baseBillFirst) &&
-            const DeepCollectionEquality()
-                .equals(other.baseBillSecond, baseBillSecond) &&
-            const DeepCollectionEquality()
-                .equals(other.baseBillThired, baseBillThired) &&
-            const DeepCollectionEquality()
-                .equals(other.powerBillFrist, powerBillFrist) &&
-            const DeepCollectionEquality()
-                .equals(other.powerBillSecond, powerBillSecond) &&
-            const DeepCollectionEquality()
-                .equals(other.powerBillThird, powerBillThird) &&
-            const DeepCollectionEquality()
-                .equals(other.powerBillSuper, powerBillSuper));
+            (identical(other.powerAccumulateThresholdFirst,
+                    powerAccumulateThresholdFirst) ||
+                other.powerAccumulateThresholdFirst ==
+                    powerAccumulateThresholdFirst) &&
+            (identical(other.powerAccumulateThresholdSecond,
+                    powerAccumulateThresholdSecond) ||
+                other.powerAccumulateThresholdSecond ==
+                    powerAccumulateThresholdSecond) &&
+            (identical(other.powerAccumulateThresholdSuper,
+                    powerAccumulateThresholdSuper) ||
+                other.powerAccumulateThresholdSuper ==
+                    powerAccumulateThresholdSuper) &&
+            (identical(other.baseBillFirst, baseBillFirst) ||
+                other.baseBillFirst == baseBillFirst) &&
+            (identical(other.baseBillSecond, baseBillSecond) ||
+                other.baseBillSecond == baseBillSecond) &&
+            (identical(other.baseBillThired, baseBillThired) ||
+                other.baseBillThired == baseBillThired) &&
+            (identical(other.powerBillFrist, powerBillFrist) ||
+                other.powerBillFrist == powerBillFrist) &&
+            (identical(other.powerBillSecond, powerBillSecond) ||
+                other.powerBillSecond == powerBillSecond) &&
+            (identical(other.powerBillThird, powerBillThird) ||
+                other.powerBillThird == powerBillThird) &&
+            (identical(other.powerBillSuper, powerBillSuper) ||
+                other.powerBillSuper == powerBillSuper));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(powerAccumulateThresholdFirst),
-      const DeepCollectionEquality().hash(powerAccumulateThresholdSecond),
-      const DeepCollectionEquality().hash(powerAccumulateThresholdSuper),
-      const DeepCollectionEquality().hash(baseBillFirst),
-      const DeepCollectionEquality().hash(baseBillSecond),
-      const DeepCollectionEquality().hash(baseBillThired),
-      const DeepCollectionEquality().hash(powerBillFrist),
-      const DeepCollectionEquality().hash(powerBillSecond),
-      const DeepCollectionEquality().hash(powerBillThird),
-      const DeepCollectionEquality().hash(powerBillSuper));
+      powerAccumulateThresholdFirst,
+      powerAccumulateThresholdSecond,
+      powerAccumulateThresholdSuper,
+      baseBillFirst,
+      baseBillSecond,
+      baseBillThired,
+      powerBillFrist,
+      powerBillSecond,
+      powerBillThird,
+      powerBillSuper);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PowerBillInfoDTOCopyWith<_$_PowerBillInfoDTO> get copyWith =>
       __$$_PowerBillInfoDTOCopyWithImpl<_$_PowerBillInfoDTO>(this, _$identity);
 

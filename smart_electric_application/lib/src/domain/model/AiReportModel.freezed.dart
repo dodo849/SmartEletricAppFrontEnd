@@ -48,7 +48,8 @@ mixin _$AiReportModel {
 abstract class $AiReportModelCopyWith<$Res> {
   factory $AiReportModelCopyWith(
           AiReportModel value, $Res Function(AiReportModel) then) =
-      _$AiReportModelCopyWithImpl<$Res>;
+      _$AiReportModelCopyWithImpl<$Res, AiReportModel>;
+  @useResult
   $Res call(
       {List<int> timePeriodIndex,
       List<double> timePeriodPowerUsage,
@@ -70,104 +71,106 @@ abstract class $AiReportModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AiReportModelCopyWithImpl<$Res>
+class _$AiReportModelCopyWithImpl<$Res, $Val extends AiReportModel>
     implements $AiReportModelCopyWith<$Res> {
   _$AiReportModelCopyWithImpl(this._value, this._then);
 
-  final AiReportModel _value;
   // ignore: unused_field
-  final $Res Function(AiReportModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timePeriodIndex = freezed,
-    Object? timePeriodPowerUsage = freezed,
-    Object? standbyPower = freezed,
-    Object? weekdayIndex = freezed,
-    Object? weekdayPowerUsage = freezed,
-    Object? dayOrNight = freezed,
-    Object? dayTimePowerUsage = freezed,
-    Object? nightTimePowerUsage = freezed,
-    Object? dayPowerUsageMean = freezed,
-    Object? dayPowerUsageMeanInWon = freezed,
-    Object? dayPowerUsageMin = freezed,
-    Object? dayPowerUsageMinInWon = freezed,
-    Object? dayPowerUsageMax = freezed,
-    Object? dayPowerUsageMaxInWon = freezed,
-    Object? predictionBill = freezed,
-    Object? predictionPowerUsage = freezed,
-    Object? predictionSection = freezed,
+    Object? timePeriodIndex = null,
+    Object? timePeriodPowerUsage = null,
+    Object? standbyPower = null,
+    Object? weekdayIndex = null,
+    Object? weekdayPowerUsage = null,
+    Object? dayOrNight = null,
+    Object? dayTimePowerUsage = null,
+    Object? nightTimePowerUsage = null,
+    Object? dayPowerUsageMean = null,
+    Object? dayPowerUsageMeanInWon = null,
+    Object? dayPowerUsageMin = null,
+    Object? dayPowerUsageMinInWon = null,
+    Object? dayPowerUsageMax = null,
+    Object? dayPowerUsageMaxInWon = null,
+    Object? predictionBill = null,
+    Object? predictionPowerUsage = null,
+    Object? predictionSection = null,
   }) {
     return _then(_value.copyWith(
-      timePeriodIndex: timePeriodIndex == freezed
+      timePeriodIndex: null == timePeriodIndex
           ? _value.timePeriodIndex
           : timePeriodIndex // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      timePeriodPowerUsage: timePeriodPowerUsage == freezed
+      timePeriodPowerUsage: null == timePeriodPowerUsage
           ? _value.timePeriodPowerUsage
           : timePeriodPowerUsage // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      standbyPower: standbyPower == freezed
+      standbyPower: null == standbyPower
           ? _value.standbyPower
           : standbyPower // ignore: cast_nullable_to_non_nullable
               as double,
-      weekdayIndex: weekdayIndex == freezed
+      weekdayIndex: null == weekdayIndex
           ? _value.weekdayIndex
           : weekdayIndex // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      weekdayPowerUsage: weekdayPowerUsage == freezed
+      weekdayPowerUsage: null == weekdayPowerUsage
           ? _value.weekdayPowerUsage
           : weekdayPowerUsage // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      dayOrNight: dayOrNight == freezed
+      dayOrNight: null == dayOrNight
           ? _value.dayOrNight
           : dayOrNight // ignore: cast_nullable_to_non_nullable
               as String,
-      dayTimePowerUsage: dayTimePowerUsage == freezed
+      dayTimePowerUsage: null == dayTimePowerUsage
           ? _value.dayTimePowerUsage
           : dayTimePowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      nightTimePowerUsage: nightTimePowerUsage == freezed
+      nightTimePowerUsage: null == nightTimePowerUsage
           ? _value.nightTimePowerUsage
           : nightTimePowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMean: dayPowerUsageMean == freezed
+      dayPowerUsageMean: null == dayPowerUsageMean
           ? _value.dayPowerUsageMean
           : dayPowerUsageMean // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMeanInWon: dayPowerUsageMeanInWon == freezed
+      dayPowerUsageMeanInWon: null == dayPowerUsageMeanInWon
           ? _value.dayPowerUsageMeanInWon
           : dayPowerUsageMeanInWon // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMin: dayPowerUsageMin == freezed
+      dayPowerUsageMin: null == dayPowerUsageMin
           ? _value.dayPowerUsageMin
           : dayPowerUsageMin // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMinInWon: dayPowerUsageMinInWon == freezed
+      dayPowerUsageMinInWon: null == dayPowerUsageMinInWon
           ? _value.dayPowerUsageMinInWon
           : dayPowerUsageMinInWon // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMax: dayPowerUsageMax == freezed
+      dayPowerUsageMax: null == dayPowerUsageMax
           ? _value.dayPowerUsageMax
           : dayPowerUsageMax // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMaxInWon: dayPowerUsageMaxInWon == freezed
+      dayPowerUsageMaxInWon: null == dayPowerUsageMaxInWon
           ? _value.dayPowerUsageMaxInWon
           : dayPowerUsageMaxInWon // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionBill: predictionBill == freezed
+      predictionBill: null == predictionBill
           ? _value.predictionBill
           : predictionBill // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionPowerUsage: predictionPowerUsage == freezed
+      predictionPowerUsage: null == predictionPowerUsage
           ? _value.predictionPowerUsage
           : predictionPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionSection: predictionSection == freezed
+      predictionSection: null == predictionSection
           ? _value.predictionSection
           : predictionSection // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -178,6 +181,7 @@ abstract class _$$_AiReportModelCopyWith<$Res>
           _$_AiReportModel value, $Res Function(_$_AiReportModel) then) =
       __$$_AiReportModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<int> timePeriodIndex,
       List<double> timePeriodPowerUsage,
@@ -200,101 +204,99 @@ abstract class _$$_AiReportModelCopyWith<$Res>
 
 /// @nodoc
 class __$$_AiReportModelCopyWithImpl<$Res>
-    extends _$AiReportModelCopyWithImpl<$Res>
+    extends _$AiReportModelCopyWithImpl<$Res, _$_AiReportModel>
     implements _$$_AiReportModelCopyWith<$Res> {
   __$$_AiReportModelCopyWithImpl(
       _$_AiReportModel _value, $Res Function(_$_AiReportModel) _then)
-      : super(_value, (v) => _then(v as _$_AiReportModel));
+      : super(_value, _then);
 
-  @override
-  _$_AiReportModel get _value => super._value as _$_AiReportModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? timePeriodIndex = freezed,
-    Object? timePeriodPowerUsage = freezed,
-    Object? standbyPower = freezed,
-    Object? weekdayIndex = freezed,
-    Object? weekdayPowerUsage = freezed,
-    Object? dayOrNight = freezed,
-    Object? dayTimePowerUsage = freezed,
-    Object? nightTimePowerUsage = freezed,
-    Object? dayPowerUsageMean = freezed,
-    Object? dayPowerUsageMeanInWon = freezed,
-    Object? dayPowerUsageMin = freezed,
-    Object? dayPowerUsageMinInWon = freezed,
-    Object? dayPowerUsageMax = freezed,
-    Object? dayPowerUsageMaxInWon = freezed,
-    Object? predictionBill = freezed,
-    Object? predictionPowerUsage = freezed,
-    Object? predictionSection = freezed,
+    Object? timePeriodIndex = null,
+    Object? timePeriodPowerUsage = null,
+    Object? standbyPower = null,
+    Object? weekdayIndex = null,
+    Object? weekdayPowerUsage = null,
+    Object? dayOrNight = null,
+    Object? dayTimePowerUsage = null,
+    Object? nightTimePowerUsage = null,
+    Object? dayPowerUsageMean = null,
+    Object? dayPowerUsageMeanInWon = null,
+    Object? dayPowerUsageMin = null,
+    Object? dayPowerUsageMinInWon = null,
+    Object? dayPowerUsageMax = null,
+    Object? dayPowerUsageMaxInWon = null,
+    Object? predictionBill = null,
+    Object? predictionPowerUsage = null,
+    Object? predictionSection = null,
   }) {
     return _then(_$_AiReportModel(
-      timePeriodIndex: timePeriodIndex == freezed
+      timePeriodIndex: null == timePeriodIndex
           ? _value._timePeriodIndex
           : timePeriodIndex // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      timePeriodPowerUsage: timePeriodPowerUsage == freezed
+      timePeriodPowerUsage: null == timePeriodPowerUsage
           ? _value._timePeriodPowerUsage
           : timePeriodPowerUsage // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      standbyPower: standbyPower == freezed
+      standbyPower: null == standbyPower
           ? _value.standbyPower
           : standbyPower // ignore: cast_nullable_to_non_nullable
               as double,
-      weekdayIndex: weekdayIndex == freezed
+      weekdayIndex: null == weekdayIndex
           ? _value._weekdayIndex
           : weekdayIndex // ignore: cast_nullable_to_non_nullable
               as List<int>,
-      weekdayPowerUsage: weekdayPowerUsage == freezed
+      weekdayPowerUsage: null == weekdayPowerUsage
           ? _value._weekdayPowerUsage
           : weekdayPowerUsage // ignore: cast_nullable_to_non_nullable
               as List<double>,
-      dayOrNight: dayOrNight == freezed
+      dayOrNight: null == dayOrNight
           ? _value.dayOrNight
           : dayOrNight // ignore: cast_nullable_to_non_nullable
               as String,
-      dayTimePowerUsage: dayTimePowerUsage == freezed
+      dayTimePowerUsage: null == dayTimePowerUsage
           ? _value.dayTimePowerUsage
           : dayTimePowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      nightTimePowerUsage: nightTimePowerUsage == freezed
+      nightTimePowerUsage: null == nightTimePowerUsage
           ? _value.nightTimePowerUsage
           : nightTimePowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMean: dayPowerUsageMean == freezed
+      dayPowerUsageMean: null == dayPowerUsageMean
           ? _value.dayPowerUsageMean
           : dayPowerUsageMean // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMeanInWon: dayPowerUsageMeanInWon == freezed
+      dayPowerUsageMeanInWon: null == dayPowerUsageMeanInWon
           ? _value.dayPowerUsageMeanInWon
           : dayPowerUsageMeanInWon // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMin: dayPowerUsageMin == freezed
+      dayPowerUsageMin: null == dayPowerUsageMin
           ? _value.dayPowerUsageMin
           : dayPowerUsageMin // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMinInWon: dayPowerUsageMinInWon == freezed
+      dayPowerUsageMinInWon: null == dayPowerUsageMinInWon
           ? _value.dayPowerUsageMinInWon
           : dayPowerUsageMinInWon // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMax: dayPowerUsageMax == freezed
+      dayPowerUsageMax: null == dayPowerUsageMax
           ? _value.dayPowerUsageMax
           : dayPowerUsageMax // ignore: cast_nullable_to_non_nullable
               as double,
-      dayPowerUsageMaxInWon: dayPowerUsageMaxInWon == freezed
+      dayPowerUsageMaxInWon: null == dayPowerUsageMaxInWon
           ? _value.dayPowerUsageMaxInWon
           : dayPowerUsageMaxInWon // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionBill: predictionBill == freezed
+      predictionBill: null == predictionBill
           ? _value.predictionBill
           : predictionBill // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionPowerUsage: predictionPowerUsage == freezed
+      predictionPowerUsage: null == predictionPowerUsage
           ? _value.predictionPowerUsage
           : predictionPowerUsage // ignore: cast_nullable_to_non_nullable
               as double,
-      predictionSection: predictionSection == freezed
+      predictionSection: null == predictionSection
           ? _value.predictionSection
           : predictionSection // ignore: cast_nullable_to_non_nullable
               as int,
@@ -400,36 +402,36 @@ class _$_AiReportModel implements _AiReportModel {
                 .equals(other._timePeriodIndex, _timePeriodIndex) &&
             const DeepCollectionEquality()
                 .equals(other._timePeriodPowerUsage, _timePeriodPowerUsage) &&
-            const DeepCollectionEquality()
-                .equals(other.standbyPower, standbyPower) &&
+            (identical(other.standbyPower, standbyPower) ||
+                other.standbyPower == standbyPower) &&
             const DeepCollectionEquality()
                 .equals(other._weekdayIndex, _weekdayIndex) &&
             const DeepCollectionEquality()
                 .equals(other._weekdayPowerUsage, _weekdayPowerUsage) &&
-            const DeepCollectionEquality()
-                .equals(other.dayOrNight, dayOrNight) &&
-            const DeepCollectionEquality()
-                .equals(other.dayTimePowerUsage, dayTimePowerUsage) &&
-            const DeepCollectionEquality()
-                .equals(other.nightTimePowerUsage, nightTimePowerUsage) &&
-            const DeepCollectionEquality()
-                .equals(other.dayPowerUsageMean, dayPowerUsageMean) &&
-            const DeepCollectionEquality()
-                .equals(other.dayPowerUsageMeanInWon, dayPowerUsageMeanInWon) &&
-            const DeepCollectionEquality()
-                .equals(other.dayPowerUsageMin, dayPowerUsageMin) &&
-            const DeepCollectionEquality()
-                .equals(other.dayPowerUsageMinInWon, dayPowerUsageMinInWon) &&
-            const DeepCollectionEquality()
-                .equals(other.dayPowerUsageMax, dayPowerUsageMax) &&
-            const DeepCollectionEquality()
-                .equals(other.dayPowerUsageMaxInWon, dayPowerUsageMaxInWon) &&
-            const DeepCollectionEquality()
-                .equals(other.predictionBill, predictionBill) &&
-            const DeepCollectionEquality()
-                .equals(other.predictionPowerUsage, predictionPowerUsage) &&
-            const DeepCollectionEquality()
-                .equals(other.predictionSection, predictionSection));
+            (identical(other.dayOrNight, dayOrNight) ||
+                other.dayOrNight == dayOrNight) &&
+            (identical(other.dayTimePowerUsage, dayTimePowerUsage) ||
+                other.dayTimePowerUsage == dayTimePowerUsage) &&
+            (identical(other.nightTimePowerUsage, nightTimePowerUsage) ||
+                other.nightTimePowerUsage == nightTimePowerUsage) &&
+            (identical(other.dayPowerUsageMean, dayPowerUsageMean) ||
+                other.dayPowerUsageMean == dayPowerUsageMean) &&
+            (identical(other.dayPowerUsageMeanInWon, dayPowerUsageMeanInWon) ||
+                other.dayPowerUsageMeanInWon == dayPowerUsageMeanInWon) &&
+            (identical(other.dayPowerUsageMin, dayPowerUsageMin) ||
+                other.dayPowerUsageMin == dayPowerUsageMin) &&
+            (identical(other.dayPowerUsageMinInWon, dayPowerUsageMinInWon) ||
+                other.dayPowerUsageMinInWon == dayPowerUsageMinInWon) &&
+            (identical(other.dayPowerUsageMax, dayPowerUsageMax) ||
+                other.dayPowerUsageMax == dayPowerUsageMax) &&
+            (identical(other.dayPowerUsageMaxInWon, dayPowerUsageMaxInWon) ||
+                other.dayPowerUsageMaxInWon == dayPowerUsageMaxInWon) &&
+            (identical(other.predictionBill, predictionBill) ||
+                other.predictionBill == predictionBill) &&
+            (identical(other.predictionPowerUsage, predictionPowerUsage) ||
+                other.predictionPowerUsage == predictionPowerUsage) &&
+            (identical(other.predictionSection, predictionSection) ||
+                other.predictionSection == predictionSection));
   }
 
   @JsonKey(ignore: true)
@@ -438,24 +440,25 @@ class _$_AiReportModel implements _AiReportModel {
       runtimeType,
       const DeepCollectionEquality().hash(_timePeriodIndex),
       const DeepCollectionEquality().hash(_timePeriodPowerUsage),
-      const DeepCollectionEquality().hash(standbyPower),
+      standbyPower,
       const DeepCollectionEquality().hash(_weekdayIndex),
       const DeepCollectionEquality().hash(_weekdayPowerUsage),
-      const DeepCollectionEquality().hash(dayOrNight),
-      const DeepCollectionEquality().hash(dayTimePowerUsage),
-      const DeepCollectionEquality().hash(nightTimePowerUsage),
-      const DeepCollectionEquality().hash(dayPowerUsageMean),
-      const DeepCollectionEquality().hash(dayPowerUsageMeanInWon),
-      const DeepCollectionEquality().hash(dayPowerUsageMin),
-      const DeepCollectionEquality().hash(dayPowerUsageMinInWon),
-      const DeepCollectionEquality().hash(dayPowerUsageMax),
-      const DeepCollectionEquality().hash(dayPowerUsageMaxInWon),
-      const DeepCollectionEquality().hash(predictionBill),
-      const DeepCollectionEquality().hash(predictionPowerUsage),
-      const DeepCollectionEquality().hash(predictionSection));
+      dayOrNight,
+      dayTimePowerUsage,
+      nightTimePowerUsage,
+      dayPowerUsageMean,
+      dayPowerUsageMeanInWon,
+      dayPowerUsageMin,
+      dayPowerUsageMinInWon,
+      dayPowerUsageMax,
+      dayPowerUsageMaxInWon,
+      predictionBill,
+      predictionPowerUsage,
+      predictionSection);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AiReportModelCopyWith<_$_AiReportModel> get copyWith =>
       __$$_AiReportModelCopyWithImpl<_$_AiReportModel>(this, _$identity);
 

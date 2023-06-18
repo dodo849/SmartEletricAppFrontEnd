@@ -32,29 +32,32 @@ mixin _$AiPredictionDTO {
 abstract class $AiPredictionDTOCopyWith<$Res> {
   factory $AiPredictionDTOCopyWith(
           AiPredictionDTO value, $Res Function(AiPredictionDTO) then) =
-      _$AiPredictionDTOCopyWithImpl<$Res>;
+      _$AiPredictionDTOCopyWithImpl<$Res, AiPredictionDTO>;
+  @useResult
   $Res call({List<DailyPrediction> prediction});
 }
 
 /// @nodoc
-class _$AiPredictionDTOCopyWithImpl<$Res>
+class _$AiPredictionDTOCopyWithImpl<$Res, $Val extends AiPredictionDTO>
     implements $AiPredictionDTOCopyWith<$Res> {
   _$AiPredictionDTOCopyWithImpl(this._value, this._then);
 
-  final AiPredictionDTO _value;
   // ignore: unused_field
-  final $Res Function(AiPredictionDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? prediction = freezed,
+    Object? prediction = null,
   }) {
     return _then(_value.copyWith(
-      prediction: prediction == freezed
+      prediction: null == prediction
           ? _value.prediction
           : prediction // ignore: cast_nullable_to_non_nullable
               as List<DailyPrediction>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -65,26 +68,25 @@ abstract class _$$_AiPredictionDTOCopyWith<$Res>
           _$_AiPredictionDTO value, $Res Function(_$_AiPredictionDTO) then) =
       __$$_AiPredictionDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<DailyPrediction> prediction});
 }
 
 /// @nodoc
 class __$$_AiPredictionDTOCopyWithImpl<$Res>
-    extends _$AiPredictionDTOCopyWithImpl<$Res>
+    extends _$AiPredictionDTOCopyWithImpl<$Res, _$_AiPredictionDTO>
     implements _$$_AiPredictionDTOCopyWith<$Res> {
   __$$_AiPredictionDTOCopyWithImpl(
       _$_AiPredictionDTO _value, $Res Function(_$_AiPredictionDTO) _then)
-      : super(_value, (v) => _then(v as _$_AiPredictionDTO));
+      : super(_value, _then);
 
-  @override
-  _$_AiPredictionDTO get _value => super._value as _$_AiPredictionDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? prediction = freezed,
+    Object? prediction = null,
   }) {
     return _then(_$_AiPredictionDTO(
-      prediction: prediction == freezed
+      prediction: null == prediction
           ? _value._prediction
           : prediction // ignore: cast_nullable_to_non_nullable
               as List<DailyPrediction>,
@@ -129,6 +131,7 @@ class _$_AiPredictionDTO implements _AiPredictionDTO {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AiPredictionDTOCopyWith<_$_AiPredictionDTO> get copyWith =>
       __$$_AiPredictionDTOCopyWithImpl<_$_AiPredictionDTO>(this, _$identity);
 
@@ -174,34 +177,37 @@ mixin _$DailyPrediction {
 abstract class $DailyPredictionCopyWith<$Res> {
   factory $DailyPredictionCopyWith(
           DailyPrediction value, $Res Function(DailyPrediction) then) =
-      _$DailyPredictionCopyWithImpl<$Res>;
+      _$DailyPredictionCopyWithImpl<$Res, DailyPrediction>;
+  @useResult
   $Res call({String dateTimeKr, double powerUsageQuantity});
 }
 
 /// @nodoc
-class _$DailyPredictionCopyWithImpl<$Res>
+class _$DailyPredictionCopyWithImpl<$Res, $Val extends DailyPrediction>
     implements $DailyPredictionCopyWith<$Res> {
   _$DailyPredictionCopyWithImpl(this._value, this._then);
 
-  final DailyPrediction _value;
   // ignore: unused_field
-  final $Res Function(DailyPrediction) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dateTimeKr = freezed,
-    Object? powerUsageQuantity = freezed,
+    Object? dateTimeKr = null,
+    Object? powerUsageQuantity = null,
   }) {
     return _then(_value.copyWith(
-      dateTimeKr: dateTimeKr == freezed
+      dateTimeKr: null == dateTimeKr
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
               as String,
-      powerUsageQuantity: powerUsageQuantity == freezed
+      powerUsageQuantity: null == powerUsageQuantity
           ? _value.powerUsageQuantity
           : powerUsageQuantity // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
@@ -212,31 +218,30 @@ abstract class _$$__DailyPredictionCopyWith<$Res>
           _$__DailyPrediction value, $Res Function(_$__DailyPrediction) then) =
       __$$__DailyPredictionCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String dateTimeKr, double powerUsageQuantity});
 }
 
 /// @nodoc
 class __$$__DailyPredictionCopyWithImpl<$Res>
-    extends _$DailyPredictionCopyWithImpl<$Res>
+    extends _$DailyPredictionCopyWithImpl<$Res, _$__DailyPrediction>
     implements _$$__DailyPredictionCopyWith<$Res> {
   __$$__DailyPredictionCopyWithImpl(
       _$__DailyPrediction _value, $Res Function(_$__DailyPrediction) _then)
-      : super(_value, (v) => _then(v as _$__DailyPrediction));
+      : super(_value, _then);
 
-  @override
-  _$__DailyPrediction get _value => super._value as _$__DailyPrediction;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? dateTimeKr = freezed,
-    Object? powerUsageQuantity = freezed,
+    Object? dateTimeKr = null,
+    Object? powerUsageQuantity = null,
   }) {
     return _then(_$__DailyPrediction(
-      dateTimeKr: dateTimeKr == freezed
+      dateTimeKr: null == dateTimeKr
           ? _value.dateTimeKr
           : dateTimeKr // ignore: cast_nullable_to_non_nullable
               as String,
-      powerUsageQuantity: powerUsageQuantity == freezed
+      powerUsageQuantity: null == powerUsageQuantity
           ? _value.powerUsageQuantity
           : powerUsageQuantity // ignore: cast_nullable_to_non_nullable
               as double,
@@ -268,21 +273,19 @@ class _$__DailyPrediction implements __DailyPrediction {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$__DailyPrediction &&
-            const DeepCollectionEquality()
-                .equals(other.dateTimeKr, dateTimeKr) &&
-            const DeepCollectionEquality()
-                .equals(other.powerUsageQuantity, powerUsageQuantity));
+            (identical(other.dateTimeKr, dateTimeKr) ||
+                other.dateTimeKr == dateTimeKr) &&
+            (identical(other.powerUsageQuantity, powerUsageQuantity) ||
+                other.powerUsageQuantity == powerUsageQuantity));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(dateTimeKr),
-      const DeepCollectionEquality().hash(powerUsageQuantity));
+  int get hashCode => Object.hash(runtimeType, dateTimeKr, powerUsageQuantity);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$__DailyPredictionCopyWith<_$__DailyPrediction> get copyWith =>
       __$$__DailyPredictionCopyWithImpl<_$__DailyPrediction>(this, _$identity);
 

@@ -32,28 +32,32 @@ mixin _$BillDateDTO {
 abstract class $BillDateDTOCopyWith<$Res> {
   factory $BillDateDTOCopyWith(
           BillDateDTO value, $Res Function(BillDateDTO) then) =
-      _$BillDateDTOCopyWithImpl<$Res>;
+      _$BillDateDTOCopyWithImpl<$Res, BillDateDTO>;
+  @useResult
   $Res call({String result});
 }
 
 /// @nodoc
-class _$BillDateDTOCopyWithImpl<$Res> implements $BillDateDTOCopyWith<$Res> {
+class _$BillDateDTOCopyWithImpl<$Res, $Val extends BillDateDTO>
+    implements $BillDateDTOCopyWith<$Res> {
   _$BillDateDTOCopyWithImpl(this._value, this._then);
 
-  final BillDateDTO _value;
   // ignore: unused_field
-  final $Res Function(BillDateDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
+    Object? result = null,
   }) {
     return _then(_value.copyWith(
-      result: result == freezed
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -64,25 +68,25 @@ abstract class _$$_BillDateDTOCopyWith<$Res>
           _$_BillDateDTO value, $Res Function(_$_BillDateDTO) then) =
       __$$_BillDateDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String result});
 }
 
 /// @nodoc
-class __$$_BillDateDTOCopyWithImpl<$Res> extends _$BillDateDTOCopyWithImpl<$Res>
+class __$$_BillDateDTOCopyWithImpl<$Res>
+    extends _$BillDateDTOCopyWithImpl<$Res, _$_BillDateDTO>
     implements _$$_BillDateDTOCopyWith<$Res> {
   __$$_BillDateDTOCopyWithImpl(
       _$_BillDateDTO _value, $Res Function(_$_BillDateDTO) _then)
-      : super(_value, (v) => _then(v as _$_BillDateDTO));
+      : super(_value, _then);
 
-  @override
-  _$_BillDateDTO get _value => super._value as _$_BillDateDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? result = freezed,
+    Object? result = null,
   }) {
     return _then(_$_BillDateDTO(
-      result: result == freezed
+      result: null == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as String,
@@ -111,16 +115,16 @@ class _$_BillDateDTO implements _BillDateDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BillDateDTO &&
-            const DeepCollectionEquality().equals(other.result, result));
+            (identical(other.result, result) || other.result == result));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(result));
+  int get hashCode => Object.hash(runtimeType, result);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BillDateDTOCopyWith<_$_BillDateDTO> get copyWith =>
       __$$_BillDateDTOCopyWithImpl<_$_BillDateDTO>(this, _$identity);
 

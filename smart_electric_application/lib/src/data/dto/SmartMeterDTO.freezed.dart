@@ -32,29 +32,32 @@ mixin _$SmartMeterDTO {
 abstract class $SmartMeterDTOCopyWith<$Res> {
   factory $SmartMeterDTOCopyWith(
           SmartMeterDTO value, $Res Function(SmartMeterDTO) then) =
-      _$SmartMeterDTOCopyWithImpl<$Res>;
+      _$SmartMeterDTOCopyWithImpl<$Res, SmartMeterDTO>;
+  @useResult
   $Res call({bool custNumValidation});
 }
 
 /// @nodoc
-class _$SmartMeterDTOCopyWithImpl<$Res>
+class _$SmartMeterDTOCopyWithImpl<$Res, $Val extends SmartMeterDTO>
     implements $SmartMeterDTOCopyWith<$Res> {
   _$SmartMeterDTOCopyWithImpl(this._value, this._then);
 
-  final SmartMeterDTO _value;
   // ignore: unused_field
-  final $Res Function(SmartMeterDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? custNumValidation = freezed,
+    Object? custNumValidation = null,
   }) {
     return _then(_value.copyWith(
-      custNumValidation: custNumValidation == freezed
+      custNumValidation: null == custNumValidation
           ? _value.custNumValidation
           : custNumValidation // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -65,26 +68,25 @@ abstract class _$$_SmartMeterDTOCopyWith<$Res>
           _$_SmartMeterDTO value, $Res Function(_$_SmartMeterDTO) then) =
       __$$_SmartMeterDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({bool custNumValidation});
 }
 
 /// @nodoc
 class __$$_SmartMeterDTOCopyWithImpl<$Res>
-    extends _$SmartMeterDTOCopyWithImpl<$Res>
+    extends _$SmartMeterDTOCopyWithImpl<$Res, _$_SmartMeterDTO>
     implements _$$_SmartMeterDTOCopyWith<$Res> {
   __$$_SmartMeterDTOCopyWithImpl(
       _$_SmartMeterDTO _value, $Res Function(_$_SmartMeterDTO) _then)
-      : super(_value, (v) => _then(v as _$_SmartMeterDTO));
+      : super(_value, _then);
 
-  @override
-  _$_SmartMeterDTO get _value => super._value as _$_SmartMeterDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? custNumValidation = freezed,
+    Object? custNumValidation = null,
   }) {
     return _then(_$_SmartMeterDTO(
-      custNumValidation: custNumValidation == freezed
+      custNumValidation: null == custNumValidation
           ? _value.custNumValidation
           : custNumValidation // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -113,17 +115,17 @@ class _$_SmartMeterDTO implements _SmartMeterDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SmartMeterDTO &&
-            const DeepCollectionEquality()
-                .equals(other.custNumValidation, custNumValidation));
+            (identical(other.custNumValidation, custNumValidation) ||
+                other.custNumValidation == custNumValidation));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(custNumValidation));
+  int get hashCode => Object.hash(runtimeType, custNumValidation);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SmartMeterDTOCopyWith<_$_SmartMeterDTO> get copyWith =>
       __$$_SmartMeterDTOCopyWithImpl<_$_SmartMeterDTO>(this, _$identity);
 

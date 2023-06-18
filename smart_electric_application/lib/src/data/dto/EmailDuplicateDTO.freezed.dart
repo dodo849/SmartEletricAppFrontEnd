@@ -33,29 +33,32 @@ mixin _$EmailDuplicateDTO {
 abstract class $EmailDuplicateDTOCopyWith<$Res> {
   factory $EmailDuplicateDTOCopyWith(
           EmailDuplicateDTO value, $Res Function(EmailDuplicateDTO) then) =
-      _$EmailDuplicateDTOCopyWithImpl<$Res>;
+      _$EmailDuplicateDTOCopyWithImpl<$Res, EmailDuplicateDTO>;
+  @useResult
   $Res call({@JsonKey(name: "email-duplicated") bool isEmailDuplicated});
 }
 
 /// @nodoc
-class _$EmailDuplicateDTOCopyWithImpl<$Res>
+class _$EmailDuplicateDTOCopyWithImpl<$Res, $Val extends EmailDuplicateDTO>
     implements $EmailDuplicateDTOCopyWith<$Res> {
   _$EmailDuplicateDTOCopyWithImpl(this._value, this._then);
 
-  final EmailDuplicateDTO _value;
   // ignore: unused_field
-  final $Res Function(EmailDuplicateDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isEmailDuplicated = freezed,
+    Object? isEmailDuplicated = null,
   }) {
     return _then(_value.copyWith(
-      isEmailDuplicated: isEmailDuplicated == freezed
+      isEmailDuplicated: null == isEmailDuplicated
           ? _value.isEmailDuplicated
           : isEmailDuplicated // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -66,26 +69,25 @@ abstract class _$$_EmailDuplicateDTOCopyWith<$Res>
           $Res Function(_$_EmailDuplicateDTO) then) =
       __$$_EmailDuplicateDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({@JsonKey(name: "email-duplicated") bool isEmailDuplicated});
 }
 
 /// @nodoc
 class __$$_EmailDuplicateDTOCopyWithImpl<$Res>
-    extends _$EmailDuplicateDTOCopyWithImpl<$Res>
+    extends _$EmailDuplicateDTOCopyWithImpl<$Res, _$_EmailDuplicateDTO>
     implements _$$_EmailDuplicateDTOCopyWith<$Res> {
   __$$_EmailDuplicateDTOCopyWithImpl(
       _$_EmailDuplicateDTO _value, $Res Function(_$_EmailDuplicateDTO) _then)
-      : super(_value, (v) => _then(v as _$_EmailDuplicateDTO));
+      : super(_value, _then);
 
-  @override
-  _$_EmailDuplicateDTO get _value => super._value as _$_EmailDuplicateDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isEmailDuplicated = freezed,
+    Object? isEmailDuplicated = null,
   }) {
     return _then(_$_EmailDuplicateDTO(
-      isEmailDuplicated: isEmailDuplicated == freezed
+      isEmailDuplicated: null == isEmailDuplicated
           ? _value.isEmailDuplicated
           : isEmailDuplicated // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -116,17 +118,17 @@ class _$_EmailDuplicateDTO implements _EmailDuplicateDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EmailDuplicateDTO &&
-            const DeepCollectionEquality()
-                .equals(other.isEmailDuplicated, isEmailDuplicated));
+            (identical(other.isEmailDuplicated, isEmailDuplicated) ||
+                other.isEmailDuplicated == isEmailDuplicated));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(isEmailDuplicated));
+  int get hashCode => Object.hash(runtimeType, isEmailDuplicated);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EmailDuplicateDTOCopyWith<_$_EmailDuplicateDTO> get copyWith =>
       __$$_EmailDuplicateDTOCopyWithImpl<_$_EmailDuplicateDTO>(
           this, _$identity);

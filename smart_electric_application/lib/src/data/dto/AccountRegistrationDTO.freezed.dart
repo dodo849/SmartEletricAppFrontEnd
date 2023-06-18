@@ -38,7 +38,8 @@ mixin _$AccountRegistrationDTO {
 abstract class $AccountRegistrationDTOCopyWith<$Res> {
   factory $AccountRegistrationDTOCopyWith(AccountRegistrationDTO value,
           $Res Function(AccountRegistrationDTO) then) =
-      _$AccountRegistrationDTOCopyWithImpl<$Res>;
+      _$AccountRegistrationDTOCopyWithImpl<$Res, AccountRegistrationDTO>;
+  @useResult
   $Res call(
       {String firebaseUid,
       String name,
@@ -49,49 +50,52 @@ abstract class $AccountRegistrationDTOCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AccountRegistrationDTOCopyWithImpl<$Res>
+class _$AccountRegistrationDTOCopyWithImpl<$Res,
+        $Val extends AccountRegistrationDTO>
     implements $AccountRegistrationDTOCopyWith<$Res> {
   _$AccountRegistrationDTOCopyWithImpl(this._value, this._then);
 
-  final AccountRegistrationDTO _value;
   // ignore: unused_field
-  final $Res Function(AccountRegistrationDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firebaseUid = freezed,
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? customerNumber = freezed,
-    Object? firebaseMessageToken = freezed,
-    Object? isSmartMeter = freezed,
+    Object? firebaseUid = null,
+    Object? name = null,
+    Object? email = null,
+    Object? customerNumber = null,
+    Object? firebaseMessageToken = null,
+    Object? isSmartMeter = null,
   }) {
     return _then(_value.copyWith(
-      firebaseUid: firebaseUid == freezed
+      firebaseUid: null == firebaseUid
           ? _value.firebaseUid
           : firebaseUid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      customerNumber: customerNumber == freezed
+      customerNumber: null == customerNumber
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      firebaseMessageToken: firebaseMessageToken == freezed
+      firebaseMessageToken: null == firebaseMessageToken
           ? _value.firebaseMessageToken
           : firebaseMessageToken // ignore: cast_nullable_to_non_nullable
               as String,
-      isSmartMeter: isSmartMeter == freezed
+      isSmartMeter: null == isSmartMeter
           ? _value.isSmartMeter
           : isSmartMeter // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -102,6 +106,7 @@ abstract class _$$_AccountRegistrationDTOCopyWith<$Res>
           $Res Function(_$_AccountRegistrationDTO) then) =
       __$$_AccountRegistrationDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String firebaseUid,
       String name,
@@ -113,47 +118,45 @@ abstract class _$$_AccountRegistrationDTOCopyWith<$Res>
 
 /// @nodoc
 class __$$_AccountRegistrationDTOCopyWithImpl<$Res>
-    extends _$AccountRegistrationDTOCopyWithImpl<$Res>
+    extends _$AccountRegistrationDTOCopyWithImpl<$Res,
+        _$_AccountRegistrationDTO>
     implements _$$_AccountRegistrationDTOCopyWith<$Res> {
   __$$_AccountRegistrationDTOCopyWithImpl(_$_AccountRegistrationDTO _value,
       $Res Function(_$_AccountRegistrationDTO) _then)
-      : super(_value, (v) => _then(v as _$_AccountRegistrationDTO));
+      : super(_value, _then);
 
-  @override
-  _$_AccountRegistrationDTO get _value =>
-      super._value as _$_AccountRegistrationDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? firebaseUid = freezed,
-    Object? name = freezed,
-    Object? email = freezed,
-    Object? customerNumber = freezed,
-    Object? firebaseMessageToken = freezed,
-    Object? isSmartMeter = freezed,
+    Object? firebaseUid = null,
+    Object? name = null,
+    Object? email = null,
+    Object? customerNumber = null,
+    Object? firebaseMessageToken = null,
+    Object? isSmartMeter = null,
   }) {
     return _then(_$_AccountRegistrationDTO(
-      firebaseUid: firebaseUid == freezed
+      firebaseUid: null == firebaseUid
           ? _value.firebaseUid
           : firebaseUid // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      customerNumber: customerNumber == freezed
+      customerNumber: null == customerNumber
           ? _value.customerNumber
           : customerNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      firebaseMessageToken: firebaseMessageToken == freezed
+      firebaseMessageToken: null == firebaseMessageToken
           ? _value.firebaseMessageToken
           : firebaseMessageToken // ignore: cast_nullable_to_non_nullable
               as String,
-      isSmartMeter: isSmartMeter == freezed
+      isSmartMeter: null == isSmartMeter
           ? _value.isSmartMeter
           : isSmartMeter // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -198,31 +201,26 @@ class _$_AccountRegistrationDTO implements _AccountRegistrationDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AccountRegistrationDTO &&
-            const DeepCollectionEquality()
-                .equals(other.firebaseUid, firebaseUid) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality()
-                .equals(other.customerNumber, customerNumber) &&
-            const DeepCollectionEquality()
-                .equals(other.firebaseMessageToken, firebaseMessageToken) &&
-            const DeepCollectionEquality()
-                .equals(other.isSmartMeter, isSmartMeter));
+            (identical(other.firebaseUid, firebaseUid) ||
+                other.firebaseUid == firebaseUid) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.customerNumber, customerNumber) ||
+                other.customerNumber == customerNumber) &&
+            (identical(other.firebaseMessageToken, firebaseMessageToken) ||
+                other.firebaseMessageToken == firebaseMessageToken) &&
+            (identical(other.isSmartMeter, isSmartMeter) ||
+                other.isSmartMeter == isSmartMeter));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(firebaseUid),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(customerNumber),
-      const DeepCollectionEquality().hash(firebaseMessageToken),
-      const DeepCollectionEquality().hash(isSmartMeter));
+  int get hashCode => Object.hash(runtimeType, firebaseUid, name, email,
+      customerNumber, firebaseMessageToken, isSmartMeter);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AccountRegistrationDTOCopyWith<_$_AccountRegistrationDTO> get copyWith =>
       __$$_AccountRegistrationDTOCopyWithImpl<_$_AccountRegistrationDTO>(
           this, _$identity);

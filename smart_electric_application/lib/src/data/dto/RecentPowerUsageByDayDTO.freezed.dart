@@ -34,35 +34,39 @@ mixin _$RecentPowerUsageByDayDTO {
 abstract class $RecentPowerUsageByDayDTOCopyWith<$Res> {
   factory $RecentPowerUsageByDayDTOCopyWith(RecentPowerUsageByDayDTO value,
           $Res Function(RecentPowerUsageByDayDTO) then) =
-      _$RecentPowerUsageByDayDTOCopyWithImpl<$Res>;
+      _$RecentPowerUsageByDayDTOCopyWithImpl<$Res, RecentPowerUsageByDayDTO>;
+  @useResult
   $Res call(
       {List<PowerUsageDTO> lastMonth, List<PowerUsageDTO> secondLastMonth});
 }
 
 /// @nodoc
-class _$RecentPowerUsageByDayDTOCopyWithImpl<$Res>
+class _$RecentPowerUsageByDayDTOCopyWithImpl<$Res,
+        $Val extends RecentPowerUsageByDayDTO>
     implements $RecentPowerUsageByDayDTOCopyWith<$Res> {
   _$RecentPowerUsageByDayDTOCopyWithImpl(this._value, this._then);
 
-  final RecentPowerUsageByDayDTO _value;
   // ignore: unused_field
-  final $Res Function(RecentPowerUsageByDayDTO) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lastMonth = freezed,
-    Object? secondLastMonth = freezed,
+    Object? lastMonth = null,
+    Object? secondLastMonth = null,
   }) {
     return _then(_value.copyWith(
-      lastMonth: lastMonth == freezed
+      lastMonth: null == lastMonth
           ? _value.lastMonth
           : lastMonth // ignore: cast_nullable_to_non_nullable
               as List<PowerUsageDTO>,
-      secondLastMonth: secondLastMonth == freezed
+      secondLastMonth: null == secondLastMonth
           ? _value.secondLastMonth
           : secondLastMonth // ignore: cast_nullable_to_non_nullable
               as List<PowerUsageDTO>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -74,33 +78,32 @@ abstract class _$$_RecentPowerUsageByDayDTOCopyWith<$Res>
           $Res Function(_$_RecentPowerUsageByDayDTO) then) =
       __$$_RecentPowerUsageByDayDTOCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {List<PowerUsageDTO> lastMonth, List<PowerUsageDTO> secondLastMonth});
 }
 
 /// @nodoc
 class __$$_RecentPowerUsageByDayDTOCopyWithImpl<$Res>
-    extends _$RecentPowerUsageByDayDTOCopyWithImpl<$Res>
+    extends _$RecentPowerUsageByDayDTOCopyWithImpl<$Res,
+        _$_RecentPowerUsageByDayDTO>
     implements _$$_RecentPowerUsageByDayDTOCopyWith<$Res> {
   __$$_RecentPowerUsageByDayDTOCopyWithImpl(_$_RecentPowerUsageByDayDTO _value,
       $Res Function(_$_RecentPowerUsageByDayDTO) _then)
-      : super(_value, (v) => _then(v as _$_RecentPowerUsageByDayDTO));
+      : super(_value, _then);
 
-  @override
-  _$_RecentPowerUsageByDayDTO get _value =>
-      super._value as _$_RecentPowerUsageByDayDTO;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lastMonth = freezed,
-    Object? secondLastMonth = freezed,
+    Object? lastMonth = null,
+    Object? secondLastMonth = null,
   }) {
     return _then(_$_RecentPowerUsageByDayDTO(
-      lastMonth: lastMonth == freezed
+      lastMonth: null == lastMonth
           ? _value._lastMonth
           : lastMonth // ignore: cast_nullable_to_non_nullable
               as List<PowerUsageDTO>,
-      secondLastMonth: secondLastMonth == freezed
+      secondLastMonth: null == secondLastMonth
           ? _value._secondLastMonth
           : secondLastMonth // ignore: cast_nullable_to_non_nullable
               as List<PowerUsageDTO>,
@@ -159,6 +162,7 @@ class _$_RecentPowerUsageByDayDTO implements _RecentPowerUsageByDayDTO {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_RecentPowerUsageByDayDTOCopyWith<_$_RecentPowerUsageByDayDTO>
       get copyWith => __$$_RecentPowerUsageByDayDTOCopyWithImpl<
           _$_RecentPowerUsageByDayDTO>(this, _$identity);
