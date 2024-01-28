@@ -1,7 +1,7 @@
 # ⚡️ 스마트 전기앱
 <img width="1532" alt="Screenshot 2023-06-03 at 10 59 07 PM" src="https://github.com/leedoyeon849/SmartEletricAppFrontEnd/assets/71880682/999f3440-c082-4634-bd52-a31ec976e1db">
 
-- 랜딩페이지: https://leedoyeon849.github.io/SmartEletricAppFrontEnd/
+- 랜딩페이지: https://dodo849.github.io/SmartEletricAppFrontEnd/
 
 > 스마트 전기앱은 한국전력공사 API를 이용한 모바일 어플리케이션입니다.
 
