@@ -1,5 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/env/Environment.dart';
+import 'package:smart_electric_application/src/data/mock_repository/AiMockRepository.dart';
+import 'package:smart_electric_application/src/data/mock_repository/AuthMockRepository.dart';
+import 'package:smart_electric_application/src/data/mock_repository/PowerUsageMockRepository.dart';
 import 'package:smart_electric_application/src/data/repository/AccountRepository.dart';
 import 'package:smart_electric_application/src/data/repository/AiRepository.dart';
 import 'package:smart_electric_application/src/data/repository/AuthRepository.dart';
@@ -21,14 +24,14 @@ import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsa
 
 /// Dependency Injection (DI)
 void setupDI() {
-// Inject mock in debug environment.
+  // Inject mock in debug environment.
   if(Environment.buildType == BuildType.debugLocal) {
     GetIt.I.registerSingleton<FirebaseRepositoryInterface>(FirebaseRepository());
-    GetIt.I.registerSingleton<AuthRepositoryInterface>(AuthRepository());
+    GetIt.I.registerSingleton<AuthRepositoryInterface>(AuthMockRepository());
     GetIt.I.registerSingleton<DefaultRepositoryInterface>(DefaultRepository());
     GetIt.I
-        .registerSingleton<PowerUsageRepositoryInterface>(PowerUsageRepository());
-    GetIt.I.registerSingleton<AiRepositoryInterface>(AiRepository());
+        .registerSingleton<PowerUsageRepositoryInterface>(PowerUsageMockRepository());
+    GetIt.I.registerSingleton<AiRepositoryInterface>(AiMockRepository());
     GetIt.I.registerSingleton<BillSimulationRepositoryInterface>(
         BillSimulationRepository());
     GetIt.I.registerSingleton<AccountRepositoryInterface>(AccountRepository());
