@@ -5,6 +5,7 @@ part 'ThisMonthModel.freezed.dart';
 part 'ThisMonthModel.g.dart';
 
 /// 사용자가 추가한 시뮬레이션 가전 정보
+///
 /// - [userName] : 로그인된 사용자 정보
 /// - [powerUsage] : 현재 사용량 (단위: kWh)
 /// - [bill] : 현재 요금
