@@ -1,3 +1,4 @@
+import 'package:smart_electric_application/env/Environment.dart';
 import 'package:smart_electric_application/src/presentation/view/page/mypage/ContactUs.dart';
 import 'package:smart_electric_application/src/presentation/view/page/mypage/NotificationSettings.dart';
 import 'package:smart_electric_application/src/presentation/view/page/mypage/PersonalInfo.dart';
@@ -17,6 +18,11 @@ import 'package:smart_electric_application/src/presentation/view/theme/Themes.da
 import 'package:smart_electric_application/src/presentation/viewmodel/ThemeViewModel.dart';
 
 void main() async {
+  // Initializes environment settings based on the value of the "FLAVOR" environment variable.
+  // The FLAVOR value is set during compilation, such as `--dart-define=FLAVOR=debug`.
+  String flavor = const String.fromEnvironment('FLAVOR');
+  Environment.initialize(flavor);
+
   // Set up DI
   setupDI();
 
