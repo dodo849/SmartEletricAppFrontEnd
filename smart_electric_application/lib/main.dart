@@ -57,7 +57,7 @@ builder: (context, child) {
           child: child!,
         );
       },
-      home: Obx(() => LoginViewModel.to.isLogin.value == true
+      home: Obx(() => LoginViewModel.to.isLogin.value == false
           ? const Login()
           : const RootScaffold()),
       theme: lightTheme,

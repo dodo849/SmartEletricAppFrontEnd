@@ -138,10 +138,10 @@ class HomeViewModel extends GetxController {
   }
 
   // 누진구간 임계값 설정
-  void setPowerAccumulateThreshold(int first, int second, int thrid) {
+  void setPowerAccumulateThreshold(int first, int second, int third) {
     powerAccumulateThresholdFirst(first);
     powerAccumulateThresholdSecond(second);
-    powerAccumulateThresholdSuper(thrid);
+    powerAccumulateThresholdSuper(third);
   }
 
   void setPredictedPowerUsageOfThisMonth(powerUsage) {
