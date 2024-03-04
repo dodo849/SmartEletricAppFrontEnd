@@ -4,8 +4,8 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
 import 'package:smart_electric_application/src/data/dto/RecentPowerUsageByDayDTO.dart';
 import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetAiPredictionForGraphUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetRecentPowerUsageByDayUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/ai_prediction/GetAiPredictionForGraphUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/power_usage/GetRecentPowerUsageByDayUsecase.dart';
 
 class PredictLineGraphViewModel extends GetxController {
   // - Graph setting

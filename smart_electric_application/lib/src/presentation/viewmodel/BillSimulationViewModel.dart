@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/CalculateBillUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetBillSimulationProductsUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/DeleteBillSimulationProductsUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetPredictedPowerUsageOfThisMonthUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/bill/CalculateBillUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/simulation/GetBillSimulationProductsUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/simulation/DeleteBillSimulationProductsUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/ai_prediction/GetPredictedPowerUsageOfThisMonthUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/module/simulation/BillSimulationProductRemoveDialog.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/ProgressiveSectionType.dart';
 

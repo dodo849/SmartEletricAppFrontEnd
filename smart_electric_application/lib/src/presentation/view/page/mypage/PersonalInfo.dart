@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/UserModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetUserUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/auth/GetUserUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/module/mypage/privacyTermsConditions.dart';
 
 class PersonalInfoViewModel extends GetxController {

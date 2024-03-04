@@ -12,15 +12,15 @@ import 'package:smart_electric_application/src/data/repository/DefaultRepository
 import 'package:smart_electric_application/src/data/repository/FirebaseRepository.dart';
 import 'package:smart_electric_application/src/data/repository/InfoRepository.dart';
 import 'package:smart_electric_application/src/data/repository/PowerUsageRepository.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/AccountRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/BillRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/BillSimulationRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/DefaultRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/InfoRepositoryInterface.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/AccountRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/AiRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/AuthRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/BillRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/BillSimulationRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/DefaultRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/FirebaseRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/InfoRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/PowerUsageRepositoryInterface.dart';
 
 /// Dependency Injection (DI)
 void setupDI() {

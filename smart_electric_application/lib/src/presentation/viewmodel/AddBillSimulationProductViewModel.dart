@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
 import 'package:smart_electric_application/src/domain/model/ProductTypeData.dart';
-import 'package:smart_electric_application/src/domain/usecase/AddBillSimulationProductUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetBillSimulationProductsUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/simulation/AddBillSimulationProductUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/simulation/GetBillSimulationProductsUsecase.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/BillSimulationViewModel.dart';
 
 class AddBillSimulationProductViewModel extends GetxController {

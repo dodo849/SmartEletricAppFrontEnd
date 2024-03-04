@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:smart_electric_application/src/data/dto/UserValidationDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/InfoRetrofit.dart';
 import 'package:smart_electric_application/src/data/retrofit/config/getInterceptorDio.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/InfoRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/InfoRepositoryInterface.dart';
 
 class InfoRepository implements InfoRepositoryInterface {
   @override

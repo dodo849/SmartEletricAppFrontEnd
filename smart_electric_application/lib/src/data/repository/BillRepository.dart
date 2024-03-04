@@ -1,7 +1,7 @@
 import 'package:smart_electric_application/src/data/dto/BillDateDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/BillRetrofit.dart';
 import 'package:smart_electric_application/src/data/retrofit/config/getInterceptorDio.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/BillRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/BillRepositoryInterface.dart';
 
 class BillRepository implements BillRepositoryInterface {
   @override

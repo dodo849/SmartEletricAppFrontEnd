@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/FirebaseRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/FirebaseRepositoryInterface.dart';
 
 /// Firebase Authentication 기능 모음
 class FirebaseRepository implements FirebaseRepositoryInterface {

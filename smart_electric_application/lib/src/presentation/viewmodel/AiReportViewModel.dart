@@ -5,8 +5,8 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/AiReportDTO.dart';
 import 'package:smart_electric_application/src/domain/model/AiReportModel.dart';
 import 'package:smart_electric_application/src/domain/model/UserModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/CreateAiReportUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetUserUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/ai_report/CreateAiReportUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/auth/GetUserUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/atoms/CustomDialog.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/ProgressiveSectionType.dart';
 

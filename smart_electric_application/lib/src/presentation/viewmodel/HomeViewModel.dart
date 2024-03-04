@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/ThisMonthModel.dart';
 import 'package:smart_electric_application/src/domain/model/UserModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/CreateThisMonthDataUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetAddressUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetUserUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/SaveAddressUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/power_usage/CreateThisMonthDataUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/auth/GetAddressUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/auth/GetUserUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/auth/SaveAddressUsecase.dart';
 import 'package:smart_electric_application/src/presentation/viewmodel/enum/ProgressiveSectionType.dart';
 
 class HomeViewModel extends GetxController {

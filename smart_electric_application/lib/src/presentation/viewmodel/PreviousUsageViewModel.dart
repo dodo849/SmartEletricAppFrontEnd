@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/GraphPointModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByDayUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByHourUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/GetPowerUsageByMonthUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/power_usage/GetPowerUsageByDayUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/power_usage/GetPowerUsageByHourUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/power_usage/GetPowerUsageByMonthUsecase.dart';
 
 class PreviousUsageViewModel extends GetxController {
   static PreviousUsageViewModel get to => Get.find();

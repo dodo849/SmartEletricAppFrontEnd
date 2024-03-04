@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/PowerUsageDTO.dart';
 import 'package:smart_electric_application/src/data/dto/RecentPowerUsageByDayDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/PowerUsageRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/PowerUsageRepositoryInterface.dart';
 
 /// 전력 사용량 임의 생성
 ///

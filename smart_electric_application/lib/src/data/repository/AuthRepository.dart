@@ -5,7 +5,7 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
 import 'package:smart_electric_application/src/data/retrofit/AuthRetrofit.dart';
 import 'package:smart_electric_application/src/domain/model/UserModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/AuthRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/AuthRepositoryInterface.dart';
 
 class AuthRepository implements AuthRepositoryInterface {
   /// firebase id token을 이용해 서버에서 access/refresh 토큰 발급받기

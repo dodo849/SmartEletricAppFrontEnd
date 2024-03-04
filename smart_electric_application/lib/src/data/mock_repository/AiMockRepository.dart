@@ -4,7 +4,7 @@ import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/data/dto/AiPredictionDTO.dart';
 import 'package:smart_electric_application/src/data/dto/AiReportDTO.dart';
 import 'package:smart_electric_application/src/data/dto/BillCalculationDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/AiRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/AiRepositoryInterface.dart';
 
 class AiMockRepository extends AiRepositoryInterface {
   @override
@@ -27,9 +27,26 @@ class AiMockRepository extends AiRepositoryInterface {
 
   @override
   Future<Result<AiReportDTO, String>> requestAiReport(
-      {required String customerNumber}) {
+      {required String customerNumber}) async {
     // TODO: implement requestAiReport
-    throw UnimplementedError();
+
+    AiReportDTO aiReport = AiReportDTO(
+        timePeriodIndex: [],
+        timePeriodPowerUsage: [],
+        standbyPower: 0,
+        weekdayIndex: [],
+        weekdayPowerUsage: [],
+        dayOrNight: "day",
+        dayTimePowerUsage: 0,
+        nightTimePowerUsage: 0,
+        dayPowerUsageMean: 0,
+        dayPowerUsageMeanInWon: 2000,
+        dayPowerUsageMin: 200,
+        dayPowerUsageMinInWon: 1000,
+        dayPowerUsageMax: 100,
+        dayPowerUsageMaxInWon: 100);
+
+    return Result.success(aiReport);
   }
 
   @override
@@ -98,5 +115,4 @@ class AiMockRepository extends AiRepositoryInterface {
 
     return powerBillInfo;
   }
-
 }

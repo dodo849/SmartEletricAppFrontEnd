@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
 import 'package:smart_electric_application/src/domain/model/BillSimulationProductModel.dart';
-import 'package:smart_electric_application/src/domain/usecase/interface/BillSimulationRepositoryInterface.dart';
+import 'package:smart_electric_application/src/domain/repository_interface/BillSimulationRepositoryInterface.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
