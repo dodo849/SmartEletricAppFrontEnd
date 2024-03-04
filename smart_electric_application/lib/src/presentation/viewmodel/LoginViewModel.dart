@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_electric_application/src/config/Result.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckLoginUsecase.dart';
-import 'package:smart_electric_application/src/domain/usecase/LoginUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/auth/CheckLoginUsecase.dart';
+import 'package:smart_electric_application/src/domain/usecase/auth/LoginUsecase.dart';
 import 'package:smart_electric_application/src/presentation/view/page/RootScaffold.dart';
 
 class LoginViewModel extends GetxController {

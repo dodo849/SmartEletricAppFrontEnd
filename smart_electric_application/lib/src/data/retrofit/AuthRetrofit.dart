@@ -5,7 +5,6 @@ import 'package:retrofit/retrofit.dart';
 import 'package:smart_electric_application/src/data/dto/EmailDuplicateDTO.dart';
 import 'package:smart_electric_application/src/data/dto/SaveEmailDTO.dart';
 import 'package:smart_electric_application/src/data/dto/JwtTokenDTO.dart';
-import 'package:smart_electric_application/src/domain/usecase/CheckEmailVerificationUsecase.dart';
 
 part 'AuthRetrofit.g.dart';
 
